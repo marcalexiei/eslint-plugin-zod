@@ -59,3 +59,4 @@ However, using namespace imports is generally recommended for better maintainabi
 - [Zod - Installation](https://zod.dev/?id=installation)
 - [TypeScript - Namespaces](https://www.typescriptlang.org/docs/handbook/namespaces.html)
 - [JavaScript - Modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules)
+- [Zod – v4: Next.js treeshaking](https://github.com/colinhacks/zod/issues/4433#issuecomment-2921500831)
