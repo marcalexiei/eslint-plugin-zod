@@ -8,17 +8,24 @@ const ruleTester = new RuleTester();
 ruleTester.run('prefer-meta', preferMeta, {
   valid: [
     {
-      name: 'valid usage',
+      name: 'namespace import',
       code: dedent`
         import * as z from 'zod';
         z.string().meta({ description: "desc" });
       `,
     },
     {
-      name: 'valid usage (named)',
+      name: 'named import',
       code: dedent`
         import { string } from 'zod';
         string().meta({ description: "desc" });
+      `,
+    },
+    {
+      name: 'named z import',
+      code: dedent`
+        import { z } from 'zod';
+        z.string().meta({ description: "desc" });
       `,
     },
     {
@@ -45,7 +52,7 @@ ruleTester.run('prefer-meta', preferMeta, {
     {
       // https://github.com/marcalexiei/eslint-plugin-zod-x/issues/121
       name: 'ignores non-zod describe methods',
-      code: `
+      code: dedent`
         import { test } from "@playwright/test";
         test.describe("test", () => {});
       `,
@@ -54,7 +61,7 @@ ruleTester.run('prefer-meta', preferMeta, {
 
   invalid: [
     {
-      name: 'describe with string',
+      name: 'describe with string (namespace import)',
       code: dedent`
         import * as z from 'zod';
         z.string().describe("desc").trim();
@@ -66,7 +73,7 @@ ruleTester.run('prefer-meta', preferMeta, {
       `,
     },
     {
-      name: 'describe with string (named)',
+      name: 'describe with string (named import)',
       code: dedent`
         import { string } from 'zod';
         string().describe("desc").trim();
@@ -75,6 +82,18 @@ ruleTester.run('prefer-meta', preferMeta, {
       output: dedent`
         import { string } from 'zod';
         string().meta({ description: "desc" }).trim();
+      `,
+    },
+    {
+      name: 'describe with string (named z import)',
+      code: dedent`
+        import { z } from 'zod';
+        z.string().describe("desc").trim();
+      `,
+      errors: [{ messageId: 'preferMeta' }],
+      output: dedent`
+        import { z } from 'zod';
+        z.string().meta({ description: "desc" }).trim();
       `,
     },
     {

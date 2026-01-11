@@ -8,17 +8,24 @@ const ruleTester = new RuleTester();
 ruleTester.run('consistent-object-schema-type', consistentObjectSchemaType, {
   valid: [
     {
-      name: 'correct usage',
+      name: 'namespace import',
       code: dedent`
         import * as z from 'zod';
         z.object({})
       `,
     },
     {
-      name: 'correct usage (named)',
+      name: 'named import',
       code: dedent`
         import { object } from 'zod';
         object({})
+      `,
+    },
+    {
+      name: 'named z import',
+      code: dedent`
+        import { z } from 'zod';
+        z.object({})
       `,
     },
     {

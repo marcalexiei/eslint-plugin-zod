@@ -8,15 +8,29 @@ const ruleTester = new RuleTester();
 ruleTester.run('prefer-meta-last', preferMetaLast, {
   valid: [
     {
-      name: 'valid usage',
+      name: 'namespace import',
       code: dedent`
         import * as z from 'zod';
         z.string().meta({ description: "desc" })
       `,
     },
     {
+      name: 'named import',
+      code: dedent`
+        import { string } from 'zod';
+        string().meta({ description: "desc" })
+      `,
+    },
+    {
+      name: 'named z import',
+      code: dedent`
+        import { z } from 'zod';
+        z.string().meta({ description: "desc" })
+      `,
+    },
+    {
       name: 'No meta... no error',
-      code: `
+      code: dedent`
         import * as z from 'zod';
         z.string().min(5).max(10);
       `,
@@ -30,7 +44,7 @@ ruleTester.run('prefer-meta-last', preferMetaLast, {
     },
     {
       name: 'multiple chained meta at the end (still valid)',
-      code: `
+      code: dedent`
         import * as z from 'zod';
         z.string().min(5).max(10).meta({ a: 1 }).meta({ b: 2 });
       `,
@@ -38,7 +52,7 @@ ruleTester.run('prefer-meta-last', preferMetaLast, {
     {
       // https://github.com/marcalexiei/eslint-plugin-zod-x/issues/42
       name: 'meta not belonging to zod',
-      code: `
+      code: dedent`
         export const t = initTRPC
           .meta<Meta>()
           .context<typeof createTRPCContext>()
@@ -52,7 +66,7 @@ ruleTester.run('prefer-meta-last', preferMetaLast, {
     {
       // https://github.com/marcalexiei/eslint-plugin-zod-x/issues/70
       name: 'inside object',
-      code: `
+      code: dedent`
         import * as z from 'zod';
         export const baseEventPayloadSchema = z.object({
           type: z.string(),
@@ -63,7 +77,7 @@ ruleTester.run('prefer-meta-last', preferMetaLast, {
     {
       // https://github.com/marcalexiei/eslint-plugin-zod-x/issues/42
       name: 'inside looseObject',
-      code: `
+      code: dedent`
         import * as z from 'zod';
         export const baseEventPayloadSchema = z.looseObject({
           type: z.string(),
@@ -74,7 +88,7 @@ ruleTester.run('prefer-meta-last', preferMetaLast, {
     {
       // https://github.com/marcalexiei/eslint-plugin-zod-x/issues/42
       name: 'inside strictObject',
-      code: `
+      code: dedent`
         import * as z from 'zod';
         export const baseEventPayloadSchema = z.strictObject({
           type: z.string(),
@@ -86,7 +100,7 @@ ruleTester.run('prefer-meta-last', preferMetaLast, {
 
   invalid: [
     {
-      name: 'meta() before another method',
+      name: 'meta() before another method (namespace import)',
       code: dedent`
         import * as z from 'zod';
         z.string().meta({ description: "desc" }).trim();
@@ -94,6 +108,30 @@ ruleTester.run('prefer-meta-last', preferMetaLast, {
       errors: [{ messageId: 'metaNotLast' }],
       output: dedent`
         import * as z from 'zod';
+        z.string().trim().meta({ description: "desc" });
+      `,
+    },
+    {
+      name: 'meta() before another method (named import)',
+      code: dedent`
+        import { string } from 'zod';
+        string().meta({ description: "desc" }).trim();
+      `,
+      errors: [{ messageId: 'metaNotLast' }],
+      output: dedent`
+        import { string } from 'zod';
+        string().trim().meta({ description: "desc" });
+      `,
+    },
+    {
+      name: 'meta() before another method (named z import)',
+      code: dedent`
+        import { z } from 'zod';
+        z.string().meta({ description: "desc" }).trim();
+      `,
+      errors: [{ messageId: 'metaNotLast' }],
+      output: dedent`
+        import { z } from 'zod';
         z.string().trim().meta({ description: "desc" });
       `,
     },

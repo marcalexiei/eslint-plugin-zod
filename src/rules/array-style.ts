@@ -60,13 +60,13 @@ export const arrayStyle = ESLintUtils.RuleCreator(getRuleURL)<
           return;
         }
 
-        const { importType, schemaType } = zodSchema;
+        const { schemaDecl, schemaType } = zodSchema;
 
         if (style === 'method') {
           // match all z.array(z.string()) and convert them into
           // z.string().array()
           if (schemaType === 'array') {
-            if (importType === 'namespace') {
+            if (schemaDecl === 'namespace') {
               context.report({
                 node,
                 messageId: 'useMethod',
@@ -105,7 +105,7 @@ export const arrayStyle = ESLintUtils.RuleCreator(getRuleURL)<
           // if there is a param the array has already a schema inside
           node.arguments.length === 0
         ) {
-          if (importType === 'namespace') {
+          if (schemaDecl === 'namespace') {
             context.report({
               node,
               messageId: 'useFunction',

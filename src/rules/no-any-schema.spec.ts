@@ -15,6 +15,14 @@ ruleTester.run('no-any-schema', noAnySchema, {
       `,
     },
     {
+      // https://github.com/marcalexiei/eslint-plugin-zod-x/issues/174
+      name: 'named z import',
+      code: dedent`
+        import { z } from 'zod';
+        const schema = z.string();
+      `,
+    },
+    {
       name: 'nested schema declaration',
       code: dedent`
         import * as z from 'zod';
@@ -42,6 +50,48 @@ ruleTester.run('no-any-schema', noAnySchema, {
               output: dedent`
                 import * as z from 'zod';
                 const schema = z.unknown();
+              `,
+            },
+          ],
+        },
+      ],
+    },
+    {
+      name: 'named z import',
+      code: dedent`
+        import { z } from 'zod';
+        const schema = z.any();
+      `,
+      errors: [
+        {
+          messageId: 'noZAny',
+          suggestions: [
+            {
+              messageId: 'useUnknown',
+              output: dedent`
+                import { z } from 'zod';
+                const schema = z.unknown();
+              `,
+            },
+          ],
+        },
+      ],
+    },
+    {
+      name: 'named z import with rename',
+      code: dedent`
+        import { z as pippo } from 'zod';
+        const schema = pippo.any();
+      `,
+      errors: [
+        {
+          messageId: 'noZAny',
+          suggestions: [
+            {
+              messageId: 'useUnknown',
+              output: dedent`
+                import { z as pippo } from 'zod';
+                const schema = pippo.unknown();
               `,
             },
           ],
@@ -79,6 +129,7 @@ ruleTester.run('no-any-schema', noAnySchema, {
     },
     {
       // https://github.com/marcalexiei/eslint-plugin-zod-x/issues/143
+      name: 'should correctly fix any schema with chained method',
       code: dedent`
         import * as z from 'zod';
         export const aSchema = z.any().refine((value) => value)

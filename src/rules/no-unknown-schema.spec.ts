@@ -43,6 +43,14 @@ ruleTester.run('no-unknown-schema', noUnknownSchema, {
       errors: [{ messageId: 'noZUnknown' }],
     },
     {
+      name: 'namespace z import',
+      code: dedent`
+        import { z } from 'zod';
+        const schema = z.unknown();
+      `,
+      errors: [{ messageId: 'noZUnknown' }],
+    },
+    {
       name: 'namespace import within an object',
       code: dedent`
         import * as z from 'zod';

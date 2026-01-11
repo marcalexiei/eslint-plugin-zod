@@ -8,17 +8,24 @@ const ruleTester = new RuleTester();
 ruleTester.run('require-brand-type-parameter', requireBrandTypeParameter, {
   valid: [
     {
-      name: 'correct usage',
+      name: 'namespace',
       code: dedent`
         import * as z from 'zod'
         z.string().min(1).brand<"aaa">();
       `,
     },
     {
-      name: 'correct usage (named)',
+      name: 'named import',
       code: dedent`
         import { string } from 'zod'
         string().min(1).brand<"aaa">();
+      `,
+    },
+    {
+      name: 'named z import',
+      code: dedent`
+        import { z } from 'zod'
+        z.string().min(1).brand<"aaa">();
       `,
     },
     {
@@ -55,7 +62,7 @@ ruleTester.run('require-brand-type-parameter', requireBrandTypeParameter, {
 
   invalid: [
     {
-      name: 'invalid',
+      name: 'namespace import',
       code: dedent`
         import * as z from 'zod';
         z.string().min(1).brand();
@@ -76,7 +83,7 @@ ruleTester.run('require-brand-type-parameter', requireBrandTypeParameter, {
       ],
     },
     {
-      name: 'invalid (named)',
+      name: 'named import',
       code: dedent`
         import { string } from 'zod';
         string().min(1).brand();
@@ -90,6 +97,27 @@ ruleTester.run('require-brand-type-parameter', requireBrandTypeParameter, {
               output: dedent`
                 import { string } from 'zod';
                 string().min(1);
+              `,
+            },
+          ],
+        },
+      ],
+    },
+    {
+      name: 'named z import',
+      code: dedent`
+        import { z } from 'zod';
+        z.string().min(1).brand();
+      `,
+      errors: [
+        {
+          messageId: 'missingTypeParameter',
+          suggestions: [
+            {
+              messageId: 'removeBrandFunction',
+              output: dedent`
+                import { z } from 'zod';
+                z.string().min(1);
               `,
             },
           ],
@@ -118,7 +146,7 @@ ruleTester.run('require-brand-type-parameter', requireBrandTypeParameter, {
       ],
     },
     {
-      name: 'brand without type parameter not as last method',
+      name: 'brand without type parameter not as last method (namespace import)',
       code: dedent`
         import * as z from 'zod';
         z.string().min(1).brand().max(2)
@@ -139,7 +167,7 @@ ruleTester.run('require-brand-type-parameter', requireBrandTypeParameter, {
       ],
     },
     {
-      name: 'brand without type parameter not as last method (named)',
+      name: 'brand without type parameter not as last method (named import)',
       code: dedent`
         import { string } from 'zod';
         string().min(1).brand().max(2)
@@ -153,6 +181,27 @@ ruleTester.run('require-brand-type-parameter', requireBrandTypeParameter, {
               output: dedent`
                 import { string } from 'zod';
                 string().min(1).max(2)
+              `,
+            },
+          ],
+        },
+      ],
+    },
+    {
+      name: 'brand without type parameter not as last method (named z import)',
+      code: dedent`
+        import { z } from 'zod';
+        z.string().min(1).brand().max(2)
+      `,
+      errors: [
+        {
+          messageId: 'missingTypeParameter',
+          suggestions: [
+            {
+              messageId: 'removeBrandFunction',
+              output: dedent`
+                import { z } from 'zod';
+                z.string().min(1).max(2)
               `,
             },
           ],

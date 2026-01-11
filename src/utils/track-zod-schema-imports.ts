@@ -104,7 +104,15 @@ export function trackZodSchemaImports(): Result {
             break;
 
           case AST_NODE_TYPES.ImportSpecifier:
-            zodNamedImports.add(spec.local.name);
+            // If the user imports `z` via a named import, it acts as a namespace.
+            // Therefore, it must be recorded in the appropriate set.
+            // We check the imported identifier because the user may alias it.
+            if ('name' in spec.imported && spec.imported.name === 'z') {
+              zodNamespaces.add(spec.local.name);
+            } else {
+              zodNamedImports.add(spec.local.name);
+            }
+
             break;
 
           // no default
