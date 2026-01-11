@@ -5,7 +5,7 @@ import esquery from 'esquery';
 import { getRuleURL } from '../meta.js';
 import { trackZodSchemaImports } from '../utils/track-zod-schema-imports.js';
 
-type MessageIds = 'invalidStyle';
+type MessageIds = 'invalidStyle' | 'invalidSelector';
 
 export const schemaErrorPropertyStyle = ESLintUtils.RuleCreator(getRuleURL)<
   [{ selector: string; example: string }],
@@ -19,8 +19,9 @@ export const schemaErrorPropertyStyle = ESLintUtils.RuleCreator(getRuleURL)<
         'Enforce consistent style for error messages in Zod schema validation (using ESQuery patterns)',
     },
     messages: {
+      invalidSelector: 'Invalid ESQuery selector: "{{selector}}"',
       invalidStyle:
-        'Error message should follow the pattern: {{selector}} (e.g., {{example}}). Found: {{ actual }}',
+        'Error message must follow the pattern "{{selector}}" (e.g., {{example}}). Found: {{actual}}.',
     },
     schema: [
       {
@@ -50,6 +51,21 @@ export const schemaErrorPropertyStyle = ESLintUtils.RuleCreator(getRuleURL)<
       collectZodChainMethods,
     } = trackZodSchemaImports();
 
+    /**
+     * Parsing `selector` to ensure it is valid,
+     * if not report an error and return empty rule listener
+     */
+    try {
+      esquery.parse(selector);
+    } catch {
+      context.report({
+        loc: { line: 1, column: 0 },
+        messageId: 'invalidSelector',
+        data: { selector },
+      });
+      return {};
+    }
+
     return {
       ImportDeclaration: importDeclarationListener,
       CallExpression(node): void {
@@ -65,7 +81,7 @@ export const schemaErrorPropertyStyle = ESLintUtils.RuleCreator(getRuleURL)<
           return;
         }
 
-        // error should be the second parameter,
+        // Error should be the second parameter,
         // if not present stop processing
         if (node.arguments.length < 2) {
           return;
