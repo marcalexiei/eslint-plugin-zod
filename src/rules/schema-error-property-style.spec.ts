@@ -64,19 +64,15 @@ ruleTester.run('error-style (custom)', schemaErrorPropertyStyle, {
     },
     {
       name: 'invalid selector',
-      options: [{ selector: 'asd', example: 'test' }],
+      options: [{ selector: '>!asd', example: 'test' }],
       code: dedent`
         import * as z from 'zod';
         z.custom(() => true, \`template string\`)
       `,
       errors: [
         {
-          messageId: 'invalidStyle',
-          data: {
-            selector: 'asd',
-            example: 'test',
-            actual: '`template string`',
-          },
+          messageId: 'invalidSelector',
+          data: { selector: '>!asd' },
         },
       ],
       output: null,
@@ -122,19 +118,15 @@ ruleTester.run('error-style (refine)', schemaErrorPropertyStyle, {
     },
     {
       name: 'invalid selector',
-      options: [{ selector: 'asd', example: 'test' }],
+      options: [{ selector: '>!asd', example: 'test' }],
       code: dedent`
         import * as z from 'zod';
         z.string().refine(() => true, \`template string\`)
       `,
       errors: [
         {
-          messageId: 'invalidStyle',
-          data: {
-            selector: 'asd',
-            example: 'test',
-            actual: '`template string`',
-          },
+          messageId: 'invalidSelector',
+          data: { selector: '>!asd' },
         },
       ],
       output: null,
