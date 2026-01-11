@@ -1,5 +1,24 @@
 # eslint-plugin-zod-x
 
+## 2.0.1
+
+### Patch Changes
+
+- [#176](https://github.com/marcalexiei/eslint-plugin-zod-x/pull/176) [`d64dbc2`](https://github.com/marcalexiei/eslint-plugin-zod-x/commit/d64dbc21f032b341ffdafbcf397ea58018a6fc19) Thanks [@marcalexiei](https://github.com/marcalexiei)! - fix: `detectZodSchemaRootNode` doesn't detect named `z` import
+
+- [#177](https://github.com/marcalexiei/eslint-plugin-zod-x/pull/177) [`070a9a5`](https://github.com/marcalexiei/eslint-plugin-zod-x/commit/070a9a5fbd9ea1a5c0e506648d742f63c7fdd7d7) Thanks [@marcalexiei](https://github.com/marcalexiei)! - fix(schema-error-property-style): rule should report invalid esQuery selectors
+
+- [#162](https://github.com/marcalexiei/eslint-plugin-zod-x/pull/162) [`b6eb583`](https://github.com/marcalexiei/eslint-plugin-zod-x/commit/b6eb5833dde8438c59bae4279c4f2fc59645082f) Thanks [@marcalexiei](https://github.com/marcalexiei)! - docs: separate rule name into title; move description to its own paragraph
+
+  Change coming from `eslint-doc-generator` update to v3
+  - <https://github.com/bmish/eslint-doc-generator/releases/tag/v3.0.0>
+  - <https://github.com/bmish/eslint-doc-generator/pull/835>
+  - <https://github.com/bmish/eslint-doc-generator/pull/839>
+
+- [#155](https://github.com/marcalexiei/eslint-plugin-zod-x/pull/155) [`84657fc`](https://github.com/marcalexiei/eslint-plugin-zod-x/commit/84657fc57724f4ad9eb5984c9b66ed878bf70297) Thanks [@ShayanTheNerd](https://github.com/ShayanTheNerd)! - fix(schema-error-property-style): correct typos in schema property descriptions
+
+- [#173](https://github.com/marcalexiei/eslint-plugin-zod-x/pull/173) [`14bde3e`](https://github.com/marcalexiei/eslint-plugin-zod-x/commit/14bde3e84442f231d1fa3892fbbbd19caa422291) Thanks [@marcalexiei](https://github.com/marcalexiei)! - docs(prefer-namespace-import): add treeshaking issue link
+
 ## 2.0.0
 
 ### Major Changes
