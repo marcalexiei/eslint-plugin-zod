@@ -67,7 +67,7 @@ export const noNumberSchemaWithInt = ESLintUtils.RuleCreator(getRuleURL)({
         }
 
         // If it's a named import usage (e.g. `import { number } from 'zod'`), report but do not fix.
-        if (zodSchemaMeta.importType === 'named') {
+        if (zodSchemaMeta.schemaDecl === 'named') {
           context.report({
             node,
             messageId: 'removeNumber',

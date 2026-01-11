@@ -45,7 +45,6 @@ export const schemaErrorPropertyStyle = ESLintUtils.RuleCreator(getRuleURL)<
   ],
   create(context, [{ selector, example }]) {
     const {
-      //
       importDeclarationListener,
       detectZodSchemaRootNode,
       collectZodChainMethods,

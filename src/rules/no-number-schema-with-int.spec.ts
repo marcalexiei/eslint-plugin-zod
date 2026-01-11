@@ -8,17 +8,24 @@ const ruleTester = new RuleTester();
 ruleTester.run('no-number-schema-with-int', noNumberSchemaWithInt, {
   valid: [
     {
-      name: 'valid usage',
+      name: 'namespace import',
       code: dedent`
         import * as z from 'zod';
         z.int();
       `,
     },
     {
-      name: 'valid usage (named)',
+      name: 'named import',
       code: dedent`
         import int from 'zod';
         int();
+      `,
+    },
+    {
+      name: 'named z import',
+      code: dedent`
+        import { z } from 'zod';
+        z.int();
       `,
     },
     {
@@ -49,7 +56,7 @@ ruleTester.run('no-number-schema-with-int', noNumberSchemaWithInt, {
   ],
   invalid: [
     {
-      name: 'number + int',
+      name: 'number + int (namespace import)',
       code: `
         import * as z from 'zod';
         z.number().int();
@@ -61,13 +68,25 @@ ruleTester.run('no-number-schema-with-int', noNumberSchemaWithInt, {
       `,
     },
     {
-      name: 'number + int (named)',
+      name: 'number + int (named import)',
       code: `
         import { number } from 'zod';
         number().int();
       `,
       errors: [{ messageId: 'removeNumber' }],
       output: null,
+    },
+    {
+      name: 'number + int (named z import)',
+      code: `
+        import { z } from 'zod';
+        z.number().int();
+      `,
+      errors: [{ messageId: 'removeNumber' }],
+      output: `
+        import { z } from 'zod';
+        z.int();
+      `,
     },
     {
       name: 'number + int + other method',

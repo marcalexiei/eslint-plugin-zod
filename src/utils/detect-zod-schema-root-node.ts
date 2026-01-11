@@ -3,10 +3,21 @@ import type { TSESTree } from '@typescript-eslint/utils';
 import { AST_NODE_TYPES } from '@typescript-eslint/utils';
 
 interface DetectData {
-  importType: 'namespace' | 'named';
-  schemaType: string; // the "factory" for the outer expression
-  methods: Array<string>; // full chain in call order, e.g. ["number","int","min"]
-  node: TSESTree.CallExpression; // the outer call expression analyzed
+  /**
+   * How the schema is declared:
+   * - `namespace` -> `z.string()`
+   * - `named` -> `string()`
+   */
+  schemaDecl: 'namespace' | 'named';
+
+  /** the "factory" for the outer expression */
+  schemaType: string;
+
+  /** full chain in call order, e.g. ["number","int","min"] */
+  methods: Array<string>;
+
+  /** the outer call expression analyzed */
+  node: TSESTree.CallExpression;
 }
 
 /**
@@ -16,7 +27,7 @@ interface DetectData {
 export type DetectResult =
   | (DetectData & {
       // innerSchemas: Array<{
-      //   importType: 'namespace' | 'named';
+      //   schemaDecl: 'namespace' | 'named';
       //   schemaType: string;
       //   methods: Array<string>;
       //   node: TSESTree.CallExpression;
@@ -73,7 +84,7 @@ function isOutermostCallExpression(node: TSESTree.CallExpression): boolean {
  * This helper DOES NOT require the call to be outermost.
  *
  * Returns:
- *  { importType, schemaType, methods, node } if successful
+ *  { schemaDecl, schemaType, methods, node } if successful
  *  null otherwise
  */
 function parseZodCallExpression(
@@ -81,7 +92,7 @@ function parseZodCallExpression(
   zodNamespaces: Set<string>,
   zodNamedImports: Set<string>,
 ): {
-  importType: 'namespace' | 'named';
+  schemaDecl: 'namespace' | 'named';
   schemaType: string;
   methods: Array<string>;
   node: TSESTree.CallExpression;
@@ -134,7 +145,7 @@ function parseZodCallExpression(
       return null;
     }
     return {
-      importType: 'namespace',
+      schemaDecl: 'namespace',
       schemaType: factory,
       methods,
       node: call,
@@ -153,7 +164,7 @@ function parseZodCallExpression(
     // If methods exist and the first item equals factory, that's odd but we'll prefer explicit factory:
     // Return schemaType as factory
     return {
-      importType: 'named',
+      schemaDecl: 'named',
       schemaType: factory,
       methods,
       node: call,
@@ -260,7 +271,7 @@ export function detectZodSchemaRootNode(
   // }
 
   return {
-    importType: outer.importType,
+    schemaDecl: outer.schemaDecl,
     schemaType: outer.schemaType,
     methods: outer.methods,
     node: call,

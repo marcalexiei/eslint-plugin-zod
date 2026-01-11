@@ -25,6 +25,13 @@ ruleTester.run(
         `,
       },
       {
+        name: 'schema with only default (named z)',
+        code: dedent`
+          import { z } from 'zod';
+          z.string().default("Hello World")
+        `,
+      },
+      {
         name: 'schema with only optional',
         code: dedent`
           import { string } from 'zod';
@@ -100,6 +107,16 @@ ruleTester.run(
         name: 'optional then default - preferredMethod: none (explicit)',
         code: dedent`
           import * as z from 'zod';
+          z.string().optional().default("Hello World")
+        `,
+        options: [{ preferredMethod: 'none' }],
+        errors: [{ messageId: 'noOptionalAndDefaultTogether' }],
+        output: null,
+      },
+      {
+        name: 'optional then default - preferredMethod: none (explicit)',
+        code: dedent`
+          import { z } from 'zod';
           z.string().optional().default("Hello World")
         `,
         options: [{ preferredMethod: 'none' }],

@@ -8,17 +8,24 @@ const ruleTester = new RuleTester();
 ruleTester.run('error-style (custom)', schemaErrorPropertyStyle, {
   valid: [
     {
-      name: 'default option',
+      name: 'default option (namespace import)',
       code: dedent`
         import * as z from 'zod';
         z.custom(() => true, { error: "my error" })
       `,
     },
     {
-      name: 'default option (named)',
+      name: 'default option (named import)',
       code: dedent`
         import { custom } from 'zod';
         custom(() => true, { error: "my error" })
+      `,
+    },
+    {
+      name: 'default option (named z import)',
+      code: dedent`
+        import { z } from 'zod';
+        z.custom(() => true, { error: "my error" })
       `,
     },
     {
@@ -81,11 +88,17 @@ ruleTester.run('error-style (refine)', schemaErrorPropertyStyle, {
   valid: [
     {
       name: 'default option',
-      code: 'z.string().refine(() => true, { error: "my error" })',
+      code: dedent`
+        import * as z from 'zod';
+        z.string().refine(() => true, { error: "my error" });
+      `,
     },
     {
       name: 'default with template string',
-      code: 'z.string().refine(() => true, `asd`)',
+      code: dedent`
+        import * as z from 'zod';
+        z.string().refine(() => true, \`asd\`);
+      `,
     },
   ],
   invalid: [

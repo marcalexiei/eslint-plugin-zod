@@ -97,6 +97,7 @@ ruleTester.run('require-schema-suffix', requireSchemaSuffix, {
 
   invalid: [
     {
+      name: 'namespace',
       code: dedent`
         import * as z from 'zod';
         const myVar = z.string();
@@ -110,6 +111,7 @@ ruleTester.run('require-schema-suffix', requireSchemaSuffix, {
       output: null,
     },
     {
+      name: 'named',
       code: dedent`
         import { string } from 'zod';
         const myVar = string();
@@ -123,6 +125,7 @@ ruleTester.run('require-schema-suffix', requireSchemaSuffix, {
       output: null,
     },
     {
+      name: 'named with chained method',
       code: dedent`
         import { string } from 'zod';
         const myVar = string().min(1);

@@ -1,4 +1,5 @@
 import { RuleTester } from '@typescript-eslint/rule-tester';
+import dedent from 'dedent';
 
 import { noThrowInRefine } from './no-throw-in-refine.js';
 
@@ -8,14 +9,14 @@ ruleTester.run('no-throw-in-refine', noThrowInRefine, {
   valid: [
     {
       name: 'refine with arrow body shorthand',
-      code: `
+      code: dedent`
         import * as z from 'zod';
         z.number().min(0).refine((val) => true);
       `,
     },
     {
       name: 'nested function not reported',
-      code: `
+      code: dedent`
         import * as z from 'zod';
         z.string().refine((val) => {
           const fn = () => { throw new Error("nested"); }; // nested function is fine
@@ -31,7 +32,7 @@ ruleTester.run('no-throw-in-refine', noThrowInRefine, {
   invalid: [
     {
       name: 'inside arrow function',
-      code: `
+      code: dedent`
         import * as z from 'zod';
         z.string().refine(() => { throw new Error(); });
       `,
@@ -39,7 +40,7 @@ ruleTester.run('no-throw-in-refine', noThrowInRefine, {
     },
     {
       name: 'inside arrow function (named)',
-      code: `
+      code: dedent`
         import { string } from 'zod';
         string().refine(() => { throw new Error(); });
       `,
@@ -47,7 +48,7 @@ ruleTester.run('no-throw-in-refine', noThrowInRefine, {
     },
     {
       name: 'inside arrow function within if',
-      code: `
+      code: dedent`
         import * as z from 'zod';
         z.number().refine((val) => {
           if (val < 0) throw new Error('Invalid');
@@ -57,7 +58,7 @@ ruleTester.run('no-throw-in-refine', noThrowInRefine, {
     },
     {
       name: 'inside arrow function within else',
-      code: `
+      code: dedent`
         import * as z from 'zod';
         z.number().refine((val) => {
           if (val < 0) return true
@@ -68,7 +69,7 @@ ruleTester.run('no-throw-in-refine', noThrowInRefine, {
     },
     {
       name: 'inside arrow function within cycle',
-      code: `
+      code: dedent`
         import * as z from 'zod';
         z.number().refine((val) => {
           for (const it of val) {

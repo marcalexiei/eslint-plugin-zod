@@ -8,17 +8,24 @@ const ruleTester = new RuleTester();
 ruleTester.run('prefer-strict-object (refine)', requireErrorMessage, {
   valid: [
     {
-      name: 'object with error property',
+      name: 'object with error property (namespace import)',
       code: dedent`
         import * as z from 'zod';
         z.string().refine(() => true, { error: "error msg" });
       `,
     },
     {
-      name: 'object with error property (named)',
+      name: 'object with error property (named import)',
       code: dedent`
         import { string } from 'zod';
         string().refine(() => true, { error: "error msg" });
+      `,
+    },
+    {
+      name: 'object with error property (named z import)',
+      code: dedent`
+        import { z } from 'zod';
+        z.string().refine(() => true, { error: "error msg" });
       `,
     },
     {

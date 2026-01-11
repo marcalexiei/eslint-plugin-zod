@@ -8,21 +8,21 @@ const ruleTester = new RuleTester();
 ruleTester.run('no-empty-custom-schema', noEmptyCustomSchema, {
   valid: [
     {
-      name: 'valid usage',
+      name: 'namespace',
       code: dedent`
         import * as z from 'zod';
         z.custom((val) => typeof val === "string" ? /^\\d+px$/.test(val) : false);
       `,
     },
     {
-      name: 'valid usage (named)',
+      name: 'named',
       code: dedent`
         import { custom } from 'zod';
         custom((val) => typeof val === "string" ? /^\\d+px$/.test(val) : false);
       `,
     },
     {
-      name: 'valid usage (named renamed)',
+      name: 'named renamed',
       code: dedent`
         import { custom as zCustom } from 'zod';
         zCustom((val) => typeof val === "string" ? /^\\d+px$/.test(val) : false);
@@ -49,7 +49,7 @@ ruleTester.run('no-empty-custom-schema', noEmptyCustomSchema, {
   ],
   invalid: [
     {
-      name: 'invalid usage',
+      name: 'namespace',
       code: dedent`
         import * as z from 'zod';
         z.custom();
@@ -57,10 +57,18 @@ ruleTester.run('no-empty-custom-schema', noEmptyCustomSchema, {
       errors: [{ messageId: 'noEmptyCustomSchema' }],
     },
     {
-      name: 'invalid usage (named)',
+      name: 'named',
       code: dedent`
         import { custom } from 'zod';
         custom();
+      `,
+      errors: [{ messageId: 'noEmptyCustomSchema' }],
+    },
+    {
+      name: 'named z',
+      code: dedent`
+        import { z } from 'zod';
+        z.custom();
       `,
       errors: [{ messageId: 'noEmptyCustomSchema' }],
     },

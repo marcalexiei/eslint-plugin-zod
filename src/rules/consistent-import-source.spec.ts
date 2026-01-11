@@ -6,6 +6,8 @@ const ruleTester = new RuleTester();
 
 ruleTester.run('consistent-import-source', consistentImportSource, {
   valid: [
+    { code: 'import * as z from "zod"' },
+    { code: 'import { z } from "zod"' },
     { code: 'import z from "zod"' },
     {
       code: 'import z from "zod"',
@@ -26,6 +28,24 @@ ruleTester.run('consistent-import-source', consistentImportSource, {
   ],
   invalid: [
     {
+      name: 'namespace',
+      code: 'import * as z from "zod/v4"',
+      errors: [
+        {
+          messageId: 'sourceNotAllowed',
+          data: { source: 'zod/v4', sources: '"zod"' },
+          suggestions: [
+            {
+              messageId: 'replaceSource',
+              data: { valid: 'zod', invalid: 'zod/v4' },
+              output: 'import * as z from "zod"',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      name: 'default',
       code: 'import z from "zod"',
       options: [{ sources: ['zod/v4'] }],
       errors: [

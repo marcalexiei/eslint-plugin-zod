@@ -8,30 +8,30 @@ const ruleTester = new RuleTester();
 ruleTester.run('array-style (function)', arrayStyle, {
   valid: [
     {
-      name: 'default option',
+      name: 'namespace import',
       code: dedent`
         import * as z from 'zod';
         z.array(z.string());
       `,
     },
     {
-      name: '`function` option',
-      code: dedent`
-        import * as z from 'zod';
-        z.array(z.string());
-      `,
-    },
-    {
-      name: 'named',
+      name: 'named import',
       code: dedent`
         import { array, string } from 'zod';
         array(string());
       `,
     },
+    {
+      name: 'named z import',
+      code: dedent`
+        import { z } from 'zod';
+        z.array(z.string());
+      `,
+    },
   ],
   invalid: [
     {
-      name: 'namespace',
+      name: 'namespace import',
       code: dedent`
         import * as z from 'zod';
         z.string().array();
@@ -43,7 +43,7 @@ ruleTester.run('array-style (function)', arrayStyle, {
       `,
     },
     {
-      name: 'named',
+      name: 'named import',
       code: dedent`
         import { string } from 'zod';
         string().array();
@@ -51,6 +51,19 @@ ruleTester.run('array-style (function)', arrayStyle, {
       options: [{ style: 'function' }],
       errors: [{ messageId: 'useFunction' }],
       output: null,
+    },
+    {
+      // https://github.com/marcalexiei/eslint-plugin-zod-x/issues/174
+      name: 'named z import',
+      code: dedent`
+        import { z } from 'zod';
+        z.string().array();
+      `,
+      errors: [{ messageId: 'useFunction' }],
+      output: dedent`
+        import { z } from 'zod';
+        z.array(z.string());
+      `,
     },
     {
       name: 'with method',
