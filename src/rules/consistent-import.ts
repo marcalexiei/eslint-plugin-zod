@@ -4,33 +4,71 @@ import { AST_NODE_TYPES, ESLintUtils } from '@typescript-eslint/utils';
 import { getRuleURL } from '../meta.js';
 import { isZodImportSource } from '../utils/is-zod-import-source.js';
 
+const IMPORT_SYNTAXES = ['namespace', 'named'] as const;
+type ImportSyntax = (typeof IMPORT_SYNTAXES)[number];
+
+interface Options {
+  syntax: ImportSyntax;
+}
+type MessageIds = 'changeImportSyntax' | 'removeDuplicate' | 'convertUsage';
+
 interface ImportGroupData {
   hasOnlyTypeImports: boolean;
   nodes: Array<TSESTree.ImportDeclaration>;
 }
 
-function isGroupFirstImportTypeNamespace(group: ImportGroupData): boolean {
-  const {
-    hasOnlyTypeImports,
-    nodes: [firstImportNode],
-  } = group;
+/**
+ * Determines whether the first import in a group is valid for a given import
+ * syntax (`named` or `namespace`), taking into account whether the group
+ * contains only type imports.
+ *
+ * Rules enforced:
+ * - For `named` syntax:
+ *   - The first import must have exactly one specifier
+ *   - That specifier must be a named import of identifier `z`
+ * - For `namespace` syntax:
+ *   - The first import must have exactly one namespace specifier
+ * - If the group contains only type imports, the first import must explicitly
+ *   be declared as `import type`
+ *
+ * @param group - Metadata describing the import group
+ * @param syntax - Expected import syntax for the group
+ * @returns `true` if the first import matches the expected syntax and type rules
+ */
+function isGroupFirstImportKindValidForSyntax(
+  group: ImportGroupData,
+  syntax: ImportSyntax,
+): boolean {
+  const { hasOnlyTypeImports, nodes } = group;
+  const [firstImportNode] = nodes;
+  const { specifiers, importKind } = firstImportNode;
 
-  const { specifiers } = firstImportNode;
-
-  if (
-    specifiers.length === 1 &&
-    specifiers[0].type === AST_NODE_TYPES.ImportNamespaceSpecifier
-  ) {
-    if (hasOnlyTypeImports) {
-      if (firstImportNode.importKind === 'type') {
-        return true;
-      }
-    } else {
-      return true;
-    }
+  // All supported syntaxes require exactly one specifier
+  if (specifiers.length !== 1) {
+    return false;
   }
 
-  return false;
+  const [specifier] = specifiers;
+
+  // Validate syntax-specific constraints
+  const isValidForSyntax =
+    syntax === 'named'
+      ? specifier.type === AST_NODE_TYPES.ImportSpecifier &&
+        specifier.imported.type === AST_NODE_TYPES.Identifier &&
+        specifier.imported.name === 'z'
+      : specifier.type === AST_NODE_TYPES.ImportNamespaceSpecifier;
+
+  if (!isValidForSyntax) {
+    return false;
+  }
+
+  // If the group consists only of type imports, the first import
+  // must explicitly use `import type`
+  if (hasOnlyTypeImports) {
+    return importKind === 'type';
+  }
+
+  return true;
 }
 
 function shouldIdentifierBeRenamed(node: TSESTree.Identifier): boolean {
@@ -74,25 +112,42 @@ function getNamespaceAliasNameFrom(node: TSESTree.ImportClause): string | null {
   return null;
 }
 
-export const preferNamespaceImport = ESLintUtils.RuleCreator(getRuleURL)({
-  name: 'prefer-namespace-import',
+export const consistentImport = ESLintUtils.RuleCreator(getRuleURL)<
+  [Options],
+  MessageIds
+>({
+  name: 'consistent-import',
   meta: {
-    type: 'suggestion',
+    type: 'problem',
     docs: {
-      description:
-        "Enforce importing zod as a namespace import (`import * as z from 'zod'`)",
+      description: 'Enforce a consistent import style for Zod',
     },
     fixable: 'code',
     messages: {
-      useNamespace: 'Import Zod with a namespace import',
-      removeDuplicate: 'Zod is already imported via namespace import',
-      convertUsage: 'Convert to namespace usage',
+      changeImportSyntax: 'Use a {{syntax}} import for Zod.',
+      removeDuplicate: 'Remove duplicate Zod import; Zod is already imported.',
+      convertUsage: 'Update Zod usage to match the {{syntax}} import syntax.',
     },
-    schema: [],
+    schema: [
+      {
+        type: 'object',
+        properties: {
+          syntax: {
+            description: 'Specifies the import syntax to use for Zod.',
+            type: 'string',
+            enum: IMPORT_SYNTAXES as never,
+          },
+        },
+        additionalProperties: false,
+      },
+    ],
   },
-  defaultOptions: [],
-  create(context) {
+  defaultOptions: [{ syntax: 'namespace' }],
+  create(context, [options]) {
+    const { syntax } = options;
+
     const { sourceCode } = context;
+
     const importGroups: Record<string, ImportGroupData> = {};
 
     return {
@@ -161,17 +216,30 @@ export const preferNamespaceImport = ESLintUtils.RuleCreator(getRuleURL)({
           }
 
           // Check if first import node is a namespace import
-          const isFirstImportValid =
-            isGroupFirstImportTypeNamespace(importGroup);
+          const isFirstImportValid = isGroupFirstImportKindValidForSyntax(
+            importGroup,
+            syntax,
+          );
 
           // if first node is invalid turn it into a namespace import
           if (!isFirstImportValid) {
             context.report({
               node: firstImportNode,
-              messageId: 'useNamespace',
+              messageId: 'changeImportSyntax',
+              data: { syntax },
               fix(fixer) {
                 const importTypeKeyword = hasOnlyTypeImports ? 'type ' : '';
-                const newImportText = `import ${importTypeKeyword}* as ${namespaceAliasName} from ${firstImportNode.source.raw};`;
+                let importSpecifier: string | undefined;
+                if (syntax === 'named') {
+                  if (namespaceAliasName === 'z') {
+                    importSpecifier = '{ z }';
+                  } else {
+                    importSpecifier = `{ z as ${namespaceAliasName} }`;
+                  }
+                } else {
+                  importSpecifier = `* as ${namespaceAliasName}`;
+                }
+                const newImportText = `import ${importTypeKeyword}${importSpecifier} from ${firstImportNode.source.raw};`;
                 return fixer.replaceText(firstImportNode, newImportText);
               },
             });
@@ -189,6 +257,7 @@ export const preferNamespaceImport = ESLintUtils.RuleCreator(getRuleURL)({
               context.report({
                 node: identifier,
                 messageId: 'convertUsage',
+                data: { syntax },
                 fix(fixer) {
                   const newId = `${namespaceAliasName}.${identifier.name}`;
                   return fixer.replaceText(identifier, newId);
