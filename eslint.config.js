@@ -7,7 +7,13 @@ import pluginEslintNode from 'eslint-plugin-n';
 
 export default defineConfig(
   globalIgnores(['dist', 'coverage']),
-  configBase,
+  {
+    ...configBase,
+    rules: {
+      ...configBase.rules,
+      'no-continue': 'off',
+    },
+  },
   {
     ...configTS,
     rules: {

@@ -69,7 +69,6 @@ export function trackZodSchemaImports(): Result {
         });
 
         current = callee.object;
-        // eslint-disable-next-line no-continue
         continue;
       }
 
