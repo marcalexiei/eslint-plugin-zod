@@ -53,7 +53,7 @@ ruleTester.run('array-style (function)', arrayStyle, {
       output: null,
     },
     {
-      // https://github.com/marcalexiei/eslint-plugin-zod-x/issues/174
+      // https://github.com/marcalexiei/eslint-plugin-zod/issues/174
       name: 'named z import',
       code: dedent`
         import { z } from 'zod';
@@ -148,7 +148,7 @@ ruleTester.run('array-style (method)', arrayStyle, {
       `,
     },
     {
-      // https://github.com/marcalexiei/eslint-plugin-zod-x/issues/148
+      // https://github.com/marcalexiei/eslint-plugin-zod/issues/148
       name: 'works with nested schema with chained methods',
       code: dedent`
         import * as z from 'zod';

@@ -1,4 +1,4 @@
-# zod-x/no-number-schema-with-int
+# zod/no-number-schema-with-int
 
 📝 Disallow usage of `z.number().int()` as it is considered legacy.
 

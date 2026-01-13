@@ -1,4 +1,4 @@
-# zod-x/prefer-namespace-import
+# zod/prefer-namespace-import
 
 📝 Enforce importing zod as a namespace import (`import * as z from 'zod'`).
 

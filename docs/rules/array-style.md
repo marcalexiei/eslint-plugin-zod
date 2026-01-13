@@ -1,4 +1,4 @@
-# zod-x/array-style
+# zod/array-style
 
 📝 Enforce consistent Zod array style.
 

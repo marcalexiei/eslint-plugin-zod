@@ -1,4 +1,4 @@
-# zod-x/schema-error-property-style
+# zod/schema-error-property-style
 
 📝 Enforce consistent style for error messages in Zod schema validation (using ESQuery patterns).
 
@@ -55,7 +55,7 @@ z.custom(() => true, { error: `template string` });
 ```json
 {
   "rules": {
-    "zod-x/schema-error-property-style": [
+    "zod/schema-error-property-style": [
       "error",
       {
         "selector": "Literal",

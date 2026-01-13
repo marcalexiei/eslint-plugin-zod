@@ -2,7 +2,7 @@
   "$schema": "https://unpkg.com/@changesets/config@3.0.3/schema.json",
   "changelog": [
     "@changesets/changelog-github",
-    { "repo": "marcalexiei/eslint-plugin-zod-x" }
+    { "repo": "marcalexiei/eslint-plugin-zod" }
   ],
   "commit": false,
   "fixed": [],

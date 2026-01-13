@@ -65,7 +65,7 @@ ruleTester.run('require-schema-suffix', requireSchemaSuffix, {
       `,
     },
     {
-      // https://github.com/marcalexiei/eslint-plugin-zod-x/issues/71
+      // https://github.com/marcalexiei/eslint-plugin-zod/issues/71
       name: 'should handle methods after parsing methods',
       code: dedent`
         import * as z from 'zod';
@@ -78,7 +78,7 @@ ruleTester.run('require-schema-suffix', requireSchemaSuffix, {
       `,
     },
     {
-      // https://github.com/marcalexiei/eslint-plugin-zod-x/issues/71
+      // https://github.com/marcalexiei/eslint-plugin-zod/issues/71
       name: 'should handle properties after `safeParse`',
       code: dedent`
         import * as z from 'zod';
@@ -86,7 +86,7 @@ ruleTester.run('require-schema-suffix', requireSchemaSuffix, {
       `,
     },
     {
-      // https://github.com/marcalexiei/eslint-plugin-zod-x/issues/71
+      // https://github.com/marcalexiei/eslint-plugin-zod/issues/71
       name: 'should handle methods after spa (alias for safeParseAsync)',
       code: dedent`
         import * as z from 'zod';

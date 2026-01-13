@@ -1,4 +1,4 @@
-# zod-x/consistent-object-schema-type
+# zod/consistent-object-schema-type
 
 📝 Enforce consistent usage of Zod schema methods.
 
@@ -64,7 +64,7 @@ z.object({ name: z.string() });
 ```json
 {
   "rules": {
-    "zod-x/consistent-object-schema-type": [
+    "zod/consistent-object-schema-type": [
       "error",
       { "allow": ["looseObject", "strictObject"] }
     ]

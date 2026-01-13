@@ -13,7 +13,7 @@ const {
 
 export { PLUGIN_NAME, PLUGIN_VERSION };
 
-/** @see https://github.com/marcalexiei/eslint-plugin-zod-x/pull/97 */
+/** @see https://github.com/marcalexiei/eslint-plugin-zod/pull/97 */
 const PLUGIN_HOMEPAGE = homepage.replace(/#[^#]*$/, '');
 
 export function getRuleURL(ruleID: string): string {

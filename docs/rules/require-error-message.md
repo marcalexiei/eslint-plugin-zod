@@ -1,4 +1,4 @@
-# zod-x/require-error-message
+# zod/require-error-message
 
 📝 Enforce that custom refinements include an error message.
 

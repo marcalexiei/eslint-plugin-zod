@@ -1,5 +1,5 @@
 {
-  "name": "eslint-plugin-zod-x",
+  "name": "eslint-plugin-zod",
   "version": "2.1.0",
   "type": "module",
   "description": "ESLint plugin that adds custom linting rules to enforce best practices when using Zod",
@@ -19,9 +19,9 @@
       "require": "./dist/index.cjs"
     }
   },
-  "homepage": "https://github.com/marcalexiei/eslint-plugin-zod-x#readme",
+  "homepage": "https://github.com/marcalexiei/eslint-plugin-zod#readme",
   "bugs": {
-    "url": "https://github.com/marcalexiei/eslint-plugin-zod-x/issues"
+    "url": "https://github.com/marcalexiei/eslint-plugin-zod/issues"
   },
   "keywords": [
     "eslint",
@@ -36,7 +36,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/marcalexiei/eslint-plugin-zod-x"
+    "url": "https://github.com/marcalexiei/eslint-plugin-zod"
   },
   "zshy": {
     "exports": "./src/index.ts"

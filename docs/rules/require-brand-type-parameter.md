@@ -1,4 +1,4 @@
-# zod-x/require-brand-type-parameter
+# zod/require-brand-type-parameter
 
 📝 Require type parameter on `.brand()` functions.
 

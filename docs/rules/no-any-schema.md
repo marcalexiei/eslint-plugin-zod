@@ -1,4 +1,4 @@
-# zod-x/no-any-schema
+# zod/no-any-schema
 
 📝 Disallow usage of `z.any()` in Zod schemas.
 

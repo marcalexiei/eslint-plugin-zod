@@ -32,7 +32,7 @@ interface CompatiblePlugin {
   };
 }
 
-const eslintPluginZodX = {
+const eslintPluginZod = {
   meta: {
     name: PLUGIN_NAME,
     version: PLUGIN_VERSION,
@@ -65,33 +65,33 @@ const recommendedConfig = {
   files: ['**/*.{js,mjs,cjs,jsx,mjsx,ts,tsx,mtsx}'],
   /* eslint-disable @typescript-eslint/naming-convention */
   plugins: {
-    'zod-x': eslintPluginZodX,
+    zod: eslintPluginZod,
   },
   rules: {
-    'zod-x/array-style': 'error',
-    'zod-x/no-any-schema': 'error',
-    'zod-x/no-empty-custom-schema': 'error',
-    'zod-x/no-number-schema-with-int': 'error',
-    'zod-x/no-optional-and-default-together': 'error',
-    'zod-x/no-throw-in-refine': 'error',
-    'zod-x/prefer-enum-over-literal-union': 'error',
-    'zod-x/prefer-meta': 'error',
-    'zod-x/prefer-meta-last': 'error',
-    'zod-x/prefer-namespace-import': 'error',
-    'zod-x/require-brand-type-parameter': 'error',
-    'zod-x/require-error-message': 'error',
-    'zod-x/require-schema-suffix': 'error',
+    'zod/array-style': 'error',
+    'zod/no-any-schema': 'error',
+    'zod/no-empty-custom-schema': 'error',
+    'zod/no-number-schema-with-int': 'error',
+    'zod/no-optional-and-default-together': 'error',
+    'zod/no-throw-in-refine': 'error',
+    'zod/prefer-enum-over-literal-union': 'error',
+    'zod/prefer-meta': 'error',
+    'zod/prefer-meta-last': 'error',
+    'zod/prefer-namespace-import': 'error',
+    'zod/require-brand-type-parameter': 'error',
+    'zod/require-error-message': 'error',
+    'zod/require-schema-suffix': 'error',
   },
   /* eslint-enable @typescript-eslint/naming-convention */
 } satisfies Linter.Config as CompatibleConfig;
 
 export default {
-  ...eslintPluginZodX,
+  ...eslintPluginZod,
   configs: {
     recommended: recommendedConfig,
   },
 } satisfies ESLint.Plugin;
 /**
  * why `satisfies`?
- * @see https://github.com/marcalexiei/eslint-plugin-zod-x/issues/49
+ * @see https://github.com/marcalexiei/eslint-plugin-zod/issues/49
  */

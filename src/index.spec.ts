@@ -36,8 +36,8 @@ describe('plugin export', async () => {
   });
 
   /**
-   * @see https://github.com/marcalexiei/eslint-plugin-zod-x/pull/99
-   * @see https://github.com/marcalexiei/eslint-plugin-zod-x/pull/102
+   * @see https://github.com/marcalexiei/eslint-plugin-zod/pull/99
+   * @see https://github.com/marcalexiei/eslint-plugin-zod/pull/102
    */
   it('all rules must have a documentation file matching their name', () => {
     for (const [ruleName, rule] of Object.entries(_plugin.rules)) {
@@ -56,8 +56,8 @@ describe('recommended config', () => {
   it('has correct shape', () => {
     const recommendedConfig = plugin.configs.recommended;
     expect(recommendedConfig).toBeTypeOf('object');
-    expect(recommendedConfig.name).toBe('eslint-plugin-zod-x/recommended');
-    expect(recommendedConfig.plugins).toHaveProperty('zod-x');
+    expect(recommendedConfig.name).toBe('eslint-plugin-zod/recommended');
+    expect(recommendedConfig.plugins).toHaveProperty('zod');
     expect(recommendedConfig.rules).toBeTypeOf('object');
   });
 

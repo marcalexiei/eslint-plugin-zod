@@ -28,7 +28,7 @@ ruleTester.run('prefer-namespace-import', preferNamespaceImport, {
       code: 'import * as z from "zod/mini";',
     },
     {
-      // https://github.com/marcalexiei/eslint-plugin-zod-x/issues/93
+      // https://github.com/marcalexiei/eslint-plugin-zod/issues/93
       name: 'zod v4 and v3',
       code: dedent`
         import * as z3 from "zod/v3";
@@ -36,7 +36,7 @@ ruleTester.run('prefer-namespace-import', preferNamespaceImport, {
       `,
     },
     {
-      // https://github.com/marcalexiei/eslint-plugin-zod-x/issues/93
+      // https://github.com/marcalexiei/eslint-plugin-zod/issues/93
       name: 'zod v4 (types) and v3',
       code: dedent`
         import * as z3 from "zod/v3";
@@ -83,7 +83,7 @@ ruleTester.run('prefer-namespace-import', preferNamespaceImport, {
       output: 'import * as z from "zod/mini";',
     },
     {
-      // https://github.com/marcalexiei/eslint-plugin-zod-x/issues/39
+      // https://github.com/marcalexiei/eslint-plugin-zod/issues/39
       name: 'named type import',
       code: 'import type { z } from "zod";',
       errors: [{ messageId: 'useNamespace' }],
@@ -120,7 +120,7 @@ ruleTester.run('prefer-namespace-import', preferNamespaceImport, {
       output: 'import * as z from "zod";\n',
     },
     {
-      // https://github.com/marcalexiei/eslint-plugin-zod-x/issues/93
+      // https://github.com/marcalexiei/eslint-plugin-zod/issues/93
       name: 'zod v4 and v3 (named)',
       code: dedent`
         import z3 from "zod/v3";
@@ -137,7 +137,7 @@ ruleTester.run('prefer-namespace-import', preferNamespaceImport, {
       `,
     },
     {
-      // https://github.com/marcalexiei/eslint-plugin-zod-x/issues/138
+      // https://github.com/marcalexiei/eslint-plugin-zod/issues/138
       name: 'mixed value and type imports',
       code: dedent`
         import {array, type $ZodType} from "zod";
@@ -154,7 +154,7 @@ ruleTester.run('prefer-namespace-import', preferNamespaceImport, {
       `,
     },
     {
-      // https://github.com/marcalexiei/eslint-plugin-zod-x/issues/138
+      // https://github.com/marcalexiei/eslint-plugin-zod/issues/138
       name: 'type named imports',
       code: dedent`
         import type { ZodBoolean, $ZodType } from "zod";
@@ -171,7 +171,7 @@ ruleTester.run('prefer-namespace-import', preferNamespaceImport, {
       `,
     },
     {
-      // https://github.com/marcalexiei/eslint-plugin-zod-x/issues/138
+      // https://github.com/marcalexiei/eslint-plugin-zod/issues/138
       name: 'namespace import + named type import',
       code: dedent`
         import * as z from "zod";
@@ -189,7 +189,7 @@ ruleTester.run('prefer-namespace-import', preferNamespaceImport, {
       `,
     },
     {
-      // https://github.com/marcalexiei/eslint-plugin-zod-x/issues/138
+      // https://github.com/marcalexiei/eslint-plugin-zod/issues/138
       name: 'two versions: one using named and one default import',
       code: dedent`
         import { z as z3 } from 'zod/v3';
@@ -209,7 +209,7 @@ ruleTester.run('prefer-namespace-import', preferNamespaceImport, {
       `,
     },
     {
-      // https://github.com/marcalexiei/eslint-plugin-zod-x/issues/138
+      // https://github.com/marcalexiei/eslint-plugin-zod/issues/138
       name: 'two versions: one using named and one default import and named type',
       code: dedent`
         import { z as z3 } from 'zod/v3';
@@ -233,7 +233,7 @@ ruleTester.run('prefer-namespace-import', preferNamespaceImport, {
       `,
     },
     {
-      // https://github.com/marcalexiei/eslint-plugin-zod-x/issues/138
+      // https://github.com/marcalexiei/eslint-plugin-zod/issues/138
       name: 'only named',
       code: dedent`
         import { type $ZodType, string } from 'zod';
@@ -250,7 +250,7 @@ ruleTester.run('prefer-namespace-import', preferNamespaceImport, {
       `,
     },
     {
-      // https://github.com/marcalexiei/eslint-plugin-zod-x/issues/138
+      // https://github.com/marcalexiei/eslint-plugin-zod/issues/138
       name: 'first named, then namespace',
       code: dedent`
         import type { $ZodType } from 'zod';
@@ -269,7 +269,7 @@ ruleTester.run('prefer-namespace-import', preferNamespaceImport, {
       `,
     },
     {
-      // https://github.com/marcalexiei/eslint-plugin-zod-x/issues/93
+      // https://github.com/marcalexiei/eslint-plugin-zod/issues/93
       name: 'two named imports from same module',
       code: dedent`
         import {array, boolean} from 'zod';
@@ -292,7 +292,7 @@ ruleTester.run('prefer-namespace-import', preferNamespaceImport, {
       `,
     },
     {
-      // https://github.com/marcalexiei/eslint-plugin-zod-x/issues/93
+      // https://github.com/marcalexiei/eslint-plugin-zod/issues/93
       name: 'keeps name from default import',
       code: dedent`
         import myZod from 'zod';
@@ -305,7 +305,7 @@ ruleTester.run('prefer-namespace-import', preferNamespaceImport, {
       `,
     },
     {
-      // https://github.com/marcalexiei/eslint-plugin-zod-x/issues/93
+      // https://github.com/marcalexiei/eslint-plugin-zod/issues/93
       name: 'keeps name from named z import',
       code: dedent`
         import { z as myZod} from 'zod';
@@ -318,7 +318,7 @@ ruleTester.run('prefer-namespace-import', preferNamespaceImport, {
       `,
     },
     {
-      // https://github.com/marcalexiei/eslint-plugin-zod-x/issues/93
+      // https://github.com/marcalexiei/eslint-plugin-zod/issues/93
       name: 'keeps name from named z import and ignores other named import',
       code: dedent`
         import { boolean, z as myZod} from 'zod';

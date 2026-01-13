@@ -1,4 +1,4 @@
-# zod-x/no-empty-custom-schema
+# zod/no-empty-custom-schema
 
 📝 Disallow usage of `z.custom()` without arguments.
 

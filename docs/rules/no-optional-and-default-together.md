@@ -1,4 +1,4 @@
-# zod-x/no-optional-and-default-together
+# zod/no-optional-and-default-together
 
 📝 Disallow using both `.optional()` and `.default()` on the same Zod schema.
 
