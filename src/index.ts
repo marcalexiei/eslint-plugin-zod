@@ -10,6 +10,7 @@ import { noNumberSchemaWithInt } from './rules/no-number-schema-with-int.js';
 import { noOptionalAndDefaultTogether } from './rules/no-optional-and-default-together.js';
 import { noThrowInRefine } from './rules/no-throw-in-refine.js';
 import { noUnknownSchema } from './rules/no-unknown-schema.js';
+import { preferEnumOverLiteralUnion } from './rules/prefer-enum-over-literal-union.js';
 import { preferMetaLast } from './rules/prefer-meta-last.js';
 import { preferMeta } from './rules/prefer-meta.js';
 import { preferNamespaceImport } from './rules/prefer-namespace-import.js';
@@ -47,6 +48,7 @@ const eslintPluginZodX = {
     'no-optional-and-default-together': noOptionalAndDefaultTogether,
     'no-throw-in-refine': noThrowInRefine,
     'no-unknown-schema': noUnknownSchema,
+    'prefer-enum-over-literal-union': preferEnumOverLiteralUnion,
     'prefer-meta': preferMeta,
     'prefer-meta-last': preferMetaLast,
     'prefer-namespace-import': preferNamespaceImport,
@@ -72,6 +74,7 @@ const recommendedConfig = {
     'zod-x/no-number-schema-with-int': 'error',
     'zod-x/no-optional-and-default-together': 'error',
     'zod-x/no-throw-in-refine': 'error',
+    'zod-x/prefer-enum-over-literal-union': 'error',
     'zod-x/prefer-meta': 'error',
     'zod-x/prefer-meta-last': 'error',
     'zod-x/prefer-namespace-import': 'error',
