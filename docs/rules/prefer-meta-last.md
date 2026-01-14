@@ -1,4 +1,4 @@
-# zod-x/prefer-meta-last
+# zod/prefer-meta-last
 
 📝 Enforce `.meta()` as last method.
 

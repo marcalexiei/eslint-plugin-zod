@@ -1,4 +1,4 @@
-# zod-x/require-schema-suffix
+# zod/require-schema-suffix
 
 📝 Require schema suffix when declaring a Zod schema.
 
@@ -62,7 +62,7 @@ They’re designed to manage all of the above scenarios correctly.
 ```json
 {
   "rules": {
-    "zod-x/require-schema-suffix": ["error"]
+    "zod/require-schema-suffix": ["error"]
   }
 }
 ```
@@ -98,7 +98,7 @@ const stringToDate = z.codec(z.iso.datetime(), z.date(), {
 ```json
 {
   "rules": {
-    "zod-x/require-schema-suffix": ["error", { "suffix": "_schema" }]
+    "zod/require-schema-suffix": ["error", { "suffix": "_schema" }]
   }
 }
 ```

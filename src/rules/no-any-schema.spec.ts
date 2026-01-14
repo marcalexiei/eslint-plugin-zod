@@ -15,7 +15,7 @@ ruleTester.run('no-any-schema', noAnySchema, {
       `,
     },
     {
-      // https://github.com/marcalexiei/eslint-plugin-zod-x/issues/174
+      // https://github.com/marcalexiei/eslint-plugin-zod/issues/174
       name: 'named z import',
       code: dedent`
         import { z } from 'zod';
@@ -128,7 +128,7 @@ ruleTester.run('no-any-schema', noAnySchema, {
       ],
     },
     {
-      // https://github.com/marcalexiei/eslint-plugin-zod-x/issues/143
+      // https://github.com/marcalexiei/eslint-plugin-zod/issues/143
       name: 'should correctly fix any schema with chained method',
       code: dedent`
         import * as z from 'zod';

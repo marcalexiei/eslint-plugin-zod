@@ -50,7 +50,7 @@ ruleTester.run('prefer-meta-last', preferMetaLast, {
       `,
     },
     {
-      // https://github.com/marcalexiei/eslint-plugin-zod-x/issues/42
+      // https://github.com/marcalexiei/eslint-plugin-zod/issues/42
       name: 'meta not belonging to zod',
       code: dedent`
         export const t = initTRPC
@@ -64,7 +64,7 @@ ruleTester.run('prefer-meta-last', preferMetaLast, {
       code: 'const t = meta<Meta>()',
     },
     {
-      // https://github.com/marcalexiei/eslint-plugin-zod-x/issues/70
+      // https://github.com/marcalexiei/eslint-plugin-zod/issues/70
       name: 'inside object',
       code: dedent`
         import * as z from 'zod';
@@ -75,7 +75,7 @@ ruleTester.run('prefer-meta-last', preferMetaLast, {
       `,
     },
     {
-      // https://github.com/marcalexiei/eslint-plugin-zod-x/issues/42
+      // https://github.com/marcalexiei/eslint-plugin-zod/issues/42
       name: 'inside looseObject',
       code: dedent`
         import * as z from 'zod';
@@ -86,7 +86,7 @@ ruleTester.run('prefer-meta-last', preferMetaLast, {
       `,
     },
     {
-      // https://github.com/marcalexiei/eslint-plugin-zod-x/issues/42
+      // https://github.com/marcalexiei/eslint-plugin-zod/issues/42
       name: 'inside strictObject',
       code: dedent`
         import * as z from 'zod';
@@ -162,7 +162,7 @@ ruleTester.run('prefer-meta-last', preferMetaLast, {
       `,
     },
     {
-      // https://github.com/marcalexiei/eslint-plugin-zod-x/issues/42
+      // https://github.com/marcalexiei/eslint-plugin-zod/issues/42
       name: 'inside strictObject',
       code: dedent`
         import * as z from 'zod';

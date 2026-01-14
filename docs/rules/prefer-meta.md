@@ -1,4 +1,4 @@
-# zod-x/prefer-meta
+# zod/prefer-meta
 
 📝 Enforce usage of `.meta()` over `.describe()`.
 

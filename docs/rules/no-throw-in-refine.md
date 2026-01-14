@@ -1,4 +1,4 @@
-# zod-x/no-throw-in-refine
+# zod/no-throw-in-refine
 
 📝 Disallow throwing errors directly inside Zod refine callbacks.
 

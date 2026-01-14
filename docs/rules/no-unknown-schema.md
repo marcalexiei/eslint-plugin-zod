@@ -1,4 +1,4 @@
-# zod-x/no-unknown-schema
+# zod/no-unknown-schema
 
 📝 Disallow usage of `z.unknown()` in Zod schemas.
 

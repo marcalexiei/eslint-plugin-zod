@@ -32,7 +32,7 @@ body:
         ```ts
         {
           "rules": {
-            "zod-x/require-schema-description": "error"
+            "zod/require-schema-description": "error"
           }
         }
         ```

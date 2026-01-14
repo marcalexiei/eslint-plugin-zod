@@ -1,4 +1,4 @@
-# zod-x/consistent-import-source
+# zod/consistent-import-source
 
 📝 Enforce consistent source from Zod imports.
 
@@ -76,7 +76,7 @@ import other from 'zod/v4';
 ```json
 {
   "rules": {
-    "zod-x/consistent-import-source": "error"
+    "zod/consistent-import-source": "error"
   }
 }
 ```
@@ -88,7 +88,7 @@ This will only allow imports from 'zod'.
 ```json
 {
   "rules": {
-    "zod-x/consistent-import-source": [
+    "zod/consistent-import-source": [
       "error",
       {
         "sources": ["zod/v4"]
@@ -105,7 +105,7 @@ This will only allow imports from 'zod/v4'.
 ```json
 {
   "rules": {
-    "zod-x/consistent-import-source": [
+    "zod/consistent-import-source": [
       "error",
       {
         "sources": ["zod", "zod/v4"]

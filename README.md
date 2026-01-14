@@ -1,4 +1,4 @@
-# eslint-plugin-zod-x
+# eslint-plugin-zod
 
 [![CI][CIBadge]][CIURL]
 [![Code style: prettier][CodeStyleBadge]][CodeStyleURL]
@@ -6,21 +6,16 @@
 [![npm version][npmVersionBadge]][npmVersionURL]
 [![issues][issuesBadge]][issuesURL]
 
-[CIBadge]: https://img.shields.io/github/actions/workflow/status/marcalexiei/eslint-plugin-zod-x/ci.yml?style=for-the-badge&logo=github&event=push&label=CI
-[CIURL]: https://github.com/marcalexiei/eslint-plugin-zod-x/actions/workflows/CI.yml/badge.svg
+[CIBadge]: https://img.shields.io/github/actions/workflow/status/marcalexiei/eslint-plugin-zod/ci.yml?style=for-the-badge&logo=github&event=push&label=CI
+[CIURL]: https://github.com/marcalexiei/eslint-plugin-zod/actions/workflows/CI.yml/badge.svg
 [CodeStyleBadge]: https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=for-the-badge&logo=prettier
 [CodeStyleURL]: https://prettier.io
-[npmVersionBadge]: https://img.shields.io/npm/v/eslint-plugin-zod-x.svg?style=for-the-badge&logo=npm
-[npmVersionURL]: https://www.npmjs.com/package/eslint-plugin-zod-x
+[npmVersionBadge]: https://img.shields.io/npm/v/eslint-plugin-zod.svg?style=for-the-badge&logo=npm
+[npmVersionURL]: https://www.npmjs.com/package/eslint-plugin-zod
 [lintBadge]: https://img.shields.io/badge/lint-eslint-3A33D1?logo=eslint&style=for-the-badge
 [lintURL]: https://eslint.org
-[issuesBadge]: https://img.shields.io/github/issues/marcalexiei/eslint-plugin-zod-x.svg?style=for-the-badge
-[issuesURL]: https://github.com/marcalexiei/eslint-plugin-zod-x/issues
-
-> `eslint-plugin-zod-x` is deprecated.\
-> You can use `eslint-plugin-zod` to have the same functionalities as before.\
->
-> See [Takeover eslint-plugin-zod](https://github.com/marcalexiei/eslint-plugin-zod-x/issues/171) for additional information.
+[issuesBadge]: https://img.shields.io/github/issues/marcalexiei/eslint-plugin-zod.svg?style=for-the-badge
+[issuesURL]: https://github.com/marcalexiei/eslint-plugin-zod/issues
 
 [ESLint](https://eslint.org) plugin that adds custom linting rules to enforce best practices when using [Zod](https://github.com/colinhacks/zod)
 
@@ -57,18 +52,18 @@
 
 ## Installation
 
-Install `eslint` and `eslint-plugin-zod-x` using your preferred package manager:
+Install `eslint` and `eslint-plugin-zod` using your preferred package manager:
 
 ```shell
-npm i --save-dev eslint eslint-plugin-zod-x
+npm i --save-dev eslint eslint-plugin-zod
 ```
 
 ```shell
-yarn add --dev eslint eslint-plugin-zod-x
+yarn add --dev eslint eslint-plugin-zod
 ```
 
 ```shell
-pnpm add --save-dev eslint eslint-plugin-zod-x
+pnpm add --save-dev eslint eslint-plugin-zod
 ```
 
 ## Configuration
@@ -76,13 +71,13 @@ pnpm add --save-dev eslint eslint-plugin-zod-x
 1. Import the plugin
 
    ```ts
-   import eslintPluginZodX from 'eslint-plugin-zod-x';
+   import eslintPluginZod from 'eslint-plugin-zod';
    ```
 
 2. Add `recommended` config to your ESLint setup
 
    ```ts
-   eslintPluginZodX.configs.recommended,
+   eslintPluginZod.configs.recommended,
    ```
 
 Here’s a minimal example using the flat config format:
@@ -91,17 +86,17 @@ Here’s a minimal example using the flat config format:
 // eslint.config.js
 import { defineConfig } from 'eslint/config';
 import eslint from '@eslint/js';
-import eslintPluginZodX from 'eslint-plugin-zod-x';
+import eslintPluginZod from 'eslint-plugin-zod';
 
 export default defineConfig(
   eslint.configs.recommended,
-  eslintPluginZodX.configs.recommended,
+  eslintPluginZod.configs.recommended,
 );
 ```
 
 ## Zod peer dependency version
 
-`eslint-plugin-zod-x` is designed for projects that use `zod@^4`.
+`eslint-plugin-zod` is designed for projects that use `zod@^4`.
 While the plugin analyzes Zod schemas in your code,
 it doesn’t import or depend on Zod at runtime.
 To document this relationship without forcing installation,

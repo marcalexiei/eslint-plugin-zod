@@ -1,4 +1,4 @@
-# zod-x/prefer-enum-over-literal-union
+# zod/prefer-enum-over-literal-union
 
 📝 Prefer `z.enum()` over `z.union()` when all members are string literals.
 

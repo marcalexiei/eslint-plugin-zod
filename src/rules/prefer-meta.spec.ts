@@ -50,7 +50,7 @@ ruleTester.run('prefer-meta', preferMeta, {
       `,
     },
     {
-      // https://github.com/marcalexiei/eslint-plugin-zod-x/issues/121
+      // https://github.com/marcalexiei/eslint-plugin-zod/issues/121
       name: 'ignores non-zod describe methods',
       code: dedent`
         import { test } from "@playwright/test";
