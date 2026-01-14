@@ -1,5 +1,17 @@
 # eslint-plugin-zod-x
 
+## 2.1.0
+
+### Minor Changes
+
+- [#183](https://github.com/marcalexiei/eslint-plugin-zod-x/pull/183) [`70f5add`](https://github.com/marcalexiei/eslint-plugin-zod-x/commit/70f5addfeb6e8438c3b0fdf5b5fa0ae32dc5057e) Thanks [@marcalexiei](https://github.com/marcalexiei)! - feat(prefer-enum-over-literal-union): add new rule
+
+- [#184](https://github.com/marcalexiei/eslint-plugin-zod-x/pull/184) [`950f61f`](https://github.com/marcalexiei/eslint-plugin-zod-x/commit/950f61f8957f81a7dd5627c7e406f512dde6ad7e) Thanks [@marcalexiei](https://github.com/marcalexiei)! - feat: `eslint-plugin-zod-x` deprecation notice
+
+  This is the last `eslint-plugin-zod-x` release.
+  Soon I'll release a new major version on `eslint-plugin-zod`.
+  See [Takeover eslint-plugin-zod](https://github.com/marcalexiei/eslint-plugin-zod-x/issues/171) for additional information.
+
 ## 2.0.1
 
 ### Patch Changes
