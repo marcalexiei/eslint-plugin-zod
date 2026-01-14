@@ -17,6 +17,11 @@
 [issuesBadge]: https://img.shields.io/github/issues/marcalexiei/eslint-plugin-zod-x.svg?style=for-the-badge
 [issuesURL]: https://github.com/marcalexiei/eslint-plugin-zod-x/issues
 
+> `eslint-plugin-zod-x` is deprecated.\
+> You can use `eslint-plugin-zod` to have the same functionalities as before.\
+>
+> See [Takeover eslint-plugin-zod](https://github.com/marcalexiei/eslint-plugin-zod-x/issues/171) for additional information.
+
 [ESLint](https://eslint.org) plugin that adds custom linting rules to enforce best practices when using [Zod](https://github.com/colinhacks/zod)
 
 ## Rules
