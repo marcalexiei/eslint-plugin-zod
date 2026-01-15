@@ -1,7 +1,7 @@
+import type { TSESTree } from '@typescript-eslint/utils';
 import { ESLintUtils } from '@typescript-eslint/utils';
 
 import { getRuleURL } from '../meta.js';
-import { isZodExpressionEndingWithMethod } from '../utils/is-zod-expression.js';
 import { trackZodSchemaImports } from '../utils/track-zod-schema-imports.js';
 
 const ZOD_ARRAY_STYLES = ['function', 'method'];
@@ -99,17 +99,23 @@ export const arrayStyle = ESLintUtils.RuleCreator(getRuleURL)<
           return;
         }
 
-        const { callee } = node;
-        if (
-          isZodExpressionEndingWithMethod(callee, 'array') &&
-          // if there is a param the array has already a schema inside
-          node.arguments.length === 0
-        ) {
+        const methods = collectZodChainMethods(node);
+
+        const arrayMethod = methods.find(
+          (it) =>
+            it.name === 'array' &&
+            // if there is a param the array has already a schema inside
+            it.node.arguments.length === 0,
+        );
+
+        if (arrayMethod) {
+          const arrayNode = arrayMethod.node;
           if (schemaDecl === 'namespace') {
             context.report({
               node,
               messageId: 'useFunction',
               fix(fixer) {
+                const callee = arrayNode.callee as TSESTree.MemberExpression;
                 const objText = sourceCode.getText(callee.object);
                 return fixer.replaceText(node, `z.array(${objText})`);
               },

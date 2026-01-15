@@ -88,6 +88,16 @@ ruleTester.run('array-style (function)', arrayStyle, {
       errors: [{ messageId: 'useFunction' }],
       output: null,
     },
+    {
+      name: 'named with method followed by another method',
+      code: dedent`
+        import { string } from 'zod';
+        string().trim().array().min(1);
+      `,
+      options: [{ style: 'function' }],
+      errors: [{ messageId: 'useFunction' }],
+      output: null,
+    },
   ],
 });
 
