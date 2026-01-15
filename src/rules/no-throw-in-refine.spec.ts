@@ -79,5 +79,17 @@ ruleTester.run('no-throw-in-refine', noThrowInRefine, {
       `,
       errors: [{ messageId: 'noThrowInRefine' }],
     },
+    {
+      name: 'inside arrow function within cycle and chained method',
+      code: dedent`
+        import * as z from 'zod';
+        z.number().refine((val) => {
+          for (const it of val) {
+            throw new Error('Invalid')
+          }
+        }).array();
+      `,
+      errors: [{ messageId: 'noThrowInRefine' }],
+    },
   ],
 });
