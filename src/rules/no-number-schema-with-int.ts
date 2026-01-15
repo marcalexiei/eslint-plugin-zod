@@ -2,7 +2,6 @@ import type { TSESTree } from '@typescript-eslint/utils';
 import { ESLintUtils } from '@typescript-eslint/utils';
 
 import { getRuleURL } from '../meta.js';
-import { getOutermostCall } from '../utils/get-outermost-call.js';
 import { trackZodSchemaImports } from '../utils/track-zod-schema-imports.js';
 
 export const noNumberSchemaWithInt = ESLintUtils.RuleCreator(getRuleURL)({
@@ -35,20 +34,15 @@ export const noNumberSchemaWithInt = ESLintUtils.RuleCreator(getRuleURL)({
       ImportDeclaration: importDeclarationListener,
 
       CallExpression(node): void {
-        const outer = getOutermostCall(node) ?? node;
-
-        const zodSchemaMeta = detectZodSchemaRootNode(outer);
-        if (!zodSchemaMeta) {
-          return;
-        }
+        const zodSchemaMeta = detectZodSchemaRootNode(node);
 
         // Only care about number schemas
-        if (zodSchemaMeta.schemaType !== 'number') {
+        if (zodSchemaMeta?.schemaType !== 'number') {
           return;
         }
 
         // Collect the full chain from the outermost call (left-to-right)
-        const methods = collectZodChainMethods(outer);
+        const methods = collectZodChainMethods(node);
 
         // find number and int positions
         const numberIndex = methods.findIndex((m) => m.name === 'number');
@@ -58,13 +52,8 @@ export const noNumberSchemaWithInt = ESLintUtils.RuleCreator(getRuleURL)({
           return;
         }
 
-        const numberMethod = methods[numberIndex];
-        const intMethod = methods[intIndex];
-
-        // We only report once — when ESLint visits the `.int()` call-expression itself.
-        if (node !== intMethod.node) {
-          return;
-        }
+        const numberNode = methods[numberIndex].node;
+        const intNode = methods[intIndex].node;
 
         // If it's a named import usage (e.g. `import { number } from 'zod'`), report but do not fix.
         if (zodSchemaMeta.schemaDecl === 'named') {
@@ -80,9 +69,6 @@ export const noNumberSchemaWithInt = ESLintUtils.RuleCreator(getRuleURL)({
           node,
           messageId: 'removeNumber',
           fix(fixer) {
-            const numberNode = numberMethod.node;
-            const intNode = intMethod.node;
-
             // prefix is the namespace (e.g. "z")
             const numberCallee = numberNode.callee as TSESTree.MemberExpression;
             const prefixObj = numberCallee.object;
