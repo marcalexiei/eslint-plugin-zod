@@ -36,6 +36,23 @@ ruleTester.run(preferEnumOverLiteralUnion.name, preferEnumOverLiteralUnion, {
         z.union([z.literal('foo'), z.literal(5)])
       `,
     },
+    {
+      // https://github.com/marcalexiei/eslint-plugin-zod/issues/189
+      code: dedent`
+        import * as z from 'zod';
+        z.union([z.string(), z.number()]).optional()
+      `,
+    },
+    {
+      // https://github.com/marcalexiei/eslint-plugin-zod/issues/189
+      code: dedent`
+      import * as z from 'zod';
+        z.looseObject({
+          modifiedTime: z.string().optional(),
+          size: z.union([z.string(), z.number()]).optional(),
+        });
+      `,
+    },
   ],
   invalid: [
     {
