@@ -1,5 +1,11 @@
 # eslint-plugin-zod
 
+## 3.0.1
+
+### Patch Changes
+
+- [#190](https://github.com/marcalexiei/eslint-plugin-zod/pull/190) [`294b4b1`](https://github.com/marcalexiei/eslint-plugin-zod/commit/294b4b17060d30354be707a3400cced43915df2c) Thanks [@marcalexiei](https://github.com/marcalexiei)! - fix(prefer-enum-over-literal-union): handle empty methods
+
 ## 3.0.0
 
 ### Major Changes
