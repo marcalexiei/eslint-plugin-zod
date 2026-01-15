@@ -1,5 +1,19 @@
 # eslint-plugin-zod
 
+## 3.0.2
+
+### Patch Changes
+
+- [#195](https://github.com/marcalexiei/eslint-plugin-zod/pull/195) [`45bbc49`](https://github.com/marcalexiei/eslint-plugin-zod/commit/45bbc49ee7a52d868b57d872e7e2b7d4c3d61c44) Thanks [@marcalexiei](https://github.com/marcalexiei)! - fix(array-style): use collectZodChainMethods to improve detection logic
+
+- [#197](https://github.com/marcalexiei/eslint-plugin-zod/pull/197) [`187d7a2`](https://github.com/marcalexiei/eslint-plugin-zod/commit/187d7a2e6d4792d5c5fed60116c5a5d89be5fc70) Thanks [@marcalexiei](https://github.com/marcalexiei)! - fix(prefer-meta-last): simplify detect logic
+
+- [#197](https://github.com/marcalexiei/eslint-plugin-zod/pull/197) [`187d7a2`](https://github.com/marcalexiei/eslint-plugin-zod/commit/187d7a2e6d4792d5c5fed60116c5a5d89be5fc70) Thanks [@marcalexiei](https://github.com/marcalexiei)! - fix(no-number-schema-with-int): simplify detect logic
+
+- [#193](https://github.com/marcalexiei/eslint-plugin-zod/pull/193) [`2f2184d`](https://github.com/marcalexiei/eslint-plugin-zod/commit/2f2184d839c67a1d676281257ef7b320cb33da70) Thanks [@marcalexiei](https://github.com/marcalexiei)! - fix(no-throw-in-refine): missing report when refine is not the last method
+
+- [#196](https://github.com/marcalexiei/eslint-plugin-zod/pull/196) [`fb0fe80`](https://github.com/marcalexiei/eslint-plugin-zod/commit/fb0fe8046cc0b50713992d6f393a1ff93f9a3bce) Thanks [@marcalexiei](https://github.com/marcalexiei)! - fix(prefer-enum-over-literal-union): optional string literal unions are not flagged
+
 ## 3.0.1
 
 ### Patch Changes
