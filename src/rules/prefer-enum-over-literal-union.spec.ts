@@ -100,5 +100,49 @@ ruleTester.run(preferEnumOverLiteralUnion.name, preferEnumOverLiteralUnion, {
       errors: [{ messageId: 'useEnum' }],
       output: null,
     },
+    {
+      name: 'with chain method (namespace import)',
+      code: dedent`
+        import * as z from 'zod';
+        z.union([z.literal('foo'), z.literal('bar')]).optional();
+      `,
+      errors: [{ messageId: 'useEnum' }],
+      output: dedent`
+        import * as z from 'zod';
+        z.enum(['foo', 'bar']).optional();
+      `,
+    },
+    {
+      name: 'nested (namespace import)',
+      code: dedent`
+        import * as z from 'zod';
+        z.looseObject({
+          size: z.union([z.literal('foo'), z.literal('bar')]),
+        });
+      `,
+      errors: [{ messageId: 'useEnum' }],
+      output: dedent`
+        import * as z from 'zod';
+        z.looseObject({
+          size: z.enum(['foo', 'bar']),
+        });
+      `,
+    },
+    {
+      name: 'nested with method (namespace import)',
+      code: dedent`
+        import * as z from 'zod';
+        z.looseObject({
+          size: z.union([z.literal('foo'), z.literal('bar')]).optional(),
+        });
+      `,
+      errors: [{ messageId: 'useEnum' }],
+      output: dedent`
+        import * as z from 'zod';
+        z.looseObject({
+          size: z.enum(['foo', 'bar']).optional(),
+        });
+      `,
+    },
   ],
 });

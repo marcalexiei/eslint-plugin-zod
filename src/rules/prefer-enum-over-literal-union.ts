@@ -24,17 +24,28 @@ export const preferEnumOverLiteralUnion = ESLintUtils.RuleCreator(getRuleURL)({
       //
       importDeclarationListener,
       detectZodSchemaRootNode,
+      collectZodChainMethods,
     } = trackZodSchemaImports();
 
     return {
       ImportDeclaration: importDeclarationListener,
       CallExpression(node): void {
         const zodSchema = detectZodSchemaRootNode(node);
+
         if (zodSchema?.schemaType !== 'union') {
           return;
         }
 
-        const unionArgument = node.arguments.at(0);
+        const methods = collectZodChainMethods(zodSchema.node);
+        const union = methods.find((it) => it.name === 'union');
+
+        if (!union) {
+          return;
+        }
+
+        const unionNode = union.node;
+
+        const unionArgument = unionNode.arguments.at(0);
         if (unionArgument?.type !== AST_NODE_TYPES.ArrayExpression) {
           return;
         }
@@ -89,12 +100,12 @@ export const preferEnumOverLiteralUnion = ESLintUtils.RuleCreator(getRuleURL)({
               // Replace just the name of the method.
               // The object property might have a named different from z.
               fixer.replaceText(
-                (node.callee as TSESTree.MemberExpression).property,
+                (unionNode.callee as TSESTree.MemberExpression).property,
                 'enum',
               ),
               // replace parameters with just the literals
               fixer.replaceText(
-                node.arguments[0],
+                unionNode.arguments[0],
                 `[${zodLiteralStrings.join(', ')}]`,
               ),
             ];
