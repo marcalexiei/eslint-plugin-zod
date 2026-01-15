@@ -2,7 +2,6 @@ import { AST_NODE_TYPES, ESLintUtils } from '@typescript-eslint/utils';
 import type { TSESTree } from '@typescript-eslint/utils';
 
 import { getRuleURL } from '../meta.js';
-import { isZodExpressionEndingWithMethod } from '../utils/is-zod-expression.js';
 import { trackZodSchemaImports } from '../utils/track-zod-schema-imports.js';
 
 export const noThrowInRefine = ESLintUtils.RuleCreator(getRuleURL)({
@@ -22,9 +21,9 @@ export const noThrowInRefine = ESLintUtils.RuleCreator(getRuleURL)({
   defaultOptions: [],
   create(context) {
     const {
-      //
       importDeclarationListener,
       detectZodSchemaRootNode,
+      collectZodChainMethods,
     } = trackZodSchemaImports();
 
     function checkNode(node: TSESTree.Node | null): void {
@@ -83,14 +82,20 @@ export const noThrowInRefine = ESLintUtils.RuleCreator(getRuleURL)({
           return;
         }
 
-        if (isZodExpressionEndingWithMethod(node.callee, 'refine')) {
-          const [callback] = node.arguments;
-          if (
-            callback.type === AST_NODE_TYPES.ArrowFunctionExpression ||
-            callback.type === AST_NODE_TYPES.FunctionExpression
-          ) {
-            checkNode(callback.body);
-          }
+        const methods = collectZodChainMethods(node);
+
+        const refineMethod = methods.find((it) => it.name === 'refine');
+
+        if (!refineMethod) {
+          return;
+        }
+
+        const [callback] = refineMethod.node.arguments;
+        if (
+          callback.type === AST_NODE_TYPES.ArrowFunctionExpression ||
+          callback.type === AST_NODE_TYPES.FunctionExpression
+        ) {
+          checkNode(callback.body);
         }
       },
     };
