@@ -13,7 +13,7 @@ interface DetectData {
   /** the "factory" for the outer expression */
   schemaType: string;
 
-  /** full chain in call order, e.g. ["number","int","min"] */
+  /** full chain in call order, e.g. ["number", "int", "min"] */
   methods: Array<string>;
 
   /** the outer call expression analyzed */
