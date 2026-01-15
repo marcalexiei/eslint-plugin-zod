@@ -34,8 +34,8 @@ export const preferEnumOverLiteralUnion = ESLintUtils.RuleCreator(getRuleURL)({
           return;
         }
 
-        const [unionArgument] = node.arguments;
-        if (unionArgument.type !== AST_NODE_TYPES.ArrayExpression) {
+        const unionArgument = node.arguments.at(0);
+        if (unionArgument?.type !== AST_NODE_TYPES.ArrayExpression) {
           return;
         }
 
