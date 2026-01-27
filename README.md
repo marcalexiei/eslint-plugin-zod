@@ -31,6 +31,7 @@
 | Name                                                                               | Description                                                                                   | 💼  | 🔧  | 💡  |
 | :--------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------- | :-- | :-- | :-- |
 | [array-style](docs/rules/array-style.md)                                           | Enforce consistent Zod array style                                                            | ✅  | 🔧  |     |
+| [consistent-import](docs/rules/consistent-import.md)                               | Enforce a consistent import style for Zod                                                     |     | 🔧  |     |
 | [consistent-import-source](docs/rules/consistent-import-source.md)                 | Enforce consistent source from Zod imports                                                    |     |     | 💡  |
 | [consistent-object-schema-type](docs/rules/consistent-object-schema-type.md)       | Enforce consistent usage of Zod schema methods                                                |     |     | 💡  |
 | [no-any-schema](docs/rules/no-any-schema.md)                                       | Disallow usage of `z.any()` in Zod schemas                                                    | ✅  |     | 💡  |
