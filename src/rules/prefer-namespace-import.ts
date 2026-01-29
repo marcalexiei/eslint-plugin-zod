@@ -78,6 +78,9 @@ export const preferNamespaceImport = ESLintUtils.RuleCreator(getRuleURL)({
   name: 'prefer-namespace-import',
   meta: {
     type: 'suggestion',
+    deprecated: {
+      message: "Use `zod/consistent-import` with `{ syntax: 'namespace' }`",
+    },
     docs: {
       description:
         "Enforce importing zod as a namespace import (`import * as z from 'zod'`)",

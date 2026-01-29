@@ -2,11 +2,33 @@
 
 📝 Enforce importing zod as a namespace import (`import * as z from 'zod'`).
 
-💼 This rule is enabled in the ✅ `recommended` config.
+❌ This rule is deprecated.
 
 🔧 This rule is automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix).
 
 <!-- end auto-generated rule header -->
+
+## Deprecation notice
+
+Use `zod/consistent-import` instead:
+
+```diff
+  // eslint.config.js
+  import { defineConfig } from 'eslint/config';
+  import eslintPluginZod from 'eslint-plugin-zod';
+
+  export default defineConfig(
+    {
+      plugins: {
+        'zod-x': eslintPluginZodX,
+      },
+      rules: {
+-       'zod/prefer-namespace-import': 'error',
++       'zod/consistent-import': 'error',
+      }
+    }
+  );
+```
 
 ## Rule Details
 
