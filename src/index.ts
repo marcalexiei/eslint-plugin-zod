@@ -71,6 +71,7 @@ const recommendedConfig = {
   },
   rules: {
     'zod/array-style': 'error',
+    'zod/consistent-import': 'error',
     'zod/no-any-schema': 'error',
     'zod/no-empty-custom-schema': 'error',
     'zod/no-number-schema-with-int': 'error',
@@ -79,7 +80,6 @@ const recommendedConfig = {
     'zod/prefer-enum-over-literal-union': 'error',
     'zod/prefer-meta': 'error',
     'zod/prefer-meta-last': 'error',
-    'zod/prefer-namespace-import': 'error',
     'zod/require-brand-type-parameter': 'error',
     'zod/require-error-message': 'error',
     'zod/require-schema-suffix': 'error',
