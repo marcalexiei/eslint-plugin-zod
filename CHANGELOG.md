@@ -1,5 +1,13 @@
 # eslint-plugin-zod
 
+## 3.1.0
+
+### Minor Changes
+
+- [#201](https://github.com/marcalexiei/eslint-plugin-zod/pull/201) [`6b1eece`](https://github.com/marcalexiei/eslint-plugin-zod/commit/6b1eecec612aac02eac2bf6536d26d1da27f98ca) Thanks [@marcalexiei](https://github.com/marcalexiei)! - feat(prefer-namespace-import): deprecate rule in favour of `zod/consistent-import`
+
+- [#179](https://github.com/marcalexiei/eslint-plugin-zod/pull/179) [`51563cf`](https://github.com/marcalexiei/eslint-plugin-zod/commit/51563cfc91c68c94caf27cbfac10057f02ca55ba) Thanks [@marcalexiei](https://github.com/marcalexiei)! - feat(consistent-import): add new rule
+
 ## 3.0.2
 
 ### Patch Changes
