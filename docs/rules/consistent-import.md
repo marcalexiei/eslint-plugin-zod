@@ -53,6 +53,12 @@ The default is `namespace`, as it avoids named import collisions and makes usage
 
 ### `namespace`
 
+This follows the default pattern in the [Zod "Defining a schema" documentation](https://zod.dev/basics?id=defining-a-schema).
+
+Alternative syntaxes can reduce tree-shaking effectiveness and increase bundle size:
+
+- [Zod – v4: Next.js treeshaking](https://github.com/colinhacks/zod/issues/4433#issuecomment-2921500831)
+
 #### ✅ Valid
 
 ```ts
@@ -122,6 +128,6 @@ When fixing is applied, the rule will:
 
 ## Further Reading
 
-- [ESM import syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import)
+- [Zod - Installation](https://zod.dev/?id=installation)
+- [MDN - ESM import syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import)
 - [TypeScript `import type`](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-8.html)
-- [Zod documentation](https://zod.dev/)
