@@ -57,19 +57,19 @@ ruleTester.run('no-string-schema-with-uuid', noStringSchemaWithUuid, {
   invalid: [
     {
       name: 'string + uuid (namespace import)',
-      code: `
+      code: dedent`
         import * as z from 'zod';
         z.string().uuid();
       `,
       errors: [{ messageId: 'useUuid' }],
-      output: `
+      output: dedent`
         import * as z from 'zod';
         z.uuid();
       `,
     },
     {
       name: 'string + uuid (named import)',
-      code: `
+      code: dedent`
         import { string } from 'zod';
         string().uuid();
       `,
@@ -78,48 +78,48 @@ ruleTester.run('no-string-schema-with-uuid', noStringSchemaWithUuid, {
     },
     {
       name: 'string + uuid (named z import)',
-      code: `
+      code: dedent`
         import { z } from 'zod';
         z.string().uuid();
       `,
       errors: [{ messageId: 'useUuid' }],
-      output: `
+      output: dedent`
         import { z } from 'zod';
         z.uuid();
       `,
     },
     {
       name: 'string + uuid + other method',
-      code: `
+      code: dedent`
         import * as z from 'zod';
         z.string().uuid().optional();
       `,
       errors: [{ messageId: 'useUuid' }],
-      output: `
+      output: dedent`
         import * as z from 'zod';
         z.uuid().optional();
       `,
     },
     {
       name: 'string + other method + uuid',
-      code: `
+      code: dedent`
         import * as z from 'zod';
         z.string().optional().uuid();
       `,
       errors: [{ messageId: 'useUuid' }],
-      output: `
+      output: dedent`
         import * as z from 'zod';
         z.uuid().optional();
       `,
     },
     {
       name: 'nested in object',
-      code: `
+      code: dedent`
         import * as z from 'zod';
         z.object({ id: z.string().uuid() });
       `,
       errors: [{ messageId: 'useUuid' }],
-      output: `
+      output: dedent`
         import * as z from 'zod';
         z.object({ id: z.uuid() });
       `,
