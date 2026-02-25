@@ -1,5 +1,11 @@
 # eslint-plugin-zod
 
+## 3.2.0
+
+### Minor Changes
+
+- [#205](https://github.com/marcalexiei/eslint-plugin-zod/pull/205) [`f33e7b9`](https://github.com/marcalexiei/eslint-plugin-zod/commit/f33e7b9d14df7a0b1fc08e4d45762ea9c7ae091d) Thanks [@pourdaavar](https://github.com/pourdaavar)! - feat(no-string-schema-with-uuid): add new rule
+
 ## 3.1.0
 
 ### Minor Changes
