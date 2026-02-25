@@ -39,6 +39,7 @@
 | [no-empty-custom-schema](docs/rules/no-empty-custom-schema.md)                     | Disallow usage of `z.custom()` without arguments                                              | ✅  |     |     |     |
 | [no-number-schema-with-int](docs/rules/no-number-schema-with-int.md)               | Disallow usage of `z.number().int()` as it is considered legacy                               | ✅  | 🔧  |     |     |
 | [no-optional-and-default-together](docs/rules/no-optional-and-default-together.md) | Disallow using both `.optional()` and `.default()` on the same Zod schema                     | ✅  | 🔧  |     |     |
+| [no-string-schema-with-uuid](docs/rules/no-string-schema-with-uuid.md)             | Disallow usage of `z.string().uuid()` in favor of the dedicated `z.uuid()` schema             | ✅  | 🔧  |     |     |
 | [no-throw-in-refine](docs/rules/no-throw-in-refine.md)                             | Disallow throwing errors directly inside Zod refine callbacks                                 | ✅  |     |     |     |
 | [no-unknown-schema](docs/rules/no-unknown-schema.md)                               | Disallow usage of `z.unknown()` in Zod schemas                                                |     |     |     |     |
 | [prefer-enum-over-literal-union](docs/rules/prefer-enum-over-literal-union.md)     | Prefer `z.enum()` over `z.union()` when all members are string literals.                      | ✅  | 🔧  |     |     |
