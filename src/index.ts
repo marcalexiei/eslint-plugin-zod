@@ -9,6 +9,7 @@ import { noAnySchema } from './rules/no-any-schema.js';
 import { noEmptyCustomSchema } from './rules/no-empty-custom-schema.js';
 import { noNumberSchemaWithInt } from './rules/no-number-schema-with-int.js';
 import { noOptionalAndDefaultTogether } from './rules/no-optional-and-default-together.js';
+import { noStringSchemaWithUuid } from './rules/no-string-schema-with-uuid.js';
 import { noThrowInRefine } from './rules/no-throw-in-refine.js';
 import { noUnknownSchema } from './rules/no-unknown-schema.js';
 import { preferEnumOverLiteralUnion } from './rules/prefer-enum-over-literal-union.js';
@@ -47,6 +48,7 @@ const eslintPluginZod = {
     'no-any-schema': noAnySchema,
     'no-empty-custom-schema': noEmptyCustomSchema,
     'no-number-schema-with-int': noNumberSchemaWithInt,
+    'no-string-schema-with-uuid': noStringSchemaWithUuid,
     'no-optional-and-default-together': noOptionalAndDefaultTogether,
     'no-throw-in-refine': noThrowInRefine,
     'no-unknown-schema': noUnknownSchema,
@@ -75,6 +77,7 @@ const recommendedConfig = {
     'zod/no-any-schema': 'error',
     'zod/no-empty-custom-schema': 'error',
     'zod/no-number-schema-with-int': 'error',
+    'zod/no-string-schema-with-uuid': 'error',
     'zod/no-optional-and-default-together': 'error',
     'zod/no-throw-in-refine': 'error',
     'zod/prefer-enum-over-literal-union': 'error',
