@@ -16,6 +16,7 @@ import { preferEnumOverLiteralUnion } from './rules/prefer-enum-over-literal-uni
 import { preferMetaLast } from './rules/prefer-meta-last.js';
 import { preferMeta } from './rules/prefer-meta.js';
 import { preferNamespaceImport } from './rules/prefer-namespace-import.js';
+import { preferStringSchemaWithTrim } from './rules/prefer-string-schema-with-trim.js';
 import { requireBrandTypeParameter } from './rules/require-brand-type-parameter.js';
 import { requireErrorMessage } from './rules/require-error-message.js';
 import { requireSchemaSuffix } from './rules/require-schema-suffix.js';
@@ -60,6 +61,7 @@ const eslintPluginZod = {
     'require-error-message': requireErrorMessage,
     'require-schema-suffix': requireSchemaSuffix,
     'schema-error-property-style': schemaErrorPropertyStyle,
+    'prefer-string-schema-with-trim': preferStringSchemaWithTrim,
     /* eslint-enable @typescript-eslint/naming-convention */
   } as unknown as Record<string, Rule.RuleModule>,
 } satisfies ESLint.Plugin as CompatiblePlugin;
@@ -83,6 +85,7 @@ const recommendedConfig = {
     'zod/prefer-enum-over-literal-union': 'error',
     'zod/prefer-meta': 'error',
     'zod/prefer-meta-last': 'error',
+    'zod/prefer-string-schema-with-trim': 'error',
     'zod/require-brand-type-parameter': 'error',
     'zod/require-error-message': 'error',
     'zod/require-schema-suffix': 'error',

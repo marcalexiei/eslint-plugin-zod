@@ -46,6 +46,7 @@
 | [prefer-meta](docs/rules/prefer-meta.md)                                           | Enforce usage of `.meta()` over `.describe()`                                                 | ✅  | 🔧  |     |     |
 | [prefer-meta-last](docs/rules/prefer-meta-last.md)                                 | Enforce `.meta()` as last method                                                              | ✅  | 🔧  |     |     |
 | [prefer-namespace-import](docs/rules/prefer-namespace-import.md)                   | Enforce importing zod as a namespace import (`import * as z from 'zod'`)                      |     | 🔧  |     | ❌  |
+| [prefer-string-schema-with-trim](docs/rules/prefer-string-schema-with-trim.md)     | Require `z.string().trim()` to prevent accidental leading/trailing whitespace                 | ✅  | 🔧  |     |     |
 | [require-brand-type-parameter](docs/rules/require-brand-type-parameter.md)         | Require type parameter on `.brand()` functions                                                | ✅  |     | 💡  |     |
 | [require-error-message](docs/rules/require-error-message.md)                       | Enforce that custom refinements include an error message                                      | ✅  | 🔧  |     |     |
 | [require-schema-suffix](docs/rules/require-schema-suffix.md)                       | Require schema suffix when declaring a Zod schema                                             | ✅  |     |     |     |
