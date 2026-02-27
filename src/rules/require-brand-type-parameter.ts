@@ -22,7 +22,6 @@ export const requireBrandTypeParameter = ESLintUtils.RuleCreator(getRuleURL)({
   defaultOptions: [],
   create(context) {
     const {
-      //
       importDeclarationListener,
       detectZodSchemaRootNode,
       collectZodChainMethods,

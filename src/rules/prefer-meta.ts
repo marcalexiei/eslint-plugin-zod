@@ -21,7 +21,6 @@ export const preferMeta = ESLintUtils.RuleCreator(getRuleURL)({
   defaultOptions: [],
   create(context) {
     const {
-      //
       importDeclarationListener,
       detectZodSchemaRootNode,
       collectZodChainMethods,
