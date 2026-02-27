@@ -1,5 +1,21 @@
 # eslint-plugin-zod
 
+## 3.3.0
+
+### Minor Changes
+
+- [#211](https://github.com/marcalexiei/eslint-plugin-zod/pull/211) [`4357023`](https://github.com/marcalexiei/eslint-plugin-zod/commit/4357023bdef806b838fd861b5d930cecfcc9a150) Thanks [@marcalexiei](https://github.com/marcalexiei)! - feat(prefer-string-schema-with-trim): add new rule
+
+  Enforce `z.string().trim()` to prevent accidental leading/trailing whitespace.
+
+### Patch Changes
+
+- [#213](https://github.com/marcalexiei/eslint-plugin-zod/pull/213) [`5970085`](https://github.com/marcalexiei/eslint-plugin-zod/commit/5970085d1f4c275c050835d9fa41d5a8f436af50) Thanks [@marcalexiei](https://github.com/marcalexiei)! - fix(build-zod-chain-replacement-fix): retain function parameters when applying fix
+
+  this change is applied to the following rules:
+  - `no-number-schema-with-int`
+  - `no-string-schema-with-uuid`
+
 ## 3.2.0
 
 ### Minor Changes
