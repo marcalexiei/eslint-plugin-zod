@@ -45,7 +45,18 @@ export function buildZodChainReplacementFix(opts: {
   });
 
   // Construct replacement: z.toMethodName() + betweenSuffixes
-  const replacement = `${prefixText}.${toMethodName}()${betweenSuffixes.join('')}`;
+  let replacement = `${prefixText}.${toMethodName}(`;
+
+  // Rebuild parameters
+  if (toNode.arguments.length) {
+    const argsText = toNode.arguments
+      .map((arg) => sourceCode.getText(arg))
+      .join(', ');
+
+    replacement += argsText;
+  }
+
+  replacement += `)${betweenSuffixes.join('')}`;
 
   return fixer.replaceTextRange(
     [fromNode.range[0], toNode.range[1]],
