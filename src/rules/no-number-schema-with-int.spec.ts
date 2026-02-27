@@ -57,19 +57,31 @@ ruleTester.run('no-number-schema-with-int', noNumberSchemaWithInt, {
   invalid: [
     {
       name: 'number + int (namespace import)',
-      code: `
+      code: dedent`
         import * as z from 'zod';
         z.number().int();
       `,
       errors: [{ messageId: 'removeNumber' }],
-      output: `
+      output: dedent`
         import * as z from 'zod';
         z.int();
       `,
     },
     {
+      name: 'number + int with parameter (namespace import)',
+      code: dedent`
+        import * as z from 'zod';
+        z.number().int('invalid int');
+      `,
+      errors: [{ messageId: 'removeNumber' }],
+      output: dedent`
+        import * as z from 'zod';
+        z.int('invalid int');
+      `,
+    },
+    {
       name: 'number + int (named import)',
-      code: `
+      code: dedent`
         import { number } from 'zod';
         number().int();
       `,
@@ -78,48 +90,48 @@ ruleTester.run('no-number-schema-with-int', noNumberSchemaWithInt, {
     },
     {
       name: 'number + int (named z import)',
-      code: `
+      code: dedent`
         import { z } from 'zod';
         z.number().int();
       `,
       errors: [{ messageId: 'removeNumber' }],
-      output: `
+      output: dedent`
         import { z } from 'zod';
         z.int();
       `,
     },
     {
       name: 'number + int + other method',
-      code: `
+      code: dedent`
         import * as z from 'zod';
         z.number().int().min(1);
       `,
       errors: [{ messageId: 'removeNumber' }],
-      output: `
+      output: dedent`
         import * as z from 'zod';
         z.int().min(1);
       `,
     },
     {
       name: 'number + other method + int',
-      code: `
+      code: dedent`
         import * as z from 'zod';
         z.number().min(1).int();
       `,
       errors: [{ messageId: 'removeNumber' }],
-      output: `
+      output: dedent`
         import * as z from 'zod';
         z.int().min(1);
       `,
     },
     {
       name: 'nested in object',
-      code: `
+      code: dedent`
         import * as z from 'zod';
         z.object({ age: z.number().int() });
       `,
       errors: [{ messageId: 'removeNumber' }],
-      output: `
+      output: dedent`
         import * as z from 'zod';
         z.object({ age: z.int() });
       `,

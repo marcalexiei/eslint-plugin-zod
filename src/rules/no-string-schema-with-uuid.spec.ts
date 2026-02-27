@@ -5,7 +5,7 @@ import { noStringSchemaWithUuid } from './no-string-schema-with-uuid.js';
 
 const ruleTester = new RuleTester();
 
-ruleTester.run('no-string-schema-with-uuid', noStringSchemaWithUuid, {
+ruleTester.run(noStringSchemaWithUuid.name, noStringSchemaWithUuid, {
   valid: [
     {
       name: 'namespace import',
@@ -65,6 +65,18 @@ ruleTester.run('no-string-schema-with-uuid', noStringSchemaWithUuid, {
       output: dedent`
         import * as z from 'zod';
         z.uuid();
+      `,
+    },
+    {
+      name: 'string + uuid with params (namespace import)',
+      code: dedent`
+        import * as z from 'zod';
+        z.string().uuid({ version: 'v4' });
+      `,
+      errors: [{ messageId: 'useUuid' }],
+      output: dedent`
+        import * as z from 'zod';
+        z.uuid({ version: 'v4' });
       `,
     },
     {
