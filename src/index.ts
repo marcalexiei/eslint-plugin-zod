@@ -66,14 +66,18 @@ const eslintPluginZod = {
   } as unknown as Record<string, Rule.RuleModule>,
 } satisfies ESLint.Plugin as CompatiblePlugin;
 
-const recommendedConfig = {
+const baseConfig = {
   name: `${PLUGIN_NAME}/recommended`,
   files: ['**/*.{js,mjs,cjs,jsx,mjsx,ts,tsx,mtsx}'],
-  /* eslint-disable @typescript-eslint/naming-convention */
   plugins: {
     zod: eslintPluginZod,
   },
+};
+
+const recommendedConfig = {
+  ...baseConfig,
   rules: {
+    /* eslint-disable @typescript-eslint/naming-convention */
     'zod/array-style': 'error',
     'zod/consistent-import': 'error',
     'zod/no-any-schema': 'error',
@@ -89,14 +93,27 @@ const recommendedConfig = {
     'zod/require-brand-type-parameter': 'error',
     'zod/require-error-message': 'error',
     'zod/require-schema-suffix': 'error',
+    /* eslint-enable @typescript-eslint/naming-convention */
   },
-  /* eslint-enable @typescript-eslint/naming-convention */
+} satisfies Linter.Config as CompatibleConfig;
+
+const recommendedConfigMini = {
+  ...baseConfig,
+  rules: {
+    /* eslint-disable @typescript-eslint/naming-convention */
+    'zod/no-any-schema': 'error',
+    'zod/prefer-meta': 'error',
+    'zod/require-brand-type-parameter': 'error',
+    'zod/require-error-message': 'error',
+    'zod/require-schema-suffix': 'error',
+  },
 } satisfies Linter.Config as CompatibleConfig;
 
 export default {
   ...eslintPluginZod,
   configs: {
     recommended: recommendedConfig,
+    recommendedMini: recommendedConfigMini,
   },
 } satisfies ESLint.Plugin;
 /**

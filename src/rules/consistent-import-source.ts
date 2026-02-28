@@ -1,21 +1,12 @@
 import type { TSESLint } from '@typescript-eslint/utils';
-import { ESLintUtils } from '@typescript-eslint/utils';
 
-import { getRuleURL } from '../meta.js';
-
-const ZOD_IMPORT_SOURCES = [
-  'zod',
-  'zod/mini',
-  'zod/v4',
-  'zod/v4-mini',
-  'zod/v3',
-] as const;
-
-type ZodImportSource = (typeof ZOD_IMPORT_SOURCES)[number];
+import { createZodPluginRule } from '../utils/create-plugin-rule.js';
+import { ZOD_IMPORT_SOURCES } from '../utils/is-zod-import-source.js';
+import type { ZodImportSource } from '../utils/is-zod-import-source.js';
 
 type MessageIds = 'sourceNotAllowed' | 'replaceSource';
 
-export const consistentImportSource = ESLintUtils.RuleCreator(getRuleURL)<
+export const consistentImportSource = createZodPluginRule<
   [{ sources: Array<ZodImportSource> }],
   MessageIds
 >({
@@ -24,6 +15,7 @@ export const consistentImportSource = ESLintUtils.RuleCreator(getRuleURL)<
     hasSuggestions: true,
     type: 'suggestion',
     docs: {
+      zodImportAllowedSource: 'all',
       description: 'Enforce consistent source from Zod imports',
     },
     messages: {

@@ -1,13 +1,18 @@
-import { ESLintUtils } from '@typescript-eslint/utils';
+import { createZodPluginRule } from '../utils/create-plugin-rule.js';
+import { createZodSchemaImportTrack } from '../utils/track-zod-schema-imports.js';
 
-import { getRuleURL } from '../meta.js';
-import { trackZodSchemaImports } from '../utils/track-zod-schema-imports.js';
+const {
+  //
+  zodImportAllowedSource,
+  trackZodSchemaImports,
+} = createZodSchemaImportTrack('all');
 
-export const noUnknownSchema = ESLintUtils.RuleCreator(getRuleURL)({
+export const noUnknownSchema = createZodPluginRule({
   name: 'no-unknown-schema',
   meta: {
     type: 'suggestion',
     docs: {
+      zodImportAllowedSource,
       description: 'Disallow usage of `z.unknown()` in Zod schemas',
     },
     messages: {

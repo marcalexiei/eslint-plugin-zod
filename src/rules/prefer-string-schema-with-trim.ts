@@ -1,14 +1,19 @@
-import { ESLintUtils } from '@typescript-eslint/utils';
+import { createZodPluginRule } from '../utils/create-plugin-rule.js';
+import { createZodSchemaImportTrack } from '../utils/track-zod-schema-imports.js';
 
-import { getRuleURL } from '../meta.js';
-import { trackZodSchemaImports } from '../utils/track-zod-schema-imports.js';
+const {
+  //
+  zodImportAllowedSource,
+  trackZodSchemaImports,
+} = createZodSchemaImportTrack('zod');
 
-export const preferStringSchemaWithTrim = ESLintUtils.RuleCreator(getRuleURL)({
+export const preferStringSchemaWithTrim = createZodPluginRule({
   name: 'prefer-string-schema-with-trim',
   meta: {
     type: 'problem',
     fixable: 'code',
     docs: {
+      zodImportAllowedSource,
       description:
         'Enforce `z.string().trim()` to prevent accidental leading/trailing whitespace',
     },

@@ -1,7 +1,7 @@
 import type { TSESTree } from '@typescript-eslint/utils';
-import { AST_NODE_TYPES, ESLintUtils } from '@typescript-eslint/utils';
+import { AST_NODE_TYPES } from '@typescript-eslint/utils';
 
-import { getRuleURL } from '../meta.js';
+import { createZodPluginRule } from '../utils/create-plugin-rule.js';
 import { isZodImportSource } from '../utils/is-zod-import-source.js';
 
 interface ImportGroupData {
@@ -74,7 +74,7 @@ function getNamespaceAliasNameFrom(node: TSESTree.ImportClause): string | null {
   return null;
 }
 
-export const preferNamespaceImport = ESLintUtils.RuleCreator(getRuleURL)({
+export const preferNamespaceImport = createZodPluginRule({
   name: 'prefer-namespace-import',
   meta: {
     type: 'suggestion',
@@ -82,6 +82,7 @@ export const preferNamespaceImport = ESLintUtils.RuleCreator(getRuleURL)({
       message: "Use `zod/consistent-import` with `{ syntax: 'namespace' }`",
     },
     docs: {
+      zodImportAllowedSource: 'all',
       description:
         "Enforce importing zod as a namespace import (`import * as z from 'zod'`)",
     },
@@ -102,7 +103,7 @@ export const preferNamespaceImport = ESLintUtils.RuleCreator(getRuleURL)({
       ImportDeclaration(node): void {
         const { source, importKind } = node;
 
-        if (!isZodImportSource(source.value)) {
+        if (!isZodImportSource(source.value, 'all')) {
           return;
         }
 
