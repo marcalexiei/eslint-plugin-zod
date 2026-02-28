@@ -1,8 +1,13 @@
-import { ESLintUtils } from '@typescript-eslint/utils';
 import type { TSESTree } from '@typescript-eslint/utils';
 
-import { getRuleURL } from '../meta.js';
-import { trackZodSchemaImports } from '../utils/track-zod-schema-imports.js';
+import { createZodPluginRule } from '../utils/create-plugin-rule.js';
+import { createZodSchemaImportTrack } from '../utils/track-zod-schema-imports.js';
+
+const {
+  //
+  zodImportAllowedSource,
+  trackZodSchemaImports,
+} = createZodSchemaImportTrack('zod');
 
 const preferredMethods = ['none', 'default', 'optional'] as const;
 
@@ -18,7 +23,7 @@ type MessageIds =
 
 const defaultOptions: Options = { preferredMethod: 'none' };
 
-export const noOptionalAndDefaultTogether = ESLintUtils.RuleCreator(getRuleURL)<
+export const noOptionalAndDefaultTogether = createZodPluginRule<
   [Options],
   MessageIds
 >({
@@ -27,6 +32,7 @@ export const noOptionalAndDefaultTogether = ESLintUtils.RuleCreator(getRuleURL)<
     type: 'problem',
     fixable: 'code',
     docs: {
+      zodImportAllowedSource,
       description:
         'Disallow using both `.optional()` and `.default()` on the same Zod schema',
     },

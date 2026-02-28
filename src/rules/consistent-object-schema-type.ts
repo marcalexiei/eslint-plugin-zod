@@ -1,8 +1,8 @@
 import type { TSESLint } from '@typescript-eslint/utils';
-import { AST_NODE_TYPES, ESLintUtils } from '@typescript-eslint/utils';
+import { AST_NODE_TYPES } from '@typescript-eslint/utils';
 
-import { getRuleURL } from '../meta.js';
-import { trackZodSchemaImports } from '../utils/track-zod-schema-imports.js';
+import { createZodPluginRule } from '../utils/create-plugin-rule.js';
+import { createZodSchemaImportTrack } from '../utils/track-zod-schema-imports.js';
 
 const ZOD_OBJECT_METHODS = ['object', 'looseObject', 'strictObject'] as const;
 
@@ -15,7 +15,13 @@ type MessageIds = 'consistentMethod' | 'useMethod';
 
 const defaultOptions: Options = { allow: ['object'] };
 
-export const consistentObjectSchemaType = ESLintUtils.RuleCreator(getRuleURL)<
+const {
+  //
+  zodImportAllowedSource,
+  trackZodSchemaImports,
+} = createZodSchemaImportTrack('all');
+
+export const consistentObjectSchemaType = createZodPluginRule<
   [Options],
   MessageIds
 >({
@@ -24,6 +30,7 @@ export const consistentObjectSchemaType = ESLintUtils.RuleCreator(getRuleURL)<
     hasSuggestions: true,
     type: 'suggestion',
     docs: {
+      zodImportAllowedSource,
       description: 'Enforce consistent usage of Zod schema methods',
     },
     messages: {

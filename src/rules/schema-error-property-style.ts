@@ -1,13 +1,19 @@
 import type { TSESTree } from '@typescript-eslint/utils';
-import { AST_NODE_TYPES, ESLintUtils } from '@typescript-eslint/utils';
+import { AST_NODE_TYPES } from '@typescript-eslint/utils';
 import esquery from 'esquery';
 
-import { getRuleURL } from '../meta.js';
-import { trackZodSchemaImports } from '../utils/track-zod-schema-imports.js';
+import { createZodPluginRule } from '../utils/create-plugin-rule.js';
+import { createZodSchemaImportTrack } from '../utils/track-zod-schema-imports.js';
 
 type MessageIds = 'invalidStyle' | 'invalidSelector';
 
-export const schemaErrorPropertyStyle = ESLintUtils.RuleCreator(getRuleURL)<
+const {
+  //
+  zodImportAllowedSource,
+  trackZodSchemaImports,
+} = createZodSchemaImportTrack('all');
+
+export const schemaErrorPropertyStyle = createZodPluginRule<
   [{ selector: string; example: string }],
   MessageIds
 >({
@@ -15,6 +21,7 @@ export const schemaErrorPropertyStyle = ESLintUtils.RuleCreator(getRuleURL)<
   meta: {
     type: 'suggestion',
     docs: {
+      zodImportAllowedSource,
       description:
         'Enforce consistent style for error messages in Zod schema validation (using ESQuery patterns)',
     },

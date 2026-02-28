@@ -4,6 +4,7 @@ import { AST_NODE_TYPES } from '@typescript-eslint/utils';
 import { detectZodSchemaRootNode } from './detect-zod-schema-root-node.js';
 import type { DetectResult } from './detect-zod-schema-root-node.js';
 import { isZodImportSource } from './is-zod-import-source.js';
+import type { ZodImportAllowedSource } from './is-zod-import-source.js';
 
 interface ZodChainItem {
   name: string;
@@ -45,7 +46,9 @@ interface Result {
  * Function to create helpers that allow to manage default, namespace and named `zod`
  * imports without too much hassle.
  */
-export function trackZodSchemaImports(): Result {
+export function trackZodSchemaImports(
+  importAllowedSource: ZodImportAllowedSource,
+): Result {
   const zodNamespaces = new Set<string>();
   const zodNamedImports = new Set<string>();
 
@@ -91,7 +94,7 @@ export function trackZodSchemaImports(): Result {
   const result: Result = {
     // to be inserted into rule.create()
     importDeclarationListener(node): void {
-      if (!isZodImportSource(node.source.value)) {
+      if (!isZodImportSource(node.source.value, importAllowedSource)) {
         return;
       }
 
@@ -126,4 +129,19 @@ export function trackZodSchemaImports(): Result {
   };
 
   return result;
+}
+
+/**
+ * Wrapper to avoid duplication of importAllowedSource across rule code
+ */
+export function createZodSchemaImportTrack(
+  zodImportAllowedSource: ZodImportAllowedSource,
+): {
+  zodImportAllowedSource: ZodImportAllowedSource;
+  trackZodSchemaImports: () => ReturnType<typeof trackZodSchemaImports>;
+} {
+  return {
+    zodImportAllowedSource,
+    trackZodSchemaImports: () => trackZodSchemaImports(zodImportAllowedSource),
+  };
 }
