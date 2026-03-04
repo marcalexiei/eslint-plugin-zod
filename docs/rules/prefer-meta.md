@@ -2,7 +2,7 @@
 
 📝 Enforce usage of `.meta()` over `.describe()`.
 
-💼 This rule is enabled in the ✅ `recommended` config.
+💼 This rule is enabled in the following configs: ✅ `recommended`, ✔️ `recommendedMini`.
 
 🔧 This rule is automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix).
 

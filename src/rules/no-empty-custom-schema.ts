@@ -1,14 +1,19 @@
-import { ESLintUtils } from '@typescript-eslint/utils';
+import { createZodPluginRule } from '../utils/create-plugin-rule.js';
+import { createZodSchemaImportTrack } from '../utils/track-zod-schema-imports.js';
 
-import { getRuleURL } from '../meta.js';
-import { trackZodSchemaImports } from '../utils/track-zod-schema-imports.js';
+const {
+  //
+  zodImportAllowedSource,
+  trackZodSchemaImports,
+} = createZodSchemaImportTrack('all');
 
-export const noEmptyCustomSchema = ESLintUtils.RuleCreator(getRuleURL)({
+export const noEmptyCustomSchema = createZodPluginRule({
   name: 'no-empty-custom-schema',
   meta: {
     hasSuggestions: false,
     type: 'suggestion',
     docs: {
+      zodImportAllowedSource,
       description: 'Disallow usage of `z.custom()` without arguments',
     },
     messages: {

@@ -1,15 +1,22 @@
 import type { TSESTree } from '@typescript-eslint/utils';
-import { AST_NODE_TYPES, ESLintUtils } from '@typescript-eslint/utils';
+import { AST_NODE_TYPES } from '@typescript-eslint/utils';
 
-import { getRuleURL } from '../meta.js';
-import { trackZodSchemaImports } from '../utils/track-zod-schema-imports.js';
+import { createZodPluginRule } from '../utils/create-plugin-rule.js';
+import { createZodSchemaImportTrack } from '../utils/track-zod-schema-imports.js';
 
-export const requireErrorMessage = ESLintUtils.RuleCreator(getRuleURL)({
+const {
+  //
+  zodImportAllowedSource,
+  trackZodSchemaImports,
+} = createZodSchemaImportTrack('all');
+
+export const requireErrorMessage = createZodPluginRule({
   name: 'require-error-message',
   meta: {
     type: 'suggestion',
     fixable: 'code',
     docs: {
+      zodImportAllowedSource,
       description: 'Enforce that custom refinements include an error message',
     },
     messages: {

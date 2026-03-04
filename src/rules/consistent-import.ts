@@ -1,7 +1,7 @@
 import type { TSESTree } from '@typescript-eslint/utils';
-import { AST_NODE_TYPES, ESLintUtils } from '@typescript-eslint/utils';
+import { AST_NODE_TYPES } from '@typescript-eslint/utils';
 
-import { getRuleURL } from '../meta.js';
+import { createZodPluginRule } from '../utils/create-plugin-rule.js';
 import { isZodImportSource } from '../utils/is-zod-import-source.js';
 
 const IMPORT_SYNTAXES = ['namespace', 'named'] as const;
@@ -112,14 +112,12 @@ function getNamespaceAliasNameFrom(node: TSESTree.ImportClause): string | null {
   return null;
 }
 
-export const consistentImport = ESLintUtils.RuleCreator(getRuleURL)<
-  [Options],
-  MessageIds
->({
+export const consistentImport = createZodPluginRule<[Options], MessageIds>({
   name: 'consistent-import',
   meta: {
     type: 'problem',
     docs: {
+      zodImportAllowedSource: 'all',
       description: 'Enforce a consistent import style for Zod',
     },
     fixable: 'code',
@@ -154,7 +152,7 @@ export const consistentImport = ESLintUtils.RuleCreator(getRuleURL)<
       ImportDeclaration(node): void {
         const { source, importKind } = node;
 
-        if (!isZodImportSource(source.value)) {
+        if (!isZodImportSource(source.value, 'all')) {
           return;
         }
 

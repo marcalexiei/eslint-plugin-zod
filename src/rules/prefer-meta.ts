@@ -1,15 +1,21 @@
 import type { TSESTree } from '@typescript-eslint/utils';
-import { ESLintUtils } from '@typescript-eslint/utils';
 
-import { getRuleURL } from '../meta.js';
-import { trackZodSchemaImports } from '../utils/track-zod-schema-imports.js';
+import { createZodPluginRule } from '../utils/create-plugin-rule.js';
+import { createZodSchemaImportTrack } from '../utils/track-zod-schema-imports.js';
 
-export const preferMeta = ESLintUtils.RuleCreator(getRuleURL)({
+const {
+  //
+  zodImportAllowedSource,
+  trackZodSchemaImports,
+} = createZodSchemaImportTrack('all');
+
+export const preferMeta = createZodPluginRule({
   name: 'prefer-meta',
   meta: {
     type: 'suggestion',
     fixable: 'code',
     docs: {
+      zodImportAllowedSource,
       description: 'Enforce usage of `.meta()` over `.describe()`',
     },
     messages: {

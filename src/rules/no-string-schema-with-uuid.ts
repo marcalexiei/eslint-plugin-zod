@@ -1,15 +1,20 @@
-import { ESLintUtils } from '@typescript-eslint/utils';
-
-import { getRuleURL } from '../meta.js';
 import { buildZodChainReplacementFix } from '../utils/build-zod-chain-replacement-fix.js';
-import { trackZodSchemaImports } from '../utils/track-zod-schema-imports.js';
+import { createZodPluginRule } from '../utils/create-plugin-rule.js';
+import { createZodSchemaImportTrack } from '../utils/track-zod-schema-imports.js';
 
-export const noStringSchemaWithUuid = ESLintUtils.RuleCreator(getRuleURL)({
+const {
+  //
+  zodImportAllowedSource,
+  trackZodSchemaImports,
+} = createZodSchemaImportTrack('zod');
+
+export const noStringSchemaWithUuid = createZodPluginRule({
   name: 'no-string-schema-with-uuid',
   meta: {
     fixable: 'code',
     type: 'problem',
     docs: {
+      zodImportAllowedSource,
       description:
         'Disallow usage of `z.string().uuid()` in favor of the dedicated `z.uuid()` schema',
       url: 'https://zod.dev/api#uuids',

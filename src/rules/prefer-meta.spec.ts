@@ -124,5 +124,17 @@ ruleTester.run('prefer-meta', preferMeta, {
         z.string().meta({ description: desc }).trim()
       `,
     },
+    {
+      name: 'zod/mini',
+      code: dedent`
+        import z from 'zod/mini';
+        z.string().check(z.describe('asd'));
+      `,
+      errors: [{ messageId: 'preferMeta' }],
+      output: dedent`
+        import z from 'zod/mini';
+        z.string().check(z.meta({ description: 'asd' }));
+      `,
+    },
   ],
 });

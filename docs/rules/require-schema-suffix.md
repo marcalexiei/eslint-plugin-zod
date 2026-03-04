@@ -2,7 +2,7 @@
 
 📝 Require schema suffix when declaring a Zod schema.
 
-💼 This rule is enabled in the ✅ `recommended` config.
+💼 This rule is enabled in the following configs: ✅ `recommended`, ✔️ `recommendedMini`.
 
 <!-- end auto-generated rule header -->
 

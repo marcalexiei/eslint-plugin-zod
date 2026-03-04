@@ -1,15 +1,22 @@
 import type { TSESLint } from '@typescript-eslint/utils';
-import { AST_NODE_TYPES, ESLintUtils } from '@typescript-eslint/utils';
+import { AST_NODE_TYPES } from '@typescript-eslint/utils';
 
-import { getRuleURL } from '../meta.js';
-import { trackZodSchemaImports } from '../utils/track-zod-schema-imports.js';
+import { createZodPluginRule } from '../utils/create-plugin-rule.js';
+import { createZodSchemaImportTrack } from '../utils/track-zod-schema-imports.js';
 
-export const noAnySchema = ESLintUtils.RuleCreator(getRuleURL)({
+const {
+  //
+  zodImportAllowedSource,
+  trackZodSchemaImports,
+} = createZodSchemaImportTrack('all');
+
+export const noAnySchema = createZodPluginRule({
   name: 'no-any-schema',
   meta: {
     hasSuggestions: true,
     type: 'suggestion',
     docs: {
+      zodImportAllowedSource,
       description: 'Disallow usage of `z.any()` in Zod schemas',
     },
     messages: {

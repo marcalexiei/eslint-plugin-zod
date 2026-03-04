@@ -1,15 +1,21 @@
 import type { TSESLint, TSESTree } from '@typescript-eslint/utils';
-import { ESLintUtils } from '@typescript-eslint/utils';
 
-import { getRuleURL } from '../meta.js';
-import { trackZodSchemaImports } from '../utils/track-zod-schema-imports.js';
+import { createZodPluginRule } from '../utils/create-plugin-rule.js';
+import { createZodSchemaImportTrack } from '../utils/track-zod-schema-imports.js';
 
-export const requireBrandTypeParameter = ESLintUtils.RuleCreator(getRuleURL)({
+const {
+  //
+  zodImportAllowedSource,
+  trackZodSchemaImports,
+} = createZodSchemaImportTrack('all');
+
+export const requireBrandTypeParameter = createZodPluginRule({
   name: 'require-brand-type-parameter',
   meta: {
     hasSuggestions: true,
     type: 'problem',
     docs: {
+      zodImportAllowedSource,
       description: 'Require type parameter on `.brand()` functions',
     },
     messages: {
