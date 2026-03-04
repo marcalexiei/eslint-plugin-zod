@@ -1,5 +1,11 @@
 # eslint-plugin-zod
 
+## 3.4.0
+
+### Minor Changes
+
+- [#217](https://github.com/marcalexiei/eslint-plugin-zod/pull/217) [`5f7492a`](https://github.com/marcalexiei/eslint-plugin-zod/commit/5f7492a988320913cdca83a12478afd705000b35) Thanks [@marcalexiei](https://github.com/marcalexiei)! - feat: add `zod/mini` partial support
+
 ## 3.3.0
 
 ### Minor Changes
