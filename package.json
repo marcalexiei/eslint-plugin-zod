@@ -56,14 +56,14 @@
     "release": "pnpm run build && changeset publish",
     "check-all": "pnpm run \"/^(lint|format|typecheck|build)$/\" && pnpm run test --run"
   },
-  "packageManager": "pnpm@10.27.0+sha512.72d699da16b1179c14ba9e64dc71c9a40988cbdc65c264cb0e489db7de917f20dcf4d64d8723625f2969ba52d4b7e2a1170682d9ac2a5dcaeaab732b7e16f04a",
+  "packageManager": "pnpm@10.32.1+sha512.a706938f0e89ac1456b6563eab4edf1d1faf3368d1191fc5c59790e96dc918e4456ab2e67d613de1043d2e8c81f87303e6b40d4ffeca9df15ef1ad567348f2be",
   "prettier": "@marcalexiei/prettier-config",
   "dependencies": {
-    "@typescript-eslint/utils": "^8.50.0",
+    "@typescript-eslint/utils": "^8.57.0",
     "esquery": "^1.6.0"
   },
   "peerDependencies": {
-    "eslint": "^9",
+    "eslint": "^9 || ^10",
     "zod": "^4"
   },
   "peerDependenciesMeta": {
@@ -72,25 +72,25 @@
     }
   },
   "devDependencies": {
-    "@changesets/changelog-github": "0.5.2",
-    "@changesets/cli": "2.29.8",
-    "@marcalexiei/eslint-config": "5.0.0",
+    "@changesets/changelog-github": "0.6.0",
+    "@changesets/cli": "2.30.0",
+    "@marcalexiei/eslint-config": "6.0.0",
     "@marcalexiei/prettier-config": "1.1.4",
     "@types/esquery": "1.5.4",
-    "@types/node": "24.10.1",
-    "@typescript-eslint/rule-tester": "8.56.1",
-    "@vitest/eslint-plugin": "1.6.9",
-    "dedent": "1.7.1",
-    "eslint": "9.39.2",
-    "eslint-doc-generator": "3.2.0",
+    "@types/node": "25.4.0",
+    "@typescript-eslint/rule-tester": "8.57.0",
+    "@vitest/eslint-plugin": "1.6.10",
+    "dedent": "1.7.2",
+    "eslint": "10.0.3",
+    "eslint-doc-generator": "3.3.1",
     "eslint-import-resolver-typescript": "4.4.4",
-    "eslint-plugin-eslint-plugin": "7.3.1",
-    "eslint-plugin-import-x": "4.16.1",
+    "eslint-plugin-eslint-plugin": "7.3.2",
+    "eslint-plugin-import-x": "4.16.2",
     "eslint-plugin-n": "17.24.0",
-    "knip": "5.85.0",
+    "knip": "5.86.0",
     "prettier": "3.8.1",
     "typescript": "5.9.3",
-    "typescript-eslint": "8.56.1",
+    "typescript-eslint": "8.57.0",
     "vitest": "4.0.18",
     "zshy": "0.7.0"
   }

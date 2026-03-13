@@ -17,7 +17,7 @@ permissions:
 
 jobs:
   test:
-    name: Test Node ${{ matrix.node }}
+    name: Test on Node ${{ matrix.node }} with ESLint ${{ matrix.eslint }}
     runs-on: ubuntu-latest
 
     strategy:
@@ -28,6 +28,9 @@ jobs:
           - 22
           - 24
           - 25
+        eslint:
+          - 9
+          - 10
 
     steps:
       - name: Checkout
@@ -37,6 +40,10 @@ jobs:
         uses: marcalexiei/github-actions/.github/actions/setup-node-and-pnpm@main
         with:
           node-version: ${{ matrix.node }}
+
+      - name: Run test
+        if: ${{ matrix.eslint != 10 }}
+        run: pnpm install eslint@${{ matrix.eslint }}
 
       - name: Run test
         run: pnpm run test

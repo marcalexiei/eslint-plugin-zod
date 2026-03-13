@@ -2,7 +2,7 @@
 
 📝 Enforce importing zod as a namespace import (`import * as z from 'zod'`).
 
-❌ This rule is deprecated.
+❌ This rule is deprecated. Use `zod/consistent-import` with `{ syntax: 'namespace' }`.
 
 🔧 This rule is automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix).
 
