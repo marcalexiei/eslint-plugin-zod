@@ -1,5 +1,11 @@
 # eslint-plugin-zod
 
+## 3.5.0
+
+### Minor Changes
+
+- [#220](https://github.com/marcalexiei/eslint-plugin-zod/pull/220) [`8d09bf4`](https://github.com/marcalexiei/eslint-plugin-zod/commit/8d09bf4bffdc6fee9d471015a41db1c62347dd00) Thanks [@marcalexiei](https://github.com/marcalexiei)! - feat: add support for ESLint 10
+
 ## 3.4.0
 
 ### Minor Changes
