@@ -41,9 +41,9 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
 
-      - name: Run test
+      - name: Install ESLint (if needed)
         if: ${{ matrix.eslint != 10 }}
-        run: pnpm install eslint@${{ matrix.eslint }}
+        run: pnpm install eslint@${{ matrix.eslint }} --save-dev
 
       - name: Run test
         run: pnpm run test
