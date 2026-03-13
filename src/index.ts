@@ -106,6 +106,7 @@ const recommendedConfigMini = {
     'zod/require-brand-type-parameter': 'error',
     'zod/require-error-message': 'error',
     'zod/require-schema-suffix': 'error',
+    /* eslint-enable @typescript-eslint/naming-convention */
   },
 } satisfies Linter.Config as CompatibleConfig;
 
