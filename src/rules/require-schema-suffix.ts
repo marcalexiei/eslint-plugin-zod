@@ -84,6 +84,12 @@ export const requireSchemaSuffix = createZodPluginRule<[Options], MessageIds>({
 
           // codec
           'codec',
+
+          // error formatting
+          'treeifyError',
+          'prettifyError',
+          'formatError',
+          'flattenError',
         ];
 
         if (
