@@ -2,4 +2,4 @@
 'eslint-plugin-zod': patch
 ---
 
-Error formatting utilities should not require the suffix, as they do not generate a schema
+fix(require-schema-suffix): Error formatting utilities should not be reported
