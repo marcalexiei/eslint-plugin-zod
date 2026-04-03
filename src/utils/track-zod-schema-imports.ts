@@ -46,7 +46,7 @@ interface Result {
  * Function to create helpers that allow to manage default, namespace and named `zod`
  * imports without too much hassle.
  */
-export function trackZodSchemaImports(
+function trackZodSchemaImports(
   importAllowedSource: ZodImportAllowedSource,
 ): Result {
   const zodNamespaces = new Set<string>();
