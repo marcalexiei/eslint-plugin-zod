@@ -64,24 +64,57 @@ ruleTester.run('require-schema-suffix', requireSchemaSuffix, {
         );
       `,
     },
-    ...['treeifyError', 'prettifyError', 'formatError', 'flattenError'].flatMap(
-      (parser) =>
-        [
-          { name: 'namespace import', value: "import * as z from 'zod'" },
-          { name: 'named import', value: "import { z } from 'zod'" },
-          { name: 'default import', value: "import z from 'zod'" },
-        ].map(({ name: importName, value }) => ({
-          name: `ignores z.${parser} with ${importName}`,
-          code: dedent`
-        ${value};
+    {
+      // https://github.com/marcalexiei/eslint-plugin-zod/issues/226
+      name: `ignores error utilities with (namespace import)`,
+      code: dedent`
+        import * as z from 'zod';
         const UserSchema = z.object({ email: z.email() });
         const result = UserSchema.safeParse({})
         if (!result.success) {
-          const result = z.${parser}(result.error);
+          const errors = [
+            z.treeifyError(result.error),
+            z.prettifyError(result.error),
+            z.formatError(result.error),
+            z.flattenError(result.error),
+          ];
         }
       `,
-        })),
-    ),
+    },
+    {
+      // https://github.com/marcalexiei/eslint-plugin-zod/issues/226
+      name: `ignores error utilities with (named import)`,
+      code: dedent`
+        import { object } from 'zod';
+        const UserSchema = object({ email: z.email() });
+        const result = UserSchema.safeParse({})
+        if (!result.success) {
+          const errors = [
+            z.treeifyError(result.error),
+            z.prettifyError(result.error),
+            z.formatError(result.error),
+            z.flattenError(result.error),
+          ];
+        }
+      `,
+    },
+    {
+      // https://github.com/marcalexiei/eslint-plugin-zod/issues/226
+      name: `ignores error utilities with (named z import)`,
+      code: dedent`
+        import {z} from 'zod';
+        const UserSchema = z.object({ email: z.email() });
+        const result = UserSchema.safeParse({})
+        if (!result.success) {
+          const errors = [
+            z.treeifyError(result.error),
+            z.prettifyError(result.error),
+            z.formatError(result.error),
+            z.flattenError(result.error),
+          ];
+        }
+      `,
+    },
     {
       // https://github.com/marcalexiei/eslint-plugin-zod/issues/71
       name: 'should handle methods after parsing methods',
