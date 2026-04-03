@@ -64,6 +64,24 @@ ruleTester.run('require-schema-suffix', requireSchemaSuffix, {
         );
       `,
     },
+    ...['treeifyError', 'prettifyError', 'formatError', 'flattenError'].flatMap(
+      (parser) =>
+        [
+          { name: 'namespace import', value: "import * as z from 'zod'" },
+          { name: 'named import', value: "import { z } from 'zod'" },
+          { name: 'default import', value: "import z from 'zod'" },
+        ].map(({ name: importName, value }) => ({
+          name: `ignores z.${parser} with ${importName}`,
+          code: dedent`
+        ${value};
+        const UserSchema = z.object({ email: z.email() });
+        const result = UserSchema.safeParse({})
+        if (!result.success) {
+          const result = z.${parser}(result.error);
+        }
+      `,
+        })),
+    ),
     {
       // https://github.com/marcalexiei/eslint-plugin-zod/issues/71
       name: 'should handle methods after parsing methods',

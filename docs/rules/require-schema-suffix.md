@@ -15,6 +15,7 @@ The rule ignores:
 
 - Variables that store parsed values (e.g., `.parse()`, `.safeParse()`)
 - Variables that use `z.codec()` transformations
+- Error formatting utilities (e.g., `prettifyError`, `formatError`)
 - Non-Zod variable declarations
 
 ## Why?
