@@ -56,7 +56,7 @@
     "release": "pnpm run build && changeset publish",
     "check-all": "pnpm run \"/^(lint|format|typecheck|build)$/\" && pnpm run test --run"
   },
-  "packageManager": "pnpm@10.32.1+sha512.a706938f0e89ac1456b6563eab4edf1d1faf3368d1191fc5c59790e96dc918e4456ab2e67d613de1043d2e8c81f87303e6b40d4ffeca9df15ef1ad567348f2be",
+  "packageManager": "pnpm@10.33.0+sha512.10568bb4a6afb58c9eb3630da90cc9516417abebd3fabbe6739f0ae795728da1491e9db5a544c76ad8eb7570f5c4bb3d6c637b2cb41bfdcdb47fa823c8649319",
   "prettier": "@marcalexiei/prettier-config",
   "dependencies": {
     "@typescript-eslint/utils": "^8.57.0",
@@ -77,21 +77,21 @@
     "@marcalexiei/eslint-config": "6.0.0",
     "@marcalexiei/prettier-config": "1.1.4",
     "@types/esquery": "1.5.4",
-    "@types/node": "25.4.0",
-    "@typescript-eslint/rule-tester": "8.57.0",
-    "@vitest/eslint-plugin": "1.6.10",
+    "@types/node": "25.5.0",
+    "@typescript-eslint/rule-tester": "8.58.0",
+    "@vitest/eslint-plugin": "1.6.14",
     "dedent": "1.7.2",
-    "eslint": "10.0.3",
-    "eslint-doc-generator": "3.3.1",
+    "eslint": "10.1.0",
+    "eslint-doc-generator": "3.3.2",
     "eslint-import-resolver-typescript": "4.4.4",
     "eslint-plugin-eslint-plugin": "7.3.2",
     "eslint-plugin-import-x": "4.16.2",
     "eslint-plugin-n": "17.24.0",
-    "knip": "5.86.0",
+    "knip": "6.2.0",
     "prettier": "3.8.1",
     "typescript": "5.9.3",
-    "typescript-eslint": "8.57.0",
-    "vitest": "4.0.18",
+    "typescript-eslint": "8.58.0",
+    "vitest": "4.1.2",
     "zshy": "0.7.0"
   }
 }

@@ -14,6 +14,7 @@
     // Modules
     "module": "NodeNext",
     "target": "ES6",
+    "types": ["node"],
 
     // Emit
     "noEmit": true,
