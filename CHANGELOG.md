@@ -1,5 +1,11 @@
 # eslint-plugin-zod
 
+## 3.5.1
+
+### Patch Changes
+
+- [#227](https://github.com/marcalexiei/eslint-plugin-zod/pull/227) [`694e492`](https://github.com/marcalexiei/eslint-plugin-zod/commit/694e4927493512b086fc3cc58134e7c71ad2ff9c) Thanks [@mikededo](https://github.com/mikededo)! - fix(require-schema-suffix): Error formatting utilities should not be reported
+
 ## 3.5.0
 
 ### Minor Changes
