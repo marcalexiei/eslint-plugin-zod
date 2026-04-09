@@ -11,13 +11,13 @@
   },
   "main": "./dist/index.cjs",
   "types": "./dist/index.d.cts",
-  "module": "./dist/index.js",
+  "module": "./dist/index.mjs",
   "exports": {
     ".": {
-      "types": "./dist/index.d.cts",
-      "import": "./dist/index.js",
+      "import": "./dist/index.mjs",
       "require": "./dist/index.cjs"
-    }
+    },
+    "./package.json": "./package.json"
   },
   "homepage": "https://github.com/marcalexiei/eslint-plugin-zod#readme",
   "bugs": {
@@ -38,11 +38,8 @@
     "type": "git",
     "url": "https://github.com/marcalexiei/eslint-plugin-zod"
   },
-  "zshy": {
-    "exports": "./src/index.ts"
-  },
   "scripts": {
-    "build": "zshy",
+    "build": "tsdown",
     "build:docs": "pnpm run build && eslint-doc-generator",
     "lint": "pnpm run lint:js && pnpm run lint:docs && pnpm run lint:knip",
     "lint:js": "eslint .",
@@ -77,21 +74,21 @@
     "@marcalexiei/eslint-config": "6.0.0",
     "@marcalexiei/prettier-config": "1.1.4",
     "@types/esquery": "1.5.4",
-    "@types/node": "25.5.0",
-    "@typescript-eslint/rule-tester": "8.58.0",
+    "@types/node": "25.5.2",
+    "@typescript-eslint/rule-tester": "8.58.1",
     "@vitest/eslint-plugin": "1.6.14",
     "dedent": "1.7.2",
-    "eslint": "10.1.0",
+    "eslint": "10.2.0",
     "eslint-doc-generator": "3.3.2",
     "eslint-import-resolver-typescript": "4.4.4",
     "eslint-plugin-eslint-plugin": "7.3.2",
     "eslint-plugin-import-x": "4.16.2",
     "eslint-plugin-n": "17.24.0",
-    "knip": "6.2.0",
+    "knip": "6.3.1",
     "prettier": "3.8.1",
-    "typescript": "5.9.3",
-    "typescript-eslint": "8.58.0",
-    "vitest": "4.1.2",
-    "zshy": "0.7.0"
+    "tsdown": "0.21.7",
+    "typescript": "6.0.2",
+    "typescript-eslint": "8.58.1",
+    "vitest": "4.1.3"
   }
 }
