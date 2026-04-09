@@ -1,5 +1,13 @@
 # eslint-plugin-zod
 
+## 3.5.2
+
+### Patch Changes
+
+- [#235](https://github.com/marcalexiei/eslint-plugin-zod/pull/235) [`a401c09`](https://github.com/marcalexiei/eslint-plugin-zod/commit/a401c0935255a9d52aaaf57832e7b9ee5542133b) Thanks [@marcalexiei](https://github.com/marcalexiei)! - chore: migrate build to `tsdown`
+
+- [#233](https://github.com/marcalexiei/eslint-plugin-zod/pull/233) [`755c1e4`](https://github.com/marcalexiei/eslint-plugin-zod/commit/755c1e478c7d70c093d5515d8ae5f9681407039d) Thanks [@marcalexiei](https://github.com/marcalexiei)! - fix(array-style): fixer removes additional methods in the chain
+
 ## 3.5.1
 
 ### Patch Changes
