@@ -120,7 +120,7 @@ export const arrayStyle = createZodPluginRule<[Options], MessageIds>({
               fix(fixer) {
                 const callee = arrayNode.callee as TSESTree.MemberExpression;
                 const objText = sourceCode.getText(callee.object);
-                return fixer.replaceText(node, `z.array(${objText})`);
+                return fixer.replaceText(arrayNode, `z.array(${objText})`);
               },
             });
             return;

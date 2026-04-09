@@ -98,6 +98,31 @@ ruleTester.run('array-style (function)', arrayStyle, {
       errors: [{ messageId: 'useFunction' }],
       output: null,
     },
+    {
+      // https://github.com/marcalexiei/eslint-plugin-zod/issues/232
+      name: 'should keep additional methods in the chain after running the fixer (named z)',
+      code: dedent`
+        import { z } from "zod";
+
+        export const testSchema = z
+          .object({
+            id: z.uuid(),
+          })
+          .array()
+          .optional();
+      `,
+      options: [{ style: 'function' }],
+      errors: [{ messageId: 'useFunction' }],
+      output: dedent`
+        import { z } from "zod";
+
+        export const testSchema = z.array(z
+          .object({
+            id: z.uuid(),
+          }))
+          .optional();
+      `,
+    },
   ],
 });
 
