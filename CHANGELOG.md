@@ -1,5 +1,15 @@
 # eslint-plugin-zod
 
+## 3.5.3
+
+### Patch Changes
+
+- [#238](https://github.com/marcalexiei/eslint-plugin-zod/pull/238) [`c3b5541`](https://github.com/marcalexiei/eslint-plugin-zod/commit/c3b55410181339aac7e9b315cd8afc06e0c7fa74) Thanks [@marcalexiei](https://github.com/marcalexiei)! - fix(require-error-message): report missing parameter error only on schema node, not entire chain
+
+- [#241](https://github.com/marcalexiei/eslint-plugin-zod/pull/241) [`241796d`](https://github.com/marcalexiei/eslint-plugin-zod/commit/241796d85ea39d93fe1b05a6f67adad463c67cd5) Thanks [@marcalexiei](https://github.com/marcalexiei)! - fix(require-error-message): check all refine/custom methods in chain
+
+- [#238](https://github.com/marcalexiei/eslint-plugin-zod/pull/238) [`560aa16`](https://github.com/marcalexiei/eslint-plugin-zod/commit/560aa16634cfc5a5c6017ff91d4d211b4d5c24ce) Thanks [@marcalexiei](https://github.com/marcalexiei)! - fix(no-empty-custom-schema): chaining method to a custom schema reports a false positive
+
 ## 3.5.2
 
 ### Patch Changes
