@@ -28,6 +28,7 @@ export const noEmptyCustomSchema = createZodPluginRule({
       //
       importDeclarationListener,
       detectZodSchemaRootNode,
+      collectZodChainMethods,
     } = trackZodSchemaImports();
 
     return {
@@ -37,12 +38,20 @@ export const noEmptyCustomSchema = createZodPluginRule({
         if (!zodSchemaMeta) {
           return;
         }
-        if (
-          zodSchemaMeta.schemaType === 'custom' &&
-          node.arguments.length === 0
-        ) {
+
+        if (zodSchemaMeta.schemaType !== 'custom') {
+          return;
+        }
+
+        // Find the actual custom() call node in the chain
+        const chainMethods = collectZodChainMethods(node);
+        const customCallNode = chainMethods.find(
+          (method) => method.name === 'custom',
+        )?.node;
+
+        if (customCallNode?.arguments.length === 0) {
           context.report({
-            node,
+            node: customCallNode,
             messageId: 'noEmptyCustomSchema',
           });
         }
