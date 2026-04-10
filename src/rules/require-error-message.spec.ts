@@ -162,9 +162,26 @@ ruleTester.run('prefer-strict-object (custom)', requireErrorMessage, {
       name: 'object without error message',
       code: `
         import * as z from 'zod';
-        z.custom(() => true, { abort: true })
+        z.custom(() => true, { abort: true });
       `,
       errors: [{ messageId: 'requireErrorMessage' }],
+      output: null,
+    },
+    {
+      name: 'reported error with missing object should highlight only the method node not whole chain ',
+      code: `
+        import * as z from 'zod';
+        z.custom(() => true).optional()
+      `,
+      errors: [
+        {
+          messageId: 'requireErrorMessage',
+          line: 3,
+          column: 9,
+          endLine: 3,
+          endColumn: 29,
+        },
+      ],
       output: null,
     },
   ],
