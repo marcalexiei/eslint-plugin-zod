@@ -57,6 +57,15 @@ ruleTester.run('prefer-strict-object (refine)', requireErrorMessage, {
         z.string().refine(() => true, { error: "error msg 2" }).trim();
       `,
     },
+    {
+      name: 'multiple chained refine with error properties',
+      code: dedent`
+        import * as z from 'zod';
+        z.string()
+          .refine(() => true, { error: "error msg 1" })
+          .refine(() => true, { error: "error msg 2" });
+      `,
+    },
   ],
 
   invalid: [
@@ -109,6 +118,22 @@ ruleTester.run('prefer-strict-object (refine)', requireErrorMessage, {
       output: dedent`
         import * as z from 'zod';
         z.string().refine(() => true, {  error: "hello" });
+      `,
+    },
+    {
+      name: 'multiple chained refine with message properties',
+      code: dedent`
+        import * as z from 'zod';
+        z.string()
+          .refine(() => true, { message: "error msg 1" })
+          .refine(() => true, { message: "error msg 2" });
+      `,
+      errors: [{ messageId: 'preferError' }, { messageId: 'preferError' }],
+      output: dedent`
+        import * as z from 'zod';
+        z.string()
+          .refine(() => true, { error: "error msg 1" })
+          .refine(() => true, { error: "error msg 2" });
       `,
     },
   ],
