@@ -57,7 +57,7 @@ export const requireErrorMessage = createZodPluginRule({
         if (refineNode.arguments.length < 2) {
           context.report({
             messageId: 'requireErrorMessage',
-            node: node.callee,
+            node: refineNode,
           });
           return;
         }
@@ -69,69 +69,72 @@ export const requireErrorMessage = createZodPluginRule({
           return;
         }
 
+        // If the pram isn't an object expression we bail the detection
+        if (params.type !== AST_NODE_TYPES.ObjectExpression) {
+          return;
+        }
+
         // If user is providing an object we search for error and message
-        if (params.type === AST_NODE_TYPES.ObjectExpression) {
-          let errorPropertyNode: TSESTree.Property | undefined;
-          let messagePropertyNode: TSESTree.Property | undefined;
-          for (const property of params.properties) {
-            if (
-              property.type === AST_NODE_TYPES.Property &&
-              property.key.type === AST_NODE_TYPES.Identifier
-            ) {
-              if (property.key.name === 'error') {
-                errorPropertyNode = property;
-              }
+        let errorPropertyNode: TSESTree.Property | undefined;
+        let messagePropertyNode: TSESTree.Property | undefined;
+        for (const property of params.properties) {
+          if (
+            property.type === AST_NODE_TYPES.Property &&
+            property.key.type === AST_NODE_TYPES.Identifier
+          ) {
+            if (property.key.name === 'error') {
+              errorPropertyNode = property;
+            }
 
-              if (property.key.name === 'message') {
-                messagePropertyNode = property;
-              }
+            if (property.key.name === 'message') {
+              messagePropertyNode = property;
+            }
 
-              if (errorPropertyNode && messagePropertyNode) {
-                break;
-              }
+            if (errorPropertyNode && messagePropertyNode) {
+              break;
             }
           }
+        }
 
-          if (errorPropertyNode && messagePropertyNode) {
-            context.report({
-              messageId: 'removeMessage',
-              node: messagePropertyNode,
-              fix(fixer) {
-                const { sourceCode } = context;
-                const nextToken = sourceCode.getTokenAfter(messagePropertyNode);
-                let [, end] = messagePropertyNode.range;
+        if (errorPropertyNode && messagePropertyNode) {
+          context.report({
+            messageId: 'removeMessage',
+            node: messagePropertyNode,
+            fix(fixer) {
+              const { sourceCode } = context;
+              const nextToken = sourceCode.getTokenAfter(messagePropertyNode);
+              let [, end] = messagePropertyNode.range;
 
-                // If there’s a comma after the property, include it
-                if (nextToken?.value === ',') {
-                  end = nextToken.range[1];
-                }
+              // If there’s a comma after the property, include it
+              if (nextToken?.value === ',') {
+                end = nextToken.range[1];
+              }
 
-                return fixer.removeRange([messagePropertyNode.range[0], end]);
-              },
-            });
-            return;
-          }
+              return fixer.removeRange([messagePropertyNode.range[0], end]);
+            },
+          });
+          return;
+        }
 
-          if (messagePropertyNode && !errorPropertyNode) {
-            context.report({
-              messageId: 'preferError',
-              node: params,
-              fix(fixer) {
-                return fixer.replaceTextRange(
-                  messagePropertyNode.key.range,
-                  'error',
-                );
-              },
-            });
-            return;
-          }
+        if (messagePropertyNode && !errorPropertyNode) {
+          context.report({
+            messageId: 'preferError',
+            node: params,
+            fix(fixer) {
+              return fixer.replaceTextRange(
+                messagePropertyNode.key.range,
+                'error',
+              );
+            },
+          });
+          return;
+        }
 
-          if (!errorPropertyNode) {
-            context.report({
-              messageId: 'requireErrorMessage',
-              node: params,
-            });
-          }
+        if (!errorPropertyNode) {
+          context.report({
+            messageId: 'requireErrorMessage',
+            node: params,
+          });
         }
       },
     };
