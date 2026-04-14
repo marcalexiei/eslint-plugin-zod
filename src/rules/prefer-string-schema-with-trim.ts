@@ -1,4 +1,5 @@
 import { createZodPluginRule } from '../utils/create-plugin-rule.js';
+import { findParentSchemaMatchingCondition } from '../utils/find-parent-schema-matching-condition.js';
 import { createZodSchemaImportTrack } from '../utils/track-zod-schema-imports.js';
 
 const {
@@ -36,6 +37,20 @@ export const preferStringSchemaWithTrim = createZodPluginRule({
         const zodSchemaMeta = detectZodSchemaRootNode(node);
 
         if (zodSchemaMeta?.schemaType !== 'string') {
+          return;
+        }
+
+        // Skip if this string schema is the key schema of z.record()
+        // because transforms on record keys cause data loss
+        // https://github.com/marcalexiei/eslint-plugin-zod/issues/242
+        if (
+          findParentSchemaMatchingCondition(zodSchemaMeta.node, {
+            schemaName: 'record',
+            condition: (callParent) =>
+              callParent.arguments.length > 0 &&
+              callParent.arguments[0] === zodSchemaMeta.node,
+          })
+        ) {
           return;
         }
 
