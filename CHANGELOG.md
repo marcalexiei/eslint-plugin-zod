@@ -1,5 +1,11 @@
 # eslint-plugin-zod
 
+## 3.5.4
+
+### Patch Changes
+
+- [#244](https://github.com/marcalexiei/eslint-plugin-zod/pull/244) [`403978a`](https://github.com/marcalexiei/eslint-plugin-zod/commit/403978a81a4632af82163c2cbed78144e2a03633) Thanks [@marcalexiei](https://github.com/marcalexiei)! - fix(prefer-string-schema-with-trim): skip record key schemas to prevent data loss
+
 ## 3.5.3
 
 ### Patch Changes
