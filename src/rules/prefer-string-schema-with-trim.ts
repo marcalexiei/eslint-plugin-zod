@@ -1,7 +1,5 @@
-import type { TSESTree } from '@typescript-eslint/utils';
-import { AST_NODE_TYPES } from '@typescript-eslint/utils';
-
 import { createZodPluginRule } from '../utils/create-plugin-rule.js';
+import { findParentSchemaMatchingCondition } from '../utils/find-parent-schema-matching-condition.js';
 import { createZodSchemaImportTrack } from '../utils/track-zod-schema-imports.js';
 
 const {
@@ -9,58 +7,6 @@ const {
   zodImportAllowedSource,
   trackZodSchemaImports,
 } = createZodSchemaImportTrack('zod');
-
-/**
- * Check if a string schema node is used as the key schema (first argument) of z.record()
- * Transforms on record keys cause data loss, so we should not warn in this case
- */
-function isRecordKeySchema(outermostNode: TSESTree.CallExpression): boolean {
-  let current = outermostNode;
-
-  // Traverse the parent chain to find if this is an argument to z.record()
-  // We need to go up: .min(1) -> MemberExpression (.min) -> parent chain...
-  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-  while (current.parent) {
-    const { parent } = current;
-
-    // If parent is a CallExpression, check if it's z.record()
-    if (parent.type === AST_NODE_TYPES.CallExpression) {
-      const callParent = parent;
-
-      // Check if the parent call is a method call (callee is MemberExpression)
-      if (callParent.callee.type === AST_NODE_TYPES.MemberExpression) {
-        const memberExpr = callParent.callee as TSESTree.MemberExpression;
-
-        // Get the property name (method name)
-        const methodName =
-          memberExpr.property.type === AST_NODE_TYPES.Identifier
-            ? memberExpr.property.name
-            : null;
-
-        // If this is z.record(), check if we're the first argument
-        if (methodName === 'record') {
-          return (
-            callParent.arguments.length > 0 &&
-            callParent.arguments[0] === current
-          );
-        }
-      }
-    }
-
-    // If parent is a MemberExpression, continue up the chain
-    if (parent.type === AST_NODE_TYPES.MemberExpression) {
-      const memberParent = parent as TSESTree.MemberExpression;
-
-      current = memberParent as unknown as TSESTree.CallExpression;
-      continue;
-    }
-
-    // Move to parent for arguments case
-    current = parent as TSESTree.CallExpression;
-  }
-
-  return false;
-}
 
 export const preferStringSchemaWithTrim = createZodPluginRule({
   name: 'prefer-string-schema-with-trim',
@@ -96,7 +42,15 @@ export const preferStringSchemaWithTrim = createZodPluginRule({
 
         // Skip if this string schema is the key schema of z.record()
         // because transforms on record keys cause data loss
-        if (isRecordKeySchema(zodSchemaMeta.node)) {
+        // https://github.com/marcalexiei/eslint-plugin-zod/issues/242
+        if (
+          findParentSchemaMatchingCondition(zodSchemaMeta.node, {
+            schemaName: 'record',
+            condition: (callParent) =>
+              callParent.arguments.length > 0 &&
+              callParent.arguments[0] === zodSchemaMeta.node,
+          })
+        ) {
           return;
         }
 
