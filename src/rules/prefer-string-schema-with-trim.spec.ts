@@ -38,6 +38,30 @@ ruleTester.run(preferStringSchemaWithTrim.name, preferStringSchemaWithTrim, {
         z.custom(() => 'asd');
       `,
     },
+    {
+      // https://github.com/marcalexiei/eslint-plugin-zod/issues/242
+      name: 'string schema as record key (first argument)',
+      code: dedent`
+        import { z } from "zod";
+        const schema = z.record(z.string(), z.unknown());
+      `,
+    },
+    {
+      // https://github.com/marcalexiei/eslint-plugin-zod/issues/242
+      name: 'string schema as record key with other methods',
+      code: dedent`
+        import { z } from "zod";
+        const schema = z.record(z.string().min(1), z.unknown());
+      `,
+    },
+    {
+      // https://github.com/marcalexiei/eslint-plugin-zod/issues/242
+      name: 'string schema as record key with trim',
+      code: dedent`
+        import { z } from "zod";
+        const schema = z.record(z.string().trim(), z.unknown());
+      `,
+    },
   ],
 
   invalid: [
@@ -94,6 +118,19 @@ ruleTester.run(preferStringSchemaWithTrim.name, preferStringSchemaWithTrim, {
       `,
       errors: [{ messageId: 'addTrim' }],
       output: null,
+    },
+    {
+      // https://github.com/marcalexiei/eslint-plugin-zod/issues/242
+      name: 'string schema as record value (second argument) should warn',
+      code: dedent`
+        import { z } from "zod";
+        const schema = z.record(z.string(), z.string());
+      `,
+      errors: [{ messageId: 'addTrim' }],
+      output: dedent`
+        import { z } from "zod";
+        const schema = z.record(z.string(), z.string().trim());
+      `,
     },
   ],
 });
