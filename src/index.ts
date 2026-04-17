@@ -11,6 +11,7 @@ import { noNumberSchemaWithInt } from './rules/no-number-schema-with-int.js';
 import { noOptionalAndDefaultTogether } from './rules/no-optional-and-default-together.js';
 import { noStringSchemaWithUuid } from './rules/no-string-schema-with-uuid.js';
 import { noThrowInRefine } from './rules/no-throw-in-refine.js';
+import { noTransformInRecordKey } from './rules/no-transform-in-record-key.js';
 import { noUnknownSchema } from './rules/no-unknown-schema.js';
 import { preferEnumOverLiteralUnion } from './rules/prefer-enum-over-literal-union.js';
 import { preferMetaLast } from './rules/prefer-meta-last.js';
@@ -52,6 +53,7 @@ const eslintPluginZod = {
     'no-string-schema-with-uuid': noStringSchemaWithUuid,
     'no-optional-and-default-together': noOptionalAndDefaultTogether,
     'no-throw-in-refine': noThrowInRefine,
+    'no-transform-in-record-key': noTransformInRecordKey,
     'no-unknown-schema': noUnknownSchema,
     'prefer-enum-over-literal-union': preferEnumOverLiteralUnion,
     'prefer-meta': preferMeta,

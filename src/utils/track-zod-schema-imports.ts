@@ -133,6 +133,11 @@ function trackZodSchemaImports(
 
 /**
  * Wrapper to avoid duplication of importAllowedSource across rule code
+ *
+ * This function exposes:
+ *
+ * - `zodImportAllowedSource` - to be used in rules meta to properly generate documentation
+ * - `trackZodSchemaImports` - used inside a rule to process only zod related variables
  */
 export function createZodSchemaImportTrack(
   zodImportAllowedSource: ZodImportAllowedSource,
