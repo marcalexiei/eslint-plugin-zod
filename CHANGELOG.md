@@ -1,5 +1,11 @@
 # eslint-plugin-zod
 
+## 3.6.0
+
+### Minor Changes
+
+- [#247](https://github.com/marcalexiei/eslint-plugin-zod/pull/247) [`3fcd70a`](https://github.com/marcalexiei/eslint-plugin-zod/commit/3fcd70a29ea18c1ffd83959b06b4506b064b1365) Thanks [@marcalexiei](https://github.com/marcalexiei)! - feat(no-transform-in-record-key): add new rule
+
 ## 3.5.4
 
 ### Patch Changes
