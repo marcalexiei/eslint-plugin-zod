@@ -4,10 +4,6 @@ import { getRuleURL } from '../meta.js';
 
 import type { ZodImportAllowedSource } from './is-zod-import-source.js';
 
-/**
- * Used by .eslint-doc-generatorrc.js
- * @lintignore
- */
 export type ZodPluginRule = ESLintUtils.RuleWithMetaAndName<
   [],
   string,

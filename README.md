@@ -17,7 +17,10 @@
 [issuesBadge]: https://img.shields.io/github/issues/marcalexiei/eslint-plugin-zod.svg?style=for-the-badge
 [issuesURL]: https://github.com/marcalexiei/eslint-plugin-zod/issues
 
-[ESLint](https://eslint.org) plugin that adds custom linting rules to enforce best practices when using [Zod](https://github.com/colinhacks/zod)
+[ESLint](https://eslint.org) plugin that adds custom linting rules to enforce best practices when using [Zod](https://github.com/colinhacks/zod).
+
+It can also work with [Oxlint](https://oxc.rs/docs/guide/usage/linter.html)!\
+Find out more about [Oxlint's `jsPLugins`](https://oxc.rs/docs/guide/usage/linter/js-plugins.html).
 
 ## Rules
 
@@ -68,6 +71,8 @@ This plugin is primarily built for `zod`, so some rules are exclusive to `zod` a
 
 ## Installation
 
+### ESLint
+
 Install `eslint` and `eslint-plugin-zod` using your preferred package manager:
 
 ```shell
@@ -82,7 +87,7 @@ yarn add --dev eslint eslint-plugin-zod
 pnpm add --save-dev eslint eslint-plugin-zod
 ```
 
-## Configuration
+#### ESLint Configuration
 
 1. Import the plugin
 
@@ -108,6 +113,57 @@ export default defineConfig(
   eslint.configs.recommended,
   eslintPluginZod.configs.recommended,
 );
+```
+
+### Oxlint
+
+Install `oxlint` and `eslint-plugin-zod` using your preferred package manager:
+
+```shell
+npm i --save-dev oxlint eslint-plugin-zod
+```
+
+```shell
+yarn add --dev oxlint eslint-plugin-zod
+```
+
+```shell
+pnpm add --save-dev oxlint eslint-plugin-zod
+```
+
+#### Oxlint Configuration
+
+1. Import the plugin
+
+   ```ts
+   import eslintPluginZod from 'eslint-plugin-zod';
+   ```
+
+2. Add `eslint-plugin-zod` to the `jsPlugins` key
+
+   ```ts
+   {
+     jsPlugins: ['eslint-plugin-zod'],
+     // ...
+   }
+   ```
+
+3. Add `eslintPluginZod.configs.recommended.rules` to your Oxlint config.\
+   Alternatively you can specify the rules manually
+
+Here’s a minimal example using the flat config format:
+
+```ts
+// oxlint.config.ts
+import eslintPluginZod from 'eslint-plugin-zod';
+import { defineConfig } from 'oxlint';
+
+export default defineConfig({
+  jsPlugins: ['eslint-plugin-zod'],
+  rules: {
+    ...eslintPluginZod.configs.recommended.rules,
+  },
+});
 ```
 
 ## Zod peer dependency version
