@@ -1,5 +1,13 @@
 # eslint-plugin-zod
 
+## 3.7.0
+
+### Minor Changes
+
+- [#236](https://github.com/marcalexiei/eslint-plugin-zod/pull/236) [`1c536be`](https://github.com/marcalexiei/eslint-plugin-zod/commit/1c536be3e151c122ac3f5a2fd9b43f2a894b8f2f) Thanks [@marcalexiei](https://github.com/marcalexiei)! - feat: add support for `oxlint`
+
+  Installation instructions are available in the [README](https://github.com/marcalexiei/eslint-plugin-zod/tree/oxlint?tab=readme-ov-file#oxlint)!
+
 ## 3.6.0
 
 ### Minor Changes
