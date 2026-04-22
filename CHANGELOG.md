@@ -1,5 +1,11 @@
 # eslint-plugin-zod
 
+## 3.8.0
+
+### Minor Changes
+
+- [#251](https://github.com/marcalexiei/eslint-plugin-zod/pull/251) [`435514a`](https://github.com/marcalexiei/eslint-plugin-zod/commit/435514abc6f677de64476fa5e8e0e03a4bf4ad79) Thanks [@marcalexiei](https://github.com/marcalexiei)! - feat(consistent-schema-output-type-style): add new rule
+
 ## 3.7.0
 
 ### Minor Changes
