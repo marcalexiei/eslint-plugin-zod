@@ -89,7 +89,7 @@ function isOutermostCallExpression(node: TSESTree.CallExpression): boolean {
 function parseZodCallExpression(
   call: TSESTree.CallExpression,
   zodNamespaces: Set<string>,
-  zodNamedImports: Set<string>,
+  zodNamedImports: { has: (key: string) => boolean },
 ): {
   schemaDecl: 'namespace' | 'named';
   schemaType: string;
@@ -230,7 +230,7 @@ function parseZodCallExpression(
 export function detectZodSchemaRootNode(
   node: TSESTree.Node,
   zodNamespaces: Set<string>,
-  zodNamedImports: Set<string>,
+  zodNamedImports: { has: (key: string) => boolean },
 ): DetectResult {
   if (node.type !== AST_NODE_TYPES.CallExpression) {
     return null;

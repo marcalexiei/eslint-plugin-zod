@@ -38,20 +38,21 @@ This plugin is primarily built for `zod`, so some rules are exclusive to `zod` a
 
 ### Universal rules (`zod` & `zod-mini`)
 
-| Name                                                                         | Description                                                                                   | 💼    | 🔧  | 💡  | ❌  |
-| :--------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------- | :---- | :-- | :-- | :-- |
-| [consistent-import](docs/rules/consistent-import.md)                         | Enforce a consistent import style for Zod                                                     | ✅    | 🔧  |     |     |
-| [consistent-import-source](docs/rules/consistent-import-source.md)           | Enforce consistent source from Zod imports                                                    |       |     | 💡  |     |
-| [consistent-object-schema-type](docs/rules/consistent-object-schema-type.md) | Enforce consistent usage of Zod schema methods                                                |       |     | 💡  |     |
-| [no-any-schema](docs/rules/no-any-schema.md)                                 | Disallow usage of `z.any()` in Zod schemas                                                    | ✅ ✔️ |     | 💡  |     |
-| [no-empty-custom-schema](docs/rules/no-empty-custom-schema.md)               | Disallow usage of `z.custom()` without arguments                                              | ✅    |     |     |     |
-| [no-unknown-schema](docs/rules/no-unknown-schema.md)                         | Disallow usage of `z.unknown()` in Zod schemas                                                |       |     |     |     |
-| [prefer-meta](docs/rules/prefer-meta.md)                                     | Enforce usage of `.meta()` over `.describe()`                                                 | ✅ ✔️ | 🔧  |     |     |
-| [prefer-namespace-import](docs/rules/prefer-namespace-import.md)             | Enforce importing zod as a namespace import (`import * as z from 'zod'`)                      |       | 🔧  |     | ❌  |
-| [require-brand-type-parameter](docs/rules/require-brand-type-parameter.md)   | Require type parameter on `.brand()` functions                                                | ✅ ✔️ |     | 💡  |     |
-| [require-error-message](docs/rules/require-error-message.md)                 | Enforce that custom refinements include an error message                                      | ✅ ✔️ | 🔧  |     |     |
-| [require-schema-suffix](docs/rules/require-schema-suffix.md)                 | Require schema suffix when declaring a Zod schema                                             | ✅ ✔️ |     |     |     |
-| [schema-error-property-style](docs/rules/schema-error-property-style.md)     | Enforce consistent style for error messages in Zod schema validation (using ESQuery patterns) |       |     |     |     |
+| Name                                                                                     | Description                                                                                   | 💼    | 🔧  | 💡  | ❌  |
+| :--------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------- | :---- | :-- | :-- | :-- |
+| [consistent-import](docs/rules/consistent-import.md)                                     | Enforce a consistent import style for Zod                                                     | ✅    | 🔧  |     |     |
+| [consistent-import-source](docs/rules/consistent-import-source.md)                       | Enforce consistent source from Zod imports                                                    |       |     | 💡  |     |
+| [consistent-object-schema-type](docs/rules/consistent-object-schema-type.md)             | Enforce consistent usage of Zod schema methods                                                |       |     | 💡  |     |
+| [consistent-schema-output-type-style](docs/rules/consistent-schema-output-type-style.md) | Enforce consistent use of z.infer or z.output for schema type inference                       |       | 🔧  |     |     |
+| [no-any-schema](docs/rules/no-any-schema.md)                                             | Disallow usage of `z.any()` in Zod schemas                                                    | ✅ ✔️ |     | 💡  |     |
+| [no-empty-custom-schema](docs/rules/no-empty-custom-schema.md)                           | Disallow usage of `z.custom()` without arguments                                              | ✅    |     |     |     |
+| [no-unknown-schema](docs/rules/no-unknown-schema.md)                                     | Disallow usage of `z.unknown()` in Zod schemas                                                |       |     |     |     |
+| [prefer-meta](docs/rules/prefer-meta.md)                                                 | Enforce usage of `.meta()` over `.describe()`                                                 | ✅ ✔️ | 🔧  |     |     |
+| [prefer-namespace-import](docs/rules/prefer-namespace-import.md)                         | Enforce importing zod as a namespace import (`import * as z from 'zod'`)                      |       | 🔧  |     | ❌  |
+| [require-brand-type-parameter](docs/rules/require-brand-type-parameter.md)               | Require type parameter on `.brand()` functions                                                | ✅ ✔️ |     | 💡  |     |
+| [require-error-message](docs/rules/require-error-message.md)                             | Enforce that custom refinements include an error message                                      | ✅ ✔️ | 🔧  |     |     |
+| [require-schema-suffix](docs/rules/require-schema-suffix.md)                             | Require schema suffix when declaring a Zod schema                                             | ✅ ✔️ |     |     |     |
+| [schema-error-property-style](docs/rules/schema-error-property-style.md)                 | Enforce consistent style for error messages in Zod schema validation (using ESQuery patterns) |       |     |     |     |
 
 ### `zod` exclusive rules
 

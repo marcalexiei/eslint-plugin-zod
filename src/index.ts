@@ -5,6 +5,7 @@ import { arrayStyle } from './rules/array-style.js';
 import { consistentImportSource } from './rules/consistent-import-source.js';
 import { consistentImport } from './rules/consistent-import.js';
 import { consistentObjectSchemaType } from './rules/consistent-object-schema-type.js';
+import { consistentSchemaOutputTypeStyle } from './rules/consistent-schema-output-type-style.js';
 import { noAnySchema } from './rules/no-any-schema.js';
 import { noEmptyCustomSchema } from './rules/no-empty-custom-schema.js';
 import { noNumberSchemaWithInt } from './rules/no-number-schema-with-int.js';
@@ -47,6 +48,7 @@ const eslintPluginZod = {
     'consistent-import-source': consistentImportSource,
     'consistent-import': consistentImport,
     'consistent-object-schema-type': consistentObjectSchemaType,
+    'consistent-schema-output-type-style': consistentSchemaOutputTypeStyle,
     'no-any-schema': noAnySchema,
     'no-empty-custom-schema': noEmptyCustomSchema,
     'no-number-schema-with-int': noNumberSchemaWithInt,
