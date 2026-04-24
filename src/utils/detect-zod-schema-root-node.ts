@@ -173,6 +173,23 @@ function parseZodCallExpression(
   return null;
 }
 
+/**
+ * True when `node` is a zod number schema call chain (e.g. `z.number().min(1)`) or `number().min(1)`.
+ * Used for member access like `z.number().isInt` where the call is not the outermost expression
+ * in the file (so {@link detectZodSchemaRootNode} does not apply).
+ */
+export function isZodNumberSchemaCallExpression(
+  node: TSESTree.Node,
+  zodNamespaces: Set<string>,
+  zodNamedImports: { has: (key: string) => boolean },
+): boolean {
+  if (node.type !== AST_NODE_TYPES.CallExpression) {
+    return false;
+  }
+  const parsed = parseZodCallExpression(node, zodNamespaces, zodNamedImports);
+  return parsed !== null && parsed.schemaType === 'number';
+}
+
 /** Examine an expression (argument) for zod schema CallExpressions.
  * Supports:
  *  - direct CallExpression (string(), z.string(), etc)

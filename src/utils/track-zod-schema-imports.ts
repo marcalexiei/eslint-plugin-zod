@@ -1,7 +1,10 @@
 import type { TSESTree } from '@typescript-eslint/utils';
 import { AST_NODE_TYPES } from '@typescript-eslint/utils';
 
-import { detectZodSchemaRootNode } from './detect-zod-schema-root-node.js';
+import {
+  detectZodSchemaRootNode,
+  isZodNumberSchemaCallExpression,
+} from './detect-zod-schema-root-node.js';
 import type { DetectResult } from './detect-zod-schema-root-node.js';
 import { isZodImportSource } from './is-zod-import-source.js';
 import type { ZodImportAllowedSource } from './is-zod-import-source.js';
@@ -63,6 +66,12 @@ interface Result {
   collectZodChainMethods: (
     node: TSESTree.CallExpression,
   ) => Array<ZodChainItem>;
+
+  /**
+   * True if `node` is a `z.number()…` (or `number()…`) zod call chain, including inner
+   * calls such as the object of `z.number().min(0).isInt`.
+   */
+  isZodNumberSchemaCallExpression: (node: TSESTree.Node) => boolean;
 }
 
 /**
@@ -164,6 +173,9 @@ function trackZodSchemaImports(
       detectZodSchemaRootNode(node, zodNamespaces, zodNamedImports),
 
     collectZodChainMethods,
+
+    isZodNumberSchemaCallExpression: (node) =>
+      isZodNumberSchemaCallExpression(node, zodNamespaces, zodNamedImports),
   };
 
   return result;
