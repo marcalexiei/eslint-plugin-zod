@@ -5,7 +5,7 @@ import { requireErrorMessage } from './require-error-message.js';
 
 const ruleTester = new RuleTester();
 
-ruleTester.run('prefer-strict-object (refine)', requireErrorMessage, {
+ruleTester.run(requireErrorMessage.name, requireErrorMessage, {
   valid: [
     {
       name: 'object with error property (namespace import)',
@@ -139,7 +139,7 @@ ruleTester.run('prefer-strict-object (refine)', requireErrorMessage, {
   ],
 });
 
-ruleTester.run('prefer-strict-object (custom)', requireErrorMessage, {
+ruleTester.run(`${requireErrorMessage.name} (custom)`, requireErrorMessage, {
   valid: [
     {
       name: 'object with error property',

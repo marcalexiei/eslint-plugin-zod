@@ -5,7 +5,7 @@ import { preferMeta } from './prefer-meta.js';
 
 const ruleTester = new RuleTester();
 
-ruleTester.run('prefer-meta', preferMeta, {
+ruleTester.run(preferMeta.name, preferMeta, {
   valid: [
     {
       name: 'namespace import',

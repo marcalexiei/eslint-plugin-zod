@@ -5,7 +5,7 @@ import { noNumberSchemaWithFinite } from './no-number-schema-with-finite.js';
 
 const ruleTester = new RuleTester();
 
-ruleTester.run('no-number-schema-with-finite', noNumberSchemaWithFinite, {
+ruleTester.run(noNumberSchemaWithFinite.name, noNumberSchemaWithFinite, {
   valid: [
     {
       name: 'number without .finite()',

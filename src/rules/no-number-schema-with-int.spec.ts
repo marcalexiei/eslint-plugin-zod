@@ -5,7 +5,7 @@ import { noNumberSchemaWithInt } from './no-number-schema-with-int.js';
 
 const ruleTester = new RuleTester();
 
-ruleTester.run('no-number-schema-with-int', noNumberSchemaWithInt, {
+ruleTester.run(noNumberSchemaWithInt.name, noNumberSchemaWithInt, {
   valid: [
     {
       name: 'namespace import',

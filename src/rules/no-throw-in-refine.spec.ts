@@ -5,7 +5,7 @@ import { noThrowInRefine } from './no-throw-in-refine.js';
 
 const ruleTester = new RuleTester();
 
-ruleTester.run('no-throw-in-refine', noThrowInRefine, {
+ruleTester.run(noThrowInRefine.name, noThrowInRefine, {
   valid: [
     {
       name: 'refine with arrow body shorthand',

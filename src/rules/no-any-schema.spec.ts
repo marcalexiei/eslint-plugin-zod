@@ -5,7 +5,7 @@ import { noAnySchema } from './no-any-schema.js';
 
 const ruleTester = new RuleTester();
 
-ruleTester.run('no-any-schema', noAnySchema, {
+ruleTester.run(noAnySchema.name, noAnySchema, {
   valid: [
     {
       name: 'not triggered with another schema',

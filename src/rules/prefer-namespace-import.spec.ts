@@ -5,7 +5,7 @@ import { preferNamespaceImport } from './prefer-namespace-import.js';
 
 const ruleTester = new RuleTester();
 
-ruleTester.run('prefer-namespace-import', preferNamespaceImport, {
+ruleTester.run(preferNamespaceImport.name, preferNamespaceImport, {
   valid: [
     {
       name: 'valid usage',

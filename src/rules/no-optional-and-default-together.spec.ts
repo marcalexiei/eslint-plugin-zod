@@ -6,7 +6,7 @@ import { noOptionalAndDefaultTogether } from './no-optional-and-default-together
 const ruleTester = new RuleTester();
 
 ruleTester.run(
-  'no-optional-and-default-together',
+  noOptionalAndDefaultTogether.name,
   noOptionalAndDefaultTogether,
   {
     valid: [

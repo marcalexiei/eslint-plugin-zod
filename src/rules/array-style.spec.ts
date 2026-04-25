@@ -5,7 +5,7 @@ import { arrayStyle } from './array-style.js';
 
 const ruleTester = new RuleTester();
 
-ruleTester.run('array-style (function)', arrayStyle, {
+ruleTester.run(`${arrayStyle.name} (function)`, arrayStyle, {
   valid: [
     {
       name: 'namespace import',
@@ -126,7 +126,7 @@ ruleTester.run('array-style (function)', arrayStyle, {
   ],
 });
 
-ruleTester.run('array-style (method)', arrayStyle, {
+ruleTester.run(`${arrayStyle.name} (method)`, arrayStyle, {
   valid: [
     {
       name: 'namespace',
