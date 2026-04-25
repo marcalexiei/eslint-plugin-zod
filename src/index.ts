@@ -8,7 +8,12 @@ import { consistentObjectSchemaType } from './rules/consistent-object-schema-typ
 import { consistentSchemaOutputTypeStyle } from './rules/consistent-schema-output-type-style.js';
 import { noAnySchema } from './rules/no-any-schema.js';
 import { noEmptyCustomSchema } from './rules/no-empty-custom-schema.js';
+import { noNumberSchemaWithFinite } from './rules/no-number-schema-with-finite.js';
 import { noNumberSchemaWithInt } from './rules/no-number-schema-with-int.js';
+import { noNumberSchemaWithIsFinite } from './rules/no-number-schema-with-is-finite.js';
+import { noNumberSchemaWithIsInt } from './rules/no-number-schema-with-is-int.js';
+import { noNumberSchemaWithSafe } from './rules/no-number-schema-with-safe.js';
+import { noNumberSchemaWithStep } from './rules/no-number-schema-with-step.js';
 import { noOptionalAndDefaultTogether } from './rules/no-optional-and-default-together.js';
 import { noStringSchemaWithUuid } from './rules/no-string-schema-with-uuid.js';
 import { noThrowInRefine } from './rules/no-throw-in-refine.js';
@@ -51,7 +56,12 @@ const eslintPluginZod = {
     'consistent-schema-output-type-style': consistentSchemaOutputTypeStyle,
     'no-any-schema': noAnySchema,
     'no-empty-custom-schema': noEmptyCustomSchema,
+    'no-number-schema-with-finite': noNumberSchemaWithFinite,
     'no-number-schema-with-int': noNumberSchemaWithInt,
+    'no-number-schema-with-is-finite': noNumberSchemaWithIsFinite,
+    'no-number-schema-with-is-int': noNumberSchemaWithIsInt,
+    'no-number-schema-with-safe': noNumberSchemaWithSafe,
+    'no-number-schema-with-step': noNumberSchemaWithStep,
     'no-string-schema-with-uuid': noStringSchemaWithUuid,
     'no-optional-and-default-together': noOptionalAndDefaultTogether,
     'no-throw-in-refine': noThrowInRefine,
@@ -86,7 +96,12 @@ const recommendedConfig = {
     'zod/consistent-import': 'error',
     'zod/no-any-schema': 'error',
     'zod/no-empty-custom-schema': 'error',
+    'zod/no-number-schema-with-finite': 'error',
     'zod/no-number-schema-with-int': 'error',
+    'zod/no-number-schema-with-is-finite': 'error',
+    'zod/no-number-schema-with-is-int': 'error',
+    'zod/no-number-schema-with-safe': 'error',
+    'zod/no-number-schema-with-step': 'error',
     'zod/no-string-schema-with-uuid': 'error',
     'zod/no-optional-and-default-together': 'error',
     'zod/no-throw-in-refine': 'error',
