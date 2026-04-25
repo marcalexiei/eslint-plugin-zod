@@ -5,12 +5,26 @@ import { noNumberSchemaWithStep } from './no-number-schema-with-step.js';
 
 const ruleTester = new RuleTester();
 
-ruleTester.run('no-number-schema-with-step', noNumberSchemaWithStep, {
+ruleTester.run(noNumberSchemaWithStep.name, noNumberSchemaWithStep, {
   valid: [
     {
       name: 'z.number() with multipleOf',
       code: dedent`
         import * as z from 'zod';
+        z.number().multipleOf(2);
+      `,
+    },
+    {
+      name: 'number() with multipleOf — named import',
+      code: dedent`
+        import { number } from 'zod';
+        number().multipleOf(2);
+      `,
+    },
+    {
+      name: 'z.number() with multipleOf — named z import',
+      code: dedent`
+        import { z } from 'zod';
         z.number().multipleOf(2);
       `,
     },
@@ -50,6 +64,18 @@ ruleTester.run('no-number-schema-with-step', noNumberSchemaWithStep, {
       output: dedent`
         import { number } from 'zod';
         number().multipleOf(1);
+      `,
+    },
+    {
+      name: 'z.number().step(2) — named z import',
+      code: dedent`
+        import { z } from 'zod';
+        z.number().step(2);
+      `,
+      errors: [{ messageId: 'useMultipleOf' }],
+      output: dedent`
+        import { z } from 'zod';
+        z.number().multipleOf(2);
       `,
     },
   ],

@@ -13,6 +13,9 @@ export const noNumberSchemaWithIsInt = createZodPluginRule({
   name: 'no-number-schema-with-is-int',
   meta: {
     type: 'problem',
+    // Note: `fixable` is intentionally omitted. There is no safe automatic fix
+    // because converting `schema.isInt` to checking the `format` property requires
+    // understanding the runtime context and intended behavior.
     docs: {
       zodImportAllowedSource,
       description:

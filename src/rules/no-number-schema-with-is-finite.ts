@@ -13,6 +13,9 @@ export const noNumberSchemaWithIsFinite = createZodPluginRule({
   name: 'no-number-schema-with-is-finite',
   meta: {
     type: 'problem',
+    // Note: `fixable` is intentionally omitted. There is no safe automatic fix
+    // because `isFinite` is a deprecated property access that always returns true
+    // in v4+. Automatically removing it could change code semantics.
     docs: {
       zodImportAllowedSource,
       description:

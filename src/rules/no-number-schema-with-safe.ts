@@ -55,6 +55,9 @@ export const noNumberSchemaWithSafe = createZodPluginRule({
 
         const numberIndex = methods.findIndex((m) => m.name === 'number');
 
+        // For named imports (e.g., `number().safe()`), we cannot safely auto-fix
+        // because replacing the entire chain would require access to the namespace prefix.
+        // Report the error without a fix in this case.
         if (zodSchemaMeta.schemaDecl === 'named') {
           context.report({
             node,
