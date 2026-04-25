@@ -5,7 +5,7 @@ import { noNumberSchemaWithIsInt } from './no-number-schema-with-is-int.js';
 
 const ruleTester = new RuleTester();
 
-ruleTester.run('no-number-schema-with-is-int', noNumberSchemaWithIsInt, {
+ruleTester.run(noNumberSchemaWithIsInt.name, noNumberSchemaWithIsInt, {
   valid: [
     {
       name: 'z.number() without isInt',
@@ -17,6 +17,20 @@ ruleTester.run('no-number-schema-with-is-int', noNumberSchemaWithIsInt, {
     {
       name: 'isInt on non-zod',
       code: 'const o = { isInt: true }; o.isInt',
+    },
+    {
+      name: 'number() without isInt — named import',
+      code: dedent`
+        import { number } from 'zod';
+        const n = number();
+      `,
+    },
+    {
+      name: 'z.number() without isInt — named z import',
+      code: dedent`
+        import { z } from 'zod';
+        const n = z.number();
+      `,
     },
   ],
   invalid: [
@@ -33,6 +47,22 @@ ruleTester.run('no-number-schema-with-is-int', noNumberSchemaWithIsInt, {
       code: dedent`
         import * as z from 'zod';
         void z.number().min(0).isInt;
+      `,
+      errors: [{ messageId: 'useFormat' }],
+    },
+    {
+      name: 'number().isInt — named import',
+      code: dedent`
+        import { number } from 'zod';
+        void number().isInt;
+      `,
+      errors: [{ messageId: 'useFormat' }],
+    },
+    {
+      name: 'z.number().isInt — named z import',
+      code: dedent`
+        import { z } from 'zod';
+        void z.number().isInt;
       `,
       errors: [{ messageId: 'useFormat' }],
     },

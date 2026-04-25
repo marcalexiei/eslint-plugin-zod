@@ -53,11 +53,10 @@ export const noNumberSchemaWithStep = createZodPluginRule({
         }
 
         const { callee } = node;
-        if (
-          callee.type !== AST_NODE_TYPES.MemberExpression ||
-          callee.property.type !== AST_NODE_TYPES.Identifier ||
-          callee.property.name !== 'step'
-        ) {
+        if (callee.type !== AST_NODE_TYPES.MemberExpression) {
+          return;
+        }
+        if (callee.property.type !== AST_NODE_TYPES.Identifier) {
           return;
         }
 
