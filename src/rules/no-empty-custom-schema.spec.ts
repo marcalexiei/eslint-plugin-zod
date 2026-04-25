@@ -5,7 +5,7 @@ import { noEmptyCustomSchema } from './no-empty-custom-schema.js';
 
 const ruleTester = new RuleTester();
 
-ruleTester.run('no-empty-custom-schema', noEmptyCustomSchema, {
+ruleTester.run(noEmptyCustomSchema.name, noEmptyCustomSchema, {
   valid: [
     {
       name: 'namespace',

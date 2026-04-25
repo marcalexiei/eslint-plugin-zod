@@ -5,7 +5,7 @@ import { noTransformInRecordKey } from './no-transform-in-record-key.js';
 
 const ruleTester = new RuleTester();
 
-ruleTester.run('no-transform-in-record-key', noTransformInRecordKey, {
+ruleTester.run(noTransformInRecordKey.name, noTransformInRecordKey, {
   valid: [
     {
       name: 'plain string key without transforms',

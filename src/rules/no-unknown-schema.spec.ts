@@ -5,7 +5,7 @@ import { noUnknownSchema } from './no-unknown-schema.js';
 
 const ruleTester = new RuleTester();
 
-ruleTester.run('no-unknown-schema', noUnknownSchema, {
+ruleTester.run(noUnknownSchema.name, noUnknownSchema, {
   valid: [
     {
       name: 'with another zod schema',

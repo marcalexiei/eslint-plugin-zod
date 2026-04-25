@@ -5,7 +5,7 @@ import { consistentObjectSchemaType } from './consistent-object-schema-type.js';
 
 const ruleTester = new RuleTester();
 
-ruleTester.run('consistent-object-schema-type', consistentObjectSchemaType, {
+ruleTester.run(consistentObjectSchemaType.name, consistentObjectSchemaType, {
   valid: [
     {
       name: 'namespace import',

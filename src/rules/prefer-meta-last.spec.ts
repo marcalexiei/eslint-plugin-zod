@@ -5,7 +5,7 @@ import { preferMetaLast } from './prefer-meta-last.js';
 
 const ruleTester = new RuleTester();
 
-ruleTester.run('prefer-meta-last', preferMetaLast, {
+ruleTester.run(preferMetaLast.name, preferMetaLast, {
   valid: [
     {
       name: 'namespace import',

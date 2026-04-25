@@ -5,7 +5,7 @@ import { requireBrandTypeParameter } from './require-brand-type-parameter.js';
 
 const ruleTester = new RuleTester();
 
-ruleTester.run('require-brand-type-parameter', requireBrandTypeParameter, {
+ruleTester.run(requireBrandTypeParameter.name, requireBrandTypeParameter, {
   valid: [
     {
       name: 'namespace',

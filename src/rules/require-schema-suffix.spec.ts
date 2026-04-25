@@ -5,7 +5,7 @@ import { requireSchemaSuffix } from './require-schema-suffix.js';
 
 const ruleTester = new RuleTester();
 
-ruleTester.run('require-schema-suffix', requireSchemaSuffix, {
+ruleTester.run(requireSchemaSuffix.name, requireSchemaSuffix, {
   valid: [
     {
       name: 'valid usage',

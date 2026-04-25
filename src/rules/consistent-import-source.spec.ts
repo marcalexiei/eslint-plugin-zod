@@ -4,7 +4,7 @@ import { consistentImportSource } from './consistent-import-source.js';
 
 const ruleTester = new RuleTester();
 
-ruleTester.run('consistent-import-source', consistentImportSource, {
+ruleTester.run(consistentImportSource.name, consistentImportSource, {
   valid: [
     { code: 'import * as z from "zod"' },
     { code: 'import { z } from "zod"' },
