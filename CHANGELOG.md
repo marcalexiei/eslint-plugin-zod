@@ -1,5 +1,19 @@
 # eslint-plugin-zod
 
+## 3.9.0
+
+### Minor Changes
+
+- [#254](https://github.com/marcalexiei/eslint-plugin-zod/pull/254) [`95f008c`](https://github.com/marcalexiei/eslint-plugin-zod/commit/95f008c3f54a928392caeb06349b9daf51dd27da) Thanks [@andidev](https://github.com/andidev)! - feat(no-number-schema-with-step): add new rule
+
+- [#254](https://github.com/marcalexiei/eslint-plugin-zod/pull/254) [`95f008c`](https://github.com/marcalexiei/eslint-plugin-zod/commit/95f008c3f54a928392caeb06349b9daf51dd27da) Thanks [@andidev](https://github.com/andidev)! - feat(no-number-schema-with-safe): add new rule
+
+- [#254](https://github.com/marcalexiei/eslint-plugin-zod/pull/254) [`95f008c`](https://github.com/marcalexiei/eslint-plugin-zod/commit/95f008c3f54a928392caeb06349b9daf51dd27da) Thanks [@andidev](https://github.com/andidev)! - feat(no-number-schema-with-is-int): add new rule
+
+- [#254](https://github.com/marcalexiei/eslint-plugin-zod/pull/254) [`95f008c`](https://github.com/marcalexiei/eslint-plugin-zod/commit/95f008c3f54a928392caeb06349b9daf51dd27da) Thanks [@andidev](https://github.com/andidev)! - feat(no-number-schema-with-is-finite): add new rule
+
+- [#254](https://github.com/marcalexiei/eslint-plugin-zod/pull/254) [`95f008c`](https://github.com/marcalexiei/eslint-plugin-zod/commit/95f008c3f54a928392caeb06349b9daf51dd27da) Thanks [@andidev](https://github.com/andidev)! - feat(no-number-schema-with-finite): add new rule
+
 ## 3.8.0
 
 ### Minor Changes
