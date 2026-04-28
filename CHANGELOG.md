@@ -1,5 +1,13 @@
 # eslint-plugin-zod
 
+## 3.11.0
+
+### Minor Changes
+
+- [#261](https://github.com/marcalexiei/eslint-plugin-zod/pull/261) [`5c36c93`](https://github.com/marcalexiei/eslint-plugin-zod/commit/5c36c931616e785c552c5a7f3c95dc99d7ea5b0d) Thanks [@marcalexiei](https://github.com/marcalexiei)! - fix(consistent-schema-var-name): rename
+
+  `3.10.0` changelog entry has been updated accordingly.
+
 ## 3.10.0
 
 ### Minor Changes
