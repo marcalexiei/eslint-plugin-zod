@@ -4,9 +4,9 @@
 
 ### Minor Changes
 
-- [#259](https://github.com/marcalexiei/eslint-plugin-zod/pull/259) [`05066a4`](https://github.com/marcalexiei/eslint-plugin-zod/commit/05066a426468a35cea07f25d33b8125bb5a5fa0a) Thanks [@marcalexiei](https://github.com/marcalexiei)! - feat(consistent-schema-name): add new rule
+- [#259](https://github.com/marcalexiei/eslint-plugin-zod/pull/259) [`05066a4`](https://github.com/marcalexiei/eslint-plugin-zod/commit/05066a426468a35cea07f25d33b8125bb5a5fa0a) Thanks [@marcalexiei](https://github.com/marcalexiei)! - feat(consistent-schema-var-name): add new rule
 
-  The new `zod/consistent-schema-name` rule replaces `zod/require-schema-suffix` and supports enforcing both a prefix (`before`) and/or a suffix (`after`) on Zod schema variable names.
+  The new `zod/consistent-schema-var-name` rule replaces `zod/require-schema-suffix` and supports enforcing both a prefix (`before`) and/or a suffix (`after`) on Zod schema variable names.
 
   The default behavior is identical to `require-schema-suffix`: it enforces an `'Schema'` suffix.
 
@@ -16,7 +16,7 @@
     // eslint.config.js
     rules: {
   -   'zod/require-schema-suffix': 'error',
-  +   'zod/consistent-schema-name': 'error',
+  +   'zod/consistent-schema-var-name': 'error',
     }
   ```
 

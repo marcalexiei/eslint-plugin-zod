@@ -20,7 +20,7 @@ export const requireSchemaSuffix = createZodPluginRule<[Options], MessageIds>({
   meta: {
     type: 'suggestion',
     deprecated: {
-      message: 'Use `zod/consistent-schema-name`',
+      message: 'Use `zod/consistent-schema-var-name`',
     },
     docs: {
       zodImportAllowedSource,

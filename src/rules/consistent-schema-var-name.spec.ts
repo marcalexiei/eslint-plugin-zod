@@ -1,11 +1,11 @@
 import { RuleTester } from '@typescript-eslint/rule-tester';
 import dedent from 'dedent';
 
-import { consistentSchemaName } from './consistent-schema-name.js';
+import { consistentSchemaVarName } from './consistent-schema-var-name.js';
 
 const ruleTester = new RuleTester();
 
-ruleTester.run(consistentSchemaName.name, consistentSchemaName, {
+ruleTester.run(consistentSchemaVarName.name, consistentSchemaVarName, {
   valid: [
     {
       name: 'valid usage (default suffix)',
