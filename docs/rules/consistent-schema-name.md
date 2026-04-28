@@ -1,37 +1,15 @@
-# zod/require-schema-suffix
+# zod/consistent-schema-name
 
-📝 Require schema suffix when declaring a Zod schema.
+📝 Enforce a consistent naming convention for Zod schema variables.
 
-❌ This rule is deprecated. Use `zod/consistent-schema-name`.
+💼 This rule is enabled in the following configs: ✅ `recommended`, ✔️ `recommendedMini`.
 
 <!-- end auto-generated rule header -->
 
-## Deprecation notice
-
-Use `zod/consistent-schema-name` instead:
-
-```diff
-  // eslint.config.js
-  import { defineConfig } from 'eslint/config';
-  import eslintPluginZod from 'eslint-plugin-zod';
-
-  export default defineConfig(
-    {
-      plugins: {
-        zod: eslintPluginZod,
-      },
-      rules: {
--       'zod/require-schema-suffix': 'error',
-+       'zod/consistent-schema-name': 'error',
-      }
-    }
-  );
-```
-
 ## Rule Details
 
-This rule enforces a consistent naming convention for Zod schema variables by requiring them to end with a specified suffix (default: 'Schema').
-This helps identify schema declarations and maintains consistent naming across your codebase.
+This rule enforces a consistent naming convention for Zod schema variables by requiring them to start with a specified prefix and/or end with a specified suffix.
+The default behavior (suffix `'Schema'`) is equivalent to the deprecated `zod/require-schema-suffix` rule.
 
 The rule ignores:
 
@@ -42,11 +20,11 @@ The rule ignores:
 
 ## Why?
 
-Using a consistent suffix for Zod schemas provides several benefits:
+Using a consistent naming convention for Zod schemas provides several benefits:
 
 1. **Clear Identification**: Makes it immediately obvious which variables contain Zod schemas
 2. **Better Code Navigation**: Easier to find schema declarations when all follow the same pattern
-3. **Self-Documenting Code**: The suffix helps document the variable's purpose
+3. **Self-Documenting Code**: The prefix/suffix helps document the variable's purpose
 4. **Consistency**: Maintains a uniform naming convention across the project
 
 ## Options
@@ -55,13 +33,14 @@ Using a consistent suffix for Zod schemas provides several benefits:
 
 | Name     | Description                                  | Type   |
 | :------- | :------------------------------------------- | :----- |
-| `suffix` | The required suffix for Zod schema variables | String |
+| `after`  | The required suffix for Zod schema variables | String |
+| `before` | The required prefix for Zod schema variables | String |
 
 <!-- end auto-generated rule options list -->
 
 ## Why is there no autofix or suggestion?
 
-**TL;DR:** Use your IDE’s rename functionality, it’s far more robust and already battle-tested.
+**TL;DR:** Use your IDE's rename functionality, it's far more robust and already battle-tested.
 Adding a custom autofix here would essentially reinvent the wheel.
 
 ---
@@ -75,17 +54,17 @@ An ESLint rule cannot reliably handle all the cases involved, including:
 - applying changes across multiple files (e.g., when the variable is exported)
 
 Because of these limitations, this rule only reports an error and does not provide an automated fix.
-To resolve the issue, rely on your IDE’s rename tools.
-They’re designed to manage all of the above scenarios correctly.
+To resolve the issue, rely on your IDE's rename tools.
+They're designed to manage all of the above scenarios correctly.
 
 ## Examples
 
-### Default
+### Default (suffix only)
 
 ```json
 {
   "rules": {
-    "zod/require-schema-suffix": ["error"]
+    "zod/consistent-schema-name": ["error"]
   }
 }
 ```
@@ -95,7 +74,6 @@ They’re designed to manage all of the above scenarios correctly.
 ```ts
 const user = z.string();
 const address = z.object({ street: z.string() });
-const userType = z.string();
 ```
 
 ✅ Valid
@@ -103,11 +81,9 @@ const userType = z.string();
 ```ts
 const userSchema = z.string();
 const addressSchema = z.object({ street: z.string() });
-const userTypeSchema = z.string();
 
 // Non-schema declarations are ignored
 const parsedValue = z.string().parse('test');
-const result = someOtherFunction();
 
 // Codec transformations are ignored
 const stringToDate = z.codec(z.iso.datetime(), z.date(), {
@@ -116,12 +92,14 @@ const stringToDate = z.codec(z.iso.datetime(), z.date(), {
 });
 ```
 
-### Custom `suffix`
+### Prefix only
+
+The default `after` is `'Schema'`, so to enforce only a prefix you must explicitly clear the suffix with `"after": ""`.
 
 ```json
 {
   "rules": {
-    "zod/require-schema-suffix": ["error", { "suffix": "_schema" }]
+    "zod/consistent-schema-name": ["error", { "before": "$", "after": "" }]
   }
 }
 ```
@@ -131,6 +109,56 @@ const stringToDate = z.codec(z.iso.datetime(), z.date(), {
 ```ts
 const user = z.string();
 const address = z.object({ street: z.string() });
+```
+
+✅ Valid
+
+```ts
+const $user = z.string();
+const $address = z.object({ street: z.string() });
+```
+
+### Both prefix and suffix
+
+```json
+{
+  "rules": {
+    "zod/consistent-schema-name": [
+      "error",
+      { "before": "$", "after": "Schema" }
+    ]
+  }
+}
+```
+
+❌ Invalid
+
+```ts
+const user = z.string();
+const $user = z.string();
+const userSchema = z.string();
+```
+
+✅ Valid
+
+```ts
+const $userSchema = z.string();
+const $addressSchema = z.object({ street: z.string() });
+```
+
+### Custom suffix (snake_case)
+
+```json
+{
+  "rules": {
+    "zod/consistent-schema-name": ["error", { "after": "_schema" }]
+  }
+}
+```
+
+❌ Invalid
+
+```ts
 const user = z.string();
 ```
 
@@ -138,25 +166,13 @@ const user = z.string();
 
 ```ts
 const user_schema = z.string();
-const address_schema = z.object({ street: z.string() });
-const user_type_schema = z.string();
-
-// Non-schema declarations are ignored
-const parsed_value = z.string().parse('test');
-const result = someOtherFunction();
-
-// Codec transformations are ignored
-const string_to_date = z.codec(z.iso.datetime(), z.date(), {
-  decode: (isoString) => new Date(isoString),
-  encode: (date) => date.toISOString(),
-});
 ```
 
 ## When Not To Use It
 
 - Have an existing codebase with different naming conventions
 - Prefer a different way to identify schema variables
-- Use Zod schemas in a context where the suffix would be redundant
+- Use Zod schemas in a context where the prefix/suffix would be redundant
 
 ## Further Reading
 

@@ -4,10 +4,11 @@ import { createZodPluginRule } from '../utils/create-plugin-rule.js';
 import { createZodSchemaImportTrack } from '../utils/track-zod-schema-imports.js';
 
 interface Options {
-  suffix: string;
+  before?: string;
+  after?: string;
 }
 
-type MessageIds = 'noSchemaSuffix';
+type MessageIds = 'invalidName';
 
 const {
   //
@@ -15,26 +16,27 @@ const {
   trackZodSchemaImports,
 } = createZodSchemaImportTrack('all');
 
-export const requireSchemaSuffix = createZodPluginRule<[Options], MessageIds>({
-  name: 'require-schema-suffix',
+export const consistentSchemaName = createZodPluginRule<[Options], MessageIds>({
+  name: 'consistent-schema-name',
   meta: {
     type: 'suggestion',
-    deprecated: {
-      message: 'Use `zod/consistent-schema-name`',
-    },
     docs: {
       zodImportAllowedSource,
-      description: 'Require schema suffix when declaring a Zod schema',
+      description:
+        'Enforce a consistent naming convention for Zod schema variables',
     },
     messages: {
-      noSchemaSuffix:
-        'Use the "{{suffix}}" suffix for Zod schemas. Rename this to "{{expected}}"',
+      invalidName: 'Rename this Zod schema to "{{expected}}"',
     },
     schema: [
       {
         type: 'object',
         properties: {
-          suffix: {
+          before: {
+            type: 'string',
+            description: 'The required prefix for Zod schema variables',
+          },
+          after: {
             type: 'string',
             description: 'The required suffix for Zod schema variables',
           },
@@ -43,8 +45,8 @@ export const requireSchemaSuffix = createZodPluginRule<[Options], MessageIds>({
       },
     ],
   },
-  defaultOptions: [{ suffix: 'Schema' }],
-  create(context, [{ suffix }]) {
+  defaultOptions: [{ after: 'Schema' }],
+  create(context, [{ before = '', after = '' }]) {
     const {
       importDeclarationListener,
       detectZodSchemaRootNode,
@@ -63,7 +65,6 @@ export const requireSchemaSuffix = createZodPluginRule<[Options], MessageIds>({
           return;
         }
 
-        // Collect all methods from the chain
         const chainMethods = collectZodChainMethods(initNode).map(
           (it) => it.name,
         );
@@ -103,17 +104,25 @@ export const requireSchemaSuffix = createZodPluginRule<[Options], MessageIds>({
           return;
         }
 
-        if (
-          node.id.type !== AST_NODE_TYPES.Identifier ||
-          node.id.name.endsWith(suffix)
-        ) {
+        if (node.id.type !== AST_NODE_TYPES.Identifier) {
           return;
         }
 
+        const { name } = node.id;
+        const validPrefix = !before || name.startsWith(before);
+        const validSuffix = !after || name.endsWith(after);
+
+        if (validPrefix && validSuffix) {
+          return;
+        }
+
+        const expected =
+          (validPrefix ? '' : before) + name + (validSuffix ? '' : after);
+
         context.report({
           node,
-          messageId: 'noSchemaSuffix',
-          data: { suffix, expected: `${node.id.name}${suffix}` },
+          messageId: 'invalidName',
+          data: { expected },
         });
       },
     };
