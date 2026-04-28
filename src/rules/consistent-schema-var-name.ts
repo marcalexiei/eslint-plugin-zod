@@ -16,8 +16,11 @@ const {
   trackZodSchemaImports,
 } = createZodSchemaImportTrack('all');
 
-export const consistentSchemaName = createZodPluginRule<[Options], MessageIds>({
-  name: 'consistent-schema-name',
+export const consistentSchemaVarName = createZodPluginRule<
+  [Options],
+  MessageIds
+>({
+  name: 'consistent-schema-var-name',
   meta: {
     type: 'suggestion',
     docs: {

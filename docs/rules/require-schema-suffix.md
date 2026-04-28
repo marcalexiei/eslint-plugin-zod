@@ -2,13 +2,13 @@
 
 📝 Require schema suffix when declaring a Zod schema.
 
-❌ This rule is deprecated. Use `zod/consistent-schema-name`.
+❌ This rule is deprecated. Use `zod/consistent-schema-var-name`.
 
 <!-- end auto-generated rule header -->
 
 ## Deprecation notice
 
-Use `zod/consistent-schema-name` instead:
+Use `zod/consistent-schema-var-name` instead:
 
 ```diff
   // eslint.config.js
@@ -22,7 +22,7 @@ Use `zod/consistent-schema-name` instead:
       },
       rules: {
 -       'zod/require-schema-suffix': 'error',
-+       'zod/consistent-schema-name': 'error',
++       'zod/consistent-schema-var-name': 'error',
       }
     }
   );

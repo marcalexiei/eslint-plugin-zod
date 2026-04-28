@@ -1,4 +1,4 @@
-# zod/consistent-schema-name
+# zod/consistent-schema-var-name
 
 📝 Enforce a consistent naming convention for Zod schema variables.
 
@@ -64,7 +64,7 @@ They're designed to manage all of the above scenarios correctly.
 ```json
 {
   "rules": {
-    "zod/consistent-schema-name": ["error"]
+    "zod/consistent-schema-var-name": ["error"]
   }
 }
 ```
@@ -99,7 +99,7 @@ The default `after` is `'Schema'`, so to enforce only a prefix you must explicit
 ```json
 {
   "rules": {
-    "zod/consistent-schema-name": ["error", { "before": "$", "after": "" }]
+    "zod/consistent-schema-var-name": ["error", { "before": "$", "after": "" }]
   }
 }
 ```
@@ -123,7 +123,7 @@ const $address = z.object({ street: z.string() });
 ```json
 {
   "rules": {
-    "zod/consistent-schema-name": [
+    "zod/consistent-schema-var-name": [
       "error",
       { "before": "$", "after": "Schema" }
     ]
@@ -151,7 +151,7 @@ const $addressSchema = z.object({ street: z.string() });
 ```json
 {
   "rules": {
-    "zod/consistent-schema-name": ["error", { "after": "_schema" }]
+    "zod/consistent-schema-var-name": ["error", { "after": "_schema" }]
   }
 }
 ```

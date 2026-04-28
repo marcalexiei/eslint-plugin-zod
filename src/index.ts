@@ -5,8 +5,8 @@ import { arrayStyle } from './rules/array-style.js';
 import { consistentImportSource } from './rules/consistent-import-source.js';
 import { consistentImport } from './rules/consistent-import.js';
 import { consistentObjectSchemaType } from './rules/consistent-object-schema-type.js';
-import { consistentSchemaName } from './rules/consistent-schema-name.js';
 import { consistentSchemaOutputTypeStyle } from './rules/consistent-schema-output-type-style.js';
+import { consistentSchemaVarName } from './rules/consistent-schema-var-name.js';
 import { noAnySchema } from './rules/no-any-schema.js';
 import { noEmptyCustomSchema } from './rules/no-empty-custom-schema.js';
 import { noNumberSchemaWithFinite } from './rules/no-number-schema-with-finite.js';
@@ -54,7 +54,7 @@ const eslintPluginZod = {
     'consistent-import-source': consistentImportSource,
     'consistent-import': consistentImport,
     'consistent-object-schema-type': consistentObjectSchemaType,
-    'consistent-schema-name': consistentSchemaName,
+    'consistent-schema-var-name': consistentSchemaVarName,
     'consistent-schema-output-type-style': consistentSchemaOutputTypeStyle,
     'no-any-schema': noAnySchema,
     'no-empty-custom-schema': noEmptyCustomSchema,
@@ -96,7 +96,7 @@ const recommendedConfig = {
     /* eslint-disable @typescript-eslint/naming-convention */
     'zod/array-style': 'error',
     'zod/consistent-import': 'error',
-    'zod/consistent-schema-name': 'error',
+    'zod/consistent-schema-var-name': 'error',
     'zod/no-any-schema': 'error',
     'zod/no-empty-custom-schema': 'error',
     'zod/no-number-schema-with-finite': 'error',
@@ -122,7 +122,7 @@ const recommendedConfigMini = {
   ...baseConfig,
   rules: {
     /* eslint-disable @typescript-eslint/naming-convention */
-    'zod/consistent-schema-name': 'error',
+    'zod/consistent-schema-var-name': 'error',
     'zod/no-any-schema': 'error',
     'zod/prefer-meta': 'error',
     'zod/require-brand-type-parameter': 'error',
