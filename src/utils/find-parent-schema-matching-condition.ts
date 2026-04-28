@@ -23,7 +23,7 @@ export function findParentSchemaMatchingCondition(
 
       // Check if the parent call is a method call (callee is MemberExpression)
       if (callParent.callee.type === AST_NODE_TYPES.MemberExpression) {
-        const memberExpr = callParent.callee as TSESTree.MemberExpression;
+        const memberExpr = callParent.callee;
 
         // Get the property name (method name)
         const methodName =
@@ -40,7 +40,7 @@ export function findParentSchemaMatchingCondition(
 
     // If parent is a MemberExpression, continue up the chain
     if (parent.type === AST_NODE_TYPES.MemberExpression) {
-      const memberParent = parent as TSESTree.MemberExpression;
+      const memberParent = parent;
 
       current = memberParent as unknown as TSESTree.CallExpression;
       continue;
