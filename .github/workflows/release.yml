@@ -2,9 +2,12 @@ name: Release
 
 on:
   workflow_run:
-    workflows: [CI]
-    types: [completed]
-    branches: [main]
+    workflows:
+      - CI
+    types:
+      - completed
+    branches:
+      - main
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
@@ -47,7 +50,7 @@ jobs:
 
       - name: Create Release Pull Request or Publish to npm
         id: changesets
-        uses: changesets/action@v1
+        uses: changesets/action@6a0a831ff30acef54f2c6aa1cbbc1096b066edaf # v1.7.0
         with:
           commit: 'chore: release'
           title: 'chore: release'
