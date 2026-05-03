@@ -1,5 +1,11 @@
 # eslint-plugin-zod
 
+## 3.12.0
+
+### Minor Changes
+
+- [#269](https://github.com/marcalexiei/eslint-plugin-zod/pull/269) [`63607d9`](https://github.com/marcalexiei/eslint-plugin-zod/commit/63607d95bdf1fc2c1afb492681ac3649af782833) Thanks [@marcalexiei](https://github.com/marcalexiei)! - feat(prefer-trim-before-string-length-checks): add new rule
+
 ## 3.11.0
 
 ### Minor Changes
