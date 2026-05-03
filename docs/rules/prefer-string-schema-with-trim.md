@@ -22,7 +22,7 @@ This rule reports an error when `z.string()` lacks `.trim()`.
 
 It includes an auto-fixer, which adds a `.trim()` after the schema type declaration.
 
-### ❌ Incorrect
+### ❌ Invalid
 
 ```ts
 import * as z from 'zod';
@@ -36,7 +36,7 @@ import * as z from 'zod';
 const schema = z.string().min(1);
 ```
 
-### ✅ Correct
+### ✅ Valid
 
 ```ts
 import * as z from 'zod';
