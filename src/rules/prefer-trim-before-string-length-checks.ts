@@ -1,0 +1,107 @@
+import type { TSESLint, TSESTree } from '@typescript-eslint/utils';
+
+import { createZodPluginRule } from '../utils/create-plugin-rule.js';
+import { findParentSchemaMatchingCondition } from '../utils/find-parent-schema-matching-condition.js';
+import { createZodSchemaImportTrack } from '../utils/track-zod-schema-imports.js';
+
+const {
+  //
+  zodImportAllowedSource,
+  trackZodSchemaImports,
+} = createZodSchemaImportTrack('zod');
+
+const LENGTH_CHECK_METHODS = ['min', 'max', 'length'];
+
+export const preferTrimBeforeStringLengthChecks = createZodPluginRule({
+  name: 'prefer-trim-before-string-length-checks',
+  meta: {
+    type: 'problem',
+    fixable: 'code',
+    docs: {
+      zodImportAllowedSource,
+      description:
+        'Enforce `.trim()` is called before string length checks to ensure accurate validation',
+    },
+    messages: {
+      trimBeforeLengthCheck:
+        '`.trim()` must be called before length checks (`.min()`, `.max()`, `.length()`) to ensure accurate validation.',
+    },
+    schema: [],
+  },
+  defaultOptions: [],
+  create(context) {
+    const {
+      importDeclarationListener,
+      detectZodSchemaRootNode,
+      collectZodChainMethods,
+    } = trackZodSchemaImports();
+
+    return {
+      ImportDeclaration: importDeclarationListener,
+      CallExpression(node): void {
+        const zodSchemaMeta = detectZodSchemaRootNode(node);
+
+        if (zodSchemaMeta?.schemaType !== 'string') {
+          return;
+        }
+
+        // Skip string schema used as record key — trim on record keys causes data loss
+        if (
+          findParentSchemaMatchingCondition(zodSchemaMeta.node, {
+            schemaName: 'record',
+            condition: (callParent) =>
+              callParent.arguments.length > 0 &&
+              callParent.arguments[0] === zodSchemaMeta.node,
+          })
+        ) {
+          return;
+        }
+
+        const methods = collectZodChainMethods(zodSchemaMeta.node);
+
+        const trimIndex = methods.findIndex((m) => m.name === 'trim');
+        if (trimIndex === -1) {
+          return;
+        }
+
+        const firstLengthCheckIndex = methods.findIndex((m) =>
+          LENGTH_CHECK_METHODS.includes(m.name),
+        );
+        if (firstLengthCheckIndex === -1) {
+          return;
+        }
+
+        if (trimIndex < firstLengthCheckIndex) {
+          return;
+        }
+
+        if (zodSchemaMeta.schemaDecl === 'named') {
+          context.report({
+            node,
+            messageId: 'trimBeforeLengthCheck',
+          });
+          return;
+        }
+
+        context.report({
+          node,
+          messageId: 'trimBeforeLengthCheck',
+          fix(fixer): Array<TSESLint.RuleFix> {
+            const stringMethodNode = methods[0].node;
+            const trimMethodNode = methods[trimIndex].node;
+            const trimCallee =
+              trimMethodNode.callee as TSESTree.MemberExpression;
+
+            return [
+              fixer.removeRange([
+                trimCallee.object.range[1],
+                trimMethodNode.range[1],
+              ]),
+              fixer.insertTextAfter(stringMethodNode, '.trim()'),
+            ];
+          },
+        });
+      },
+    };
+  },
+});

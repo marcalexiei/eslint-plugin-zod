@@ -19,7 +19,7 @@
 
 This rule enforces how error messages should be formatted in Zod schema validation using `refine()` and `custom()` methods.
 
-### ✅ Correct
+### ✅ Valid
 
 ```ts
 // Default configuration (Literal or TemplateLiteral)
@@ -30,7 +30,7 @@ z.custom(() => true, `my error`);
 z.custom(() => true, { error: 'my error' });
 ```
 
-### ❌ Incorrect
+### ❌ Invalid
 
 ```ts
 // Default configuration
