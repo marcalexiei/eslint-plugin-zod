@@ -2,21 +2,17 @@ import { readFileSync } from 'node:fs';
 
 const packageJSON = JSON.parse(
   readFileSync(new URL('../package.json', import.meta.url), 'utf8'),
-) as { name: string; version: string; homepage: string };
+) as {
+  name: string;
+  version: string;
+  repository: { url: string; directory: string };
+};
 
-const {
-  name: PLUGIN_NAME,
-  version: PLUGIN_VERSION,
-  //
-  homepage,
-} = packageJSON;
+const { name: PLUGIN_NAME, version: PLUGIN_VERSION, repository } = packageJSON;
 
 export { PLUGIN_NAME, PLUGIN_VERSION };
 
-/** @see https://github.com/marcalexiei/eslint-zod/pull/97 */
-const PLUGIN_HOMEPAGE = homepage.replace(/#[^#]*$/, '');
-
 export function getRuleURL(ruleID: string): string {
-  // e.g., https://github.com/marcalexiei/eslint-zod/blob/v3.12.0/docs/rules/array-style.md
-  return `${PLUGIN_HOMEPAGE}/blob/v${PLUGIN_VERSION}/docs/rules/${ruleID}.md`;
+  // e.g., https://github.com/marcalexiei/eslint-zod/blob/HEAD/plugins/eslint-plugin-zod/docs/rules/array-style.md
+  return `${repository.url}/blob/HEAD/${repository.directory}/docs/rules/${ruleID}.md`;
 }
