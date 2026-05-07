@@ -7,6 +7,5 @@ export default defineConfig({
   clean: true,
   outDir: 'dist',
   target: 'node20',
-  exports: true,
   unbundle: true,
 });
