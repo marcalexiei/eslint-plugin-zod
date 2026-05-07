@@ -5,14 +5,14 @@
 [![Lint: eslint][lintBadge]][lintURL]
 [![issues][issuesBadge]][issuesURL]
 
-[CIBadge]: https://img.shields.io/github/actions/workflow/status/marcalexiei/eslint-plugin-zod/ci.yml?style=for-the-badge&logo=github&event=push&label=CI
-[CIURL]: https://github.com/marcalexiei/eslint-plugin-zod/actions/workflows/CI.yml/badge.svg
+[CIBadge]: https://img.shields.io/github/actions/workflow/status/marcalexiei/eslint-zod/ci.yml?style=for-the-badge&logo=github&event=push&label=CI
+[CIURL]: https://github.com/marcalexiei/eslint-zod/actions/workflows/CI.yml/badge.svg
 [CodeStyleBadge]: https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=for-the-badge&logo=prettier
 [CodeStyleURL]: https://prettier.io
 [lintBadge]: https://img.shields.io/badge/lint-eslint-3A33D1?logo=eslint&style=for-the-badge
 [lintURL]: https://eslint.org
-[issuesBadge]: https://img.shields.io/github/issues/marcalexiei/eslint-plugin-zod.svg?style=for-the-badge
-[issuesURL]: https://github.com/marcalexiei/eslint-plugin-zod/issues
+[issuesBadge]: https://img.shields.io/github/issues/marcalexiei/eslint-zod.svg?style=for-the-badge
+[issuesURL]: https://github.com/marcalexiei/eslint-zod/issues
 
 Monorepo containing [ESLint](https://eslint.org) plugins that enforce best practices when using [Zod](https://github.com/colinhacks/zod).
 

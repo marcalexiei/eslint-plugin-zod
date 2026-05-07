@@ -19,9 +19,9 @@
     },
     "./package.json": "./package.json"
   },
-  "homepage": "https://github.com/marcalexiei/eslint-plugin-zod#readme",
+  "homepage": "https://github.com/marcalexiei/eslint-zod#readme",
   "bugs": {
-    "url": "https://github.com/marcalexiei/eslint-plugin-zod/issues"
+    "url": "https://github.com/marcalexiei/eslint-zod/issues"
   },
   "keywords": [
     "eslint",
@@ -37,7 +37,8 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/marcalexiei/eslint-plugin-zod"
+    "url": "https://github.com/marcalexiei/eslint-zod",
+    "directory": "plugins/eslint-plugin-zod"
   },
   "scripts": {
     "build": "tsdown",

@@ -81,5 +81,5 @@ export default {
 } satisfies ESLint.Plugin;
 /**
  * why `satisfies`?
- * @see https://github.com/marcalexiei/eslint-plugin-zod/issues/49
+ * @see https://github.com/marcalexiei/eslint-zod/issues/49
  */

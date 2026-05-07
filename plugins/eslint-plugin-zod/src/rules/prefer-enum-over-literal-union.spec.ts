@@ -37,14 +37,14 @@ ruleTester.run(preferEnumOverLiteralUnion.name, preferEnumOverLiteralUnion, {
       `,
     },
     {
-      // https://github.com/marcalexiei/eslint-plugin-zod/issues/189
+      // https://github.com/marcalexiei/eslint-zod/issues/189
       code: dedent`
         import * as z from 'zod';
         z.union([z.string(), z.number()]).optional()
       `,
     },
     {
-      // https://github.com/marcalexiei/eslint-plugin-zod/issues/189
+      // https://github.com/marcalexiei/eslint-zod/issues/189
       code: dedent`
       import * as z from 'zod';
         z.looseObject({

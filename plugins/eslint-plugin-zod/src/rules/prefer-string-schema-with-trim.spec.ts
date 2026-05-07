@@ -39,7 +39,7 @@ ruleTester.run(preferStringSchemaWithTrim.name, preferStringSchemaWithTrim, {
       `,
     },
     {
-      // https://github.com/marcalexiei/eslint-plugin-zod/issues/242
+      // https://github.com/marcalexiei/eslint-zod/issues/242
       name: 'string schema as record key (first argument)',
       code: dedent`
         import { z } from "zod";
@@ -47,7 +47,7 @@ ruleTester.run(preferStringSchemaWithTrim.name, preferStringSchemaWithTrim, {
       `,
     },
     {
-      // https://github.com/marcalexiei/eslint-plugin-zod/issues/242
+      // https://github.com/marcalexiei/eslint-zod/issues/242
       name: 'string schema as record key with other methods',
       code: dedent`
         import { z } from "zod";
@@ -55,7 +55,7 @@ ruleTester.run(preferStringSchemaWithTrim.name, preferStringSchemaWithTrim, {
       `,
     },
     {
-      // https://github.com/marcalexiei/eslint-plugin-zod/issues/242
+      // https://github.com/marcalexiei/eslint-zod/issues/242
       name: 'string schema as record key with trim',
       code: dedent`
         import { z } from "zod";
@@ -120,7 +120,7 @@ ruleTester.run(preferStringSchemaWithTrim.name, preferStringSchemaWithTrim, {
       output: null,
     },
     {
-      // https://github.com/marcalexiei/eslint-plugin-zod/issues/242
+      // https://github.com/marcalexiei/eslint-zod/issues/242
       name: 'string schema as record value (second argument) should warn',
       code: dedent`
         import { z } from "zod";

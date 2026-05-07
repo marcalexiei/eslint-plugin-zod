@@ -65,7 +65,7 @@ ruleTester.run(requireSchemaSuffix.name, requireSchemaSuffix, {
       `,
     },
     {
-      // https://github.com/marcalexiei/eslint-plugin-zod/issues/226
+      // https://github.com/marcalexiei/eslint-zod/issues/226
       name: `ignores error utilities with (namespace import)`,
       code: dedent`
         import * as z from 'zod';
@@ -82,7 +82,7 @@ ruleTester.run(requireSchemaSuffix.name, requireSchemaSuffix, {
       `,
     },
     {
-      // https://github.com/marcalexiei/eslint-plugin-zod/issues/226
+      // https://github.com/marcalexiei/eslint-zod/issues/226
       name: `ignores error utilities with (named import)`,
       code: dedent`
         import { object } from 'zod';
@@ -99,7 +99,7 @@ ruleTester.run(requireSchemaSuffix.name, requireSchemaSuffix, {
       `,
     },
     {
-      // https://github.com/marcalexiei/eslint-plugin-zod/issues/226
+      // https://github.com/marcalexiei/eslint-zod/issues/226
       name: `ignores error utilities with (named z import)`,
       code: dedent`
         import {z} from 'zod';
@@ -116,7 +116,7 @@ ruleTester.run(requireSchemaSuffix.name, requireSchemaSuffix, {
       `,
     },
     {
-      // https://github.com/marcalexiei/eslint-plugin-zod/issues/71
+      // https://github.com/marcalexiei/eslint-zod/issues/71
       name: 'should handle methods after parsing methods',
       code: dedent`
         import * as z from 'zod';
@@ -129,7 +129,7 @@ ruleTester.run(requireSchemaSuffix.name, requireSchemaSuffix, {
       `,
     },
     {
-      // https://github.com/marcalexiei/eslint-plugin-zod/issues/71
+      // https://github.com/marcalexiei/eslint-zod/issues/71
       name: 'should handle properties after `safeParse`',
       code: dedent`
         import * as z from 'zod';
@@ -137,7 +137,7 @@ ruleTester.run(requireSchemaSuffix.name, requireSchemaSuffix, {
       `,
     },
     {
-      // https://github.com/marcalexiei/eslint-plugin-zod/issues/71
+      // https://github.com/marcalexiei/eslint-zod/issues/71
       name: 'should handle methods after spa (alias for safeParseAsync)',
       code: dedent`
         import * as z from 'zod';

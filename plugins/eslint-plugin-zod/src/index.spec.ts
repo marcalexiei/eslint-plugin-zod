@@ -36,8 +36,8 @@ describe('plugin export', async () => {
   });
 
   /**
-   * @see https://github.com/marcalexiei/eslint-plugin-zod/pull/99
-   * @see https://github.com/marcalexiei/eslint-plugin-zod/pull/102
+   * @see https://github.com/marcalexiei/eslint-zod/pull/99
+   * @see https://github.com/marcalexiei/eslint-zod/pull/102
    */
   it('all rules must have a documentation file matching their name', () => {
     for (const [ruleName, rule] of Object.entries(_plugin.rules)) {

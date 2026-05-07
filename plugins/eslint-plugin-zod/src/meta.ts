@@ -13,10 +13,10 @@ const {
 
 export { PLUGIN_NAME, PLUGIN_VERSION };
 
-/** @see https://github.com/marcalexiei/eslint-plugin-zod/pull/97 */
+/** @see https://github.com/marcalexiei/eslint-zod/pull/97 */
 const PLUGIN_HOMEPAGE = homepage.replace(/#[^#]*$/, '');
 
 export function getRuleURL(ruleID: string): string {
-  // e.g., https://github.com/marcalexiei/eslint-plugin-zod/blob/v3.12.0/docs/rules/array-style.md
+  // e.g., https://github.com/marcalexiei/eslint-zod/blob/v3.12.0/docs/rules/array-style.md
   return `${PLUGIN_HOMEPAGE}/blob/v${PLUGIN_VERSION}/docs/rules/${ruleID}.md`;
 }

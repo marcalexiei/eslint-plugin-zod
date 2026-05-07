@@ -65,4 +65,4 @@ const schema = z.string().trim().min(1).max(10);
 
 - [Zod - Strings](https://zod.dev/api#strings)
 - [MDN - String.prototype.trim](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/trim)
-- [GitHub - Rule request issue](https://github.com/marcalexiei/eslint-plugin-zod/issues/253)
+- [GitHub - Rule request issue](https://github.com/marcalexiei/eslint-zod/issues/253)

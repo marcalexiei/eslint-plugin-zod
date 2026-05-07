@@ -53,7 +53,7 @@ ruleTester.run(`${arrayStyle.name} (function)`, arrayStyle, {
       output: null,
     },
     {
-      // https://github.com/marcalexiei/eslint-plugin-zod/issues/174
+      // https://github.com/marcalexiei/eslint-zod/issues/174
       name: 'named z import',
       code: dedent`
         import { z } from 'zod';
@@ -99,7 +99,7 @@ ruleTester.run(`${arrayStyle.name} (function)`, arrayStyle, {
       output: null,
     },
     {
-      // https://github.com/marcalexiei/eslint-plugin-zod/issues/232
+      // https://github.com/marcalexiei/eslint-zod/issues/232
       name: 'should keep additional methods in the chain after running the fixer (named z)',
       code: dedent`
         import { z } from "zod";
@@ -183,7 +183,7 @@ ruleTester.run(`${arrayStyle.name} (method)`, arrayStyle, {
       `,
     },
     {
-      // https://github.com/marcalexiei/eslint-plugin-zod/issues/148
+      // https://github.com/marcalexiei/eslint-zod/issues/148
       name: 'works with nested schema with chained methods',
       code: dedent`
         import * as z from 'zod';

@@ -45,7 +45,7 @@ export const preferStringSchemaWithTrim = createZodPluginRule({
 
         // Skip if this string schema is the key schema of z.record()
         // because transforms on record keys cause data loss
-        // https://github.com/marcalexiei/eslint-plugin-zod/issues/242
+        // https://github.com/marcalexiei/eslint-zod/issues/242
         if (
           findParentSchemaMatchingCondition(zodSchemaMeta.node, {
             schemaName: 'record',

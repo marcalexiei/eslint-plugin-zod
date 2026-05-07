@@ -47,7 +47,7 @@ ruleTester.run(noEmptyCustomSchema.name, noEmptyCustomSchema, {
       `,
     },
     {
-      // https://github.com/marcalexiei/eslint-plugin-zod/issues/237
+      // https://github.com/marcalexiei/eslint-zod/issues/237
       name: 'should not error when custom schema is chained with optional method',
       code: dedent`
         import * as z from 'zod';
@@ -102,7 +102,7 @@ ruleTester.run(noEmptyCustomSchema.name, noEmptyCustomSchema, {
       errors: [{ messageId: 'noEmptyCustomSchema' }],
     },
     {
-      // https://github.com/marcalexiei/eslint-plugin-zod/issues/237
+      // https://github.com/marcalexiei/eslint-zod/issues/237
       name: 'empty custom schema is chained with optional method',
       code: dedent`
         import * as z from 'zod';
