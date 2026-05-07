@@ -17,5 +17,6 @@ export { PLUGIN_NAME, PLUGIN_VERSION };
 const PLUGIN_HOMEPAGE = homepage.replace(/#[^#]*$/, '');
 
 export function getRuleURL(ruleID: string): string {
-  return `${PLUGIN_HOMEPAGE}/blob/HEAD/docs/rules/${ruleID}.md`;
+  // e.g., https://github.com/marcalexiei/eslint-plugin-zod/blob/v3.12.0/docs/rules/array-style.md
+  return `${PLUGIN_HOMEPAGE}/blob/v${PLUGIN_VERSION}/docs/rules/${ruleID}.md`;
 }

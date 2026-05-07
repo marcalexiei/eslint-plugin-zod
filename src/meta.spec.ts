@@ -6,8 +6,8 @@ describe('getRuleURL', () => {
   /** @see https://github.com/marcalexiei/eslint-plugin-zod/pull/97 */
   it('should provide correct URLs (no hash please)', () => {
     const RULE_ID = 'rule-id-mock';
-    expect(getRuleURL(RULE_ID)).toBe(
-      `https://github.com/marcalexiei/eslint-plugin-zod/blob/HEAD/docs/rules/${RULE_ID}.md`,
+    expect(getRuleURL(RULE_ID)).toMatch(
+      /^https:\/\/github\.com\/marcalexiei\/eslint-plugin-zod\/blob\/v\d+\.\d+\.\d+\/docs\/rules\/rule-id-mock\.md$/,
     );
   });
 });
