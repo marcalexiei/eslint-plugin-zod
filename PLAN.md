@@ -17,7 +17,7 @@ The existing `eslint-plugin-zod` package on npm will be kept as a deprecated stu
 
 ---
 
-## Phase 1 — Monorepo scaffold
+## Phase 1 — Monorepo scaffold ✅
 
 - Add `pnpm-workspace.yaml` at the root:
   ```yaml
@@ -30,7 +30,7 @@ The existing `eslint-plugin-zod` package on npm will be kept as a deprecated stu
 
 ---
 
-## Phase 2 — TypeScript project references + `@eslint-zod/source` condition
+## Phase 2 — TypeScript project references + `@eslint-zod/source` condition ✅
 
 Root `tsconfig.json` becomes a references-only config (no emit):
 
@@ -84,7 +84,7 @@ during development without needing to build `utils` first.
 
 ---
 
-## Phase 3 — Move existing plugin
+## Phase 3 — Move existing plugin ✅
 
 Move into `plugins/eslint-plugin-zod/`:
 
@@ -100,7 +100,7 @@ its own counterpart in `eslint-plugin-zod-mini`.
 
 ---
 
-## Phase 4 — Extract shared utilities
+## Phase 4 — Extract shared utilities ✅
 
 Create `packages/utils/` (`@eslint-zod/utils`, `private: false`, published to npm).
 
@@ -130,7 +130,7 @@ their own Zod ESLint rules.
 
 ---
 
-## Phase 5 — New plugin scaffold
+## Phase 5 — New plugin scaffold ✅
 
 Create `plugins/eslint-plugin-zod-mini/`:
 
@@ -140,9 +140,17 @@ Create `plugins/eslint-plugin-zod-mini/`:
 - Own rule implementations using shared AST utilities from `@eslint-zod/utils`
 - zod-mini-specific rules added incrementally
 
+### Additional changes made in this phase
+
+- Removed `'all'` from `ZodImportAllowedSource` (was `'all' | 'zod' | 'zod-mini'`, now `'zod' | 'zod-mini'`). The `'all'` union is no longer needed now that each plugin is scoped to its own import source.
+- Removed `recommendedMini` config from `eslint-plugin-zod`. Users of `zod/mini` should now use `eslint-plugin-zod-mini` directly.
+- All `eslint-plugin-zod` rules updated from `createZodSchemaImportTrack('all')` to `createZodSchemaImportTrack('zod')`.
+- `prefer-meta` rule in `eslint-plugin-zod-mini` reimplemented: in `zod/mini`, `.describe()` is a standalone function (`z.describe(...)`) not a chain method, so detection uses namespace/import tracking instead of `collectZodChainMethods`.
+- READMEs created for both plugins; root README converted to monorepo overview.
+
 ---
 
-## Phase 6 — CI/CD adjustments
+## Phase 6 — CI/CD adjustments ✅
 
 ### Build
 
@@ -166,15 +174,15 @@ pnpm -r test
 ### Docs
 
 `eslint-doc-generator` runs per-plugin (not relevant for `utils`).
+Each plugin has its own `.eslint-doc-generatorrc.js` (the tool does not traverse past `package.json` boundaries).
 
 ### Knip
 
-Update `knip.config.ts` to be workspace-aware.
+`knip.config.ts` updated to be workspace-aware. `eslint` is suppressed per-plugin via `ignoreDependencies` (it is an optional peer used only for `satisfies` type checks). The CI matrix `eslint@${{ matrix.eslint }}` syntax is suppressed via `ignoreBinaries`.
 
 ### Changesets
 
-Update `.changeset/config.json` to list all three publishable packages.
-`@eslint-zod/utils` is public so changesets tracks it like the plugins.
+No changes needed — changesets auto-discovers publishable packages from the workspace.
 
 ### CI matrix
 
@@ -184,3 +192,11 @@ No structural changes — existing Node/ESLint version matrix is preserved.
 ### Release workflow
 
 No changes needed — changesets handles per-package versioning and publishing.
+
+---
+
+## Remaining before merge
+
+- [ ] Create a changeset for `eslint-plugin-zod` (major — removal of `recommendedMini` config)
+- [ ] Create a changeset for `eslint-plugin-zod-mini` (initial release)
+- [ ] Create a changeset for `@eslint-zod/utils` (initial release)

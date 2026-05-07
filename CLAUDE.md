@@ -1,0 +1,101 @@
+# CLAUDE.md
+
+## Repository overview
+
+pnpm monorepo containing two ESLint plugins and a shared utilities package for [Zod](https://zod.dev) v4.
+
+| Package                  | Directory                         | Published |
+| ------------------------ | --------------------------------- | --------- |
+| `eslint-plugin-zod`      | `plugins/eslint-plugin-zod/`      | yes       |
+| `eslint-plugin-zod-mini` | `plugins/eslint-plugin-zod-mini/` | yes       |
+| `@eslint-zod/utils`      | `packages/utils/`                 | yes       |
+
+`@eslint-zod/utils` is bundled into each plugin at build time — consumers never install it directly.
+
+## Common commands
+
+```bash
+# from repo root
+pnpm build          # build all packages
+pnpm test           # run all test suites
+pnpm typecheck      # tsc -b (project references, no emit)
+pnpm lint           # lint:js + lint:docs + lint:knip
+pnpm format         # prettier --write
+
+# per-plugin (run from plugin directory or with --filter)
+pnpm build:docs     # rebuild plugin + regenerate rule docs
+pnpm lint:docs      # check rule docs are up to date
+```
+
+## Architecture
+
+### Import source scoping
+
+Each plugin is scoped to its own import source via `ZodImportAllowedSource` (`'zod'` or `'zod-mini'`). This type lives in `packages/utils/src/is-zod-import-source.ts`. There is no `'all'` union — rules in `eslint-plugin-zod` never fire on `zod/mini` imports and vice versa.
+
+### Shared utilities (`@eslint-zod/utils`)
+
+AST helpers used by both plugins:
+
+- `trackZodSchemaImports()` — tracks namespace and named imports; returns `isZodNamespace`, `getNamedImportOriginal`, and listener hooks
+- `detectZodSchemaRootNode()` — finds the outermost Zod call expression in a chain
+- `collectZodChainMethods()` — returns the list of chained method names on a Zod expression
+- `buildZodChainRemovalFix` / `buildZodChainReplacementFix` — fixer helpers
+
+Rule implementations live entirely per-plugin. Only the AST utilities are shared.
+
+### TypeScript resolution
+
+Each package has a `@eslint-zod/source` custom export condition pointing to its `.ts` source. `tsc -b` at the root resolves workspace dependencies through this condition, so plugins can import from `@eslint-zod/utils` source directly during development without pre-building.
+
+## zod vs zod/mini API differences
+
+This is the most important thing to know when working on `eslint-plugin-zod-mini` rules.
+
+**`zod` (full)** — validation methods are chained:
+
+```ts
+z.string()
+  .min(1)
+  .max(10)
+  .optional()
+  .describe('desc')
+  .meta({ description: 'desc' });
+```
+
+**`zod/mini`** — validation methods are standalone `$ZodCheck` functions passed to `.check()`:
+
+```ts
+z.string().check(z.min(1), z.max(10));
+z.optional(z.string());
+z.string().check(z.refine(() => true));
+z.string().check(z.describe('desc')); // z.describe is a standalone call
+z.string().check(z.meta({ description: 'desc' }));
+```
+
+Methods that ARE chained in `zod/mini`: `check()`, `brand()`, `parse()`, `safeParse()`, `parseAsync()`, `safeParseAsync()`.
+
+### Consequence for rule authoring
+
+Rules that look for chained methods (via `collectZodChainMethods`) work correctly in both plugins because `detectZodSchemaRootNode` identifies the outermost call — including calls in argument position (e.g. `z.refine(fn)` inside `.check(z.refine(fn))` is the root of its own expression).
+
+The exception is `prefer-meta` in `eslint-plugin-zod-mini`: since `z.describe()` is not a chain method, detection uses direct namespace/import tracking (`isZodNamespace`, `getNamedImportOriginal`) instead of `collectZodChainMethods`.
+
+## Adding a new rule
+
+1. Create `src/rules/<rule-name>.ts` and `src/rules/<rule-name>.spec.ts` in the relevant plugin.
+2. Export the rule from `src/index.ts` and add it to the plugin's `rules` object.
+3. If it belongs in the `recommended` config, add it there too.
+4. Run `pnpm build:docs` from the plugin directory — this creates the rule doc stub and updates the README table.
+5. Fill in the doc at `docs/rules/<rule-name>.md`.
+
+## Docs generation
+
+`eslint-doc-generator` is configured per-plugin (`.eslint-doc-generatorrc.js` in each plugin directory). It does not traverse past `package.json` boundaries, so a root-level config alone is not sufficient. The root README is a hand-maintained monorepo overview — it has no auto-generated sections.
+
+## Knip
+
+Two intentional suppressions in `knip.config.ts`:
+
+- `ignoreBinaries: [/^eslint@/]` — the CI matrix runs `eslint@${{ matrix.eslint }}` to test multiple ESLint versions; the template syntax confuses knip.
+- `ignoreDependencies: ['eslint']` per plugin — `eslint` is an optional peer referenced only for `satisfies` type checks in `src/index.ts`, not a real devDependency.
