@@ -14,7 +14,6 @@
   "module": "./dist/index.mjs",
   "exports": {
     ".": {
-      "@eslint-zod/source": "./src/index.ts",
       "import": "./dist/index.mjs",
       "require": "./dist/index.cjs"
     },

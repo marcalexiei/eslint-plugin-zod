@@ -1,4 +1,7 @@
-import { createZodSchemaImportTrack, findParentSchemaMatchingCondition  } from '@eslint-zod/utils';
+import {
+  createZodSchemaImportTrack,
+  findParentSchemaMatchingCondition,
+} from '@eslint-zod/utils';
 
 import { createZodPluginRule } from '../utils/create-plugin-rule.js';
 

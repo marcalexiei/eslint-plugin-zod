@@ -4,11 +4,11 @@
 
 Convert `eslint-plugin-zod` into a pnpm monorepo with three packages:
 
-| npm name | directory | description |
-|---|---|---|
-| `eslint-plugin-zod` | `plugins/eslint-plugin-zod/` | existing plugin, renamed |
+| npm name                 | directory                         | description               |
+| ------------------------ | --------------------------------- | ------------------------- |
+| `eslint-plugin-zod`      | `plugins/eslint-plugin-zod/`      | existing plugin, renamed  |
 | `eslint-plugin-zod-mini` | `plugins/eslint-plugin-zod-mini/` | new plugin for `zod/mini` |
-| `@eslint-zod/utils` | `packages/utils/` | shared utilities, public |
+| `@eslint-zod/utils`      | `packages/utils/`                 | shared utilities, public  |
 
 Plugins are unscoped; utilities live under the `@eslint-zod` org scope.
 This mirrors the `@eslint-react` convention.
@@ -22,8 +22,8 @@ The existing `eslint-plugin-zod` package on npm will be kept as a deprecated stu
 - Add `pnpm-workspace.yaml` at the root:
   ```yaml
   packages:
-    - "plugins/*"
-    - "packages/*"
+    - 'plugins/*'
+    - 'packages/*'
   ```
 - Convert root `package.json` to a workspace root: remove `name`, `version`, `main`, `exports`; keep all dev deps (`vitest`, `typescript`, `prettier`, `eslint`, `tsdown`, `knip`, etc.)
 - Create `plugins/` and `packages/` directories
@@ -184,4 +184,3 @@ No structural changes — existing Node/ESLint version matrix is preserved.
 ### Release workflow
 
 No changes needed — changesets handles per-package versioning and publishing.
-

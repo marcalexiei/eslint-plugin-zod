@@ -125,7 +125,8 @@ export const consistentImport = createZodMiniPluginRule<[Options], MessageIds>({
       changeImportSyntax: 'Use a {{syntax}} import for Zod Mini.',
       removeDuplicate:
         'Remove duplicate Zod Mini import; Zod Mini is already imported.',
-      convertUsage: 'Update Zod Mini usage to match the {{syntax}} import syntax.',
+      convertUsage:
+        'Update Zod Mini usage to match the {{syntax}} import syntax.',
     },
     schema: [
       {

@@ -2,7 +2,7 @@
 
 📝 Enforce a consistent naming convention for Zod schema variables.
 
-💼 This rule is enabled in the following configs: ✅ `recommended`, ✔️ `recommendedMini`.
+💼 This rule is enabled in the ✅ `recommended` config.
 
 <!-- end auto-generated rule header -->
 

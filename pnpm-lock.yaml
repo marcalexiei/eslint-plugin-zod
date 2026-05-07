@@ -11,6 +11,9 @@ catalogs:
       specifier: ^8.57.0
       version: 8.59.2
   dev:
+    '@marcalexiei/prettier-config':
+      specifier: 1.1.4
+      version: 1.1.4
     '@typescript-eslint/rule-tester':
       specifier: 8.59.2
       version: 8.59.2
@@ -20,6 +23,9 @@ catalogs:
     eslint-doc-generator:
       specifier: 3.3.2
       version: 3.3.2
+    prettier:
+      specifier: 3.8.3
+      version: 3.8.3
     tsdown:
       specifier: 0.21.10
       version: 0.21.10
@@ -73,9 +79,6 @@ importers:
       prettier:
         specifier: 3.8.3
         version: 3.8.3
-      tsdown:
-        specifier: catalog:dev
-        version: 0.21.10(oxc-resolver@11.19.1)(typescript@6.0.3)
       typescript:
         specifier: 6.0.3
         version: 6.0.3
@@ -117,6 +120,9 @@ importers:
         specifier: ^4
         version: 4.4.3
     devDependencies:
+      '@marcalexiei/prettier-config':
+        specifier: catalog:dev
+        version: 1.1.4(prettier@3.8.3)
       '@types/esquery':
         specifier: 1.5.4
         version: 1.5.4
@@ -129,6 +135,9 @@ importers:
       eslint-doc-generator:
         specifier: catalog:dev
         version: 3.3.2(eslint@10.3.0)(prettier@3.8.3)(typescript@6.0.3)
+      prettier:
+        specifier: catalog:dev
+        version: 3.8.3
       tsdown:
         specifier: catalog:dev
         version: 0.21.10(oxc-resolver@11.19.1)(typescript@6.0.3)
@@ -157,6 +166,9 @@ importers:
         specifier: ^4
         version: 4.4.3
     devDependencies:
+      '@marcalexiei/prettier-config':
+        specifier: catalog:dev
+        version: 1.1.4(prettier@3.8.3)
       '@types/esquery':
         specifier: 1.5.4
         version: 1.5.4
@@ -169,6 +181,9 @@ importers:
       eslint-doc-generator:
         specifier: catalog:dev
         version: 3.3.2(eslint@10.3.0)(prettier@3.8.3)(typescript@6.0.3)
+      prettier:
+        specifier: catalog:dev
+        version: 3.8.3
       tsdown:
         specifier: catalog:dev
         version: 0.21.10(oxc-resolver@11.19.1)(typescript@6.0.3)

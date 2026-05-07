@@ -26,8 +26,11 @@ export const preferMeta = createZodMiniPluginRule({
   },
   defaultOptions: [],
   create(context) {
-    const { importDeclarationListener, isZodNamespace, getNamedImportOriginal } =
-      trackZodSchemaImports();
+    const {
+      importDeclarationListener,
+      isZodNamespace,
+      getNamedImportOriginal,
+    } = trackZodSchemaImports();
 
     return {
       ImportDeclaration: importDeclarationListener,

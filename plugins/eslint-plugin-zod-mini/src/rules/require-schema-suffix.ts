@@ -15,7 +15,10 @@ const {
   trackZodSchemaImports,
 } = createZodSchemaImportTrack('zod-mini');
 
-export const requireSchemaSuffix = createZodMiniPluginRule<[Options], MessageIds>({
+export const requireSchemaSuffix = createZodMiniPluginRule<
+  [Options],
+  MessageIds
+>({
   name: 'require-schema-suffix',
   meta: {
     type: 'suggestion',

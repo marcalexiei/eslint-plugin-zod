@@ -1,4 +1,7 @@
-import { buildZodChainRemoveMethodFix, createZodSchemaImportTrack  } from '@eslint-zod/utils';
+import {
+  buildZodChainRemoveMethodFix,
+  createZodSchemaImportTrack,
+} from '@eslint-zod/utils';
 
 import { createZodPluginRule } from '../utils/create-plugin-rule.js';
 

@@ -63,7 +63,6 @@ const baseConfig = {
 const recommendedConfig = {
   ...baseConfig,
   rules: {
-
     'zod-mini/consistent-import': 'error',
     'zod-mini/consistent-schema-var-name': 'error',
     'zod-mini/no-any-schema': 'error',
@@ -71,7 +70,6 @@ const recommendedConfig = {
     'zod-mini/prefer-meta': 'error',
     'zod-mini/require-brand-type-parameter': 'error',
     'zod-mini/require-error-message': 'error',
-
   },
 } satisfies Linter.Config as CompatibleConfig;
 

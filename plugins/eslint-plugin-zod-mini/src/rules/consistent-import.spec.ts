@@ -88,8 +88,16 @@ ruleTester.run(`${consistentImport.name} namespace`, consistentImport, {
         const userSchema: $ZodType = z.string();
       `,
       errors: [
-        { messageId: 'changeImportSyntax', data: { syntax: 'namespace' }, line: 1 },
-        { messageId: 'removeDuplicate', data: { syntax: 'namespace' }, line: 2 },
+        {
+          messageId: 'changeImportSyntax',
+          data: { syntax: 'namespace' },
+          line: 1,
+        },
+        {
+          messageId: 'removeDuplicate',
+          data: { syntax: 'namespace' },
+          line: 2,
+        },
         { messageId: 'convertUsage', data: { syntax: 'namespace' }, line: 3 },
       ],
       output: dedent`

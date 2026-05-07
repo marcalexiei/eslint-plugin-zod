@@ -1,0 +1,149 @@
+# eslint-plugin-zod-mini
+
+[![CI][CIBadge]][CIURL]
+[![Code style: prettier][CodeStyleBadge]][CodeStyleURL]
+[![Lint: eslint][lintBadge]][lintURL]
+[![npm version][npmVersionBadge]][npmVersionURL]
+[![issues][issuesBadge]][issuesURL]
+
+[CIBadge]: https://img.shields.io/github/actions/workflow/status/marcalexiei/eslint-plugin-zod/ci.yml?style=for-the-badge&logo=github&event=push&label=CI
+[CIURL]: https://github.com/marcalexiei/eslint-plugin-zod/actions/workflows/CI.yml/badge.svg
+[CodeStyleBadge]: https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=for-the-badge&logo=prettier
+[CodeStyleURL]: https://prettier.io
+[npmVersionBadge]: https://img.shields.io/npm/v/eslint-plugin-zod-mini.svg?style=for-the-badge&logo=npm
+[npmVersionURL]: https://www.npmjs.com/package/eslint-plugin-zod-mini
+[lintBadge]: https://img.shields.io/badge/lint-eslint-3A33D1?logo=eslint&style=for-the-badge
+[lintURL]: https://eslint.org
+[issuesBadge]: https://img.shields.io/github/issues/marcalexiei/eslint-plugin-zod.svg?style=for-the-badge
+[issuesURL]: https://github.com/marcalexiei/eslint-plugin-zod/issues
+
+[ESLint](https://eslint.org) plugin that adds custom linting rules to enforce best practices when using [Zod Mini](https://zod.dev/?id=zod-mini) (`zod/mini`).
+
+It can also work with [Oxlint](https://oxc.rs/docs/guide/usage/linter.html)!\
+Find out more about [Oxlint's `jsPLugins`](https://oxc.rs/docs/guide/usage/linter/js-plugins.html).
+
+## Rules
+
+<!-- begin auto-generated rules list -->
+
+💼 Configurations enabled in.\
+✅ Set in the `recommended` configuration.\
+🔧 Automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/user-guide/command-line-interface#--fix).\
+💡 Manually fixable by [editor suggestions](https://eslint.org/docs/latest/use/core-concepts#rule-suggestions).\
+❌ Deprecated.
+
+| Name                                                                                     | Description                                                                                        | 💼  | 🔧  | 💡  | ❌  |
+| :--------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------- | :-- | :-- | :-- | :-- |
+| [consistent-import](docs/rules/consistent-import.md)                                     | Enforce a consistent import style for Zod Mini                                                     | ✅  | 🔧  |     |     |
+| [consistent-import-source](docs/rules/consistent-import-source.md)                       | Enforce consistent source from Zod Mini imports                                                    |     |     | 💡  |     |
+| [consistent-object-schema-type](docs/rules/consistent-object-schema-type.md)             | Enforce consistent usage of Zod Mini schema methods                                                |     |     | 💡  |     |
+| [consistent-schema-output-type-style](docs/rules/consistent-schema-output-type-style.md) | Enforce consistent use of z.infer or z.output for schema type inference                            |     | 🔧  |     |     |
+| [consistent-schema-var-name](docs/rules/consistent-schema-var-name.md)                   | Enforce a consistent naming convention for Zod Mini schema variables                               | ✅  |     |     |     |
+| [no-any-schema](docs/rules/no-any-schema.md)                                             | Disallow usage of `z.any()` in Zod Mini schemas                                                    | ✅  |     | 💡  |     |
+| [no-empty-custom-schema](docs/rules/no-empty-custom-schema.md)                           | Disallow usage of `z.custom()` without arguments                                                   | ✅  |     |     |     |
+| [no-unknown-schema](docs/rules/no-unknown-schema.md)                                     | Disallow usage of `z.unknown()` in Zod Mini schemas                                                |     |     |     |     |
+| [prefer-meta](docs/rules/prefer-meta.md)                                                 | Enforce usage of `z.meta()` over `z.describe()`                                                    | ✅  | 🔧  |     |     |
+| [prefer-namespace-import](docs/rules/prefer-namespace-import.md)                         | Enforce importing zod/mini as a namespace import (`import * as z from 'zod/mini'`)                 |     | 🔧  |     | ❌  |
+| [require-brand-type-parameter](docs/rules/require-brand-type-parameter.md)               | Require type parameter on `.brand()` functions                                                     | ✅  |     | 💡  |     |
+| [require-error-message](docs/rules/require-error-message.md)                             | Enforce that custom refinements include an error message                                           | ✅  | 🔧  |     |     |
+| [require-schema-suffix](docs/rules/require-schema-suffix.md)                             | Require schema suffix when declaring a Zod Mini schema                                             |     |     |     | ❌  |
+| [schema-error-property-style](docs/rules/schema-error-property-style.md)                 | Enforce consistent style for error messages in Zod Mini schema validation (using ESQuery patterns) |     |     |     |     |
+
+<!-- end auto-generated rules list -->
+
+## Installation
+
+### ESLint
+
+Install `eslint` and `eslint-plugin-zod-mini` using your preferred package manager:
+
+```shell
+npm i --save-dev eslint eslint-plugin-zod-mini
+```
+
+```shell
+yarn add --dev eslint eslint-plugin-zod-mini
+```
+
+```shell
+pnpm add --save-dev eslint eslint-plugin-zod-mini
+```
+
+#### ESLint Configuration
+
+1. Import the plugin
+
+   ```ts
+   import eslintPluginZodMini from 'eslint-plugin-zod-mini';
+   ```
+
+2. Add `recommended` config to your ESLint setup
+
+   ```ts
+   eslintPluginZodMini.configs.recommended,
+   ```
+
+Here's a minimal example using the flat config format:
+
+```ts
+// eslint.config.js
+import { defineConfig } from 'eslint/config';
+import eslint from '@eslint/js';
+import eslintPluginZodMini from 'eslint-plugin-zod-mini';
+
+export default defineConfig(
+  eslint.configs.recommended,
+  eslintPluginZodMini.configs.recommended,
+);
+```
+
+### Oxlint
+
+Install `oxlint` and `eslint-plugin-zod-mini` using your preferred package manager:
+
+```shell
+npm i --save-dev oxlint eslint-plugin-zod-mini
+```
+
+```shell
+yarn add --dev oxlint eslint-plugin-zod-mini
+```
+
+```shell
+pnpm add --save-dev oxlint eslint-plugin-zod-mini
+```
+
+#### Oxlint Configuration
+
+1. Import the plugin
+
+   ```ts
+   import eslintPluginZodMini from 'eslint-plugin-zod-mini';
+   ```
+
+2. Add `eslint-plugin-zod-mini` to the `jsPlugins` key
+
+   ```ts
+   {
+     jsPlugins: ['eslint-plugin-zod-mini'],
+     // ...
+   }
+   ```
+
+3. Add `eslintPluginZodMini.configs.recommended.rules` to your Oxlint config.\
+   Alternatively you can specify the rules manually
+
+Here's a minimal example using the flat config format:
+
+```ts
+// oxlint.config.ts
+import eslintPluginZodMini from 'eslint-plugin-zod-mini';
+import { defineConfig } from 'oxlint';
+
+export default defineConfig({
+  jsPlugins: ['eslint-plugin-zod-mini'],
+  rules: {
+    ...eslintPluginZodMini.configs.recommended.rules,
+  },
+});
+```
