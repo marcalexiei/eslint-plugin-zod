@@ -10,13 +10,13 @@ export default {
       entry: [],
     },
     'plugins/eslint-plugin-zod': {
-      entry: ['.eslint-doc-generatorrc.js'],
+      entry: ['.eslint-doc-generatorrc.ts'],
       // eslint is an optional peer dependency referenced only for `satisfies` type checks
       // in src/index.ts — it doesn't need to be a devDependency
       ignoreDependencies: ['eslint'],
     },
     'plugins/eslint-plugin-zod-mini': {
-      entry: ['.eslint-doc-generatorrc.js'],
+      entry: ['.eslint-doc-generatorrc.ts'],
       // eslint is an optional peer dependency referenced only for `satisfies` type checks
       // in src/index.ts — it doesn't need to be a devDependency
       ignoreDependencies: ['eslint'],

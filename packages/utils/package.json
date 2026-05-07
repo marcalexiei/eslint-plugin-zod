@@ -42,8 +42,7 @@
   },
   "scripts": {
     "build": "tsdown",
-    "test": "exit 0",
-    "test:dev": "vitest --typecheck=false"
+    "test": "vitest"
   },
   "devDependencies": {
     "tsdown": "catalog:dev",

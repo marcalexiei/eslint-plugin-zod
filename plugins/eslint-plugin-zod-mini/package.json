@@ -41,8 +41,7 @@
     "build": "tsdown",
     "build:docs": "pnpm run build && eslint-doc-generator",
     "lint:docs": "eslint-doc-generator --check",
-    "test": "vitest",
-    "test:dev": "vitest --typecheck=false"
+    "test": "vitest"
   },
   "dependencies": {
     "@eslint-zod/utils": "workspace:*",

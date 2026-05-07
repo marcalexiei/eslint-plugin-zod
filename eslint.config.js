@@ -43,7 +43,13 @@ export default defineConfig(
       'eslint-plugin/require-meta-default-options': 'off',
     },
   },
-  pluginEslintNode.configs['flat/recommended-module'],
+  {
+    ...pluginEslintNode.configs['flat/recommended-module'],
+    rules: {
+      ...pluginEslintNode.configs['flat/recommended-module'].rules,
+      'n/no-missing-import': ['error', { ignoreTypeImport: true }],
+    },
+  },
   {
     languageOptions: {
       parserOptions: {

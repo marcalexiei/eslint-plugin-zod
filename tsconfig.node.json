@@ -1,6 +1,6 @@
 {
   "extends": "./tsconfig.base.json",
-  "include": ["*.ts", "*.js"],
+  "include": ["*.ts", "*.js", "plugins/*/.eslint-doc-generatorrc.ts"],
   "compilerOptions": {
     "noEmit": true
   }
