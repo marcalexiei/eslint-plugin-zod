@@ -10,7 +10,7 @@ pnpm monorepo containing two ESLint plugins and a shared utilities package for [
 | `eslint-plugin-zod-mini` | `plugins/eslint-plugin-zod-mini/` | yes       |
 | `@eslint-zod/utils`      | `packages/utils/`                 | yes       |
 
-`@eslint-zod/utils` is bundled into each plugin at build time — consumers never install it directly.
+`@eslint-zod/utils` is a dependency of each plugin — consumers do not need to install it directly.
 
 ## Common commands
 
