@@ -18,7 +18,7 @@ const {
   //
   zodImportAllowedSource,
   trackZodSchemaImports,
-} = createZodSchemaImportTrack('all');
+} = createZodSchemaImportTrack('zod');
 
 export const consistentSchemaOutputTypeStyle = createZodPluginRule<
   [Options],

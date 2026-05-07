@@ -82,7 +82,7 @@ export const preferNamespaceImport = createZodPluginRule({
       message: "Use `zod/consistent-import` with `{ syntax: 'namespace' }`",
     },
     docs: {
-      zodImportAllowedSource: 'all',
+      zodImportAllowedSource: 'zod',
       description:
         "Enforce importing zod as a namespace import (`import * as z from 'zod'`)",
     },
@@ -103,7 +103,7 @@ export const preferNamespaceImport = createZodPluginRule({
       ImportDeclaration(node): void {
         const { source, importKind } = node;
 
-        if (!isZodImportSource(source.value, 'all')) {
+        if (!isZodImportSource(source.value, 'zod')) {
           return;
         }
 

@@ -8,7 +8,7 @@ const {
   //
   zodImportAllowedSource,
   trackZodSchemaImports,
-} = createZodSchemaImportTrack('all');
+} = createZodSchemaImportTrack('zod');
 
 export const requireErrorMessage = createZodPluginRule({
   name: 'require-error-message',

@@ -10,5 +10,5 @@ export type ZodPluginRule = ESLintUtils.RuleWithMetaAndName<
 >;
 
 export const createZodPluginRule = ESLintUtils.RuleCreator<{
-  zodImportAllowedSource: 'all' | 'zod' | 'zod-mini';
+  zodImportAllowedSource: ZodImportAllowedSource;
 }>(getRuleURL);

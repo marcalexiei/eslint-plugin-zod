@@ -7,7 +7,7 @@ const {
   //
   zodImportAllowedSource,
   trackZodSchemaImports,
-} = createZodSchemaImportTrack('all');
+} = createZodSchemaImportTrack('zod');
 
 export const requireBrandTypeParameter = createZodPluginRule({
   name: 'require-brand-type-parameter',

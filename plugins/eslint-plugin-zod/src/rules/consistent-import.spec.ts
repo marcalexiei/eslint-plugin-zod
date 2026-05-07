@@ -85,14 +85,6 @@ ruleTester.run(`${consistentImport.name} namespace`, consistentImport, {
       output: 'import * as z from "zod";',
     },
     {
-      name: 'zod/mini',
-      code: 'import z from "zod/mini";',
-      errors: [
-        { messageId: 'changeImportSyntax', data: { syntax: 'namespace' } },
-      ],
-      output: 'import * as z from "zod/mini";',
-    },
-    {
       // https://github.com/marcalexiei/eslint-plugin-zod-x/issues/39
       name: 'named type import',
       code: 'import type { z } from "zod";',

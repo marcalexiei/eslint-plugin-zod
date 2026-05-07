@@ -11,7 +11,7 @@ const {
   //
   zodImportAllowedSource,
   trackZodSchemaImports,
-} = createZodSchemaImportTrack('all');
+} = createZodSchemaImportTrack('zod');
 
 export const schemaErrorPropertyStyle = createZodPluginRule<
   [{ selector: string; example: string }],

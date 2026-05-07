@@ -6,7 +6,7 @@ const {
   //
   zodImportAllowedSource,
   trackZodSchemaImports,
-} = createZodSchemaImportTrack('all');
+} = createZodSchemaImportTrack('zod');
 
 export const noEmptyCustomSchema = createZodPluginRule({
   name: 'no-empty-custom-schema',

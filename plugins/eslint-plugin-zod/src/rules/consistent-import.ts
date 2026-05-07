@@ -117,7 +117,7 @@ export const consistentImport = createZodPluginRule<[Options], MessageIds>({
   meta: {
     type: 'problem',
     docs: {
-      zodImportAllowedSource: 'all',
+      zodImportAllowedSource: 'zod',
       description: 'Enforce a consistent import style for Zod',
     },
     fixable: 'code',
@@ -152,7 +152,7 @@ export const consistentImport = createZodPluginRule<[Options], MessageIds>({
       ImportDeclaration(node): void {
         const { source, importKind } = node;
 
-        if (!isZodImportSource(source.value, 'all')) {
+        if (!isZodImportSource(source.value, 'zod')) {
           return;
         }
 

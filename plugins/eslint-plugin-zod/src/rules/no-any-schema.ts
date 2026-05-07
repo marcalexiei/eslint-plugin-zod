@@ -8,7 +8,7 @@ const {
   //
   zodImportAllowedSource,
   trackZodSchemaImports,
-} = createZodSchemaImportTrack('all');
+} = createZodSchemaImportTrack('zod');
 
 export const noAnySchema = createZodPluginRule({
   name: 'no-any-schema',

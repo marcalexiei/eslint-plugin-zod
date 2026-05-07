@@ -1,4 +1,4 @@
-export type ZodImportAllowedSource = 'all' | 'zod' | 'zod-mini';
+export type ZodImportAllowedSource = 'zod' | 'zod-mini';
 
 export const ZOD_IMPORT_SOURCES = [
   'zod',
@@ -14,15 +14,10 @@ export function isZodImportSource(
   source: string,
   allowedSource: ZodImportAllowedSource,
 ): boolean {
-  const allowedSources: Array<ZodImportSource> = [];
-
-  if (allowedSource === 'all' || allowedSource === 'zod') {
-    allowedSources.push('zod', 'zod/v4', 'zod/v3');
-  }
-
-  if (allowedSource === 'all' || allowedSource === 'zod-mini') {
-    allowedSources.push('zod/mini', 'zod/v4-mini');
-  }
+  const allowedSources: Array<ZodImportSource> =
+    allowedSource === 'zod'
+      ? ['zod', 'zod/v4', 'zod/v3']
+      : ['zod/mini', 'zod/v4-mini'];
 
   return allowedSources.includes(source as ZodImportSource);
 }

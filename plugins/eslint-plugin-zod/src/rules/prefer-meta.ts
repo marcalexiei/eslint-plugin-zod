@@ -7,7 +7,7 @@ const {
   //
   zodImportAllowedSource,
   trackZodSchemaImports,
-} = createZodSchemaImportTrack('all');
+} = createZodSchemaImportTrack('zod');
 
 export const preferMeta = createZodPluginRule({
   name: 'prefer-meta',

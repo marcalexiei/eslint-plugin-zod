@@ -13,7 +13,7 @@ const {
   //
   zodImportAllowedSource,
   trackZodSchemaImports,
-} = createZodSchemaImportTrack('all');
+} = createZodSchemaImportTrack('zod');
 
 export const requireSchemaSuffix = createZodPluginRule<[Options], MessageIds>({
   name: 'require-schema-suffix',

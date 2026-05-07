@@ -57,6 +57,13 @@ ruleTester.run(preferMeta.name, preferMeta, {
         test.describe("test", () => {});
       `,
     },
+    {
+      name: 'not triggered on zod/mini import',
+      code: dedent`
+        import z from 'zod/mini';
+        z.string().check(z.describe('asd'));
+      `,
+    },
   ],
 
   invalid: [
@@ -122,18 +129,6 @@ ruleTester.run(preferMeta.name, preferMeta, {
         import * as z from 'zod';
         const desc = 'desc';
         z.string().meta({ description: desc }).trim()
-      `,
-    },
-    {
-      name: 'zod/mini',
-      code: dedent`
-        import z from 'zod/mini';
-        z.string().check(z.describe('asd'));
-      `,
-      errors: [{ messageId: 'preferMeta' }],
-      output: dedent`
-        import z from 'zod/mini';
-        z.string().check(z.meta({ description: 'asd' }));
       `,
     },
   ],

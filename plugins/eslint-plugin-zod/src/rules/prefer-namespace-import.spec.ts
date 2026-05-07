@@ -77,12 +77,6 @@ ruleTester.run(preferNamespaceImport.name, preferNamespaceImport, {
       output: 'import * as z from "zod";',
     },
     {
-      name: 'zod/mini',
-      code: 'import z from "zod/mini";',
-      errors: [{ messageId: 'useNamespace' }],
-      output: 'import * as z from "zod/mini";',
-    },
-    {
       // https://github.com/marcalexiei/eslint-plugin-zod/issues/39
       name: 'named type import',
       code: 'import type { z } from "zod";',

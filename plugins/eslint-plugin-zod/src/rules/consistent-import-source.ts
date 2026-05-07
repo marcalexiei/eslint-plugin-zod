@@ -15,7 +15,7 @@ export const consistentImportSource = createZodPluginRule<
     hasSuggestions: true,
     type: 'suggestion',
     docs: {
-      zodImportAllowedSource: 'all',
+      zodImportAllowedSource: 'zod',
       description: 'Enforce consistent source from Zod imports',
     },
     messages: {
