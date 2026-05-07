@@ -1,5 +1,11 @@
 # eslint-plugin-zod
 
+## 3.12.1
+
+### Patch Changes
+
+- [`8803483`](https://github.com/marcalexiei/eslint-plugin-zod/commit/8803483726ea1c00bca0e0b725d3ea6a8d29c4e5) Thanks [@marcalexiei](https://github.com/marcalexiei)! - fix: rules documentation reference now point to the installed tag rather than HEAD
+
 ## 3.12.0
 
 ### Minor Changes
