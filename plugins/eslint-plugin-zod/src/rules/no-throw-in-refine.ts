@@ -1,0 +1,110 @@
+import { AST_NODE_TYPES } from '@typescript-eslint/utils';
+import type { TSESTree } from '@typescript-eslint/utils';
+
+import { createZodPluginRule } from '../utils/create-plugin-rule.js';
+import { createZodSchemaImportTrack } from '@eslint-zod/utils';
+
+const {
+  //
+  zodImportAllowedSource,
+  trackZodSchemaImports,
+} = createZodSchemaImportTrack('zod');
+
+export const noThrowInRefine = createZodPluginRule({
+  name: 'no-throw-in-refine',
+  meta: {
+    type: 'problem',
+    docs: {
+      zodImportAllowedSource,
+      description:
+        'Disallow throwing errors directly inside Zod refine callbacks',
+    },
+    messages: {
+      noThrowInRefine:
+        'Do not throw errors directly inside a z.refine callback.',
+    },
+    schema: [],
+  },
+  defaultOptions: [],
+  create(context) {
+    const {
+      importDeclarationListener,
+      detectZodSchemaRootNode,
+      collectZodChainMethods,
+    } = trackZodSchemaImports();
+
+    function checkNode(node: TSESTree.Node | null): void {
+      if (!node) {
+        return;
+      }
+
+      switch (node.type) {
+        case AST_NODE_TYPES.ThrowStatement:
+          context.report({ node, messageId: 'noThrowInRefine' });
+          break;
+        case AST_NODE_TYPES.BlockStatement:
+          node.body.forEach(checkNode);
+          break;
+        case AST_NODE_TYPES.IfStatement:
+          checkNode(node.consequent);
+          if (node.alternate) {
+            checkNode(node.alternate);
+          }
+          break;
+        case AST_NODE_TYPES.ForStatement:
+        case AST_NODE_TYPES.ForInStatement:
+        case AST_NODE_TYPES.ForOfStatement:
+        case AST_NODE_TYPES.WhileStatement:
+        case AST_NODE_TYPES.DoWhileStatement:
+          checkNode(node.body);
+          break;
+        case AST_NODE_TYPES.TryStatement:
+          checkNode(node.block);
+          if (node.handler) {
+            checkNode(node.handler.body);
+          }
+          if (node.finalizer) {
+            checkNode(node.finalizer);
+          }
+          break;
+        // Ignore nested functions
+        case AST_NODE_TYPES.FunctionExpression:
+        case AST_NODE_TYPES.ArrowFunctionExpression:
+        case AST_NODE_TYPES.FunctionDeclaration:
+          return;
+        default:
+          if ('body' in node && Array.isArray(node.body)) {
+            node.body.forEach(checkNode);
+          }
+          break;
+      }
+    }
+
+    return {
+      ImportDeclaration: importDeclarationListener,
+      CallExpression(node): void {
+        const zodSchemaMeta = detectZodSchemaRootNode(node);
+
+        if (!zodSchemaMeta) {
+          return;
+        }
+
+        const methods = collectZodChainMethods(node);
+
+        const refineMethod = methods.find((it) => it.name === 'refine');
+
+        if (!refineMethod) {
+          return;
+        }
+
+        const [callback] = refineMethod.node.arguments;
+        if (
+          callback.type === AST_NODE_TYPES.ArrowFunctionExpression ||
+          callback.type === AST_NODE_TYPES.FunctionExpression
+        ) {
+          checkNode(callback.body);
+        }
+      },
+    };
+  },
+});

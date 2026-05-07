@@ -1,10 +1,24 @@
 import type { KnipConfig } from 'knip';
 
 export default {
-  entry: [
-    // 'src/index.ts',
-
-    // Executed by `eslint-doc-generator`
-    '.eslint-doc-generatorrc.js',
-  ],
+  workspaces: {
+    '.': {
+      entry: [],
+    },
+    'plugins/eslint-plugin-zod': {
+      entry: [
+        'src/index.ts',
+        '.eslint-doc-generatorrc.js',
+      ],
+    },
+    'plugins/eslint-plugin-zod-mini': {
+      entry: [
+        'src/index.ts',
+        '.eslint-doc-generatorrc.js',
+      ],
+    },
+    'packages/utils': {
+      entry: ['src/index.ts'],
+    },
+  },
 } satisfies KnipConfig;

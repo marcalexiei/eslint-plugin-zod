@@ -1,3 +1,7 @@
+packages:
+  - "plugins/*"
+  - "packages/*"
+
 allowBuilds:
   unrs-resolver: true
 

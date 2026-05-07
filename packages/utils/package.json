@@ -1,0 +1,50 @@
+{
+  "name": "@eslint-zod/utils",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Shared utilities for eslint-zod plugins",
+  "engines": {
+    "node": "^20 || ^22 || >=24"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "./dist/index.cjs",
+  "types": "./dist/index.d.cts",
+  "module": "./dist/index.mjs",
+  "exports": {
+    ".": {
+      "@eslint-zod/source": "./src/index.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "homepage": "https://github.com/marcalexiei/eslint-plugin-zod#readme",
+  "bugs": {
+    "url": "https://github.com/marcalexiei/eslint-plugin-zod/issues"
+  },
+  "keywords": [
+    "eslint",
+    "eslint-plugin",
+    "zod",
+    "utils"
+  ],
+  "files": [
+    "dist"
+  ],
+  "author": "Marco Pasqualetti @marcalexiei",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/marcalexiei/eslint-plugin-zod"
+  },
+  "scripts": {
+    "build": "tsdown",
+    "test": "vitest",
+    "test:dev": "vitest --typecheck=false"
+  },
+  "dependencies": {
+    "@typescript-eslint/utils": "^8.57.0"
+  }
+}

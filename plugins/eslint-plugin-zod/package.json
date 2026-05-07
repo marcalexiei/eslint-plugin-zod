@@ -1,0 +1,78 @@
+{
+  "name": "eslint-plugin-zod",
+  "version": "3.12.1",
+  "type": "module",
+  "description": "ESLint plugin that adds custom linting rules to enforce best practices when using Zod",
+  "engines": {
+    "node": "^20 || ^22 || >=24"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "./dist/index.cjs",
+  "types": "./dist/index.d.cts",
+  "module": "./dist/index.mjs",
+  "exports": {
+    ".": {
+      "@eslint-zod/source": "./src/index.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "homepage": "https://github.com/marcalexiei/eslint-plugin-zod#readme",
+  "bugs": {
+    "url": "https://github.com/marcalexiei/eslint-plugin-zod/issues"
+  },
+  "keywords": [
+    "eslint",
+    "eslintplugin",
+    "eslint-plugin",
+    "oxlint",
+    "zod"
+  ],
+  "files": [
+    "dist"
+  ],
+  "author": "Marco Pasqualetti @marcalexiei",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/marcalexiei/eslint-plugin-zod"
+  },
+  "scripts": {
+    "build": "tsdown",
+    "build:docs": "pnpm run build && eslint-doc-generator",
+    "lint:docs": "eslint-doc-generator --check",
+    "test": "vitest",
+    "test:dev": "vitest --typecheck=false"
+  },
+  "dependencies": {
+    "@eslint-zod/utils": "workspace:*",
+    "@typescript-eslint/utils": "^8.57.0",
+    "esquery": "^1.6.0"
+  },
+  "peerDependencies": {
+    "eslint": "^9 || ^10",
+    "oxlint": "^1.59.0",
+    "zod": "^4"
+  },
+  "peerDependenciesMeta": {
+    "eslint": {
+      "optional": true
+    },
+    "oxlint": {
+      "optional": true
+    },
+    "zod": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@types/esquery": "1.5.4",
+    "@typescript-eslint/rule-tester": "8.59.2",
+    "dedent": "1.7.2",
+    "eslint-doc-generator": "3.3.2",
+    "vitest": "4.1.5"
+  }
+}

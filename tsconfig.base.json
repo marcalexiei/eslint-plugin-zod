@@ -1,0 +1,38 @@
+{
+  "compilerOptions": {
+    // https://www.typescriptlang.org/tsconfig/
+
+    // Type Checking
+    "strict": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noImplicitOverride": true,
+    "allowUnreachableCode": false,
+
+    // Modules
+    "module": "NodeNext",
+    "target": "ES6",
+    "types": ["node"],
+
+    // Emit
+    "noEmit": true,
+    "removeComments": true,
+
+    // Language and Environment
+    "moduleResolution": "NodeNext",
+    "customConditions": ["@eslint-zod/source"],
+    "lib": [
+      "es2024",
+      "ESNext.Array",
+      "ESNext.Collection",
+      "ESNext.Iterator",
+      "ESNext.Promise"
+    ],
+
+    // Interop Constraints
+    "verbatimModuleSyntax": true,
+
+    "skipLibCheck": true
+  }
+}

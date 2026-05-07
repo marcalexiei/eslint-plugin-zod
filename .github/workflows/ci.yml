@@ -43,7 +43,7 @@ jobs:
 
       - name: Install ESLint (if needed)
         if: ${{ matrix.eslint != 10 }}
-        run: pnpm install eslint@${{ matrix.eslint }} --save-dev
+        run: pnpm -r --include-workspace-root install eslint@${{ matrix.eslint }} --save-dev
 
       - name: Run test
         run: pnpm run test
@@ -61,6 +61,9 @@ jobs:
 
       - name: Build
         run: pnpm run build
+
+      - name: Typecheck
+        run: pnpm run typecheck
 
       - name: Format check
         run: pnpm run format:check
