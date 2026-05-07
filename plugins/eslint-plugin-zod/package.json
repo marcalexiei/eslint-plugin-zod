@@ -49,7 +49,7 @@
   },
   "dependencies": {
     "@eslint-zod/utils": "workspace:*",
-    "@typescript-eslint/utils": "^8.57.0",
+    "@typescript-eslint/utils": "catalog:deps",
     "esquery": "^1.6.0"
   },
   "peerDependencies": {
@@ -70,9 +70,10 @@
   },
   "devDependencies": {
     "@types/esquery": "1.5.4",
-    "@typescript-eslint/rule-tester": "8.59.2",
-    "dedent": "1.7.2",
-    "eslint-doc-generator": "3.3.2",
-    "vitest": "4.1.5"
+    "@typescript-eslint/rule-tester": "catalog:dev",
+    "dedent": "catalog:dev",
+    "eslint-doc-generator": "catalog:dev",
+    "tsdown": "catalog:dev",
+    "vitest": "catalog:dev"
   }
 }

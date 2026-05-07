@@ -40,8 +40,8 @@
     "eslint-plugin-n": "17.24.0",
     "knip": "6.11.0",
     "prettier": "3.8.3",
-    "tsdown": "0.21.10",
+    "tsdown": "catalog:dev",
     "typescript": "6.0.3",
-    "typescript-eslint": "8.59.2"
+    "typescript-eslint": "catalog:dev"
   }
 }

@@ -1,8 +1,7 @@
+import { createZodSchemaImportTrack, findParentSchemaMatchingCondition  } from '@eslint-zod/utils';
 import type { TSESLint, TSESTree } from '@typescript-eslint/utils';
 
 import { createZodPluginRule } from '../utils/create-plugin-rule.js';
-import { findParentSchemaMatchingCondition } from '@eslint-zod/utils';
-import { createZodSchemaImportTrack } from '@eslint-zod/utils';
 
 const {
   //

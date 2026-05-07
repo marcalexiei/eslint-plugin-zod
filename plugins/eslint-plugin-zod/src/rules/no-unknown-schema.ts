@@ -1,5 +1,6 @@
-import { createZodPluginRule } from '../utils/create-plugin-rule.js';
 import { createZodSchemaImportTrack } from '@eslint-zod/utils';
+
+import { createZodPluginRule } from '../utils/create-plugin-rule.js';
 
 const {
   //

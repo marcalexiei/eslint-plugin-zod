@@ -1,8 +1,8 @@
+import { createZodSchemaImportTrack } from '@eslint-zod/utils';
 import type { TSESLint } from '@typescript-eslint/utils';
 import { AST_NODE_TYPES } from '@typescript-eslint/utils';
 
 import { createZodPluginRule } from '../utils/create-plugin-rule.js';
-import { createZodSchemaImportTrack } from '@eslint-zod/utils';
 
 const ZOD_OBJECT_METHODS = ['object', 'looseObject', 'strictObject'] as const;
 

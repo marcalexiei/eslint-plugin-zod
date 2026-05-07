@@ -113,26 +113,10 @@ Move from `plugins/eslint-plugin-zod/src/utils/`:
 - `build-zod-chain-removal-fix.ts`
 - `build-zod-chain-replacement-fix.ts`
 
-The **14 universal rules** (rules that apply to both `zod` and `zod/mini`) also move
-here as raw rule factory functions — no `createPluginRule` wrapper, just the `create`
-logic. Each plugin wraps them with its own `createPluginRule` and registers them.
-
-Universal rules (from README):
-
-- `consistent-import`
-- `consistent-import-source`
-- `consistent-object-schema-type`
-- `consistent-schema-output-type-style`
-- `consistent-schema-var-name`
-- `no-any-schema`
-- `no-empty-custom-schema`
-- `no-unknown-schema`
-- `prefer-meta`
-- `prefer-namespace-import`
-- `require-brand-type-parameter`
-- `require-error-message`
-- `require-schema-suffix`
-- `schema-error-property-style`
+**Rule implementations stay per-plugin.** `eslint-plugin-zod` tracks `zod` imports and
+`eslint-plugin-zod-mini` tracks `zod/mini` imports — the factory logic differs between
+plugins. Each plugin owns its complete rule set and uses the shared AST utilities from
+`@eslint-zod/utils` to detect and manipulate nodes.
 
 Update `eslint-plugin-zod` imports to use `@eslint-zod/utils`.
 
@@ -152,8 +136,8 @@ Create `plugins/eslint-plugin-zod-mini/`:
 
 - Own `package.json` (`name: "eslint-plugin-zod-mini"`), `tsconfig.json`, `tsdown.config.ts`, `vitest.config.ts`
 - Depends on `@eslint-zod/utils` (workspace)
-- Own `create-plugin-rule.ts` (independent from zod's, may diverge)
-- Re-exports universal rules from `@eslint-zod/utils`, wrapped with its own `createPluginRule`
+- Own `create-plugin-rule.ts` (independent from zod's, detects `zod/mini` imports)
+- Own rule implementations using shared AST utilities from `@eslint-zod/utils`
 - zod-mini-specific rules added incrementally
 
 ---

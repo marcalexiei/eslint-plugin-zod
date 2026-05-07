@@ -1,9 +1,9 @@
+import { createZodSchemaImportTrack } from '@eslint-zod/utils';
 import type { TSESTree } from '@typescript-eslint/utils';
 import { AST_NODE_TYPES } from '@typescript-eslint/utils';
 import esquery from 'esquery';
 
 import { createZodPluginRule } from '../utils/create-plugin-rule.js';
-import { createZodSchemaImportTrack } from '@eslint-zod/utils';
 
 type MessageIds = 'invalidStyle' | 'invalidSelector';
 

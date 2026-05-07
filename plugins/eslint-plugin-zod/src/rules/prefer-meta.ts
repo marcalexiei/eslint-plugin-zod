@@ -1,7 +1,7 @@
+import { createZodSchemaImportTrack } from '@eslint-zod/utils';
 import type { TSESTree } from '@typescript-eslint/utils';
 
 import { createZodPluginRule } from '../utils/create-plugin-rule.js';
-import { createZodSchemaImportTrack } from '@eslint-zod/utils';
 
 const {
   //

@@ -50,7 +50,7 @@ const eslintPluginZod = {
     version: PLUGIN_VERSION,
   },
   rules: {
-    /* eslint-disable @typescript-eslint/naming-convention */
+     
     'array-style': arrayStyle,
     'consistent-import-source': consistentImportSource,
     'consistent-import': consistentImport,
@@ -81,7 +81,7 @@ const eslintPluginZod = {
     'require-error-message': requireErrorMessage,
     'require-schema-suffix': requireSchemaSuffix,
     'schema-error-property-style': schemaErrorPropertyStyle,
-    /* eslint-enable @typescript-eslint/naming-convention */
+     
   } as unknown as Record<string, Rule.RuleModule>,
 } satisfies ESLint.Plugin as CompatiblePlugin;
 
@@ -96,7 +96,7 @@ const baseConfig = {
 const recommendedConfig = {
   ...baseConfig,
   rules: {
-    /* eslint-disable @typescript-eslint/naming-convention */
+     
     'zod/array-style': 'error',
     'zod/consistent-import': 'error',
     'zod/consistent-schema-var-name': 'error',
@@ -118,20 +118,20 @@ const recommendedConfig = {
     'zod/prefer-trim-before-string-length-checks': 'error',
     'zod/require-brand-type-parameter': 'error',
     'zod/require-error-message': 'error',
-    /* eslint-enable @typescript-eslint/naming-convention */
+     
   },
 } satisfies Linter.Config as CompatibleConfig;
 
 const recommendedConfigMini = {
   ...baseConfig,
   rules: {
-    /* eslint-disable @typescript-eslint/naming-convention */
+     
     'zod/consistent-schema-var-name': 'error',
     'zod/no-any-schema': 'error',
     'zod/prefer-meta': 'error',
     'zod/require-brand-type-parameter': 'error',
     'zod/require-error-message': 'error',
-    /* eslint-enable @typescript-eslint/naming-convention */
+     
   },
 } satisfies Linter.Config as CompatibleConfig;
 

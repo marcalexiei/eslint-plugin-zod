@@ -1,8 +1,8 @@
+import { isZodImportSource } from '@eslint-zod/utils';
 import type { TSESTree } from '@typescript-eslint/utils';
 import { AST_NODE_TYPES } from '@typescript-eslint/utils';
 
 import { createZodPluginRule } from '../utils/create-plugin-rule.js';
-import { isZodImportSource } from '@eslint-zod/utils';
 
 interface ImportGroupData {
   hasOnlyTypeImports: boolean;

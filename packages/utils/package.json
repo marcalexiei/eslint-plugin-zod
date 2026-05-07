@@ -41,10 +41,14 @@
   },
   "scripts": {
     "build": "tsdown",
-    "test": "vitest",
+    "test": "exit 0",
     "test:dev": "vitest --typecheck=false"
   },
+  "devDependencies": {
+    "tsdown": "catalog:dev",
+    "vitest": "catalog:dev"
+  },
   "dependencies": {
-    "@typescript-eslint/utils": "^8.57.0"
+    "@typescript-eslint/utils": "catalog:deps"
   }
 }

@@ -6,7 +6,7 @@ import pluginEslintPlugin from 'eslint-plugin-eslint-plugin';
 import pluginEslintNode from 'eslint-plugin-n';
 
 export default defineConfig(
-  globalIgnores(['dist', 'coverage']),
+  globalIgnores(['**/dist/**', '**/coverage/**']),
   {
     ...configBase,
     rules: {
@@ -25,6 +25,12 @@ export default defineConfig(
           selector: ['objectLiteralProperty', 'objectLiteralMethod'],
           format: ['camelCase', 'PascalCase'],
         },
+        // path-like keys in config files (e.g. knip workspaces)
+        {
+          selector: 'objectLiteralProperty',
+          modifiers: ['requiresQuotes'],
+          format: null,
+        },
       ],
     },
   },
@@ -41,8 +47,25 @@ export default defineConfig(
   {
     languageOptions: {
       parserOptions: {
-        project: true,
+        project: [
+          './tsconfig.node.json',
+          './plugins/*/tsconfig.json',
+          './packages/*/tsconfig.json',
+        ],
       },
+    },
+    rules: {
+      'import-x/no-extraneous-dependencies': [
+        'error',
+        {
+          packageDir: [
+            '.',
+            './plugins/eslint-plugin-zod',
+            './plugins/eslint-plugin-zod-mini',
+            './packages/utils',
+          ],
+        },
+      ],
     },
   },
 );

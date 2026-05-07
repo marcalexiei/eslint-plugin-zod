@@ -1,8 +1,7 @@
+import type { ZodImportAllowedSource } from '@eslint-zod/utils';
 import { ESLintUtils } from '@typescript-eslint/utils';
 
 import { getRuleURL } from '../meta.js';
-
-import type { ZodImportAllowedSource } from './is-zod-import-source.js';
 
 export type ZodPluginRule = ESLintUtils.RuleWithMetaAndName<
   [],

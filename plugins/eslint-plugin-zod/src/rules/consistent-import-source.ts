@@ -1,8 +1,8 @@
+import { ZOD_IMPORT_SOURCES } from '@eslint-zod/utils';
+import type { ZodImportSource } from '@eslint-zod/utils';
 import type { TSESLint } from '@typescript-eslint/utils';
 
 import { createZodPluginRule } from '../utils/create-plugin-rule.js';
-import { ZOD_IMPORT_SOURCES } from '@eslint-zod/utils';
-import type { ZodImportSource } from '@eslint-zod/utils';
 
 type MessageIds = 'sourceNotAllowed' | 'replaceSource';
 
