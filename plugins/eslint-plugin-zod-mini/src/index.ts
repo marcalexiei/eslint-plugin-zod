@@ -10,10 +10,8 @@ import { noAnySchema } from './rules/no-any-schema.js';
 import { noEmptyCustomSchema } from './rules/no-empty-custom-schema.js';
 import { noUnknownSchema } from './rules/no-unknown-schema.js';
 import { preferMeta } from './rules/prefer-meta.js';
-import { preferNamespaceImport } from './rules/prefer-namespace-import.js';
 import { requireBrandTypeParameter } from './rules/require-brand-type-parameter.js';
 import { requireErrorMessage } from './rules/require-error-message.js';
-import { requireSchemaSuffix } from './rules/require-schema-suffix.js';
 import { schemaErrorPropertyStyle } from './rules/schema-error-property-style.js';
 
 interface CompatibleConfig {
@@ -44,10 +42,8 @@ const eslintPluginZodMini = {
     'no-empty-custom-schema': noEmptyCustomSchema,
     'no-unknown-schema': noUnknownSchema,
     'prefer-meta': preferMeta,
-    'prefer-namespace-import': preferNamespaceImport,
     'require-brand-type-parameter': requireBrandTypeParameter,
     'require-error-message': requireErrorMessage,
-    'require-schema-suffix': requireSchemaSuffix,
     'schema-error-property-style': schemaErrorPropertyStyle,
   } as unknown as Record<string, Rule.RuleModule>,
 } satisfies ESLint.Plugin as CompatiblePlugin;

@@ -23,12 +23,10 @@ import { noUnknownSchema } from './rules/no-unknown-schema.js';
 import { preferEnumOverLiteralUnion } from './rules/prefer-enum-over-literal-union.js';
 import { preferMetaLast } from './rules/prefer-meta-last.js';
 import { preferMeta } from './rules/prefer-meta.js';
-import { preferNamespaceImport } from './rules/prefer-namespace-import.js';
 import { preferStringSchemaWithTrim } from './rules/prefer-string-schema-with-trim.js';
 import { preferTrimBeforeStringLengthChecks } from './rules/prefer-trim-before-string-length-checks.js';
 import { requireBrandTypeParameter } from './rules/require-brand-type-parameter.js';
 import { requireErrorMessage } from './rules/require-error-message.js';
-import { requireSchemaSuffix } from './rules/require-schema-suffix.js';
 import { schemaErrorPropertyStyle } from './rules/schema-error-property-style.js';
 
 interface CompatibleConfig {
@@ -72,13 +70,11 @@ const eslintPluginZod = {
     'prefer-enum-over-literal-union': preferEnumOverLiteralUnion,
     'prefer-meta': preferMeta,
     'prefer-meta-last': preferMetaLast,
-    'prefer-namespace-import': preferNamespaceImport,
     'prefer-string-schema-with-trim': preferStringSchemaWithTrim,
     'prefer-trim-before-string-length-checks':
       preferTrimBeforeStringLengthChecks,
     'require-brand-type-parameter': requireBrandTypeParameter,
     'require-error-message': requireErrorMessage,
-    'require-schema-suffix': requireSchemaSuffix,
     'schema-error-property-style': schemaErrorPropertyStyle,
   } as unknown as Record<string, Rule.RuleModule>,
 } satisfies ESLint.Plugin as CompatiblePlugin;
