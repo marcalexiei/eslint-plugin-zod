@@ -1,9 +1,9 @@
 # eslint-plugin-zod
 
-[![CI][CIBadge]][CIURL]
+[![CI Status][CIBadge]][CIURL]
 [![Code style: prettier][CodeStyleBadge]][CodeStyleURL]
 [![Lint: eslint][lintBadge]][lintURL]
-[![issues][issuesBadge]][issuesURL]
+[![Open issue tracker][issuesBadge]][issuesURL]
 
 [CIBadge]: https://img.shields.io/github/actions/workflow/status/marcalexiei/eslint-zod/ci.yml?style=for-the-badge&logo=github&event=push&label=CI
 [CIURL]: https://github.com/marcalexiei/eslint-zod/actions/workflows/CI.yml/badge.svg
@@ -19,14 +19,23 @@ Monorepo containing [ESLint](https://eslint.org) plugins that enforce best pract
 Both plugins can also work with [Oxlint](https://oxc.rs/docs/guide/usage/linter.html)!\
 Find out more about [Oxlint's `jsPLugins`](https://oxc.rs/docs/guide/usage/linter/js-plugins.html).
 
+## Plugins
+
+| Package                                                  | Version                                           | Description          |
+| :------------------------------------------------------- | :------------------------------------------------ | :------------------- |
+| [eslint-plugin-zod](plugins/eslint-plugin-zod)           | [![Open on npmx][npmZodBadge]][npmZodURL]         | Rules for `zod`      |
+| [eslint-plugin-zod-mini](plugins/eslint-plugin-zod-mini) | [![Open on npmx][npmZodMiniBadge]][npmZodMiniURL] | Rules for `zod/mini` |
+
+[npmZodBadge]: https://npmx.dev/api/registry/badge/version/eslint-plugin-zod
+[npmZodURL]: https://npmx.dev/package/eslint-plugin-zod
+[npmZodMiniBadge]: https://npmx.dev/api/registry/badge/version/eslint-plugin-zod-mini
+[npmZodMiniURL]: https://npmx.dev/package/eslint-plugin-zod-mini
+
 ## Packages
 
-| Package                                                  | Version                                          | Description          |
-| :------------------------------------------------------- | :----------------------------------------------- | :------------------- |
-| [eslint-plugin-zod](plugins/eslint-plugin-zod)           | [![npm version][npmZodBadge]][npmZodURL]         | Rules for `zod`      |
-| [eslint-plugin-zod-mini](plugins/eslint-plugin-zod-mini) | [![npm version][npmZodMiniBadge]][npmZodMiniURL] | Rules for `zod/mini` |
+| Package                             | Version                                       | Description                                 |
+| :---------------------------------- | :-------------------------------------------- | :------------------------------------------ |
+| [@eslint-zod/utils](packages/utils) | [![Open on npmx][npmUtilsBadge]][npmUtilsURL] | Shared AST utilities for eslint-zod plugins |
 
-[npmZodBadge]: https://img.shields.io/npm/v/eslint-plugin-zod.svg?style=flat-square&logo=npm
-[npmZodURL]: https://www.npmjs.com/package/eslint-plugin-zod
-[npmZodMiniBadge]: https://img.shields.io/npm/v/eslint-plugin-zod-mini.svg?style=flat-square&logo=npm
-[npmZodMiniURL]: https://www.npmjs.com/package/eslint-plugin-zod-mini
+[npmUtilsBadge]: https://img.shields.io/npm/v/@eslint-zod/utils.svg?style=flat-square&logo=npm
+[npmUtilsURL]: https://npmx.dev/package/@eslint-zod/utils
