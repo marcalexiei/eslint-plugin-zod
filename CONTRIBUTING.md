@@ -4,6 +4,22 @@ Thank you for considering a contribution!
 
 This document explains how to set up the project locally, run tests and linters, update documentation, and send changes via pull requests.
 
+## Repository structure
+
+This is a pnpm monorepo with two published ESLint plugins and a shared utilities package:
+
+| Package                  | Directory                         |
+| ------------------------ | --------------------------------- |
+| `eslint-plugin-zod`      | `plugins/eslint-plugin-zod/`      |
+| `eslint-plugin-zod-mini` | `plugins/eslint-plugin-zod-mini/` |
+| `@eslint-zod/utils`      | `packages/utils/`                 |
+
+`@eslint-zod/utils` contains AST helpers shared by both plugins. Rule implementations live entirely per-plugin.
+
+Several rules exist in **both** plugins with the same name and intent but adapted to each plugin's API style (`zod` uses chained methods; `zod/mini` uses standalone `$ZodCheck` functions). When modifying a shared rule, keep both plugins in sync (code, specs, and docs).
+
+---
+
 ## Quick start ✅
 
 Detailed setup instructions are available here:
@@ -21,16 +37,10 @@ pnpm run check-all
 
 ## Run tests 🧪
 
-- Run the full test suite:
+- Run the full test suite (all packages):
 
 ```shell
 pnpm test
-```
-
-- Run tests without type-checking (faster for quick iteration):
-
-```shell
-pnpm run test --typecheck=false
 ```
 
 ---
@@ -41,25 +51,30 @@ pnpm run test --typecheck=false
 
 ```shell
 pnpm run lint
-pnpm run format
 ```
 
-- Fix JS lint issues and formatting automatically:
+- Fix JS lint issues automatically:
 
 ```shell
 pnpm run lint:js:fix
-pnpm run format:fix
 ```
 
-- Make sure docs are in sync:
+- Fix formatting:
+
+```shell
+pnpm run format
+```
+
+- Make sure docs are in sync (runs across all plugins):
 
 ```shell
 pnpm run lint:docs
 ```
 
-To _update_ generated rule docs from the source code:
+To _update_ generated rule docs from the source code, run from the relevant plugin directory (or use `--filter`):
 
 ```shell
+# from plugins/eslint-plugin-zod/ or plugins/eslint-plugin-zod-mini/
 pnpm run build:docs
 ```
 
@@ -69,7 +84,9 @@ pnpm run build:docs
 
 ## Rule documentation
 
-If you change a rule's behavior, update its documentation in the `docs/rules/` folder and run `pnpm run build:docs` to regenerate the docs.
+Each plugin has its own `docs/rules/` folder. If you change a rule's behavior, update its documentation and run `pnpm run build:docs` from that plugin's directory to regenerate the docs.
+
+If the rule exists in both plugins (see the shared rules list in `CLAUDE.md`), update both plugins' docs and regenerate both.
 
 ---
 
@@ -88,7 +105,7 @@ Please ensure your commit messages are clear and follow the repository conventio
 - Fork the repository and create a branch with a descriptive name.
 - Open a pull request against `main` and include a short description of the changes and the reasoning.
 - Run `pnpm run check-all`.
-- If your change affects docs, include the updated docs or run `pnpm run build:docs` and include the generated files.
+- If your change affects docs, include the updated docs or run `pnpm run build:docs` from the relevant plugin directory and include the generated files.
 
 ---
 
@@ -100,4 +117,4 @@ Releases are handled via Changesets. See the release guide for details:
 
 ---
 
-Thank you for helping improve the project — contributions are welcome! 🙏
+Thank you for helping improve the project — contributions are welcome!
