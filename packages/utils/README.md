@@ -2,6 +2,7 @@
 
 [![CI Status][CIBadge]][CIURL]
 [![Code style: prettier][CodeStyleBadge]][CodeStyleURL]
+[![Lint: eslint][lintBadge]][lintURL]
 [![Open on npmx][npmVersionBadge]][npmVersionURL]
 [![Open issue tracker][issuesBadge]][issuesURL]
 
@@ -9,6 +10,8 @@
 [CIURL]: https://github.com/marcalexiei/eslint-zod/actions/workflows/CI.yml/badge.svg
 [CodeStyleBadge]: https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=for-the-badge&logo=prettier
 [CodeStyleURL]: https://prettier.io
+[lintBadge]: https://img.shields.io/badge/lint-eslint-3A33D1?logo=eslint&style=for-the-badge
+[lintURL]: https://eslint.org
 [npmVersionBadge]: https://img.shields.io/npm/v/@eslint-zod/utils.svg?style=for-the-badge&logo=npm
 [npmVersionURL]: https://npmx.dev/package/@eslint-zod/utils
 [issuesBadge]: https://img.shields.io/github/issues/marcalexiei/eslint-zod.svg?style=for-the-badge
