@@ -1,14 +1,10 @@
-import { createZodSchemaImportTrack } from '@eslint-zod/utils';
+import { createZodSchemaImportTrack, zodImportScope } from '@eslint-zod/utils';
 import type { TSESLint } from '@typescript-eslint/utils';
 import { AST_NODE_TYPES } from '@typescript-eslint/utils';
 
 import { createZodPluginRule } from '../utils/create-plugin-rule.js';
 
-const {
-  //
-  zodImportAllowedSource,
-  trackZodSchemaImports,
-} = createZodSchemaImportTrack('zod');
+const { trackZodSchemaImports } = createZodSchemaImportTrack(zodImportScope);
 
 export const noAnySchema = createZodPluginRule({
   name: 'no-any-schema',
@@ -16,7 +12,6 @@ export const noAnySchema = createZodPluginRule({
     hasSuggestions: true,
     type: 'suggestion',
     docs: {
-      zodImportAllowedSource,
       description: 'Disallow usage of `z.any()` in Zod schemas',
     },
     messages: {

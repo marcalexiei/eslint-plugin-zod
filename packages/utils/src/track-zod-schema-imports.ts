@@ -6,8 +6,7 @@ import {
   isZodNumberSchemaCallExpression,
 } from './detect-zod-schema-root-node.js';
 import type { DetectResult } from './detect-zod-schema-root-node.js';
-import { isZodImportSource } from './is-zod-import-source.js';
-import type { ZodImportAllowedSource } from './is-zod-import-source.js';
+import type { ZodImportScope } from './zod-import-scope.js';
 
 interface ZodChainItem {
   name: string;
@@ -78,9 +77,8 @@ interface Result {
  * Function to create helpers that allow to manage default, namespace and named `zod`
  * imports without too much hassle.
  */
-function trackZodSchemaImports(
-  importAllowedSource: ZodImportAllowedSource,
-): Result {
+function trackZodSchemaImports(importScope: ZodImportScope): Result {
+  const scope = importScope;
   const zodNamespaces = new Set<string>();
   // localName → original export name
   const zodNamedImports = new Map<string, string>();
@@ -129,7 +127,7 @@ function trackZodSchemaImports(
   const result: Result = {
     // to be inserted into rule.create()
     importDeclarationListener(node): void {
-      if (!isZodImportSource(node.source.value, importAllowedSource)) {
+      if (!scope.isAllowed(node.source.value)) {
         return;
       }
 
@@ -181,22 +179,10 @@ function trackZodSchemaImports(
   return result;
 }
 
-/**
- * Wrapper to avoid duplication of importAllowedSource across rule code
- *
- * This function exposes:
- *
- * - `zodImportAllowedSource` - to be used in rules meta to properly generate documentation
- * - `trackZodSchemaImports` - used inside a rule to process only zod related variables
- */
-export function createZodSchemaImportTrack(
-  zodImportAllowedSource: ZodImportAllowedSource,
-): {
-  zodImportAllowedSource: ZodImportAllowedSource;
+export function createZodSchemaImportTrack(scope: ZodImportScope): {
   trackZodSchemaImports: () => ReturnType<typeof trackZodSchemaImports>;
 } {
   return {
-    zodImportAllowedSource,
-    trackZodSchemaImports: () => trackZodSchemaImports(zodImportAllowedSource),
+    trackZodSchemaImports: () => trackZodSchemaImports(scope),
   };
 }

@@ -1,13 +1,9 @@
-import { createZodSchemaImportTrack } from '@eslint-zod/utils';
+import { createZodSchemaImportTrack, zodImportScope } from '@eslint-zod/utils';
 import { AST_NODE_TYPES } from '@typescript-eslint/utils';
 
 import { createZodPluginRule } from '../utils/create-plugin-rule.js';
 
-const {
-  //
-  zodImportAllowedSource,
-  trackZodSchemaImports,
-} = createZodSchemaImportTrack('zod');
+const { trackZodSchemaImports } = createZodSchemaImportTrack(zodImportScope);
 
 export const noNumberSchemaWithIsInt = createZodPluginRule({
   name: 'no-number-schema-with-is-int',
@@ -17,7 +13,6 @@ export const noNumberSchemaWithIsInt = createZodPluginRule({
     // because converting `schema.isInt` to checking the `format` property requires
     // understanding the runtime context and intended behavior.
     docs: {
-      zodImportAllowedSource,
       description:
         'Disallow using deprecated `isInt` on a Zod number schema; check the `format` property instead.',
     },

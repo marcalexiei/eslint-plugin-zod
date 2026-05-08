@@ -11,6 +11,9 @@
 This rule enforces consistent import sources for Zod across your project.
 It helps maintain uniformity in how Zod is imported, especially when dealing with different versions or import paths.
 
+The rule only applies to imports within the `zod` scope: `'zod'`, `'zod/v4'`, and `'zod/v3'`.
+Imports from `zod/mini` or `zod/v4-mini` are out of scope and are never flagged — use [`zod-mini/consistent-import-source`](../../eslint-plugin-zod-mini/docs/rules/consistent-import-source.md) for those.
+
 ---
 
 This rule is disabled by default since equivalent behavior can be enforced by other, more specialized rules.

@@ -1,13 +1,9 @@
-import { createZodSchemaImportTrack } from '@eslint-zod/utils';
+import { createZodSchemaImportTrack, zodImportScope } from '@eslint-zod/utils';
 import { AST_NODE_TYPES } from '@typescript-eslint/utils';
 
 import { createZodPluginRule } from '../utils/create-plugin-rule.js';
 
-const {
-  //
-  zodImportAllowedSource,
-  trackZodSchemaImports,
-} = createZodSchemaImportTrack('zod');
+const { trackZodSchemaImports } = createZodSchemaImportTrack(zodImportScope);
 
 export const noNumberSchemaWithIsFinite = createZodPluginRule({
   name: 'no-number-schema-with-is-finite',
@@ -17,7 +13,6 @@ export const noNumberSchemaWithIsFinite = createZodPluginRule({
     // because `isFinite` is a deprecated property access that always returns true
     // in v4+. Automatically removing it could change code semantics.
     docs: {
-      zodImportAllowedSource,
       description:
         'Disallow using deprecated `isFinite` on a Zod number schema; in v4+ it is always `true`.',
     },

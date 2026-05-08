@@ -1,13 +1,9 @@
-import { createZodSchemaImportTrack } from '@eslint-zod/utils';
+import { createZodSchemaImportTrack, zodImportScope } from '@eslint-zod/utils';
 import type { TSESTree } from '@typescript-eslint/utils';
 
 import { createZodPluginRule } from '../utils/create-plugin-rule.js';
 
-const {
-  //
-  zodImportAllowedSource,
-  trackZodSchemaImports,
-} = createZodSchemaImportTrack('zod');
+const { trackZodSchemaImports } = createZodSchemaImportTrack(zodImportScope);
 
 const preferredMethods = ['none', 'default', 'optional'] as const;
 
@@ -32,7 +28,6 @@ export const noOptionalAndDefaultTogether = createZodPluginRule<
     type: 'problem',
     fixable: 'code',
     docs: {
-      zodImportAllowedSource,
       description:
         'Disallow using both `.optional()` and `.default()` on the same Zod schema',
     },

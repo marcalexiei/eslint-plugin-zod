@@ -1,19 +1,14 @@
-import { createZodSchemaImportTrack } from '@eslint-zod/utils';
+import { createZodSchemaImportTrack, zodImportScope } from '@eslint-zod/utils';
 
 import { createZodPluginRule } from '../utils/create-plugin-rule.js';
 
-const {
-  //
-  zodImportAllowedSource,
-  trackZodSchemaImports,
-} = createZodSchemaImportTrack('zod');
+const { trackZodSchemaImports } = createZodSchemaImportTrack(zodImportScope);
 
 export const noUnknownSchema = createZodPluginRule({
   name: 'no-unknown-schema',
   meta: {
     type: 'suggestion',
     docs: {
-      zodImportAllowedSource,
       description: 'Disallow usage of `z.unknown()` in Zod schemas',
     },
     messages: {

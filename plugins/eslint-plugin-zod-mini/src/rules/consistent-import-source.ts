@@ -1,5 +1,4 @@
-import { ZOD_IMPORT_SOURCES } from '@eslint-zod/utils';
-import type { ZodImportSource } from '@eslint-zod/utils';
+import { zodMiniImportScope } from '@eslint-zod/utils';
 import type { TSESLint } from '@typescript-eslint/utils';
 
 import { createZodMiniPluginRule } from '../utils/create-plugin-rule.js';
@@ -7,7 +6,7 @@ import { createZodMiniPluginRule } from '../utils/create-plugin-rule.js';
 type MessageIds = 'sourceNotAllowed' | 'replaceSource';
 
 export const consistentImportSource = createZodMiniPluginRule<
-  [{ sources: Array<ZodImportSource> }],
+  [{ sources: Array<(typeof zodMiniImportScope.sources)[number]> }],
   MessageIds
 >({
   name: 'consistent-import-source',
@@ -15,7 +14,6 @@ export const consistentImportSource = createZodMiniPluginRule<
     hasSuggestions: true,
     type: 'suggestion',
     docs: {
-      zodImportAllowedSource: 'zod-mini',
       description: 'Enforce consistent source from Zod Mini imports',
     },
     messages: {
@@ -32,7 +30,7 @@ export const consistentImportSource = createZodMiniPluginRule<
             description: 'An array of allowed Zod import sources.',
             items: {
               type: 'string',
-              enum: [...ZOD_IMPORT_SOURCES],
+              enum: [...zodMiniImportScope.sources],
             },
             minItems: 1,
             uniqueItems: true,
@@ -47,11 +45,11 @@ export const consistentImportSource = createZodMiniPluginRule<
     return {
       ImportDeclaration(node): void {
         const sourceValue = node.source.value;
-        if (!sourceValue.startsWith('zod')) {
+        if (!zodMiniImportScope.isAllowed(sourceValue)) {
           return;
         }
 
-        if (sources.includes(sourceValue as ZodImportSource)) {
+        if ((sources as Array<string>).includes(sourceValue)) {
           return;
         }
 

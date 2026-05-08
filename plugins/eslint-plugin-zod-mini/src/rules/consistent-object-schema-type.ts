@@ -1,4 +1,7 @@
-import { createZodSchemaImportTrack } from '@eslint-zod/utils';
+import {
+  createZodSchemaImportTrack,
+  zodMiniImportScope,
+} from '@eslint-zod/utils';
 import type { TSESLint } from '@typescript-eslint/utils';
 import { AST_NODE_TYPES } from '@typescript-eslint/utils';
 
@@ -15,11 +18,8 @@ type MessageIds = 'consistentMethod' | 'useMethod';
 
 const defaultOptions: Options = { allow: ['object'] };
 
-const {
-  //
-  zodImportAllowedSource,
-  trackZodSchemaImports,
-} = createZodSchemaImportTrack('zod-mini');
+const { trackZodSchemaImports } =
+  createZodSchemaImportTrack(zodMiniImportScope);
 
 export const consistentObjectSchemaType = createZodMiniPluginRule<
   [Options],
@@ -30,7 +30,6 @@ export const consistentObjectSchemaType = createZodMiniPluginRule<
     hasSuggestions: true,
     type: 'suggestion',
     docs: {
-      zodImportAllowedSource,
       description: 'Enforce consistent usage of Zod Mini schema methods',
     },
     messages: {

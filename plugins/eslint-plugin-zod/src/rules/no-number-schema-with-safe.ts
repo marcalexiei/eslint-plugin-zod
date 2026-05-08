@@ -1,15 +1,12 @@
 import {
   buildZodChainReplacementFix,
   createZodSchemaImportTrack,
+  zodImportScope,
 } from '@eslint-zod/utils';
 
 import { createZodPluginRule } from '../utils/create-plugin-rule.js';
 
-const {
-  //
-  zodImportAllowedSource,
-  trackZodSchemaImports,
-} = createZodSchemaImportTrack('zod');
+const { trackZodSchemaImports } = createZodSchemaImportTrack(zodImportScope);
 
 export const noNumberSchemaWithSafe = createZodPluginRule({
   name: 'no-number-schema-with-safe',
@@ -17,7 +14,6 @@ export const noNumberSchemaWithSafe = createZodPluginRule({
     fixable: 'code',
     type: 'problem',
     docs: {
-      zodImportAllowedSource,
       description:
         'Disallow deprecated `z.number().safe()`. Use `z.int()`; `.safe()` is now identical to `.int()`.',
     },

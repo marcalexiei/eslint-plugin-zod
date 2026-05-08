@@ -1,15 +1,12 @@
 import {
   buildZodChainRemoveMethodFix,
   createZodSchemaImportTrack,
+  zodImportScope,
 } from '@eslint-zod/utils';
 
 import { createZodPluginRule } from '../utils/create-plugin-rule.js';
 
-const {
-  //
-  zodImportAllowedSource,
-  trackZodSchemaImports,
-} = createZodSchemaImportTrack('zod');
+const { trackZodSchemaImports } = createZodSchemaImportTrack(zodImportScope);
 
 export const noNumberSchemaWithFinite = createZodPluginRule({
   name: 'no-number-schema-with-finite',
@@ -17,7 +14,6 @@ export const noNumberSchemaWithFinite = createZodPluginRule({
     fixable: 'code',
     type: 'problem',
     docs: {
-      zodImportAllowedSource,
       description:
         'Disallow deprecated `z.number().finite()`. In Zod 4+ number schemas do not allow infinite values by default, so it is a no-op.',
     },

@@ -1,15 +1,12 @@
 import {
   createZodSchemaImportTrack,
   findParentSchemaMatchingCondition,
+  zodImportScope,
 } from '@eslint-zod/utils';
 
 import { createZodPluginRule } from '../utils/create-plugin-rule.js';
 
-const {
-  //
-  zodImportAllowedSource,
-  trackZodSchemaImports,
-} = createZodSchemaImportTrack('zod');
+const { trackZodSchemaImports } = createZodSchemaImportTrack(zodImportScope);
 
 export const preferStringSchemaWithTrim = createZodPluginRule({
   name: 'prefer-string-schema-with-trim',
@@ -17,7 +14,6 @@ export const preferStringSchemaWithTrim = createZodPluginRule({
     type: 'problem',
     fixable: 'code',
     docs: {
-      zodImportAllowedSource,
       description:
         'Enforce `z.string().trim()` to prevent accidental leading/trailing whitespace',
     },

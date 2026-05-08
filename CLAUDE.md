@@ -31,16 +31,17 @@ pnpm lint:docs      # check rule docs are up to date
 
 ### Import source scoping
 
-Each plugin is scoped to its own import source via `ZodImportAllowedSource` (`'zod'` or `'zod-mini'`). This type lives in `packages/utils/src/is-zod-import-source.ts`. There is no `'all'` union — rules in `eslint-plugin-zod` never fire on `zod/mini` imports and vice versa.
+Each plugin is scoped to its own import source via `ZodImportAllowedSource` (`'zod'` or `'zod-mini'`). This type lives in `packages/utils/src/zod-import-scope.ts` alongside the `ZodImportScope` class and the two pre-built instances `zodImportScope` and `zodMiniImportScope`. There is no `'all'` union — rules in `eslint-plugin-zod` never fire on `zod/mini` imports and vice versa. Each rule guards itself with `scope.isAllowed(sourceValue)` at the top of its visitor.
 
 ### Shared utilities (`@eslint-zod/utils`)
 
 AST helpers used by both plugins:
 
-- `trackZodSchemaImports()` — tracks namespace and named imports; returns `isZodNamespace`, `getNamedImportOriginal`, and listener hooks
+- `createZodSchemaImportTrack()` — tracks namespace and named imports; returns an object with `isZodNamespace`, `getNamedImportOriginal`, `collectZodChainMethods`, and listener hooks
 - `detectZodSchemaRootNode()` — finds the outermost Zod call expression in a chain
-- `collectZodChainMethods()` — returns the list of chained method names on a Zod expression
-- `buildZodChainRemovalFix` / `buildZodChainReplacementFix` — fixer helpers
+- `buildZodChainRemoveMethodFix` / `buildZodChainReplacementFix` — fixer helpers
+- `zodImportScope` / `zodMiniImportScope` — pre-built `ZodImportScope` instances; use `scope.isAllowed(source)` to check whether a source belongs to the plugin's scope
+- `ZOD_NON_SCHEMA_PRODUCING_METHODS` — array of method names that do not return a schema (parse, codec, error formatters)
 
 Rule implementations live entirely per-plugin. Only the AST utilities are shared.
 
@@ -77,9 +78,18 @@ Methods that ARE chained in `zod/mini`: `check()`, `brand()`, `parse()`, `safePa
 
 ### Consequence for rule authoring
 
-Rules that look for chained methods (via `collectZodChainMethods`) work correctly in both plugins because `detectZodSchemaRootNode` identifies the outermost call — including calls in argument position (e.g. `z.refine(fn)` inside `.check(z.refine(fn))` is the root of its own expression).
+Rules that look for chained methods (via `tracker.collectZodChainMethods`) work correctly in both plugins because `detectZodSchemaRootNode` identifies the outermost call — including calls in argument position (e.g. `z.refine(fn)` inside `.check(z.refine(fn))` is the root of its own expression).
 
-The exception is `prefer-meta` in `eslint-plugin-zod-mini`: since `z.describe()` is not a chain method, detection uses direct namespace/import tracking (`isZodNamespace`, `getNamedImportOriginal`) instead of `collectZodChainMethods`.
+The exception is `prefer-meta` in `eslint-plugin-zod-mini`: since `z.describe()` is not a chain method, detection uses direct namespace/import tracking (`isZodNamespace`, `getNamedImportOriginal`) instead of `tracker.collectZodChainMethods`.
+
+## Quality expectations
+
+Every change must be properly tested and documented:
+
+- Add or update specs to cover the new or modified behavior
+- Update rule docs (`docs/rules/*.md`) when rule behavior changes; run `pnpm build:docs` from the plugin directory afterward
+- Update package READMEs when public API changes
+- Update this file when architecture, utilities, or conventions change
 
 ## Adding a new rule
 

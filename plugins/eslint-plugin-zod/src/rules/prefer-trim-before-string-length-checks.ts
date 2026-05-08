@@ -1,16 +1,13 @@
 import {
   createZodSchemaImportTrack,
   findParentSchemaMatchingCondition,
+  zodImportScope,
 } from '@eslint-zod/utils';
 import type { TSESLint, TSESTree } from '@typescript-eslint/utils';
 
 import { createZodPluginRule } from '../utils/create-plugin-rule.js';
 
-const {
-  //
-  zodImportAllowedSource,
-  trackZodSchemaImports,
-} = createZodSchemaImportTrack('zod');
+const { trackZodSchemaImports } = createZodSchemaImportTrack(zodImportScope);
 
 const LENGTH_CHECK_METHODS = ['min', 'max', 'length'];
 
@@ -20,7 +17,6 @@ export const preferTrimBeforeStringLengthChecks = createZodPluginRule({
     type: 'problem',
     fixable: 'code',
     docs: {
-      zodImportAllowedSource,
       description:
         'Enforce `.trim()` is called before string length checks to ensure accurate validation',
     },

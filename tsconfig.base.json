@@ -21,7 +21,6 @@
 
     // Language and Environment
     "moduleResolution": "NodeNext",
-    "customConditions": ["@eslint-zod/source"],
     "lib": [
       "es2024",
       "ESNext.Array",

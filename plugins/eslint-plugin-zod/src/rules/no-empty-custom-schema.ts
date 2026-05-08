@@ -1,12 +1,8 @@
-import { createZodSchemaImportTrack } from '@eslint-zod/utils';
+import { createZodSchemaImportTrack, zodImportScope } from '@eslint-zod/utils';
 
 import { createZodPluginRule } from '../utils/create-plugin-rule.js';
 
-const {
-  //
-  zodImportAllowedSource,
-  trackZodSchemaImports,
-} = createZodSchemaImportTrack('zod');
+const { trackZodSchemaImports } = createZodSchemaImportTrack(zodImportScope);
 
 export const noEmptyCustomSchema = createZodPluginRule({
   name: 'no-empty-custom-schema',
@@ -14,7 +10,6 @@ export const noEmptyCustomSchema = createZodPluginRule({
     hasSuggestions: false,
     type: 'suggestion',
     docs: {
-      zodImportAllowedSource,
       description: 'Disallow usage of `z.custom()` without arguments',
     },
     messages: {

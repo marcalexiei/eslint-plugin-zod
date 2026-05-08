@@ -1,13 +1,13 @@
-import { createZodSchemaImportTrack } from '@eslint-zod/utils';
+import {
+  createZodSchemaImportTrack,
+  zodMiniImportScope,
+} from '@eslint-zod/utils';
 import type { TSESLint, TSESTree } from '@typescript-eslint/utils';
 
 import { createZodMiniPluginRule } from '../utils/create-plugin-rule.js';
 
-const {
-  //
-  zodImportAllowedSource,
-  trackZodSchemaImports,
-} = createZodSchemaImportTrack('zod-mini');
+const { trackZodSchemaImports } =
+  createZodSchemaImportTrack(zodMiniImportScope);
 
 export const requireBrandTypeParameter = createZodMiniPluginRule({
   name: 'require-brand-type-parameter',
@@ -15,7 +15,6 @@ export const requireBrandTypeParameter = createZodMiniPluginRule({
     hasSuggestions: true,
     type: 'problem',
     docs: {
-      zodImportAllowedSource,
       description: 'Require type parameter on `.brand()` functions',
     },
     messages: {

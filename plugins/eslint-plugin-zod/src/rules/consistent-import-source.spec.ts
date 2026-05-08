@@ -18,12 +18,8 @@ ruleTester.run(consistentImportSource.name, consistentImportSource, {
       options: [{ sources: ['zod/v4'] }],
     },
     {
+      name: 'zod-mini import is out of scope',
       code: 'import z from "zod/mini"',
-      options: [{ sources: ['zod/mini'] }],
-    },
-    {
-      code: 'import z from "zod/v4-mini"',
-      options: [{ sources: ['zod/v4-mini'] }],
     },
   ],
   invalid: [
@@ -79,32 +75,16 @@ ruleTester.run(consistentImportSource.name, consistentImportSource, {
       ],
     },
     {
-      code: 'import z from "zod/mini"',
-      errors: [
-        {
-          messageId: 'sourceNotAllowed',
-          data: { source: 'zod/mini', sources: '"zod"' },
-          suggestions: [
-            {
-              messageId: 'replaceSource',
-              data: { valid: 'zod', invalid: 'zod/mini' },
-              output: 'import z from "zod"',
-            },
-          ],
-        },
-      ],
-    },
-    {
       name: 'should keep quote style',
-      code: "import z from 'zod/mini'",
+      code: "import z from 'zod/v3'",
       errors: [
         {
           messageId: 'sourceNotAllowed',
-          data: { source: 'zod/mini', sources: '"zod"' },
+          data: { source: 'zod/v3', sources: '"zod"' },
           suggestions: [
             {
               messageId: 'replaceSource',
-              data: { valid: 'zod', invalid: 'zod/mini' },
+              data: { valid: 'zod', invalid: 'zod/v3' },
               output: "import z from 'zod'",
             },
           ],
@@ -113,21 +93,21 @@ ruleTester.run(consistentImportSource.name, consistentImportSource, {
     },
     {
       name: 'multiple sources, multiple suggestions',
-      code: 'import z from "zod/mini"',
+      code: 'import z from "zod/v3"',
       options: [{ sources: ['zod', 'zod/v4'] }],
       errors: [
         {
           messageId: 'sourceNotAllowed',
-          data: { source: 'zod/mini', sources: '"zod", "zod/v4"' },
+          data: { source: 'zod/v3', sources: '"zod", "zod/v4"' },
           suggestions: [
             {
               messageId: 'replaceSource',
-              data: { valid: 'zod', invalid: 'zod/mini' },
+              data: { valid: 'zod', invalid: 'zod/v3' },
               output: 'import z from "zod"',
             },
             {
               messageId: 'replaceSource',
-              data: { valid: 'zod/v4', invalid: 'zod/mini' },
+              data: { valid: 'zod/v4', invalid: 'zod/v3' },
               output: 'import z from "zod/v4"',
             },
           ],

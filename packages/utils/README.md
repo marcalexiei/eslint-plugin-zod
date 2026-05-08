@@ -21,18 +21,43 @@ Shared AST utilities for [eslint-plugin-zod](../plugins/eslint-plugin-zod) and [
 
 ## API
 
-### `trackZodSchemaImports()`
+### `createZodSchemaImportTrack()`
 
-Tracks namespace and named imports from a Zod import source. Returns `isZodNamespace`, `getNamedImportOriginal`, and listener hooks to wire into a rule's visitor.
+Tracks namespace and named imports from a Zod import source. Returns an object with `isZodNamespace`, `getNamedImportOriginal`, `collectZodChainMethods`, and listener hooks to wire into a rule's visitor.
 
 ### `detectZodSchemaRootNode()`
 
 Finds the outermost Zod call expression in a chain, including calls in argument position (e.g. inside `.check()`).
 
-### `collectZodChainMethods()`
+### `isZodNumberSchemaCallExpression()`
 
-Returns the list of chained method names on a Zod expression.
+Returns `true` if a call expression is a Zod number schema call (`z.number()` or equivalent).
+
+### `findParentSchemaMatchingCondition()`
+
+Walks up the AST from a call expression and returns the first ancestor Zod schema node that satisfies the provided predicate.
 
 ### `buildZodChainRemoveMethodFix` / `buildZodChainReplacementFix`
 
 Fixer helpers for removing or replacing a method in a Zod chain.
+
+### `ZodImportScope` / `zodImportScope` / `zodMiniImportScope`
+
+Class and pre-built instances that define the set of recognised import sources for each plugin scope.
+
+- `zodImportScope.sources` → `['zod', 'zod/v4', 'zod/v3']`
+- `zodMiniImportScope.sources` → `['zod/mini', 'zod/v4-mini']`
+- `isAllowed(source)` — returns `true` if the source belongs to the scope
+
+### `ZOD_NON_SCHEMA_PRODUCING_METHODS`
+
+Array of Zod method names that do not return a schema (parse methods, codec helpers, error formatters). Useful for filtering out terminal calls when traversing a chain.
+
+### Import syntax helpers
+
+Utilities used by `consistent-import` rules to inspect and rewrite import declarations.
+
+- `IMPORT_SYNTAXES` — `['namespace', 'named']` constant tuple
+- `isGroupFirstImportKindValidForSyntax()` — checks whether the first import in a group matches the expected syntax and `import type` rules
+- `shouldIdentifierBeRenamed()` — returns `true` if an identifier node should be renamed (skips specifier nodes and already-qualified members)
+- `getNamespaceAliasNameFrom()` — extracts the most significant local name from an import clause for use as a namespace alias

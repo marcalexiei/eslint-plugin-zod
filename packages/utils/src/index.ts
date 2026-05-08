@@ -4,14 +4,19 @@ export {
   detectZodSchemaRootNode,
   isZodNumberSchemaCallExpression,
 } from './detect-zod-schema-root-node.js';
-export type { DetectResult } from './detect-zod-schema-root-node.js';
 export { findParentSchemaMatchingCondition } from './find-parent-schema-matching-condition.js';
 export {
-  isZodImportSource,
-  ZOD_IMPORT_SOURCES,
-} from './is-zod-import-source.js';
-export type {
-  ZodImportAllowedSource,
-  ZodImportSource,
-} from './is-zod-import-source.js';
+  IMPORT_SYNTAXES,
+  isGroupFirstImportKindValidForSyntax,
+  shouldIdentifierBeRenamed,
+  getNamespaceAliasNameFrom,
+  type ImportSyntax,
+  type ImportGroupData,
+} from './import-syntax-helpers.js';
+export {
+  ZodImportScope,
+  zodImportScope,
+  zodMiniImportScope,
+} from './zod-import-scope.js';
 export { createZodSchemaImportTrack } from './track-zod-schema-imports.js';
+export { ZOD_NON_SCHEMA_PRODUCING_METHODS } from './zod-non-schema-producing-methods.js';

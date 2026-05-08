@@ -1,14 +1,14 @@
-import { createZodSchemaImportTrack } from '@eslint-zod/utils';
+import {
+  createZodSchemaImportTrack,
+  zodMiniImportScope,
+} from '@eslint-zod/utils';
 import type { TSESTree } from '@typescript-eslint/utils';
 import { AST_NODE_TYPES } from '@typescript-eslint/utils';
 
 import { createZodMiniPluginRule } from '../utils/create-plugin-rule.js';
 
-const {
-  //
-  zodImportAllowedSource,
-  trackZodSchemaImports,
-} = createZodSchemaImportTrack('zod-mini');
+const { trackZodSchemaImports } =
+  createZodSchemaImportTrack(zodMiniImportScope);
 
 export const requireErrorMessage = createZodMiniPluginRule({
   name: 'require-error-message',
@@ -16,7 +16,6 @@ export const requireErrorMessage = createZodMiniPluginRule({
     type: 'suggestion',
     fixable: 'code',
     docs: {
-      zodImportAllowedSource,
       description: 'Enforce that custom refinements include an error message',
     },
     messages: {

@@ -1,15 +1,12 @@
 import {
   buildZodChainReplacementFix,
   createZodSchemaImportTrack,
+  zodImportScope,
 } from '@eslint-zod/utils';
 
 import { createZodPluginRule } from '../utils/create-plugin-rule.js';
 
-const {
-  //
-  zodImportAllowedSource,
-  trackZodSchemaImports,
-} = createZodSchemaImportTrack('zod');
+const { trackZodSchemaImports } = createZodSchemaImportTrack(zodImportScope);
 
 export const noNumberSchemaWithInt = createZodPluginRule({
   name: 'no-number-schema-with-int',
@@ -17,7 +14,6 @@ export const noNumberSchemaWithInt = createZodPluginRule({
     fixable: 'code',
     type: 'problem',
     docs: {
-      zodImportAllowedSource,
       description:
         'Disallow usage of `z.number().int()` as it is considered legacy',
     },

@@ -1,14 +1,10 @@
-import { createZodSchemaImportTrack } from '@eslint-zod/utils';
+import { createZodSchemaImportTrack, zodImportScope } from '@eslint-zod/utils';
 import type { TSESTree } from '@typescript-eslint/utils';
 import { AST_NODE_TYPES } from '@typescript-eslint/utils';
 
 import { createZodPluginRule } from '../utils/create-plugin-rule.js';
 
-const {
-  //
-  zodImportAllowedSource,
-  trackZodSchemaImports,
-} = createZodSchemaImportTrack('zod');
+const { trackZodSchemaImports } = createZodSchemaImportTrack(zodImportScope);
 
 export const preferEnumOverLiteralUnion = createZodPluginRule({
   name: 'prefer-enum-over-literal-union',
@@ -16,7 +12,6 @@ export const preferEnumOverLiteralUnion = createZodPluginRule({
     type: 'suggestion',
     fixable: 'code',
     docs: {
-      zodImportAllowedSource,
       description:
         'Prefer `z.enum()` over `z.union()` when all members are string literals.',
     },

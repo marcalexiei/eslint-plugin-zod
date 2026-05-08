@@ -1,20 +1,15 @@
-import { createZodSchemaImportTrack } from '@eslint-zod/utils';
+import { createZodSchemaImportTrack, zodImportScope } from '@eslint-zod/utils';
 import type { TSESTree } from '@typescript-eslint/utils';
 
 import { createZodPluginRule } from '../utils/create-plugin-rule.js';
 
-const {
-  //
-  zodImportAllowedSource,
-  trackZodSchemaImports,
-} = createZodSchemaImportTrack('zod');
+const { trackZodSchemaImports } = createZodSchemaImportTrack(zodImportScope);
 
 export const preferMetaLast = createZodPluginRule({
   name: 'prefer-meta-last',
   meta: {
     type: 'suggestion',
     docs: {
-      zodImportAllowedSource,
       description: 'Enforce `.meta()` as last method',
     },
     fixable: 'code',

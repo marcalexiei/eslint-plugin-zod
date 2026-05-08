@@ -1,4 +1,4 @@
-import { createZodSchemaImportTrack } from '@eslint-zod/utils';
+import { createZodSchemaImportTrack, zodImportScope } from '@eslint-zod/utils';
 import type { TSESTree } from '@typescript-eslint/utils';
 
 import { createZodPluginRule } from '../utils/create-plugin-rule.js';
@@ -12,11 +12,7 @@ type MessageIds = 'useFunction' | 'useMethod';
 
 const defaultOptions: Options = { style: 'function' };
 
-const {
-  //
-  zodImportAllowedSource,
-  trackZodSchemaImports,
-} = createZodSchemaImportTrack('zod');
+const { trackZodSchemaImports } = createZodSchemaImportTrack(zodImportScope);
 
 export const arrayStyle = createZodPluginRule<[Options], MessageIds>({
   name: 'array-style',
@@ -24,7 +20,6 @@ export const arrayStyle = createZodPluginRule<[Options], MessageIds>({
     type: 'suggestion',
     fixable: 'code',
     docs: {
-      zodImportAllowedSource,
       description: 'Enforce consistent Zod array style',
     },
     messages: {

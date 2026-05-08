@@ -1,13 +1,9 @@
-import { createZodSchemaImportTrack } from '@eslint-zod/utils';
+import { createZodSchemaImportTrack, zodImportScope } from '@eslint-zod/utils';
 import { AST_NODE_TYPES } from '@typescript-eslint/utils';
 
 import { createZodPluginRule } from '../utils/create-plugin-rule.js';
 
-const {
-  //
-  zodImportAllowedSource,
-  trackZodSchemaImports,
-} = createZodSchemaImportTrack('zod');
+const { trackZodSchemaImports } = createZodSchemaImportTrack(zodImportScope);
 
 export const noNumberSchemaWithStep = createZodPluginRule({
   name: 'no-number-schema-with-step',
@@ -15,7 +11,6 @@ export const noNumberSchemaWithStep = createZodPluginRule({
     fixable: 'code',
     type: 'problem',
     docs: {
-      zodImportAllowedSource,
       description:
         'Disallow deprecated `z.number().step()`. Use `.multipleOf()` instead.',
     },

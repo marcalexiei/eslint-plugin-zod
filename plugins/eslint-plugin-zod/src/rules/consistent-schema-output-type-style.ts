@@ -1,4 +1,4 @@
-import { createZodSchemaImportTrack } from '@eslint-zod/utils';
+import { createZodSchemaImportTrack, zodImportScope } from '@eslint-zod/utils';
 import type { TSESTree } from '@typescript-eslint/utils';
 import { AST_NODE_TYPES } from '@typescript-eslint/utils';
 
@@ -14,11 +14,7 @@ interface Options {
 
 type MessageIds = 'useInfer' | 'useOutput';
 
-const {
-  //
-  zodImportAllowedSource,
-  trackZodSchemaImports,
-} = createZodSchemaImportTrack('zod');
+const { trackZodSchemaImports } = createZodSchemaImportTrack(zodImportScope);
 
 export const consistentSchemaOutputTypeStyle = createZodPluginRule<
   [Options],
@@ -29,7 +25,6 @@ export const consistentSchemaOutputTypeStyle = createZodPluginRule<
     type: 'suggestion',
     fixable: 'code',
     docs: {
-      zodImportAllowedSource,
       description:
         'Enforce consistent use of z.infer or z.output for schema type inference',
     },

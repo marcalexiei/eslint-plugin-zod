@@ -18,26 +18,26 @@ ruleTester.run(consistentImportSource.name, consistentImportSource, {
       options: [{ sources: ['zod/v4-mini'] }],
     },
     {
-      code: 'import z from "zod"',
-      options: [{ sources: ['zod'] }],
-    },
-    {
       name: 'non-zod import is ignored',
       code: 'import z from "react"',
+    },
+    {
+      name: 'non-mini zod import is out of scope',
+      code: 'import z from "zod"',
     },
   ],
   invalid: [
     {
-      name: 'zod not allowed by default',
-      code: 'import * as z from "zod"',
+      name: 'namespace',
+      code: 'import * as z from "zod/v4-mini"',
       errors: [
         {
           messageId: 'sourceNotAllowed',
-          data: { source: 'zod', sources: '"zod/mini"' },
+          data: { source: 'zod/v4-mini', sources: '"zod/mini"' },
           suggestions: [
             {
               messageId: 'replaceSource',
-              data: { valid: 'zod/mini', invalid: 'zod' },
+              data: { valid: 'zod/mini', invalid: 'zod/v4-mini' },
               output: 'import * as z from "zod/mini"',
             },
           ],
@@ -45,16 +45,15 @@ ruleTester.run(consistentImportSource.name, consistentImportSource, {
       ],
     },
     {
-      name: 'zod/v4 not allowed by default',
-      code: 'import z from "zod/v4"',
+      code: 'import z from "zod/v4-mini"',
       errors: [
         {
           messageId: 'sourceNotAllowed',
-          data: { source: 'zod/v4', sources: '"zod/mini"' },
+          data: { source: 'zod/v4-mini', sources: '"zod/mini"' },
           suggestions: [
             {
               messageId: 'replaceSource',
-              data: { valid: 'zod/mini', invalid: 'zod/v4' },
+              data: { valid: 'zod/mini', invalid: 'zod/v4-mini' },
               output: 'import z from "zod/mini"',
             },
           ],
@@ -74,29 +73,6 @@ ruleTester.run(consistentImportSource.name, consistentImportSource, {
               messageId: 'replaceSource',
               data: { valid: 'zod/mini', invalid: 'zod/v4-mini' },
               output: "import z from 'zod/mini'",
-            },
-          ],
-        },
-      ],
-    },
-    {
-      name: 'multiple sources, multiple suggestions',
-      code: 'import z from "zod"',
-      options: [{ sources: ['zod/mini', 'zod/v4-mini'] }],
-      errors: [
-        {
-          messageId: 'sourceNotAllowed',
-          data: { source: 'zod', sources: '"zod/mini", "zod/v4-mini"' },
-          suggestions: [
-            {
-              messageId: 'replaceSource',
-              data: { valid: 'zod/mini', invalid: 'zod' },
-              output: 'import z from "zod/mini"',
-            },
-            {
-              messageId: 'replaceSource',
-              data: { valid: 'zod/v4-mini', invalid: 'zod' },
-              output: 'import z from "zod/v4-mini"',
             },
           ],
         },

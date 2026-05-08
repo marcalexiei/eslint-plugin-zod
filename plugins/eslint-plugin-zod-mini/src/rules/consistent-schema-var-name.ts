@@ -1,4 +1,8 @@
-import { createZodSchemaImportTrack } from '@eslint-zod/utils';
+import {
+  ZOD_NON_SCHEMA_PRODUCING_METHODS,
+  createZodSchemaImportTrack,
+  zodMiniImportScope,
+} from '@eslint-zod/utils';
 import { AST_NODE_TYPES } from '@typescript-eslint/utils';
 
 import { createZodMiniPluginRule } from '../utils/create-plugin-rule.js';
@@ -10,11 +14,8 @@ interface Options {
 
 type MessageIds = 'invalidName';
 
-const {
-  //
-  zodImportAllowedSource,
-  trackZodSchemaImports,
-} = createZodSchemaImportTrack('zod-mini');
+const { trackZodSchemaImports } =
+  createZodSchemaImportTrack(zodMiniImportScope);
 
 export const consistentSchemaVarName = createZodMiniPluginRule<
   [Options],
@@ -24,7 +25,6 @@ export const consistentSchemaVarName = createZodMiniPluginRule<
   meta: {
     type: 'suggestion',
     docs: {
-      zodImportAllowedSource,
       description:
         'Enforce a consistent naming convention for Zod Mini schema variables',
     },
@@ -72,35 +72,8 @@ export const consistentSchemaVarName = createZodMiniPluginRule<
           (it) => it.name,
         );
 
-        // Methods that either produce non-schema outputs or are unrelated to schemas (e.g., codecs)
-        const methodsThatProduceSomethingThatShouldNotBeValidated = [
-          // parse methods
-          'parse',
-          'parseAsync',
-          'safeParse',
-          'safeParseAsync',
-          'spa', // alias for `safeParseAsync`
-          'encode',
-          'encodeAsync',
-          'decode',
-          'decodeAsync',
-          'safeEncode',
-          'safeEncodeAsync',
-          'safeDecode',
-          'safeDecodeAsync',
-
-          // codec
-          'codec',
-
-          // error formatting
-          'treeifyError',
-          'prettifyError',
-          'formatError',
-          'flattenError',
-        ];
-
         if (
-          methodsThatProduceSomethingThatShouldNotBeValidated.some((it) =>
+          ZOD_NON_SCHEMA_PRODUCING_METHODS.some((it) =>
             chainMethods.includes(it),
           )
         ) {

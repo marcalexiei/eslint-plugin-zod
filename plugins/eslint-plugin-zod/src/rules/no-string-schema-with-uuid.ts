@@ -1,15 +1,12 @@
 import {
   buildZodChainReplacementFix,
   createZodSchemaImportTrack,
+  zodImportScope,
 } from '@eslint-zod/utils';
 
 import { createZodPluginRule } from '../utils/create-plugin-rule.js';
 
-const {
-  //
-  zodImportAllowedSource,
-  trackZodSchemaImports,
-} = createZodSchemaImportTrack('zod');
+const { trackZodSchemaImports } = createZodSchemaImportTrack(zodImportScope);
 
 export const noStringSchemaWithUuid = createZodPluginRule({
   name: 'no-string-schema-with-uuid',
@@ -17,7 +14,6 @@ export const noStringSchemaWithUuid = createZodPluginRule({
     fixable: 'code',
     type: 'problem',
     docs: {
-      zodImportAllowedSource,
       description:
         'Disallow usage of `z.string().uuid()` in favor of the dedicated `z.uuid()` schema',
       url: 'https://zod.dev/api#uuids',

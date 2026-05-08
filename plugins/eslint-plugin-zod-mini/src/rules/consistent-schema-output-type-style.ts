@@ -1,4 +1,7 @@
-import { createZodSchemaImportTrack } from '@eslint-zod/utils';
+import {
+  createZodSchemaImportTrack,
+  zodMiniImportScope,
+} from '@eslint-zod/utils';
 import type { TSESTree } from '@typescript-eslint/utils';
 import { AST_NODE_TYPES } from '@typescript-eslint/utils';
 
@@ -14,11 +17,8 @@ interface Options {
 
 type MessageIds = 'useInfer' | 'useOutput';
 
-const {
-  //
-  zodImportAllowedSource,
-  trackZodSchemaImports,
-} = createZodSchemaImportTrack('zod-mini');
+const { trackZodSchemaImports } =
+  createZodSchemaImportTrack(zodMiniImportScope);
 
 export const consistentSchemaOutputTypeStyle = createZodMiniPluginRule<
   [Options],
@@ -29,7 +29,6 @@ export const consistentSchemaOutputTypeStyle = createZodMiniPluginRule<
     type: 'suggestion',
     fixable: 'code',
     docs: {
-      zodImportAllowedSource,
       description:
         'Enforce consistent use of z.infer or z.output for schema type inference',
     },

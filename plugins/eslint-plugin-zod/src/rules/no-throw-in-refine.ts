@@ -1,21 +1,16 @@
-import { createZodSchemaImportTrack } from '@eslint-zod/utils';
+import { createZodSchemaImportTrack, zodImportScope } from '@eslint-zod/utils';
 import { AST_NODE_TYPES } from '@typescript-eslint/utils';
 import type { TSESTree } from '@typescript-eslint/utils';
 
 import { createZodPluginRule } from '../utils/create-plugin-rule.js';
 
-const {
-  //
-  zodImportAllowedSource,
-  trackZodSchemaImports,
-} = createZodSchemaImportTrack('zod');
+const { trackZodSchemaImports } = createZodSchemaImportTrack(zodImportScope);
 
 export const noThrowInRefine = createZodPluginRule({
   name: 'no-throw-in-refine',
   meta: {
     type: 'problem',
     docs: {
-      zodImportAllowedSource,
       description:
         'Disallow throwing errors directly inside Zod refine callbacks',
     },
