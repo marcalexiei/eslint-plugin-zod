@@ -1,0 +1,30 @@
+# eslint-plugin-zod-mini
+
+## 1.0.0
+
+### Major Changes
+
+- [#277](https://github.com/marcalexiei/eslint-zod/pull/277) [`349991f`](https://github.com/marcalexiei/eslint-zod/commit/349991fc60a7909af4830d0aa117d2878f306557) Thanks [@marcalexiei](https://github.com/marcalexiei)! - feat!: initial release
+
+  This plugin visits only schemas coming from `zod/mini` and `zod/v4-mini`
+
+  It supports the following rules from `eslint-plugin-zod`:
+  - `consistent-import`
+  - `consistent-import-source`
+  - `consistent-object-schema-type`
+  - `consistent-schema-output-type-style`
+  - `consistent-schema-var-name`
+  - `no-any-schema`
+  - `no-empty-custom-schema`
+  - `no-unknown-schema`
+  - `prefer-meta`
+  - `require-brand-type-parameter`
+  - `require-error-message`
+  - `schema-error-property-style`
+
+  A `recommended` config is exposed by the plugin for easy setup
+
+### Patch Changes
+
+- Updated dependencies [[`349991f`](https://github.com/marcalexiei/eslint-zod/commit/349991fc60a7909af4830d0aa117d2878f306557)]:
+  - @eslint-zod/utils@1.0.0

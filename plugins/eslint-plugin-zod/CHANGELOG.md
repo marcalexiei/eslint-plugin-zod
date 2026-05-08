@@ -1,5 +1,90 @@
 # eslint-plugin-zod
 
+## 4.0.0
+
+### Major Changes
+
+- [#279](https://github.com/marcalexiei/eslint-zod/pull/279) [`b3fe829`](https://github.com/marcalexiei/eslint-zod/commit/b3fe829b06e98ded153ba12b00201e476d3850df) Thanks [@marcalexiei](https://github.com/marcalexiei)! - feat!: remove `zod/require-schema-suffix` rule
+
+  Use `zod/consistent-schema-var-name` instead:
+
+  ```diff
+    // eslint.config.js
+    import { defineConfig } from 'eslint/config';
+    import eslintPluginZod from 'eslint-plugin-zod';
+
+    export default defineConfig(
+      {
+        plugins: {
+          zod: eslintPluginZod,
+        },
+        rules: {
+  -       'zod/require-schema-suffix': 'error',
+  +       'zod/consistent-schema-var-name': 'error',
+        }
+      }
+    );
+  ```
+
+- [#279](https://github.com/marcalexiei/eslint-zod/pull/279) [`b3fe829`](https://github.com/marcalexiei/eslint-zod/commit/b3fe829b06e98ded153ba12b00201e476d3850df) Thanks [@marcalexiei](https://github.com/marcalexiei)! - feat!: remove `zod/prefer-namespace-import` rule
+
+  Use `zod/consistent-import` instead:
+
+  ```diff
+    // eslint.config.js
+    import { defineConfig } from 'eslint/config';
+    import eslintPluginZod from 'eslint-plugin-zod';
+
+    export default defineConfig(
+      {
+        plugins: {
+          zod: eslintPluginZod,
+        },
+        rules: {
+  -       'zod/prefer-namespace-import': 'error',
+  +       'zod/consistent-import': 'error', // Uses 'namespace' syntax as default
+        }
+      }
+    );
+  ```
+
+- [#277](https://github.com/marcalexiei/eslint-zod/pull/277) [`349991f`](https://github.com/marcalexiei/eslint-zod/commit/349991fc60a7909af4830d0aa117d2878f306557) Thanks [@marcalexiei](https://github.com/marcalexiei)! - feat!: split `zod-mini` rules in a separate plugin
+
+  `eslint-plugin-zod` now only applies to `zod`, `zod/v4`, and `zod/v3` imports.
+  Rules no longer fire on `zod/mini` or `zod/v4-mini` imports.
+
+  If you were using `eslint-plugin-zod` to lint Zod Mini schemas, install the new dedicated plugin:
+
+  ```shell
+  npm i --save-dev eslint-plugin-zod-mini
+  ```
+
+  Then replace `configs.recommendedMini` with the new plugin's `configs.recommended`:
+
+  ```diff
+    // eslint.config.js
+    import { defineConfig } from 'eslint/config';
+    import eslint from '@eslint/js';
+    import eslintPluginZod from 'eslint-plugin-zod';
+  + import eslintPluginZodMini from 'eslint-plugin-zod-mini';
+
+    export default defineConfig(
+      eslint.configs.recommended,
+      eslintPluginZod.configs.recommended,
+  -   eslintPluginZod.configs.recommendedMini,
+  +   eslintPluginZodMini.configs.recommended,
+    );
+  ```
+
+- [#282](https://github.com/marcalexiei/eslint-zod/pull/282) [`2b5e41d`](https://github.com/marcalexiei/eslint-zod/commit/2b5e41d7f79f28e173171b7542ca860886da0792) Thanks [@marcalexiei](https://github.com/marcalexiei)! - feat(consistent-import-source)!: rules now apply only to zod imports
+
+  The plugin now ignores `zod/mini` and `zod/v4-mini` imports
+
+### Patch Changes
+
+- Updated dependencies [[`349991f`](https://github.com/marcalexiei/eslint-zod/commit/349991fc60a7909af4830d0aa117d2878f306557)]:
+  - @eslint-zod/utils@1.0.0
+
 ## 3.12.1
 
 ### Patch Changes

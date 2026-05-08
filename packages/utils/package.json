@@ -1,6 +1,6 @@
 {
   "name": "@eslint-zod/utils",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "type": "module",
   "description": "Shared utilities for eslint-zod plugins",
   "engines": {
