@@ -82,6 +82,15 @@ Rules that look for chained methods (via `tracker.collectZodChainMethods`) work 
 
 The exception is `prefer-meta` in `eslint-plugin-zod-mini`: since `z.describe()` is not a chain method, detection uses direct namespace/import tracking (`isZodNamespace`, `getNamedImportOriginal`) instead of `tracker.collectZodChainMethods`.
 
+## Shared rules between plugins
+
+Several rules exist in both `eslint-plugin-zod` and `eslint-plugin-zod-mini` with the same name and intent but different API examples (see the API differences section above). When updating a rule that exists in both plugins, keep the counterpart in sync:
+
+- **Docs** (`docs/rules/<rule-name>.md`): mirror structure and content, but adapt all code examples to the correct import source (`zod` vs `zod/mini`) and API style (chained methods vs standalone `$ZodCheck` functions passed to `.check()`).
+- **Specs** (`src/rules/<rule-name>.spec.ts`): mirror the test cases, but again adapt import sources and API. Valid/invalid cases should cover the same scenarios in both plugins.
+
+Rules that exist in both plugins: `consistent-import`, `consistent-import-source`, `consistent-object-schema-type`, `consistent-schema-output-type-style`, `consistent-schema-var-name`, `no-any-schema`, `no-empty-custom-schema`, `no-unknown-schema`, `prefer-meta`, `require-brand-type-parameter`, `require-error-message`, `schema-error-property-style`.
+
 ## Quality expectations
 
 Every change must be properly tested and documented:

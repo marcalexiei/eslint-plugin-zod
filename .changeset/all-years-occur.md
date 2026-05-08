@@ -4,7 +4,7 @@
 
 feat!: remove `zod/require-schema-suffix` rule
 
-Use `zod/require-schema-suffix` instead:
+Use `zod/consistent-schema-var-name` instead:
 
 ```diff
   // eslint.config.js

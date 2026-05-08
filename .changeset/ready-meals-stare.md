@@ -14,7 +14,7 @@ Use `zod/consistent-import` instead:
   export default defineConfig(
     {
       plugins: {
-        'zod-x': eslintPluginZodX,
+        zod: eslintPluginZod,
       },
       rules: {
 -       'zod/prefer-namespace-import': 'error',
