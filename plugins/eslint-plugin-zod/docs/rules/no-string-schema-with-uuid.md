@@ -8,6 +8,28 @@
 
 <!-- end auto-generated rule header -->
 
+## Deprecation notice
+
+Use `zod/prefer-top-level-string-formats` instead:
+
+```diff
+  // eslint.config.js
+  import { defineConfig } from 'eslint/config';
+  import eslintPluginZod from 'eslint-plugin-zod';
+
+  export default defineConfig(
+    {
+      plugins: {
+        zod: eslintPluginZod,
+      },
+      rules: {
+-       'zod/no-string-schema-with-uuid': 'error',
++       'zod/prefer-top-level-string-formats': 'error',
+      }
+    }
+  );
+```
+
 ## Rule Details
 
 This rule aims to prevent the usage of `z.string().uuid()` in favor of the dedicated `z.uuid()` schema from Zod’s [string formats API](https://zod.dev/api#uuids).
