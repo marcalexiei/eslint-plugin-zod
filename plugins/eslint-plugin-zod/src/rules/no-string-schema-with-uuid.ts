@@ -13,6 +13,9 @@ export const noStringSchemaWithUuid = createZodPluginRule({
   meta: {
     fixable: 'code',
     type: 'problem',
+    deprecated: {
+      message: 'Use `zod/prefer-top-level-string-formats` instead',
+    },
     docs: {
       description:
         'Disallow usage of `z.string().uuid()` in favor of the dedicated `z.uuid()` schema',
