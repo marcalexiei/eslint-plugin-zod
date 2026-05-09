@@ -24,6 +24,7 @@ import { preferEnumOverLiteralUnion } from './rules/prefer-enum-over-literal-uni
 import { preferMetaLast } from './rules/prefer-meta-last.js';
 import { preferMeta } from './rules/prefer-meta.js';
 import { preferStringSchemaWithTrim } from './rules/prefer-string-schema-with-trim.js';
+import { preferTopLevelStringFormats } from './rules/prefer-top-level-string-formats.js';
 import { preferTrimBeforeStringLengthChecks } from './rules/prefer-trim-before-string-length-checks.js';
 import { requireBrandTypeParameter } from './rules/require-brand-type-parameter.js';
 import { requireErrorMessage } from './rules/require-error-message.js';
@@ -70,6 +71,7 @@ const eslintPluginZod = {
     'prefer-enum-over-literal-union': preferEnumOverLiteralUnion,
     'prefer-meta': preferMeta,
     'prefer-meta-last': preferMetaLast,
+    'prefer-top-level-string-formats': preferTopLevelStringFormats,
     'prefer-string-schema-with-trim': preferStringSchemaWithTrim,
     'prefer-trim-before-string-length-checks':
       preferTrimBeforeStringLengthChecks,
@@ -107,6 +109,7 @@ const recommendedConfig = {
     'zod/prefer-enum-over-literal-union': 'error',
     'zod/prefer-meta': 'error',
     'zod/prefer-meta-last': 'error',
+    'zod/prefer-top-level-string-formats': 'error',
     'zod/prefer-string-schema-with-trim': 'error',
     'zod/prefer-trim-before-string-length-checks': 'error',
     'zod/require-brand-type-parameter': 'error',
