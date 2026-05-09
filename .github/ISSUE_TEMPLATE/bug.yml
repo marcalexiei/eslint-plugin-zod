@@ -10,6 +10,16 @@ body:
       value: |
         **Please fill in the details below** — the clearer the report, the faster we can diagnose and fix it.
 
+  - type: dropdown
+    id: plugin
+    attributes:
+      label: 📦 Affected package
+      options:
+        - eslint-plugin-zod
+        - eslint-plugin-zod-mini
+    validations:
+      required: true
+
   - type: textarea
     id: description
     attributes:
@@ -44,7 +54,7 @@ body:
     attributes:
       label: 💻 System info
       description: |
-        Output of `npx envinfo --npmPackages 'eslint,eslint-plugin-zod' --binaries`
+        Output of `npx envinfo --npmPackages 'eslint,eslint-plugin-zod,eslint-plugin-zod-mini' --binaries`
       render: shell
     validations:
       required: true

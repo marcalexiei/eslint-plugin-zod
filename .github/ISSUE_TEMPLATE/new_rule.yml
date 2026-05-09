@@ -15,6 +15,16 @@ body:
     validations:
       required: true
 
+  - type: checkboxes
+    id: plugins
+    attributes:
+      label: 📦 Target plugin(s)
+      options:
+        - label: eslint-plugin-zod
+        - label: eslint-plugin-zod-mini
+    validations:
+      required: true
+
   - type: textarea
     id: options
     attributes:
