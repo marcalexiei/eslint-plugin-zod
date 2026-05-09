@@ -9,6 +9,7 @@ import { consistentSchemaOutputTypeStyle } from './rules/consistent-schema-outpu
 import { consistentSchemaVarName } from './rules/consistent-schema-var-name.js';
 import { noAnySchema } from './rules/no-any-schema.js';
 import { noEmptyCustomSchema } from './rules/no-empty-custom-schema.js';
+import { noNativeEnum } from './rules/no-native-enum.js';
 import { noNumberSchemaWithFinite } from './rules/no-number-schema-with-finite.js';
 import { noNumberSchemaWithInt } from './rules/no-number-schema-with-int.js';
 import { noNumberSchemaWithIsFinite } from './rules/no-number-schema-with-is-finite.js';
@@ -57,6 +58,7 @@ const eslintPluginZod = {
     'consistent-schema-output-type-style': consistentSchemaOutputTypeStyle,
     'no-any-schema': noAnySchema,
     'no-empty-custom-schema': noEmptyCustomSchema,
+    'no-native-enum': noNativeEnum,
     'no-number-schema-with-finite': noNumberSchemaWithFinite,
     'no-number-schema-with-int': noNumberSchemaWithInt,
     'no-number-schema-with-is-finite': noNumberSchemaWithIsFinite,
@@ -97,6 +99,7 @@ const recommendedConfig = {
     'zod/consistent-schema-var-name': 'error',
     'zod/no-any-schema': 'error',
     'zod/no-empty-custom-schema': 'error',
+    'zod/no-native-enum': 'error',
     'zod/no-number-schema-with-finite': 'error',
     'zod/no-number-schema-with-int': 'error',
     'zod/no-number-schema-with-is-finite': 'error',
