@@ -20,3 +20,5 @@ export const zodMiniImportScope = new ZodImportScope([
   'zod/mini',
   'zod/v4-mini',
 ] as const);
+
+export const zodCoreImportScope = new ZodImportScope(['zod/v4/core'] as const);

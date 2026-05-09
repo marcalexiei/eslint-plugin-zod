@@ -21,15 +21,18 @@ Find out more about [Oxlint's `jsPLugins`](https://oxc.rs/docs/guide/usage/linte
 
 ## Plugins
 
-| Package                                                  | Version                                           | Description          |
-| :------------------------------------------------------- | :------------------------------------------------ | :------------------- |
-| [eslint-plugin-zod](plugins/eslint-plugin-zod)           | [![Open on npmx][npmZodBadge]][npmZodURL]         | Rules for `zod`      |
-| [eslint-plugin-zod-mini](plugins/eslint-plugin-zod-mini) | [![Open on npmx][npmZodMiniBadge]][npmZodMiniURL] | Rules for `zod/mini` |
+| Package                                                  | Version                                           | Description             |
+| :------------------------------------------------------- | :------------------------------------------------ | :---------------------- |
+| [eslint-plugin-zod](plugins/eslint-plugin-zod)           | [![Open on npmx][npmZodBadge]][npmZodURL]         | Rules for `zod`         |
+| [eslint-plugin-zod-mini](plugins/eslint-plugin-zod-mini) | [![Open on npmx][npmZodMiniBadge]][npmZodMiniURL] | Rules for `zod/mini`    |
+| [eslint-plugin-zod-core](plugins/eslint-plugin-zod-core) | [![Open on npmx][npmZodCoreBadge]][npmZodCoreURL] | Rules for `zod/v4/core` |
 
 [npmZodBadge]: https://npmx.dev/api/registry/badge/version/eslint-plugin-zod
 [npmZodURL]: https://npmx.dev/package/eslint-plugin-zod
 [npmZodMiniBadge]: https://npmx.dev/api/registry/badge/version/eslint-plugin-zod-mini
 [npmZodMiniURL]: https://npmx.dev/package/eslint-plugin-zod-mini
+[npmZodCoreBadge]: https://npmx.dev/api/registry/badge/version/eslint-plugin-zod-core
+[npmZodCoreURL]: https://npmx.dev/package/eslint-plugin-zod-core
 
 ## Packages
 

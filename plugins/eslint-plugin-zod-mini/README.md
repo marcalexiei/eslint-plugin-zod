@@ -17,7 +17,7 @@
 [issuesBadge]: https://img.shields.io/github/issues/marcalexiei/eslint-zod.svg?style=for-the-badge
 [issuesURL]: https://github.com/marcalexiei/eslint-zod/issues
 
-[ESLint](https://eslint.org) plugin that adds custom linting rules to enforce best practices when using [Zod Mini](https://zod.dev/?id=zod-mini) (`zod/mini`).
+[ESLint](https://eslint.org) plugin that adds custom linting rules to enforce best practices when using [Zod Mini](https://zod.dev/packages/mini) (`zod/mini`).
 
 It can also work with [Oxlint](https://oxc.rs/docs/guide/usage/linter.html)!\
 Find out more about [Oxlint's `jsPLugins`](https://oxc.rs/docs/guide/usage/linter/js-plugins.html).

@@ -1,11 +1,12 @@
 {
-  "name": "@eslint-zod/utils",
-  "version": "1.1.0",
-  "description": "Shared utilities for eslint-zod plugins",
+  "name": "eslint-plugin-zod-core",
+  "version": "0.1.0",
+  "description": "ESLint plugin that adds custom linting rules to enforce best practices when using Zod core",
   "keywords": [
     "eslint",
     "eslint-plugin",
-    "utils",
+    "eslintplugin",
+    "oxlint",
     "zod"
   ],
   "homepage": "https://github.com/marcalexiei/eslint-zod#readme",
@@ -17,7 +18,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/marcalexiei/eslint-zod",
-    "directory": "packages/utils"
+    "directory": "plugins/eslint-plugin-zod-core"
   },
   "files": [
     "dist"
@@ -28,7 +29,6 @@
   "types": "./dist/index.d.cts",
   "exports": {
     ".": {
-      "@eslint-zod/source": "./src/index.ts",
       "import": "./dist/index.mjs",
       "require": "./dist/index.cjs"
     },
@@ -39,14 +39,38 @@
   },
   "scripts": {
     "build": "tsdown",
+    "build:docs": "pnpm run build && eslint-doc-generator",
+    "lint:docs": "eslint-doc-generator --check",
     "test": "vitest"
   },
   "dependencies": {
+    "@eslint-zod/utils": "workspace:*",
     "@typescript-eslint/utils": "catalog:deps"
   },
   "devDependencies": {
+    "@marcalexiei/prettier-config": "catalog:dev",
+    "@typescript-eslint/rule-tester": "catalog:dev",
+    "dedent": "catalog:dev",
+    "eslint-doc-generator": "catalog:dev",
+    "prettier": "catalog:dev",
     "tsdown": "catalog:dev",
     "vitest": "catalog:dev"
+  },
+  "peerDependencies": {
+    "eslint": "^9 || ^10",
+    "oxlint": "^1.59.0",
+    "zod": "^4"
+  },
+  "peerDependenciesMeta": {
+    "eslint": {
+      "optional": true
+    },
+    "oxlint": {
+      "optional": true
+    },
+    "zod": {
+      "optional": true
+    }
   },
   "engines": {
     "node": "^20 || ^22 || >=24"

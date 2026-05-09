@@ -17,10 +17,14 @@
 [issuesBadge]: https://img.shields.io/github/issues/marcalexiei/eslint-zod.svg?style=for-the-badge
 [issuesURL]: https://github.com/marcalexiei/eslint-zod/issues
 
-Shared AST utilities for [eslint-plugin-zod](../plugins/eslint-plugin-zod) and [eslint-plugin-zod-mini](../plugins/eslint-plugin-zod-mini).
+Shared AST utilities for
+
+- `eslint-plugin-zod`
+- `eslint-plugin-zod-mini`
+- `eslint-plugin-zod-core`
 
 > [!NOTE]
-> This package is a dependency of `eslint-plugin-zod` and `eslint-plugin-zod-mini`. You do not need to install it directly.
+> This package is a dependency of all previously listed packages, so you do not need to install it directly.
 
 ## API
 

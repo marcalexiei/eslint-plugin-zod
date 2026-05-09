@@ -6,17 +6,21 @@ This document explains how to set up the project locally, run tests and linters,
 
 ## Repository structure
 
-This is a pnpm monorepo with two published ESLint plugins and a shared utilities package:
+This is a pnpm monorepo with three published ESLint plugins and a shared utilities package:
 
 | Package                  | Directory                         |
 | ------------------------ | --------------------------------- |
 | `eslint-plugin-zod`      | `plugins/eslint-plugin-zod/`      |
 | `eslint-plugin-zod-mini` | `plugins/eslint-plugin-zod-mini/` |
+| `eslint-plugin-zod-core` | `plugins/eslint-plugin-zod-core/` |
 | `@eslint-zod/utils`      | `packages/utils/`                 |
 
-`@eslint-zod/utils` contains AST helpers shared by both plugins. Rule implementations live entirely per-plugin.
+`@eslint-zod/utils` contains AST helpers shared by all plugins. Rule implementations live entirely per-plugin.
 
-Several rules exist in **both** plugins with the same name and intent but adapted to each plugin's API style (`zod` uses chained methods; `zod/mini` uses standalone `$ZodCheck` functions). When modifying a shared rule, keep both plugins in sync (code, specs, and docs).
+Several rules exist in **different** plugins with the same name and intent but adapted to each plugin's API style.
+E.g., `zod` uses chained methods; `zod/mini` uses standalone `$ZodCheck` functions.
+
+When modifying a shared rule, keep both plugins in sync (code, specs, and docs).
 
 ---
 
