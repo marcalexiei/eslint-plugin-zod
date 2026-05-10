@@ -1,5 +1,21 @@
 # @eslint-zod/utils
 
+## 1.1.0
+
+### Minor Changes
+
+- [#297](https://github.com/marcalexiei/eslint-zod/pull/297) [`66dcfca`](https://github.com/marcalexiei/eslint-zod/commit/66dcfca1aceb8c5dc2d85e4e06147561495491e6) Thanks [@marcalexiei](https://github.com/marcalexiei)! - feat: remove `detectZodSchemaRootNode` from export
+
+  This is technically a breaking change, but since this package is only used by the plugin within this repository, I'm releasing it as a minor version.
+
+  If you were relying on the previous behavior, feel free to open an issue and I’ll cut a follow-up release to restore compatibility.
+
+- [#297](https://github.com/marcalexiei/eslint-zod/pull/297) [`66dcfca`](https://github.com/marcalexiei/eslint-zod/commit/66dcfca1aceb8c5dc2d85e4e06147561495491e6) Thanks [@marcalexiei](https://github.com/marcalexiei)! - feat: `detectZodSchemaRootNode#schemaType` should be the zod public name not the local one
+
+### Patch Changes
+
+- [#295](https://github.com/marcalexiei/eslint-zod/pull/295) [`38429ee`](https://github.com/marcalexiei/eslint-zod/commit/38429ee89494bc1605d3248b10e46c8a6ec0a58c) Thanks [@marcalexiei](https://github.com/marcalexiei)! - feat(ZodImportScope): simplify types using sources directly
+
 ## 1.0.1
 
 ### Patch Changes
