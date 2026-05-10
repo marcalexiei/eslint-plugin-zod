@@ -1,25 +1,22 @@
-type ZodImportAllowedSource = 'zod' | 'zod-mini';
+export class ZodImportScope<TSources extends Array<string> = Array<string>> {
+  readonly sources: TSources;
 
-const ZodImportSources = ['zod', 'zod/v4', 'zod/v3'] as const;
-const ZodMiniImportSources = ['zod/mini', 'zod/v4-mini'] as const;
-
-export class ZodImportScope<
-  TSource extends ZodImportAllowedSource = ZodImportAllowedSource,
-> {
-  readonly sources: TSource extends 'zod'
-    ? typeof ZodImportSources
-    : typeof ZodMiniImportSources;
-
-  constructor(scope: TSource) {
-    this.sources = (
-      scope === 'zod' ? ZodImportSources : ZodMiniImportSources
-    ) as never;
+  constructor(sources: TSources) {
+    this.sources = sources;
   }
 
-  isAllowed(source: string): boolean {
-    return this.sources.includes(source as never);
+  isAllowed(source: string): source is TSources[number] {
+    return this.sources.includes(source);
   }
 }
 
-export const zodImportScope = new ZodImportScope('zod');
-export const zodMiniImportScope = new ZodImportScope('zod-mini');
+export const zodImportScope = new ZodImportScope([
+  'zod',
+  'zod/v4',
+  'zod/v3',
+] as const);
+
+export const zodMiniImportScope = new ZodImportScope([
+  'zod/mini',
+  'zod/v4-mini',
+] as const);

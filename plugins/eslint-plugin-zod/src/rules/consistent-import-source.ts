@@ -49,7 +49,7 @@ export const consistentImportSource = createZodPluginRule<
           return;
         }
 
-        if ((sources as Array<string>).includes(sourceValue)) {
+        if (sources.includes(sourceValue)) {
           return;
         }
 

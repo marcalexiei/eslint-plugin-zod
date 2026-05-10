@@ -44,7 +44,7 @@ Walks up the AST from a call expression and returns the first ancestor Zod schem
 
 Fixer helpers for removing or replacing a method in a Zod chain.
 
-### `ZodImportScope` / `zodImportScope` / `zodMiniImportScope`
+### `zodImportScope` / `zodMiniImportScope`
 
 Class and pre-built instances that define the set of recognised import sources for each plugin scope.
 
