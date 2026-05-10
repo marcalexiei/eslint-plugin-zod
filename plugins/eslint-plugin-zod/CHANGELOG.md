@@ -1,5 +1,14 @@
 # eslint-plugin-zod
 
+## 4.2.1
+
+### Patch Changes
+
+- [#297](https://github.com/marcalexiei/eslint-zod/pull/297) [`66dcfca`](https://github.com/marcalexiei/eslint-zod/commit/66dcfca1aceb8c5dc2d85e4e06147561495491e6) Thanks [@marcalexiei](https://github.com/marcalexiei)! - refactor: make fixer return `null` instead of having two branch for `context.report` (1 with and 1 without the fixer)
+
+- Updated dependencies [[`66dcfca`](https://github.com/marcalexiei/eslint-zod/commit/66dcfca1aceb8c5dc2d85e4e06147561495491e6), [`66dcfca`](https://github.com/marcalexiei/eslint-zod/commit/66dcfca1aceb8c5dc2d85e4e06147561495491e6), [`38429ee`](https://github.com/marcalexiei/eslint-zod/commit/38429ee89494bc1605d3248b10e46c8a6ec0a58c)]:
+  - @eslint-zod/utils@1.1.0
+
 ## 4.2.0
 
 ### Minor Changes
