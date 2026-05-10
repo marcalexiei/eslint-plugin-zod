@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-zod",
-  "version": "4.1.0",
+  "version": "4.2.0",
   "type": "module",
   "description": "ESLint plugin that adds custom linting rules to enforce best practices when using Zod",
   "engines": {

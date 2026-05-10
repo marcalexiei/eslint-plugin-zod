@@ -1,5 +1,11 @@
 # eslint-plugin-zod
 
+## 4.2.0
+
+### Minor Changes
+
+- [#294](https://github.com/marcalexiei/eslint-zod/pull/294) [`ce6b90d`](https://github.com/marcalexiei/eslint-zod/commit/ce6b90df2055564296ee955a3ca7c6570a33c973) Thanks [@nimaebra](https://github.com/nimaebra)! - feat: add `no-native-enum` rule
+
 ## 4.1.0
 
 ### Minor Changes
