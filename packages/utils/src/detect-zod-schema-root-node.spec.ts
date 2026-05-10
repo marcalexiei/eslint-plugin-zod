@@ -47,7 +47,11 @@ function setOutermostParent(node: TSESTree.CallExpression): void {
 }
 
 const zodNamespaces = new Set(['z']);
-const zodNamedImports = new Set(['string', 'number', 'array']);
+const zodNamedImports = new Map<string, string>([
+  ['string', 'string'],
+  ['number', 'number'],
+  ['array', 'array'],
+]);
 
 describe('detectZodSchemaRootNode', () => {
   it('returns null for non-CallExpression nodes', () => {
@@ -144,6 +148,22 @@ describe('detectZodSchemaRootNode', () => {
     expect(result?.schemaDecl).toBe('named');
     expect(result?.schemaType).toBe('string');
     expect(result?.methods).toStrictEqual(['optional']);
+  });
+
+  it('resolves aliased named import to original name: nativeEnum as zodNativeEnum', () => {
+    const zodNamedImportsWithAlias = new Map([['zodNativeEnum', 'nativeEnum']]);
+    const call = makeCall(makeIdent('zodNativeEnum'));
+    setOutermostParent(call);
+
+    const result = detectZodSchemaRootNode(
+      call,
+      zodNamespaces,
+      zodNamedImportsWithAlias,
+    );
+
+    expect(result?.schemaDecl).toBe('named');
+    expect(result?.schemaType).toBe('nativeEnum');
+    expect(result?.methods).toStrictEqual([]);
   });
 });
 

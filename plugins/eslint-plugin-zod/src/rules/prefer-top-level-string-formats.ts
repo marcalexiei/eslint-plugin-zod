@@ -154,18 +154,6 @@ export const preferTopLevelStringFormats = createZodPluginRule<
         const { replacementMethodName, sourceMethodName } =
           TOP_LEVEL_STRING_FORMATS_BY_SOURCE[formatMethod.name];
 
-        if (zodSchemaMeta.schemaDecl === 'named') {
-          context.report({
-            node,
-            messageId: 'preferTopLevelStringFormat',
-            data: {
-              replacementMethod: replacementMethodName,
-              sourceMethod: sourceMethodName,
-            },
-          });
-          return;
-        }
-
         context.report({
           node,
           messageId: 'preferTopLevelStringFormat',
@@ -174,6 +162,10 @@ export const preferTopLevelStringFormats = createZodPluginRule<
             sourceMethod: sourceMethodName,
           },
           fix(fixer) {
+            if (zodSchemaMeta.schemaDecl === 'named') {
+              return null;
+            }
+
             return buildZodChainReplacementFix({
               sourceCode,
               fixer,

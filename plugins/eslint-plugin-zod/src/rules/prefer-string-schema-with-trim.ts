@@ -59,18 +59,14 @@ export const preferStringSchemaWithTrim = createZodPluginRule({
           return;
         }
 
-        if (zodSchemaMeta.schemaDecl === 'named') {
-          context.report({
-            node,
-            messageId: 'addTrim',
-          });
-          return;
-        }
-
         context.report({
           node,
           messageId: 'addTrim',
           fix(fixer) {
+            if (zodSchemaMeta.schemaDecl === 'named') {
+              return null;
+            }
+
             const lastMethod = methods.at(0)!;
             return fixer.insertTextAfter(lastMethod.node, '.trim()');
           },

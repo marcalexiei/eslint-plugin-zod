@@ -1,9 +1,6 @@
 export { buildZodChainRemoveMethodFix } from './build-zod-chain-remove-method-fix.js';
 export { buildZodChainReplacementFix } from './build-zod-chain-replacement-fix.js';
-export {
-  detectZodSchemaRootNode,
-  isZodNumberSchemaCallExpression,
-} from './detect-zod-schema-root-node.js';
+export { isZodNumberSchemaCallExpression } from './detect-zod-schema-root-node.js';
 export { findParentSchemaMatchingCondition } from './find-parent-schema-matching-condition.js';
 export {
   IMPORT_SYNTAXES,
