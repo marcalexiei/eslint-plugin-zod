@@ -37,7 +37,7 @@ jobs:
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: Install Dependencies
-        uses: marcalexiei/github-actions/.github/actions/setup-node-and-pnpm@f27a68a73a799c79d7158cf4a98d7e3d5e8e23be # v1.1.0
+        uses: marcalexiei/github-actions/.github/actions/setup-node-and-pnpm@6735bb9dd019900ebc16ce34e13c118b3917d1f7 # v1.2.0
         with:
           node-version: ${{ matrix.node }}
 
@@ -57,7 +57,7 @@ jobs:
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: Install Dependencies
-        uses: marcalexiei/github-actions/.github/actions/setup-node-and-pnpm@f27a68a73a799c79d7158cf4a98d7e3d5e8e23be # v1.1.0
+        uses: marcalexiei/github-actions/.github/actions/setup-node-and-pnpm@6735bb9dd019900ebc16ce34e13c118b3917d1f7 # v1.2.0
 
       - name: Build
         run: pnpm run build
