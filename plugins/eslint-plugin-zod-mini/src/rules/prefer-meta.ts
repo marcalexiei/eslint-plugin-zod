@@ -2,7 +2,7 @@ import {
   createZodSchemaImportTrack,
   zodMiniImportScope,
 } from '@eslint-zod/utils';
-import { AST_NODE_TYPES } from '@typescript-eslint/utils';
+import type { TSESTree } from '@typescript-eslint/utils';
 
 import { createZodMiniPluginRule } from '../utils/create-plugin-rule.js';
 
@@ -25,51 +25,41 @@ export const preferMeta = createZodMiniPluginRule({
   },
   defaultOptions: [],
   create(context) {
-    const {
-      importDeclarationListener,
-      isZodNamespace,
-      getNamedImportOriginal,
-    } = trackZodSchemaImports();
+    const { importDeclarationListener, detectZodSchemaRootNode } =
+      trackZodSchemaImports();
 
     return {
       ImportDeclaration: importDeclarationListener,
       CallExpression(node): void {
-        const { callee } = node;
+        const zodSchemaMeta = detectZodSchemaRootNode(node);
 
-        // z.describe("arg") — namespace or { z } named import
-        if (
-          callee.type === AST_NODE_TYPES.MemberExpression &&
-          callee.property.type === AST_NODE_TYPES.Identifier &&
-          callee.property.name === 'describe' &&
-          callee.object.type === AST_NODE_TYPES.Identifier &&
-          isZodNamespace(callee.object.name)
-        ) {
-          const [describeArg] = node.arguments;
-
-          context.report({
-            node,
-            messageId: 'preferMeta',
-            fix(fixer) {
-              return [
-                fixer.replaceText(callee.property, 'meta'),
-                fixer.replaceText(
-                  describeArg,
-                  `{ description: ${context.sourceCode.getText(describeArg)} }`,
-                ),
-              ];
-            },
-          });
-
+        if (zodSchemaMeta?.schemaType !== 'describe') {
           return;
         }
 
-        // describe("arg") — named import of the describe function
-        if (
-          callee.type === AST_NODE_TYPES.Identifier &&
-          getNamedImportOriginal(callee.name) === 'describe'
-        ) {
-          context.report({ node, messageId: 'preferMeta' });
-        }
+        context.report({
+          node,
+          messageId: 'preferMeta',
+          fix(fixer) {
+            if (zodSchemaMeta.schemaDecl === 'named') {
+              return null;
+            }
+
+            const { callee } = node;
+            const [describeArg] = node.arguments;
+
+            return [
+              fixer.replaceText(
+                (callee as TSESTree.MemberExpression).property,
+                'meta',
+              ),
+              fixer.replaceText(
+                describeArg,
+                `{ description: ${context.sourceCode.getText(describeArg)} }`,
+              ),
+            ];
+          },
+        });
       },
     };
   },

@@ -89,7 +89,7 @@ function isOutermostCallExpression(node: TSESTree.CallExpression): boolean {
 function parseZodCallExpression(
   call: TSESTree.CallExpression,
   zodNamespaces: Set<string>,
-  zodNamedImports: { has: (key: string) => boolean },
+  zodNamedImports: Map<string, string>,
 ): {
   schemaDecl: 'namespace' | 'named';
   schemaType: string;
@@ -153,15 +153,8 @@ function parseZodCallExpression(
 
   // Named import style: number().int() or array(...)
   if (zodNamedImports.has(leftmostIdentifier)) {
-    // When the leftmost identifier itself is the named import,
-    // the factory is the identifier (e.g. array(...), number())
-    // methods may be empty (for direct constructor) or contain subsequent chained names.
-    // Example: string().array() => when parse is called on that outer CallExpression,
-    // leftmostIdentifier === 'string' (if parse invoked on inner), but for outer we handle accordingly.
-    // For direct calls where call.callee is Identifier, methods will be [] and leftmostIdentifier is the factory.
-    const factory = leftmostIdentifier;
-    // If methods exist and the first item equals factory, that's odd but we'll prefer explicit factory:
-    // Return schemaType as factory
+    // prettier-ignore
+    const factory = zodNamedImports.get(leftmostIdentifier) ?? leftmostIdentifier;
     return {
       schemaDecl: 'named',
       schemaType: factory,
@@ -181,7 +174,7 @@ function parseZodCallExpression(
 export function isZodNumberSchemaCallExpression(
   node: TSESTree.Node,
   zodNamespaces: Set<string>,
-  zodNamedImports: { has: (key: string) => boolean },
+  zodNamedImports: Map<string, string>,
 ): boolean {
   if (node.type !== AST_NODE_TYPES.CallExpression) {
     return false;
@@ -247,7 +240,7 @@ export function isZodNumberSchemaCallExpression(
 export function detectZodSchemaRootNode(
   node: TSESTree.Node,
   zodNamespaces: Set<string>,
-  zodNamedImports: { has: (key: string) => boolean },
+  zodNamedImports: Map<string, string>,
 ): DetectResult {
   if (node.type !== AST_NODE_TYPES.CallExpression) {
     return null;

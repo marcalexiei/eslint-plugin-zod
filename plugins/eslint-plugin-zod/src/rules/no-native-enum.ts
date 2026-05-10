@@ -26,52 +26,35 @@ export const noNativeEnum = createZodPluginRule({
       importDeclarationListener,
       detectZodSchemaRootNode,
       collectZodChainMethods,
-      getNamedImportOriginal,
     } = trackZodSchemaImports();
 
     return {
       ImportDeclaration: importDeclarationListener,
 
       CallExpression(node): void {
-        const zodSchema = detectZodSchemaRootNode(node);
-        const methods = zodSchema
-          ? collectZodChainMethods(zodSchema.node)
-          : undefined;
-        const rootMethod = methods?.[0];
+        const zodSchemaMeta = detectZodSchemaRootNode(node);
 
-        const isNativeEnumRoot =
-          zodSchema?.schemaDecl === 'namespace'
-            ? rootMethod?.name === 'nativeEnum'
-            : getNamedImportOriginal(rootMethod?.name ?? '') === 'nativeEnum';
-
-        if (!zodSchema || !isNativeEnumRoot) {
+        if (zodSchemaMeta?.schemaType !== 'nativeEnum') {
           return;
         }
 
-        // For named imports (e.g., `nativeEnum().optional()`), we cannot safely auto-fix
-        // because replacing the entire chain would require access to the namespace prefix.
-        // Report the error without a fix in this case.
-        if (zodSchema.schemaDecl === 'named') {
-          context.report({
-            node,
-            messageId: 'useEnum',
-          });
-          return;
-        }
+        const methods = collectZodChainMethods(zodSchemaMeta.node);
+        const [{ node: rootMethodNode }] = methods;
 
         context.report({
           node,
           messageId: 'useEnum',
           fix(fixer) {
+            // For named imports (e.g., `nativeEnum().optional()`), we cannot safely auto-fix
+            // because replacing the entire chain would require access to the namespace prefix.
+            // Report the error without a fix in this case.
             if (
-              rootMethod?.node.callee.type !==
-                AST_NODE_TYPES.MemberExpression ||
-              rootMethod.node.callee.property.type !== AST_NODE_TYPES.Identifier
+              rootMethodNode.callee.type !== AST_NODE_TYPES.MemberExpression
             ) {
               return null;
             }
 
-            return fixer.replaceText(rootMethod.node.callee.property, 'enum');
+            return fixer.replaceText(rootMethodNode.callee.property, 'enum');
           },
         });
       },

@@ -53,12 +53,12 @@ export const arrayStyle = createZodPluginRule<[Options], MessageIds>({
     return {
       ImportDeclaration: importDeclarationListener,
       CallExpression(node): void {
-        const zodSchema = detectZodSchemaRootNode(node);
-        if (!zodSchema) {
+        const zodSchemaMeta = detectZodSchemaRootNode(node);
+        if (!zodSchemaMeta) {
           return;
         }
 
-        const { schemaDecl, schemaType } = zodSchema;
+        const { schemaDecl, schemaType } = zodSchemaMeta;
 
         if (style === 'method') {
           // match all z.array(z.string()) and convert them into

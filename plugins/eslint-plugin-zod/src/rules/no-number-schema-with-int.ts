@@ -56,20 +56,16 @@ export const noNumberSchemaWithInt = createZodPluginRule({
 
         const numberIndex = methods.findIndex((m) => m.name === 'number');
 
-        // If it's a named import usage (e.g. `import { number } from 'zod'`), report but do not fix.
-        if (zodSchemaMeta.schemaDecl === 'named') {
-          context.report({
-            node,
-            messageId: 'removeNumber',
-          });
-          return;
-        }
-
-        // Namespace import (e.g. z.number()) — prepare a fixer
         context.report({
           node,
           messageId: 'removeNumber',
           fix(fixer) {
+            // If it's a named import usage (e.g. `import { number } from 'zod'`), report but do not fix.
+            if (zodSchemaMeta.schemaDecl === 'named') {
+              return null;
+            }
+
+            // Namespace import (e.g. z.number()) — prepare a fixer
             return buildZodChainReplacementFix({
               sourceCode,
               fixer,

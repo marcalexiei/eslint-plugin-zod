@@ -31,13 +31,13 @@ export const preferEnumOverLiteralUnion = createZodPluginRule({
     return {
       ImportDeclaration: importDeclarationListener,
       CallExpression(node): void {
-        const zodSchema = detectZodSchemaRootNode(node);
+        const zodSchemaMeta = detectZodSchemaRootNode(node);
 
-        if (zodSchema?.schemaType !== 'union') {
+        if (zodSchemaMeta?.schemaType !== 'union') {
           return;
         }
 
-        const methods = collectZodChainMethods(zodSchema.node);
+        const methods = collectZodChainMethods(zodSchemaMeta.node);
         const union = methods.find((it) => it.name === 'union');
 
         if (!union) {
@@ -85,18 +85,14 @@ export const preferEnumOverLiteralUnion = createZodPluginRule({
           return;
         }
 
-        if (zodSchema.schemaDecl === 'named') {
-          context.report({
-            node,
-            messageId: 'useEnum',
-          });
-          return;
-        }
-
         context.report({
           node,
           messageId: 'useEnum',
           fix(fixer) {
+            if (zodSchemaMeta.schemaDecl === 'named') {
+              return null;
+            }
+
             return [
               // Replace just the name of the method.
               // The object property might have a named different from z.

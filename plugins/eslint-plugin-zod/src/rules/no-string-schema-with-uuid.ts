@@ -60,20 +60,16 @@ export const noStringSchemaWithUuid = createZodPluginRule({
 
         const stringIndex = methods.findIndex((m) => m.name === 'string');
 
-        // If it's a named import usage (e.g. `import { string } from 'zod'`), report but do not fix.
-        if (zodSchemaMeta.schemaDecl === 'named') {
-          context.report({
-            node,
-            messageId: 'useUuid',
-          });
-          return;
-        }
-
-        // Namespace import (e.g. z.string()) — prepare a fixer
         context.report({
           node,
           messageId: 'useUuid',
           fix(fixer) {
+            // If it's a named import usage (e.g. `import { string } from 'zod'`), report but do not fix.
+            if (zodSchemaMeta.schemaDecl === 'named') {
+              return null;
+            }
+
+            // Namespace import (e.g. z.string()) — prepare a fixer
             return buildZodChainReplacementFix({
               sourceCode,
               fixer,

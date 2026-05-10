@@ -3,7 +3,7 @@ import {
   findParentSchemaMatchingCondition,
   zodImportScope,
 } from '@eslint-zod/utils';
-import type { TSESLint, TSESTree } from '@typescript-eslint/utils';
+import type { TSESTree } from '@typescript-eslint/utils';
 
 import { createZodPluginRule } from '../utils/create-plugin-rule.js';
 
@@ -73,18 +73,14 @@ export const preferTrimBeforeStringLengthChecks = createZodPluginRule({
           return;
         }
 
-        if (zodSchemaMeta.schemaDecl === 'named') {
-          context.report({
-            node,
-            messageId: 'trimBeforeLengthCheck',
-          });
-          return;
-        }
-
         context.report({
           node,
           messageId: 'trimBeforeLengthCheck',
-          fix(fixer): Array<TSESLint.RuleFix> {
+          fix(fixer) {
+            if (zodSchemaMeta.schemaDecl === 'named') {
+              return null;
+            }
+
             const stringMethodNode = methods[0].node;
             const trimMethodNode = methods[trimIndex].node;
             const trimCallee =
