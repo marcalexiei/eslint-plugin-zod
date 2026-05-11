@@ -22,8 +22,10 @@ import { noThrowInRefine } from './rules/no-throw-in-refine.js';
 import { noTransformInRecordKey } from './rules/no-transform-in-record-key.js';
 import { noUnknownSchema } from './rules/no-unknown-schema.js';
 import { preferEnumOverLiteralUnion } from './rules/prefer-enum-over-literal-union.js';
+import { preferLooseObject } from './rules/prefer-loose-object.js';
 import { preferMetaLast } from './rules/prefer-meta-last.js';
 import { preferMeta } from './rules/prefer-meta.js';
+import { preferStrictObject } from './rules/prefer-strict-object.js';
 import { preferStringSchemaWithTrim } from './rules/prefer-string-schema-with-trim.js';
 import { preferTopLevelStringFormats } from './rules/prefer-top-level-string-formats.js';
 import { preferTrimBeforeStringLengthChecks } from './rules/prefer-trim-before-string-length-checks.js';
@@ -71,8 +73,10 @@ const eslintPluginZod = {
     'no-transform-in-record-key': noTransformInRecordKey,
     'no-unknown-schema': noUnknownSchema,
     'prefer-enum-over-literal-union': preferEnumOverLiteralUnion,
+    'prefer-loose-object': preferLooseObject,
     'prefer-meta': preferMeta,
     'prefer-meta-last': preferMetaLast,
+    'prefer-strict-object': preferStrictObject,
     'prefer-top-level-string-formats': preferTopLevelStringFormats,
     'prefer-string-schema-with-trim': preferStringSchemaWithTrim,
     'prefer-trim-before-string-length-checks':
@@ -110,8 +114,10 @@ const recommendedConfig = {
     'zod/no-optional-and-default-together': 'error',
     'zod/no-throw-in-refine': 'error',
     'zod/prefer-enum-over-literal-union': 'error',
+    'zod/prefer-loose-object': 'error',
     'zod/prefer-meta': 'error',
     'zod/prefer-meta-last': 'error',
+    'zod/prefer-strict-object': 'error',
     'zod/prefer-top-level-string-formats': 'error',
     'zod/prefer-string-schema-with-trim': 'error',
     'zod/prefer-trim-before-string-length-checks': 'error',
