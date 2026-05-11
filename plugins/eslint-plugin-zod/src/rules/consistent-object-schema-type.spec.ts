@@ -62,7 +62,7 @@ ruleTester.run(consistentObjectSchemaType.name, consistentObjectSchemaType, {
               data: { expected: 'object' },
               output: dedent`
                 import * as z from 'zod';
-                z.object({}).passthrough()
+                z.object({})
               `,
             },
           ],
@@ -100,7 +100,7 @@ ruleTester.run(consistentObjectSchemaType.name, consistentObjectSchemaType, {
               data: { expected: 'object' },
               output: dedent`
                 import * as z from 'zod';
-                z.object({ test: z.object({}).passthrough() })
+                z.object({ test: z.object({}) })
               `,
             },
           ],
