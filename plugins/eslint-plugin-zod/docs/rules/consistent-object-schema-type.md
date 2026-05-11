@@ -100,6 +100,7 @@ Consider disabling or not applying this rule when:
   the rule can create churn and noisy fixes during the migration.
 - You're authoring a library that must expose both strict and loose schemas as part of its public API.
 - You prefer enforcing schema semantics via tests or code review rather than a global lint rule.
+- You are using `zod/prefer-strict-object` and/or `zod/prefer-loose-object`. (If you use them, configure this rule to allow `strictObject` and/or `looseObject` as needed.)
 
 If you still want partial enforcement, you use ESLint overrides to scope the rule to specific directories or file patterns instead of enabling it project‑wide.
 

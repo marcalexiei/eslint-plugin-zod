@@ -101,8 +101,14 @@ export const consistentObjectSchemaType = createZodPluginRule<
             >((it) => ({
               messageId: 'useMethod',
               data: { expected: it },
-              fix(fixer): TSESLint.RuleFix {
-                return fixer.replaceText(callee.property, it);
+              fix(fixer): Array<TSESLint.RuleFix> {
+                const fixes = [fixer.replaceText(callee.property, it)];
+                if (schemaType === 'strictObject' && it === 'object') {
+                  fixes.push(fixer.insertTextAfter(node, '.strict()'));
+                } else if (schemaType === 'looseObject' && it === 'object') {
+                  fixes.push(fixer.insertTextAfter(node, '.passthrough()'));
+                }
+                return fixes;
               },
             })),
           });
