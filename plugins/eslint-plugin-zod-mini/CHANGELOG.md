@@ -1,5 +1,14 @@
 # eslint-plugin-zod-mini
 
+## 1.0.3
+
+### Patch Changes
+
+- [#293](https://github.com/marcalexiei/eslint-zod/pull/293) [`74117f9`](https://github.com/marcalexiei/eslint-zod/commit/74117f9ad94697911f42f77b958e59b4d2239017) Thanks [@marcalexiei](https://github.com/marcalexiei)! - docs(README): correct `zod/mini` URL
+
+- Updated dependencies [[`74117f9`](https://github.com/marcalexiei/eslint-zod/commit/74117f9ad94697911f42f77b958e59b4d2239017)]:
+  - @eslint-zod/utils@1.2.0
+
 ## 1.0.2
 
 ### Patch Changes
