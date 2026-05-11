@@ -1,17 +1,32 @@
 {
   "name": "eslint-plugin-zod",
   "version": "4.2.1",
-  "type": "module",
   "description": "ESLint plugin that adds custom linting rules to enforce best practices when using Zod",
-  "engines": {
-    "node": "^20 || ^22 || >=24"
+  "keywords": [
+    "eslint",
+    "eslint-plugin",
+    "eslintplugin",
+    "oxlint",
+    "zod"
+  ],
+  "homepage": "https://github.com/marcalexiei/eslint-zod#readme",
+  "bugs": {
+    "url": "https://github.com/marcalexiei/eslint-zod/issues"
   },
-  "publishConfig": {
-    "access": "public"
+  "license": "MIT",
+  "author": "Marco Pasqualetti @marcalexiei",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/marcalexiei/eslint-zod",
+    "directory": "plugins/eslint-plugin-zod"
   },
+  "files": [
+    "dist"
+  ],
+  "type": "module",
   "main": "./dist/index.cjs",
-  "types": "./dist/index.d.cts",
   "module": "./dist/index.mjs",
+  "types": "./dist/index.d.cts",
   "exports": {
     ".": {
       "import": "./dist/index.mjs",
@@ -19,26 +34,8 @@
     },
     "./package.json": "./package.json"
   },
-  "homepage": "https://github.com/marcalexiei/eslint-zod#readme",
-  "bugs": {
-    "url": "https://github.com/marcalexiei/eslint-zod/issues"
-  },
-  "keywords": [
-    "eslint",
-    "eslintplugin",
-    "eslint-plugin",
-    "oxlint",
-    "zod"
-  ],
-  "files": [
-    "dist"
-  ],
-  "author": "Marco Pasqualetti @marcalexiei",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/marcalexiei/eslint-zod",
-    "directory": "plugins/eslint-plugin-zod"
+  "publishConfig": {
+    "access": "public"
   },
   "scripts": {
     "build": "tsdown",
@@ -50,6 +47,16 @@
     "@eslint-zod/utils": "workspace:*",
     "@typescript-eslint/utils": "catalog:deps",
     "esquery": "^1.6.0"
+  },
+  "devDependencies": {
+    "@marcalexiei/prettier-config": "catalog:dev",
+    "@types/esquery": "1.5.4",
+    "@typescript-eslint/rule-tester": "catalog:dev",
+    "dedent": "catalog:dev",
+    "eslint-doc-generator": "catalog:dev",
+    "prettier": "catalog:dev",
+    "tsdown": "catalog:dev",
+    "vitest": "catalog:dev"
   },
   "peerDependencies": {
     "eslint": "^9 || ^10",
@@ -67,14 +74,7 @@
       "optional": true
     }
   },
-  "devDependencies": {
-    "@marcalexiei/prettier-config": "catalog:dev",
-    "@types/esquery": "1.5.4",
-    "@typescript-eslint/rule-tester": "catalog:dev",
-    "dedent": "catalog:dev",
-    "eslint-doc-generator": "catalog:dev",
-    "prettier": "catalog:dev",
-    "tsdown": "catalog:dev",
-    "vitest": "catalog:dev"
+  "engines": {
+    "node": "^20 || ^22 || >=24"
   }
 }

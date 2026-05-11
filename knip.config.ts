@@ -21,6 +21,12 @@ export default {
       // in src/index.ts — it doesn't need to be a devDependency
       ignoreDependencies: ['eslint'],
     },
+    'plugins/eslint-plugin-zod-core': {
+      entry: ['.eslint-doc-generatorrc.ts'],
+      // eslint is an optional peer dependency referenced only for `satisfies` type checks
+      // in src/index.ts — it doesn't need to be a devDependency
+      ignoreDependencies: ['eslint'],
+    },
     'packages/utils': {},
   },
 } satisfies KnipConfig;

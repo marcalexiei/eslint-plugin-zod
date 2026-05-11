@@ -10,6 +10,10 @@ export {
   type ImportSyntax,
   type ImportGroupData,
 } from './import-syntax-helpers.js';
-export { zodImportScope, zodMiniImportScope } from './zod-import-scope.js';
+export {
+  zodImportScope,
+  zodMiniImportScope,
+  zodCoreImportScope,
+} from './zod-import-scope.js';
 export { createZodSchemaImportTrack } from './track-zod-schema-imports.js';
 export { ZOD_NON_SCHEMA_PRODUCING_METHODS } from './zod-non-schema-producing-methods.js';

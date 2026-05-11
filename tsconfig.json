@@ -3,6 +3,7 @@
   "references": [
     { "path": "packages/utils" },
     { "path": "plugins/eslint-plugin-zod" },
-    { "path": "plugins/eslint-plugin-zod-mini" }
+    { "path": "plugins/eslint-plugin-zod-mini" },
+    { "path": "plugins/eslint-plugin-zod-core" }
   ]
 }
