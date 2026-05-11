@@ -16,8 +16,6 @@ Using the shorthand method makes the schema semantics explicit at creation time 
 
 Zod 4 documents `.strict()` as a legacy API. It remains available for backwards compatibility and will not be removed, but `z.strictObject()` is the recommended form for new code.
 
-The legacy `.strict()` method does not accept a message parameter or other arguments.
-
 ## Examples
 
 ### ❌ Invalid

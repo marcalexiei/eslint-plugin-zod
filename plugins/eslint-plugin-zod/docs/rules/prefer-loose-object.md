@@ -16,8 +16,6 @@ Using the shorthand method makes the schema semantics explicit at creation time 
 
 Zod 4 documents `.passthrough()` as a legacy API. The older `.loose()` method is also deprecated. They remain available for backwards compatibility and will not be removed, but `z.looseObject()` is the recommended form for new code.
 
-The legacy `.passthrough()` and `.loose()` methods do not accept a message parameter or other arguments.
-
 ## Examples
 
 ### ❌ Invalid
