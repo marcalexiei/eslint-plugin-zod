@@ -11,10 +11,12 @@ export const preferLooseObject = createZodPluginRule({
     type: 'suggestion',
     fixable: 'code',
     docs: {
-      description: 'Prefer `z.looseObject()` over `z.object().passthrough()`',
+      description:
+        'Prefer `z.looseObject()` over `z.object().passthrough()` and `z.object().loose()`',
     },
     messages: {
-      preferLooseObject: 'Use `z.looseObject()` instead of `.passthrough()`.',
+      preferLooseObject:
+        'Use `z.looseObject()` instead of `.passthrough()` or `.loose()`.',
     },
     schema: [],
   },
@@ -36,23 +38,23 @@ export const preferLooseObject = createZodPluginRule({
         }
 
         const methods = collectZodChainMethods(zodSchemaMeta.node);
-        const passthroughMethod = methods.find(
-          (it) => it.name === 'passthrough',
+        const looseMethod = methods.find(
+          (it) => it.name === 'passthrough' || it.name === 'loose',
         );
 
-        if (!passthroughMethod) {
+        if (!looseMethod) {
           return;
         }
 
         context.report({
-          node: passthroughMethod.node,
+          node: looseMethod.node,
           messageId: 'preferLooseObject',
           fix(fixer) {
             if (zodSchemaMeta.schemaDecl === 'named') {
               return null;
             }
 
-            if (passthroughMethod.node.arguments.length !== 0) {
+            if (looseMethod.node.arguments.length !== 0) {
               return null;
             }
 
@@ -72,17 +74,16 @@ export const preferLooseObject = createZodPluginRule({
             ];
 
             const calleeProperty =
-              passthroughMethod.node.callee.type ===
-              AST_NODE_TYPES.MemberExpression
-                ? passthroughMethod.node.callee.property
-                : passthroughMethod.node.callee;
+              looseMethod.node.callee.type === AST_NODE_TYPES.MemberExpression
+                ? looseMethod.node.callee.property
+                : looseMethod.node.callee;
             const tokenBefore = sourceCode.getTokenBefore(calleeProperty);
 
             if (tokenBefore?.value === '.') {
               fixes.push(
                 fixer.removeRange([
                   tokenBefore.range[0],
-                  passthroughMethod.node.range[1],
+                  looseMethod.node.range[1],
                 ]),
               );
             }

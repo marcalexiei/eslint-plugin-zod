@@ -1,6 +1,6 @@
 # zod/prefer-loose-object
 
-📝 Prefer `z.looseObject()` over `z.object().passthrough()`.
+📝 Prefer `z.looseObject()` over `z.object().passthrough()` and `z.object().loose()`.
 
 💼 This rule is enabled in the ✅ `recommended` config.
 
@@ -10,13 +10,13 @@
 
 ## Rule Details
 
-This rule recommends using Zod's `looseObject()` shorthand instead of chaining `.passthrough()` after `.object()`.
+This rule recommends using Zod's `looseObject()` shorthand instead of chaining `.passthrough()` or `.loose()` after `.object()`.
 
 Using the shorthand method makes the schema semantics explicit at creation time and keeps the object declaration easier to read.
 
-Zod 4 documents `.passthrough()` as a legacy API. It remains available for backwards compatibility and will not be removed, but `z.looseObject()` is the recommended form for new code.
+Zod 4 documents `.passthrough()` as a legacy API. The older `.loose()` method is also deprecated. They remain available for backwards compatibility and will not be removed, but `z.looseObject()` is the recommended form for new code.
 
-The legacy `.passthrough()` method does not accept a message parameter or other arguments.
+The legacy `.passthrough()` and `.loose()` methods do not accept a message parameter or other arguments.
 
 ## Examples
 
@@ -28,6 +28,8 @@ The legacy `.passthrough()` method does not accept a message parameter or other 
 import * as z from 'zod';
 
 z.object({ age: z.number() }).passthrough();
+
+z.object({ age: z.number() }).loose();
 
 // Even when chained with other methods
 z.object({ id: z.string() }).describe('User ID').passthrough();
@@ -66,7 +68,7 @@ To resolve this conflict, configure `consistent-object-schema-type` to also allo
 
 ## When Not To Use It
 
-If you prefer chaining `.passthrough()` to keep object schemas visually consistent with other chained validations, you can disable this rule.
+If you prefer chaining `.passthrough()` or `.loose()` to keep object schemas visually consistent with other chained validations, you can disable this rule.
 
 ## Further Reading
 
