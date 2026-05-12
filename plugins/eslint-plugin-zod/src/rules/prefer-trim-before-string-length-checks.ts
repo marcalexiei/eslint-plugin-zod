@@ -28,11 +28,8 @@ export const preferTrimBeforeStringLengthChecks = createZodPluginRule({
   },
   defaultOptions: [],
   create(context) {
-    const {
-      importDeclarationListener,
-      detectZodSchemaRootNode,
-      collectZodChainMethods,
-    } = trackZodSchemaImports();
+    const { importDeclarationListener, detectZodSchemaRootNode, collectZodChainMethods } =
+      trackZodSchemaImports();
 
     return {
       ImportDeclaration: importDeclarationListener,
@@ -48,8 +45,7 @@ export const preferTrimBeforeStringLengthChecks = createZodPluginRule({
           findParentSchemaMatchingCondition(zodSchemaMeta.node, {
             schemaName: 'record',
             condition: (callParent) =>
-              callParent.arguments.length > 0 &&
-              callParent.arguments[0] === zodSchemaMeta.node,
+              callParent.arguments.length > 0 && callParent.arguments[0] === zodSchemaMeta.node,
           })
         ) {
           return;
@@ -83,14 +79,10 @@ export const preferTrimBeforeStringLengthChecks = createZodPluginRule({
 
             const stringMethodNode = methods[0].node;
             const trimMethodNode = methods[trimIndex].node;
-            const trimCallee =
-              trimMethodNode.callee as TSESTree.MemberExpression;
+            const trimCallee = trimMethodNode.callee as TSESTree.MemberExpression;
 
             return [
-              fixer.removeRange([
-                trimCallee.object.range[1],
-                trimMethodNode.range[1],
-              ]),
+              fixer.removeRange([trimCallee.object.range[1], trimMethodNode.range[1]]),
               fixer.insertTextAfter(stringMethodNode, '.trim()'),
             ];
           },

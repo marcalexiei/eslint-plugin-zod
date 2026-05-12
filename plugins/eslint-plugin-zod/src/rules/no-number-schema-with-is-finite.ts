@@ -25,8 +25,7 @@ export const noNumberSchemaWithIsFinite = createZodPluginRule({
   defaultOptions: [],
 
   create(context) {
-    const { importDeclarationListener, isZodNumberSchemaCallExpression } =
-      trackZodSchemaImports();
+    const { importDeclarationListener, isZodNumberSchemaCallExpression } = trackZodSchemaImports();
 
     return {
       ImportDeclaration: importDeclarationListener,

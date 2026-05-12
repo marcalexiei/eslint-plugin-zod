@@ -52,9 +52,7 @@ ruleTester.run(`${consistentImport.name} namespace`, consistentImport, {
         import { z } from "zod";
         const aSchema = z.string();
       `,
-      errors: [
-        { messageId: 'changeImportSyntax', data: { syntax: 'namespace' } },
-      ],
+      errors: [{ messageId: 'changeImportSyntax', data: { syntax: 'namespace' } }],
       output: dedent`
         import * as z from "zod";
         const aSchema = z.string();
@@ -63,34 +61,26 @@ ruleTester.run(`${consistentImport.name} namespace`, consistentImport, {
     {
       name: 'default import',
       code: 'import z from "zod";',
-      errors: [
-        { messageId: 'changeImportSyntax', data: { syntax: 'namespace' } },
-      ],
+      errors: [{ messageId: 'changeImportSyntax', data: { syntax: 'namespace' } }],
       output: 'import * as z from "zod";',
     },
     {
       name: 'multiple named imports',
       code: 'import { object, string } from "zod";',
-      errors: [
-        { messageId: 'changeImportSyntax', data: { syntax: 'namespace' } },
-      ],
+      errors: [{ messageId: 'changeImportSyntax', data: { syntax: 'namespace' } }],
       output: 'import * as z from "zod";',
     },
     {
       name: 'mixed default + named',
       code: 'import z, { object } from "zod";',
-      errors: [
-        { messageId: 'changeImportSyntax', data: { syntax: 'namespace' } },
-      ],
+      errors: [{ messageId: 'changeImportSyntax', data: { syntax: 'namespace' } }],
       output: 'import * as z from "zod";',
     },
     {
       // https://github.com/marcalexiei/eslint-zod-x/issues/39
       name: 'named type import',
       code: 'import type { z } from "zod";',
-      errors: [
-        { messageId: 'changeImportSyntax', data: { syntax: 'namespace' } },
-      ],
+      errors: [{ messageId: 'changeImportSyntax', data: { syntax: 'namespace' } }],
       output: 'import type * as z from "zod";',
     },
     {

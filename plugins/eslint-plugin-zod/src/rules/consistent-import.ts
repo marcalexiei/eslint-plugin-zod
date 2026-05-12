@@ -63,10 +63,7 @@ export const consistentImport = createZodPluginRule<[Options], MessageIds>({
           nodes: [],
         };
 
-        if (
-          importGroups[source.value].hasOnlyTypeImports &&
-          importKind === 'value'
-        ) {
+        if (importGroups[source.value].hasOnlyTypeImports && importKind === 'value') {
           importGroups[source.value].hasOnlyTypeImports = false;
         }
 
@@ -113,10 +110,7 @@ export const consistentImport = createZodPluginRule<[Options], MessageIds>({
           }
 
           // Check if first import node is a namespace import
-          const isFirstImportValid = isGroupFirstImportKindValidForSyntax(
-            importGroup,
-            syntax,
-          );
+          const isFirstImportValid = isGroupFirstImportKindValidForSyntax(importGroup, syntax);
 
           // if first node is invalid turn it into a namespace import
           if (!isFirstImportValid) {

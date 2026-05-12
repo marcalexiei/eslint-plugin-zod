@@ -54,10 +54,7 @@ To resolve this conflict, configure `consistent-object-schema-type` to also allo
 ```json
 {
   "rules": {
-    "zod/consistent-object-schema-type": [
-      "error",
-      { "allow": ["object", "strictObject"] }
-    ]
+    "zod/consistent-object-schema-type": ["error", { "allow": ["object", "strictObject"] }]
   }
 }
 ```

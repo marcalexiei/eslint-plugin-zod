@@ -28,8 +28,7 @@ export const noSchemaWithIsOptional = createZodPluginRule({
   defaultOptions: [],
 
   create(context) {
-    const { importDeclarationListener, detectZodSchemaRootNode } =
-      trackZodSchemaImports();
+    const { importDeclarationListener, detectZodSchemaRootNode } = trackZodSchemaImports();
 
     return {
       ImportDeclaration: importDeclarationListener,

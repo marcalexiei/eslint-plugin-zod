@@ -15,18 +15,14 @@ export const preferLooseObject = createZodPluginRule({
         'Prefer `z.looseObject()` over `z.object().passthrough()` and `z.object().loose()`',
     },
     messages: {
-      preferLooseObject:
-        'Use `z.looseObject()` instead of `.passthrough()` or `.loose()`.',
+      preferLooseObject: 'Use `z.looseObject()` instead of `.passthrough()` or `.loose()`.',
     },
     schema: [],
   },
   defaultOptions: [],
   create(context) {
-    const {
-      importDeclarationListener,
-      detectZodSchemaRootNode,
-      collectZodChainMethods,
-    } = trackZodSchemaImports();
+    const { importDeclarationListener, detectZodSchemaRootNode, collectZodChainMethods } =
+      trackZodSchemaImports();
 
     return {
       ImportDeclaration: importDeclarationListener,
@@ -38,9 +34,7 @@ export const preferLooseObject = createZodPluginRule({
         }
 
         const methods = collectZodChainMethods(zodSchemaMeta.node);
-        const looseMethod = methods.find(
-          (it) => it.name === 'passthrough' || it.name === 'loose',
-        );
+        const looseMethod = methods.find((it) => it.name === 'passthrough' || it.name === 'loose');
 
         if (!looseMethod) {
           return;
@@ -69,9 +63,7 @@ export const preferLooseObject = createZodPluginRule({
                 ? `${sourceCode.getText(objectMethod.node.callee.object)}.looseObject`
                 : 'looseObject';
 
-            const fixes = [
-              fixer.replaceText(objectMethod.node.callee, replacementText),
-            ];
+            const fixes = [fixer.replaceText(objectMethod.node.callee, replacementText)];
 
             const calleeProperty =
               looseMethod.node.callee.type === AST_NODE_TYPES.MemberExpression
@@ -80,12 +72,7 @@ export const preferLooseObject = createZodPluginRule({
             const tokenBefore = sourceCode.getTokenBefore(calleeProperty);
 
             if (tokenBefore?.value === '.') {
-              fixes.push(
-                fixer.removeRange([
-                  tokenBefore.range[0],
-                  looseMethod.node.range[1],
-                ]),
-              );
+              fixes.push(fixer.removeRange([tokenBefore.range[0], looseMethod.node.range[1]]));
             }
 
             return fixes;

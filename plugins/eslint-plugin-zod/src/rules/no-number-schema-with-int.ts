@@ -14,12 +14,10 @@ export const noNumberSchemaWithInt = createZodPluginRule({
     fixable: 'code',
     type: 'problem',
     docs: {
-      description:
-        'Disallow usage of `z.number().int()` as it is considered legacy',
+      description: 'Disallow usage of `z.number().int()` as it is considered legacy',
     },
     messages: {
-      removeNumber:
-        '`z.number().int()` is considered legacy. Use `z.int()` instead.',
+      removeNumber: '`z.number().int()` is considered legacy. Use `z.int()` instead.',
     },
     schema: [],
   },
@@ -28,11 +26,8 @@ export const noNumberSchemaWithInt = createZodPluginRule({
   create(context) {
     const { sourceCode } = context;
 
-    const {
-      importDeclarationListener,
-      detectZodSchemaRootNode,
-      collectZodChainMethods,
-    } = trackZodSchemaImports();
+    const { importDeclarationListener, detectZodSchemaRootNode, collectZodChainMethods } =
+      trackZodSchemaImports();
 
     return {
       ImportDeclaration: importDeclarationListener,

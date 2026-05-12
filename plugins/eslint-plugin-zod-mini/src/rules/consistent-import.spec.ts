@@ -40,9 +40,7 @@ ruleTester.run(`${consistentImport.name} namespace`, consistentImport, {
         import { z } from "zod/mini";
         const userSchema = z.string();
       `,
-      errors: [
-        { messageId: 'changeImportSyntax', data: { syntax: 'namespace' } },
-      ],
+      errors: [{ messageId: 'changeImportSyntax', data: { syntax: 'namespace' } }],
       output: dedent`
         import * as z from "zod/mini";
         const userSchema = z.string();
@@ -51,33 +49,25 @@ ruleTester.run(`${consistentImport.name} namespace`, consistentImport, {
     {
       name: 'default import',
       code: 'import z from "zod/mini";',
-      errors: [
-        { messageId: 'changeImportSyntax', data: { syntax: 'namespace' } },
-      ],
+      errors: [{ messageId: 'changeImportSyntax', data: { syntax: 'namespace' } }],
       output: 'import * as z from "zod/mini";',
     },
     {
       name: 'multiple named imports',
       code: 'import { object, string } from "zod/mini";',
-      errors: [
-        { messageId: 'changeImportSyntax', data: { syntax: 'namespace' } },
-      ],
+      errors: [{ messageId: 'changeImportSyntax', data: { syntax: 'namespace' } }],
       output: 'import * as z from "zod/mini";',
     },
     {
       name: 'named type import',
       code: 'import type { z } from "zod/mini";',
-      errors: [
-        { messageId: 'changeImportSyntax', data: { syntax: 'namespace' } },
-      ],
+      errors: [{ messageId: 'changeImportSyntax', data: { syntax: 'namespace' } }],
       output: 'import type * as z from "zod/mini";',
     },
     {
       name: 'zod/v4-mini default import',
       code: 'import z from "zod/v4-mini";',
-      errors: [
-        { messageId: 'changeImportSyntax', data: { syntax: 'namespace' } },
-      ],
+      errors: [{ messageId: 'changeImportSyntax', data: { syntax: 'namespace' } }],
       output: 'import * as z from "zod/v4-mini";',
     },
     {

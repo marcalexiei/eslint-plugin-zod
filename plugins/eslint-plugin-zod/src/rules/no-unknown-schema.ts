@@ -12,8 +12,7 @@ export const noUnknownSchema = createZodPluginRule({
       description: 'Disallow usage of `z.unknown()` in Zod schemas',
     },
     messages: {
-      noZUnknown:
-        'Using `z.unknown()` is not allowed. Please use a more specific schema.',
+      noZUnknown: 'Using `z.unknown()` is not allowed. Please use a more specific schema.',
     },
     schema: [],
   },

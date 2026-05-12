@@ -22,11 +22,8 @@ export const requireBrandTypeParameter = createZodPluginRule({
   },
   defaultOptions: [],
   create(context) {
-    const {
-      importDeclarationListener,
-      detectZodSchemaRootNode,
-      collectZodChainMethods,
-    } = trackZodSchemaImports();
+    const { importDeclarationListener, detectZodSchemaRootNode, collectZodChainMethods } =
+      trackZodSchemaImports();
 
     return {
       ImportDeclaration: importDeclarationListener,
@@ -61,10 +58,7 @@ export const requireBrandTypeParameter = createZodPluginRule({
             {
               messageId: 'removeBrandFunction',
               fix(fixer): TSESLint.RuleFix {
-                return fixer.removeRange([
-                  brandCalleeNode.object.range[1],
-                  brandNode.range[1],
-                ]);
+                return fixer.removeRange([brandCalleeNode.object.range[1], brandNode.range[1]]);
               },
             },
           ],

@@ -14,10 +14,7 @@ function makeIdent(name: string): TSESTree.Identifier {
   } as unknown as TSESTree.Identifier;
 }
 
-function makeME(
-  object: TSESTree.Expression,
-  propertyName: string,
-): TSESTree.MemberExpression {
+function makeME(object: TSESTree.Expression, propertyName: string): TSESTree.MemberExpression {
   return {
     type: AST_NODE_TYPES.MemberExpression,
     object,
@@ -48,9 +45,7 @@ function mockImportDecl(
   } as unknown as TSESTree.ImportDeclaration;
 }
 
-function mockNamespaceSpec(
-  localName: string,
-): TSESTree.ImportNamespaceSpecifier {
+function mockNamespaceSpec(localName: string): TSESTree.ImportNamespaceSpecifier {
   return {
     type: AST_NODE_TYPES.ImportNamespaceSpecifier,
     local: makeIdent(localName),
@@ -64,10 +59,7 @@ function mockDefaultSpec(localName: string): TSESTree.ImportDefaultSpecifier {
   } as unknown as TSESTree.ImportDefaultSpecifier;
 }
 
-function mockNamedSpec(
-  localName: string,
-  originalName?: string,
-): TSESTree.ImportSpecifier {
+function mockNamedSpec(localName: string, originalName?: string): TSESTree.ImportSpecifier {
   return {
     type: AST_NODE_TYPES.ImportSpecifier,
     local: makeIdent(localName),
@@ -79,14 +71,11 @@ function mockNamedSpec(
 
 describe('createZodSchemaImportTrack', () => {
   it('each trackZodSchemaImports() call returns an independent instance', () => {
-    const { trackZodSchemaImports } =
-      createZodSchemaImportTrack(zodImportScope);
+    const { trackZodSchemaImports } = createZodSchemaImportTrack(zodImportScope);
     const a = trackZodSchemaImports();
     const b = trackZodSchemaImports();
 
-    a.importDeclarationListener(
-      mockImportDecl('zod', [mockNamespaceSpec('z')]),
-    );
+    a.importDeclarationListener(mockImportDecl('zod', [mockNamespaceSpec('z')]));
 
     expect(a.isZodNamespace('z')).toBe(true);
     expect(b.isZodNamespace('z')).toBe(false);
@@ -95,49 +84,36 @@ describe('createZodSchemaImportTrack', () => {
 
 describe('importDeclarationListener', () => {
   it('tracks namespace import (import * as z)', () => {
-    const { trackZodSchemaImports } =
-      createZodSchemaImportTrack(zodImportScope);
+    const { trackZodSchemaImports } = createZodSchemaImportTrack(zodImportScope);
     const tracker = trackZodSchemaImports();
-    tracker.importDeclarationListener(
-      mockImportDecl('zod', [mockNamespaceSpec('z')]),
-    );
+    tracker.importDeclarationListener(mockImportDecl('zod', [mockNamespaceSpec('z')]));
     expect(tracker.isZodNamespace('z')).toBe(true);
   });
 
   it('tracks default import (import z from "zod")', () => {
-    const { trackZodSchemaImports } =
-      createZodSchemaImportTrack(zodImportScope);
+    const { trackZodSchemaImports } = createZodSchemaImportTrack(zodImportScope);
     const tracker = trackZodSchemaImports();
-    tracker.importDeclarationListener(
-      mockImportDecl('zod', [mockDefaultSpec('z')]),
-    );
+    tracker.importDeclarationListener(mockImportDecl('zod', [mockDefaultSpec('z')]));
     expect(tracker.isZodNamespace('z')).toBe(true);
   });
 
   it('treats named import of z as a namespace (import { z } from "zod")', () => {
-    const { trackZodSchemaImports } =
-      createZodSchemaImportTrack(zodImportScope);
+    const { trackZodSchemaImports } = createZodSchemaImportTrack(zodImportScope);
     const tracker = trackZodSchemaImports();
-    tracker.importDeclarationListener(
-      mockImportDecl('zod', [mockNamedSpec('z', 'z')]),
-    );
+    tracker.importDeclarationListener(mockImportDecl('zod', [mockNamedSpec('z', 'z')]));
     expect(tracker.isZodNamespace('z')).toBe(true);
   });
 
   it('tracks named import (import { string } from "zod")', () => {
-    const { trackZodSchemaImports } =
-      createZodSchemaImportTrack(zodImportScope);
+    const { trackZodSchemaImports } = createZodSchemaImportTrack(zodImportScope);
     const tracker = trackZodSchemaImports();
-    tracker.importDeclarationListener(
-      mockImportDecl('zod', [mockNamedSpec('string')]),
-    );
+    tracker.importDeclarationListener(mockImportDecl('zod', [mockNamedSpec('string')]));
     expect(tracker.getNamedImportOriginal('string')).toBe('string');
     expect(tracker.getNamedImportLocal('string')).toBe('string');
   });
 
   it('tracks aliased named import (import { string as zodString })', () => {
-    const { trackZodSchemaImports } =
-      createZodSchemaImportTrack(zodImportScope);
+    const { trackZodSchemaImports } = createZodSchemaImportTrack(zodImportScope);
     const tracker = trackZodSchemaImports();
     tracker.importDeclarationListener(
       mockImportDecl('zod', [mockNamedSpec('zodString', 'string')]),
@@ -147,40 +123,30 @@ describe('importDeclarationListener', () => {
   });
 
   it('ignores imports from non-zod sources', () => {
-    const { trackZodSchemaImports } =
-      createZodSchemaImportTrack(zodMiniImportScope);
+    const { trackZodSchemaImports } = createZodSchemaImportTrack(zodMiniImportScope);
     const tracker = trackZodSchemaImports();
-    tracker.importDeclarationListener(
-      mockImportDecl('lodash', [mockNamespaceSpec('_')]),
-    );
+    tracker.importDeclarationListener(mockImportDecl('lodash', [mockNamespaceSpec('_')]));
     expect(tracker.isZodNamespace('_')).toBe(false);
   });
 
   it('respects allowedSource boundary (zod-mini tracker ignores zod imports)', () => {
-    const { trackZodSchemaImports } =
-      createZodSchemaImportTrack(zodMiniImportScope);
+    const { trackZodSchemaImports } = createZodSchemaImportTrack(zodMiniImportScope);
     const tracker = trackZodSchemaImports();
-    tracker.importDeclarationListener(
-      mockImportDecl('zod', [mockNamespaceSpec('z')]),
-    );
+    tracker.importDeclarationListener(mockImportDecl('zod', [mockNamespaceSpec('z')]));
     expect(tracker.isZodNamespace('z')).toBe(false);
   });
 
   it('tracks zod-mini namespace import when allowedSource is zod-mini', () => {
-    const { trackZodSchemaImports } =
-      createZodSchemaImportTrack(zodMiniImportScope);
+    const { trackZodSchemaImports } = createZodSchemaImportTrack(zodMiniImportScope);
     const tracker = trackZodSchemaImports();
-    tracker.importDeclarationListener(
-      mockImportDecl('zod/mini', [mockNamespaceSpec('z')]),
-    );
+    tracker.importDeclarationListener(mockImportDecl('zod/mini', [mockNamespaceSpec('z')]));
     expect(tracker.isZodNamespace('z')).toBe(true);
   });
 });
 
 describe('collectZodChainMethods', () => {
   it('collects namespace chain: z.number().min(1)', () => {
-    const { trackZodSchemaImports } =
-      createZodSchemaImportTrack(zodImportScope);
+    const { trackZodSchemaImports } = createZodSchemaImportTrack(zodImportScope);
     const tracker = trackZodSchemaImports();
 
     const zIdent = makeIdent('z');
@@ -197,8 +163,7 @@ describe('collectZodChainMethods', () => {
   });
 
   it('collects single named import: string()', () => {
-    const { trackZodSchemaImports } =
-      createZodSchemaImportTrack(zodImportScope);
+    const { trackZodSchemaImports } = createZodSchemaImportTrack(zodImportScope);
     const tracker = trackZodSchemaImports();
 
     const stringCall = makeCall(makeIdent('string'));
@@ -209,8 +174,7 @@ describe('collectZodChainMethods', () => {
   });
 
   it('collects named import chain: string().optional()', () => {
-    const { trackZodSchemaImports } =
-      createZodSchemaImportTrack(zodImportScope);
+    const { trackZodSchemaImports } = createZodSchemaImportTrack(zodImportScope);
     const tracker = trackZodSchemaImports();
 
     const stringCall = makeCall(makeIdent('string'));

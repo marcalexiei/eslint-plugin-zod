@@ -31,11 +31,8 @@ export const noStringSchemaWithUuid = createZodPluginRule({
   create(context) {
     const { sourceCode } = context;
 
-    const {
-      importDeclarationListener,
-      detectZodSchemaRootNode,
-      collectZodChainMethods,
-    } = trackZodSchemaImports();
+    const { importDeclarationListener, detectZodSchemaRootNode, collectZodChainMethods } =
+      trackZodSchemaImports();
 
     return {
       ImportDeclaration: importDeclarationListener,

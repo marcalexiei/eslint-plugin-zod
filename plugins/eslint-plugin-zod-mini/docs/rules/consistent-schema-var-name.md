@@ -96,10 +96,7 @@ The default `after` is `'Schema'`, so to enforce only a prefix you must explicit
 ```json
 {
   "rules": {
-    "zod-mini/consistent-schema-var-name": [
-      "error",
-      { "before": "$", "after": "" }
-    ]
+    "zod-mini/consistent-schema-var-name": ["error", { "before": "$", "after": "" }]
   }
 }
 ```
@@ -127,10 +124,7 @@ const $address = z.object({ street: z.string() });
 ```json
 {
   "rules": {
-    "zod-mini/consistent-schema-var-name": [
-      "error",
-      { "before": "$", "after": "Schema" }
-    ]
+    "zod-mini/consistent-schema-var-name": ["error", { "before": "$", "after": "Schema" }]
   }
 }
 ```

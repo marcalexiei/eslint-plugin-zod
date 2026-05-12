@@ -12,8 +12,8 @@ catalogs:
       version: 8.59.2
   dev:
     '@marcalexiei/prettier-config':
-      specifier: 1.1.4
-      version: 1.1.4
+      specifier: 2.0.0
+      version: 2.0.0
     '@typescript-eslint/rule-tester':
       specifier: 8.59.2
       version: 8.59.2
@@ -50,8 +50,8 @@ importers:
         specifier: 7.0.0
         version: 7.0.0(@vitest/eslint-plugin@1.6.16)(eslint-import-resolver-typescript@4.4.4)(eslint-plugin-import-x@4.16.2)(eslint@10.3.0)(typescript-eslint@8.59.2)
       '@marcalexiei/prettier-config':
-        specifier: 1.1.4
-        version: 1.1.4(prettier@3.8.3)
+        specifier: catalog:dev
+        version: 2.0.0(prettier@3.8.3)
       '@types/node':
         specifier: 25.6.0
         version: 25.6.0
@@ -122,7 +122,7 @@ importers:
     devDependencies:
       '@marcalexiei/prettier-config':
         specifier: catalog:dev
-        version: 1.1.4(prettier@3.8.3)
+        version: 2.0.0(prettier@3.8.3)
       '@types/esquery':
         specifier: 1.5.4
         version: 1.5.4
@@ -165,7 +165,7 @@ importers:
     devDependencies:
       '@marcalexiei/prettier-config':
         specifier: catalog:dev
-        version: 1.1.4(prettier@3.8.3)
+        version: 2.0.0(prettier@3.8.3)
       '@typescript-eslint/rule-tester':
         specifier: catalog:dev
         version: 8.59.2(eslint@10.3.0)(typescript@6.0.3)
@@ -208,7 +208,7 @@ importers:
     devDependencies:
       '@marcalexiei/prettier-config':
         specifier: catalog:dev
-        version: 1.1.4(prettier@3.8.3)
+        version: 2.0.0(prettier@3.8.3)
       '@types/esquery':
         specifier: 1.5.4
         version: 1.5.4
@@ -454,8 +454,8 @@ packages:
       eslint-plugin-react-x:
         optional: true
 
-  '@marcalexiei/prettier-config@1.1.4':
-    resolution: {integrity: sha512-aRTVCdhiUeqLvye6sUaTCzyGWcs3friq2LE6yi2qFsbBaHzntTsK4JUkKWdV+pkbcRh6BvdythRzoQAr18XxsA==}
+  '@marcalexiei/prettier-config@2.0.0':
+    resolution: {integrity: sha512-AKLLt7UnoceToFDgUER7N5z7wTiEDXw/Qi/uN7rxGR5MI77LH/BpDEMnVeCSw62lVbqzNR9THgEKxf9IaNZfTg==}
     engines: {node: '>= 20'}
     peerDependencies:
       prettier: ^2.8.0 || ^3.0.0
@@ -2883,7 +2883,7 @@ snapshots:
     optionalDependencies:
       '@vitest/eslint-plugin': 1.6.16(@typescript-eslint/eslint-plugin@8.59.2)(eslint@10.3.0)(typescript@6.0.3)(vitest@4.1.5)
 
-  '@marcalexiei/prettier-config@1.1.4(prettier@3.8.3)':
+  '@marcalexiei/prettier-config@2.0.0(prettier@3.8.3)':
     dependencies:
       prettier: 3.8.3
 

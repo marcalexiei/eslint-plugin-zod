@@ -8,131 +8,127 @@ import {
 
 const ruleTester = new RuleTester();
 
-const valid = TOP_LEVEL_STRING_FORMATS.flatMap(
-  ({ replacementMethodName, sourceMethodName }) => {
-    const [namedImportSpecifier] = replacementMethodName.split('.');
-    const namedImportExpression = `${replacementMethodName}()`;
-    const replacementExpression = `z.${replacementMethodName}()`;
+const valid = TOP_LEVEL_STRING_FORMATS.flatMap(({ replacementMethodName, sourceMethodName }) => {
+  const [namedImportSpecifier] = replacementMethodName.split('.');
+  const namedImportExpression = `${replacementMethodName}()`;
+  const replacementExpression = `z.${replacementMethodName}()`;
 
-    return [
-      {
-        name: `${sourceMethodName}: namespace import`,
-        code: dedent`
+  return [
+    {
+      name: `${sourceMethodName}: namespace import`,
+      code: dedent`
           import * as z from 'zod';
           ${replacementExpression};
         `,
-      },
-      {
-        name: `${sourceMethodName}: named import`,
-        code: dedent`
+    },
+    {
+      name: `${sourceMethodName}: named import`,
+      code: dedent`
           import { ${namedImportSpecifier} } from 'zod';
           ${namedImportExpression};
         `,
-      },
-      {
-        name: `${sourceMethodName}: named z import`,
-        code: dedent`
+    },
+    {
+      name: `${sourceMethodName}: named z import`,
+      code: dedent`
           import { z } from 'zod';
           ${replacementExpression};
         `,
-      },
-      {
-        name: `${sourceMethodName}: replacement with chain method`,
-        code: dedent`
+    },
+    {
+      name: `${sourceMethodName}: replacement with chain method`,
+      code: dedent`
           import * as z from 'zod';
           ${replacementExpression}.optional();
         `,
-      },
-      {
-        name: `${sourceMethodName}: ignored through options`,
-        code: dedent`
+    },
+    {
+      name: `${sourceMethodName}: ignored through options`,
+      code: dedent`
           import * as z from 'zod';
           z.string().${sourceMethodName}();
         `,
-        options: [{ ignore: [sourceMethodName] }] as const,
-      },
-    ];
-  },
-);
+      options: [{ ignore: [sourceMethodName] }] as const,
+    },
+  ];
+});
 
-const invalid = TOP_LEVEL_STRING_FORMATS.flatMap(
-  ({ replacementMethodName, sourceMethodName }) => {
-    const replacementExpression = `z.${replacementMethodName}()`;
+const invalid = TOP_LEVEL_STRING_FORMATS.flatMap(({ replacementMethodName, sourceMethodName }) => {
+  const replacementExpression = `z.${replacementMethodName}()`;
 
-    return [
-      {
-        name: `${sourceMethodName}: namespace import`,
-        code: dedent`
+  return [
+    {
+      name: `${sourceMethodName}: namespace import`,
+      code: dedent`
           import * as z from 'zod';
           z.string().${sourceMethodName}();
         `,
-        errors: [{ messageId: 'preferTopLevelStringFormat' }] as const,
-        output: dedent`
+      errors: [{ messageId: 'preferTopLevelStringFormat' }] as const,
+      output: dedent`
           import * as z from 'zod';
           ${replacementExpression};
         `,
-      },
-      {
-        name: `${sourceMethodName}: namespace import with params`,
-        code: dedent`
+    },
+    {
+      name: `${sourceMethodName}: namespace import with params`,
+      code: dedent`
           import * as z from 'zod';
           z.string().${sourceMethodName}('custom error');
         `,
-        errors: [{ messageId: 'preferTopLevelStringFormat' }] as const,
-        output: dedent`
+      errors: [{ messageId: 'preferTopLevelStringFormat' }] as const,
+      output: dedent`
           import * as z from 'zod';
           ${replacementExpression.replace('()', `('custom error')`)};
         `,
-      },
-      {
-        name: `${sourceMethodName}: named import`,
-        code: dedent`
+    },
+    {
+      name: `${sourceMethodName}: named import`,
+      code: dedent`
           import { string } from 'zod';
           string().${sourceMethodName}();
         `,
-        errors: [{ messageId: 'preferTopLevelStringFormat' }] as const,
-        output: null,
-      },
-      {
-        name: `${sourceMethodName}: named z import`,
-        code: dedent`
+      errors: [{ messageId: 'preferTopLevelStringFormat' }] as const,
+      output: null,
+    },
+    {
+      name: `${sourceMethodName}: named z import`,
+      code: dedent`
           import { z } from 'zod';
           z.string().${sourceMethodName}();
         `,
-        errors: [{ messageId: 'preferTopLevelStringFormat' }] as const,
-        output: dedent`
+      errors: [{ messageId: 'preferTopLevelStringFormat' }] as const,
+      output: dedent`
           import { z } from 'zod';
           ${replacementExpression};
         `,
-      },
-      {
-        name: `${sourceMethodName}: method after optional`,
-        code: dedent`
+    },
+    {
+      name: `${sourceMethodName}: method after optional`,
+      code: dedent`
           import * as z from 'zod';
           z.string().optional().${sourceMethodName}();
         `,
-        errors: [{ messageId: 'preferTopLevelStringFormat' }] as const,
-        output: dedent`
+      errors: [{ messageId: 'preferTopLevelStringFormat' }] as const,
+      output: dedent`
           import * as z from 'zod';
           ${replacementExpression}.optional();
         `,
-      },
-      {
-        name: `${sourceMethodName}: not ignored when another method is ignored`,
-        code: dedent`
+    },
+    {
+      name: `${sourceMethodName}: not ignored when another method is ignored`,
+      code: dedent`
           import * as z from 'zod';
           z.string().${sourceMethodName}();
         `,
-        options: [{ ignore: ['email'] }] as const,
-        errors: [{ messageId: 'preferTopLevelStringFormat' }] as const,
-        output: dedent`
+      options: [{ ignore: ['email'] }] as const,
+      errors: [{ messageId: 'preferTopLevelStringFormat' }] as const,
+      output: dedent`
           import * as z from 'zod';
           ${replacementExpression};
         `,
-      },
-    ];
-  },
-).filter(({ options, name }) => {
+    },
+  ];
+}).filter(({ options, name }) => {
   if (!options) {
     return true;
   }

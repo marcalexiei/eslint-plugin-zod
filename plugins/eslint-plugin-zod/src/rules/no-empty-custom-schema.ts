@@ -13,8 +13,7 @@ export const noEmptyCustomSchema = createZodPluginRule({
       description: 'Disallow usage of `z.custom()` without arguments',
     },
     messages: {
-      noEmptyCustomSchema:
-        'You should provide a validate function within `z.custom()`',
+      noEmptyCustomSchema: 'You should provide a validate function within `z.custom()`',
     },
     schema: [],
   },
@@ -41,9 +40,7 @@ export const noEmptyCustomSchema = createZodPluginRule({
 
         // Find the actual custom() call node in the chain
         const chainMethods = collectZodChainMethods(node);
-        const customCallNode = chainMethods.find(
-          (method) => method.name === 'custom',
-        )?.node;
+        const customCallNode = chainMethods.find((method) => method.name === 'custom')?.node;
 
         if (customCallNode?.arguments.length === 0) {
           context.report({

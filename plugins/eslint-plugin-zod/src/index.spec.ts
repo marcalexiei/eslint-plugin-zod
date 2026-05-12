@@ -26,13 +26,9 @@ describe('plugin export', async () => {
   });
 
   it('should include all rules created inside `src/rules` folder', () => {
-    const allRuleNames = allRulesPaths.map((item) =>
-      path.basename(item.name, '.ts'),
-    );
+    const allRuleNames = allRulesPaths.map((item) => path.basename(item.name, '.ts'));
     expect(_plugin.rules).toBeTypeOf('object');
-    expect(Object.keys(_plugin.rules)).toEqual(
-      expect.arrayContaining(allRuleNames),
-    );
+    expect(Object.keys(_plugin.rules)).toEqual(expect.arrayContaining(allRuleNames));
   });
 
   /**

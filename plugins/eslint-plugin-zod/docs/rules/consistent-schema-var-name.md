@@ -123,10 +123,7 @@ const $address = z.object({ street: z.string() });
 ```json
 {
   "rules": {
-    "zod/consistent-schema-var-name": [
-      "error",
-      { "before": "$", "after": "Schema" }
-    ]
+    "zod/consistent-schema-var-name": ["error", { "before": "$", "after": "Schema" }]
   }
 }
 ```

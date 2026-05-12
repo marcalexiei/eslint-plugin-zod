@@ -23,10 +23,7 @@ describe('zodSources', () => {
 
 describe('zodMiniSources', () => {
   it('contains all expected sources', () => {
-    expect(zodMiniImportScope.sources).toStrictEqual([
-      'zod/mini',
-      'zod/v4-mini',
-    ]);
+    expect(zodMiniImportScope.sources).toStrictEqual(['zod/mini', 'zod/v4-mini']);
   });
 
   describe('isAllowed', () => {
@@ -34,11 +31,8 @@ describe('zodMiniSources', () => {
       expect(zodMiniImportScope.isAllowed(source)).toBe(true);
     });
 
-    it.each(['zod', 'zod/v4', 'zod/v3', 'lodash', ''])(
-      "returns false for '%s'",
-      (source) => {
-        expect(zodMiniImportScope.isAllowed(source)).toBe(false);
-      },
-    );
+    it.each(['zod', 'zod/v4', 'zod/v3', 'lodash', ''])("returns false for '%s'", (source) => {
+      expect(zodMiniImportScope.isAllowed(source)).toBe(false);
+    });
   });
 });

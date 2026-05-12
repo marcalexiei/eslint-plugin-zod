@@ -175,89 +175,85 @@ ruleTester.run(
   },
 );
 
-ruleTester.run(
-  `${consistentSchemaOutputTypeStyle.name} (infer)`,
-  consistentSchemaOutputTypeStyle,
-  {
-    valid: [
-      {
-        name: 'namespace import',
-        code: dedent`
+ruleTester.run(`${consistentSchemaOutputTypeStyle.name} (infer)`, consistentSchemaOutputTypeStyle, {
+  valid: [
+    {
+      name: 'namespace import',
+      code: dedent`
           import * as z from 'zod';
           type SchemaType = z.infer<typeof Schema>;
         `,
-        options: [{ style: 'infer' }],
-      },
-      {
-        name: 'named z import',
-        code: dedent`
+      options: [{ style: 'infer' }],
+    },
+    {
+      name: 'named z import',
+      code: dedent`
           import { z } from 'zod';
           type SchemaType = z.infer<typeof Schema>;
         `,
-        options: [{ style: 'infer' }],
-      },
-      {
-        name: 'non-zod import',
-        code: dedent`
+      options: [{ style: 'infer' }],
+    },
+    {
+      name: 'non-zod import',
+      code: dedent`
           import * as z from '@custom';
           type SchemaType = z.output<typeof Schema>;
         `,
-        options: [{ style: 'infer' }],
-      },
-      {
-        name: 'aliased namespace import using infer',
-        code: dedent`
+      options: [{ style: 'infer' }],
+    },
+    {
+      name: 'aliased namespace import using infer',
+      code: dedent`
           import * as myZ from 'zod';
           type SchemaType = myZ.infer<typeof Schema>;
         `,
-        options: [{ style: 'infer' }],
-      },
-    ],
-    invalid: [
-      {
-        name: 'namespace import',
-        code: dedent`
+      options: [{ style: 'infer' }],
+    },
+  ],
+  invalid: [
+    {
+      name: 'namespace import',
+      code: dedent`
           import * as z from 'zod';
           type SchemaType = z.output<typeof Schema>;
         `,
-        options: [{ style: 'infer' }],
-        errors: [{ messageId: 'useInfer' }],
-        output: dedent`
+      options: [{ style: 'infer' }],
+      errors: [{ messageId: 'useInfer' }],
+      output: dedent`
           import * as z from 'zod';
           type SchemaType = z.infer<typeof Schema>;
         `,
-      },
-      {
-        name: 'named z import',
-        code: dedent`
+    },
+    {
+      name: 'named z import',
+      code: dedent`
           import { z } from 'zod';
           type SchemaType = z.output<typeof Schema>;
         `,
-        options: [{ style: 'infer' }],
-        errors: [{ messageId: 'useInfer' }],
-        output: dedent`
+      options: [{ style: 'infer' }],
+      errors: [{ messageId: 'useInfer' }],
+      output: dedent`
           import { z } from 'zod';
           type SchemaType = z.infer<typeof Schema>;
         `,
-      },
-      {
-        name: 'multiple usages',
-        code: dedent`
+    },
+    {
+      name: 'multiple usages',
+      code: dedent`
           import * as z from 'zod';
           type TypeA = z.output<typeof SchemaA>;
           type TypeB = z.output<typeof SchemaB>;
         `,
-        options: [{ style: 'infer' }],
-        errors: [{ messageId: 'useInfer' }, { messageId: 'useInfer' }],
-        output: dedent`
+      options: [{ style: 'infer' }],
+      errors: [{ messageId: 'useInfer' }, { messageId: 'useInfer' }],
+      output: dedent`
           import * as z from 'zod';
           type TypeA = z.infer<typeof SchemaA>;
           type TypeB = z.infer<typeof SchemaB>;
         `,
-      },
-    ],
-  },
-);
+    },
+  ],
+});
 
 ruleTester.run(
   `${consistentSchemaOutputTypeStyle.name} (infer, named imports)`,

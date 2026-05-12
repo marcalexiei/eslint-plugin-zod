@@ -1,14 +1,10 @@
-import {
-  createZodSchemaImportTrack,
-  zodMiniImportScope,
-} from '@eslint-zod/utils';
+import { createZodSchemaImportTrack, zodMiniImportScope } from '@eslint-zod/utils';
 import type { TSESLint } from '@typescript-eslint/utils';
 import { AST_NODE_TYPES } from '@typescript-eslint/utils';
 
 import { createZodMiniPluginRule } from '../utils/create-plugin-rule.js';
 
-const { trackZodSchemaImports } =
-  createZodSchemaImportTrack(zodMiniImportScope);
+const { trackZodSchemaImports } = createZodSchemaImportTrack(zodMiniImportScope);
 
 export const noAnySchema = createZodMiniPluginRule({
   name: 'no-any-schema',
@@ -19,19 +15,15 @@ export const noAnySchema = createZodMiniPluginRule({
       description: 'Disallow usage of `z.any()` in Zod Mini schemas',
     },
     messages: {
-      noZAny:
-        'Using `z.any()` is not allowed. Please use a more specific schema.',
+      noZAny: 'Using `z.any()` is not allowed. Please use a more specific schema.',
       useUnknown: 'Replace `z.any()` with `z.unknown()`',
     },
     schema: [],
   },
   defaultOptions: [],
   create(context) {
-    const {
-      importDeclarationListener,
-      detectZodSchemaRootNode,
-      collectZodChainMethods,
-    } = trackZodSchemaImports();
+    const { importDeclarationListener, detectZodSchemaRootNode, collectZodChainMethods } =
+      trackZodSchemaImports();
 
     return {
       ImportDeclaration: importDeclarationListener,
@@ -68,10 +60,7 @@ export const noAnySchema = createZodMiniPluginRule({
                 {
                   messageId: 'useUnknown',
                   fix(fixer): TSESLint.RuleFix {
-                    return fixer.replaceText(
-                      schemaMethodCallee.property,
-                      'unknown',
-                    );
+                    return fixer.replaceText(schemaMethodCallee.property, 'unknown');
                   },
                 },
               ],

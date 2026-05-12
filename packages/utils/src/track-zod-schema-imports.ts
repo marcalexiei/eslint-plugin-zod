@@ -62,9 +62,7 @@ interface Result {
    *
    * Returns an empty array if the expression isn't a zod chain.
    */
-  collectZodChainMethods: (
-    node: TSESTree.CallExpression,
-  ) => Array<ZodChainItem>;
+  collectZodChainMethods: (node: TSESTree.CallExpression) => Array<ZodChainItem>;
 
   /**
    * True if `node` is a `z.number()…` (or `number()…`) zod call chain, including inner
@@ -85,9 +83,7 @@ function trackZodSchemaImports(importScope: ZodImportScope): Result {
   // original export name → localName (last import wins)
   const zodNamedImportsByOriginal = new Map<string, string>();
 
-  function collectZodChainMethods(
-    node: TSESTree.CallExpression,
-  ): Array<ZodChainItem> {
+  function collectZodChainMethods(node: TSESTree.CallExpression): Array<ZodChainItem> {
     const methods: Array<{ name: string; node: TSESTree.CallExpression }> = [];
     let current: TSESTree.Expression | null = node;
 
@@ -142,8 +138,7 @@ function trackZodSchemaImports(importScope: ZodImportScope): Result {
             // If the user imports `z` via a named import, it acts as a namespace.
             // Therefore, it must be recorded in the appropriate set.
             // We check the imported identifier because the user may alias it.
-            const originalName =
-              'name' in spec.imported ? spec.imported.name : spec.local.name;
+            const originalName = 'name' in spec.imported ? spec.imported.name : spec.local.name;
 
             if (originalName === 'z') {
               zodNamespaces.add(spec.local.name);
@@ -164,8 +159,7 @@ function trackZodSchemaImports(importScope: ZodImportScope): Result {
 
     getNamedImportOriginal: (localName) => zodNamedImports.get(localName),
 
-    getNamedImportLocal: (originalName) =>
-      zodNamedImportsByOriginal.get(originalName),
+    getNamedImportLocal: (originalName) => zodNamedImportsByOriginal.get(originalName),
 
     detectZodSchemaRootNode: (node) =>
       detectZodSchemaRootNode(node, zodNamespaces, zodNamedImports),

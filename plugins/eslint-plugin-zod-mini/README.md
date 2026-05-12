@@ -88,10 +88,7 @@ import { defineConfig } from 'eslint/config';
 import eslint from '@eslint/js';
 import eslintPluginZodMini from 'eslint-plugin-zod-mini';
 
-export default defineConfig(
-  eslint.configs.recommended,
-  eslintPluginZodMini.configs.recommended,
-);
+export default defineConfig(eslint.configs.recommended, eslintPluginZodMini.configs.recommended);
 ```
 
 ### Oxlint

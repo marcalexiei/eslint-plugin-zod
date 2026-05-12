@@ -20,11 +20,8 @@ export const preferStrictObject = createZodPluginRule({
   },
   defaultOptions: [],
   create(context) {
-    const {
-      importDeclarationListener,
-      detectZodSchemaRootNode,
-      collectZodChainMethods,
-    } = trackZodSchemaImports();
+    const { importDeclarationListener, detectZodSchemaRootNode, collectZodChainMethods } =
+      trackZodSchemaImports();
 
     return {
       ImportDeclaration: importDeclarationListener,
@@ -65,9 +62,7 @@ export const preferStrictObject = createZodPluginRule({
                 ? `${sourceCode.getText(objectMethod.node.callee.object)}.strictObject`
                 : 'strictObject';
 
-            const fixes = [
-              fixer.replaceText(objectMethod.node.callee, replacementText),
-            ];
+            const fixes = [fixer.replaceText(objectMethod.node.callee, replacementText)];
 
             const calleeProperty =
               strictMethod.node.callee.type === AST_NODE_TYPES.MemberExpression
@@ -76,12 +71,7 @@ export const preferStrictObject = createZodPluginRule({
             const tokenBefore = sourceCode.getTokenBefore(calleeProperty);
 
             if (tokenBefore?.value === '.') {
-              fixes.push(
-                fixer.removeRange([
-                  tokenBefore.range[0],
-                  strictMethod.node.range[1],
-                ]),
-              );
+              fixes.push(fixer.removeRange([tokenBefore.range[0], strictMethod.node.range[1]]));
             }
 
             return fixes;

@@ -21,11 +21,8 @@ export const preferMeta = createZodPluginRule({
   },
   defaultOptions: [],
   create(context) {
-    const {
-      importDeclarationListener,
-      detectZodSchemaRootNode,
-      collectZodChainMethods,
-    } = trackZodSchemaImports();
+    const { importDeclarationListener, detectZodSchemaRootNode, collectZodChainMethods } =
+      trackZodSchemaImports();
 
     return {
       ImportDeclaration: importDeclarationListener,
@@ -54,10 +51,7 @@ export const preferMeta = createZodPluginRule({
           messageId: 'preferMeta',
           fix(fixer) {
             return [
-              fixer.replaceText(
-                (callee as TSESTree.MemberExpression).property,
-                'meta',
-              ),
+              fixer.replaceText((callee as TSESTree.MemberExpression).property, 'meta'),
               fixer.replaceText(
                 describeArg,
                 `{ description: ${context.sourceCode.getText(describeArg)} }`,

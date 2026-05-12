@@ -1,13 +1,9 @@
-import {
-  createZodSchemaImportTrack,
-  zodMiniImportScope,
-} from '@eslint-zod/utils';
+import { createZodSchemaImportTrack, zodMiniImportScope } from '@eslint-zod/utils';
 import type { TSESTree } from '@typescript-eslint/utils';
 
 import { createZodMiniPluginRule } from '../utils/create-plugin-rule.js';
 
-const { trackZodSchemaImports } =
-  createZodSchemaImportTrack(zodMiniImportScope);
+const { trackZodSchemaImports } = createZodSchemaImportTrack(zodMiniImportScope);
 
 export const preferMeta = createZodMiniPluginRule({
   name: 'prefer-meta',
@@ -25,8 +21,7 @@ export const preferMeta = createZodMiniPluginRule({
   },
   defaultOptions: [],
   create(context) {
-    const { importDeclarationListener, detectZodSchemaRootNode } =
-      trackZodSchemaImports();
+    const { importDeclarationListener, detectZodSchemaRootNode } = trackZodSchemaImports();
 
     return {
       ImportDeclaration: importDeclarationListener,
@@ -49,10 +44,7 @@ export const preferMeta = createZodMiniPluginRule({
             const [describeArg] = node.arguments;
 
             return [
-              fixer.replaceText(
-                (callee as TSESTree.MemberExpression).property,
-                'meta',
-              ),
+              fixer.replaceText((callee as TSESTree.MemberExpression).property, 'meta'),
               fixer.replaceText(
                 describeArg,
                 `{ description: ${context.sourceCode.getText(describeArg)} }`,

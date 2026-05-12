@@ -6,8 +6,7 @@ import {
 
 import { createZodPluginRule } from '../utils/create-plugin-rule.js';
 
-const TOP_LEVEL_STRING_FORMATS_URL =
-  'https://zod.dev/v4?id=top-level-string-formats';
+const TOP_LEVEL_STRING_FORMATS_URL = 'https://zod.dev/v4?id=top-level-string-formats';
 
 export const TOP_LEVEL_STRING_FORMATS = [
   { sourceMethodName: 'base64', replacementMethodName: 'base64' },
@@ -38,8 +37,7 @@ export const TOP_LEVEL_STRING_FORMATS = [
   { sourceMethodName: 'xid', replacementMethodName: 'xid' },
 ] as const;
 
-type TopLevelStringFormatMethodName =
-  (typeof TOP_LEVEL_STRING_FORMATS)[number]['sourceMethodName'];
+type TopLevelStringFormatMethodName = (typeof TOP_LEVEL_STRING_FORMATS)[number]['sourceMethodName'];
 
 interface Options {
   ignore?: ReadonlyArray<TopLevelStringFormatMethodName>;
@@ -55,23 +53,13 @@ const TOP_LEVEL_STRING_FORMAT_METHOD_NAMES = TOP_LEVEL_STRING_FORMATS.map(
 
 const TOP_LEVEL_STRING_FORMATS_BY_SOURCE = Object.fromEntries(
   TOP_LEVEL_STRING_FORMATS.map((format) => [format.sourceMethodName, format]),
-) as Record<
-  TopLevelStringFormatMethodName,
-  (typeof TOP_LEVEL_STRING_FORMATS)[number]
->;
+) as Record<TopLevelStringFormatMethodName, (typeof TOP_LEVEL_STRING_FORMATS)[number]>;
 
-function isTopLevelStringFormatMethodName(
-  value: string,
-): value is TopLevelStringFormatMethodName {
-  return TOP_LEVEL_STRING_FORMAT_METHOD_NAMES.includes(
-    value as TopLevelStringFormatMethodName,
-  );
+function isTopLevelStringFormatMethodName(value: string): value is TopLevelStringFormatMethodName {
+  return TOP_LEVEL_STRING_FORMAT_METHOD_NAMES.includes(value as TopLevelStringFormatMethodName);
 }
 
-export const preferTopLevelStringFormats = createZodPluginRule<
-  [Options],
-  MessageIds
->({
+export const preferTopLevelStringFormats = createZodPluginRule<[Options], MessageIds>({
   name: 'prefer-top-level-string-formats',
   meta: {
     type: 'suggestion',
@@ -91,8 +79,7 @@ export const preferTopLevelStringFormats = createZodPluginRule<
         properties: {
           ignore: {
             type: 'array',
-            description:
-              'Top-level string format methods to ignore for this rule.',
+            description: 'Top-level string format methods to ignore for this rule.',
             items: {
               type: 'string',
               enum: [...TOP_LEVEL_STRING_FORMAT_METHOD_NAMES],
@@ -110,11 +97,8 @@ export const preferTopLevelStringFormats = createZodPluginRule<
 
     const ignoredMethods = new Set<TopLevelStringFormatMethodName>(ignore);
 
-    const {
-      importDeclarationListener,
-      detectZodSchemaRootNode,
-      collectZodChainMethods,
-    } = trackZodSchemaImports();
+    const { importDeclarationListener, detectZodSchemaRootNode, collectZodChainMethods } =
+      trackZodSchemaImports();
 
     return {
       ImportDeclaration: importDeclarationListener,
@@ -128,9 +112,7 @@ export const preferTopLevelStringFormats = createZodPluginRule<
 
         const methods = collectZodChainMethods(node);
 
-        const stringIndex = methods.findIndex(
-          (method) => method.name === 'string',
-        );
+        const stringIndex = methods.findIndex((method) => method.name === 'string');
 
         if (stringIndex === -1) {
           return;

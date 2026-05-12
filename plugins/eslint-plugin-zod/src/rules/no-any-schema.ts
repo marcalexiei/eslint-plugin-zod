@@ -15,19 +15,15 @@ export const noAnySchema = createZodPluginRule({
       description: 'Disallow usage of `z.any()` in Zod schemas',
     },
     messages: {
-      noZAny:
-        'Using `z.any()` is not allowed. Please use a more specific schema.',
+      noZAny: 'Using `z.any()` is not allowed. Please use a more specific schema.',
       useUnknown: 'Replace `z.any()` with `z.unknown()`',
     },
     schema: [],
   },
   defaultOptions: [],
   create(context) {
-    const {
-      importDeclarationListener,
-      detectZodSchemaRootNode,
-      collectZodChainMethods,
-    } = trackZodSchemaImports();
+    const { importDeclarationListener, detectZodSchemaRootNode, collectZodChainMethods } =
+      trackZodSchemaImports();
 
     return {
       ImportDeclaration: importDeclarationListener,
@@ -64,10 +60,7 @@ export const noAnySchema = createZodPluginRule({
                 {
                   messageId: 'useUnknown',
                   fix(fixer): TSESLint.RuleFix {
-                    return fixer.replaceText(
-                      schemaMethodCallee.property,
-                      'unknown',
-                    );
+                    return fixer.replaceText(schemaMethodCallee.property, 'unknown');
                   },
                 },
               ],

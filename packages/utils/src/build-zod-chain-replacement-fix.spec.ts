@@ -11,10 +11,7 @@ function makeIdent(name: string): TSESTree.Identifier {
   } as unknown as TSESTree.Identifier;
 }
 
-function makeME(
-  object: TSESTree.Expression,
-  propertyName: string,
-): TSESTree.MemberExpression {
+function makeME(object: TSESTree.Expression, propertyName: string): TSESTree.MemberExpression {
   return {
     type: AST_NODE_TYPES.MemberExpression,
     object,
@@ -35,9 +32,7 @@ function makeCall(
   } as unknown as TSESTree.CallExpression;
 }
 
-function makeSourceCode(
-  textMap: Map<TSESTree.Node, string>,
-): TSESLint.SourceCode {
+function makeSourceCode(textMap: Map<TSESTree.Node, string>): TSESLint.SourceCode {
   return {
     getText: (node: TSESTree.Node) => textMap.get(node) ?? '',
   } as unknown as TSESLint.SourceCode;

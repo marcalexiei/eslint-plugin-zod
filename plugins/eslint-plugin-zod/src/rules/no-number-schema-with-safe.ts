@@ -28,11 +28,8 @@ export const noNumberSchemaWithSafe = createZodPluginRule({
   create(context) {
     const { sourceCode } = context;
 
-    const {
-      importDeclarationListener,
-      detectZodSchemaRootNode,
-      collectZodChainMethods,
-    } = trackZodSchemaImports();
+    const { importDeclarationListener, detectZodSchemaRootNode, collectZodChainMethods } =
+      trackZodSchemaImports();
 
     return {
       ImportDeclaration: importDeclarationListener,
@@ -45,9 +42,7 @@ export const noNumberSchemaWithSafe = createZodPluginRule({
         }
 
         const methods = collectZodChainMethods(node);
-        const safeIndex = methods.findIndex(
-          (m) => m.name === 'safe' && m.node === node,
-        );
+        const safeIndex = methods.findIndex((m) => m.name === 'safe' && m.node === node);
         if (safeIndex === -1) {
           return;
         }

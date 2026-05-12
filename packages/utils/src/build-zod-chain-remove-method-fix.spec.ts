@@ -3,10 +3,7 @@ import { describe, expect, it } from 'vitest';
 
 import { buildZodChainRemoveMethodFix } from './build-zod-chain-remove-method-fix.js';
 
-function makeNodeWithRange(
-  start: number,
-  end: number,
-): TSESTree.CallExpression {
+function makeNodeWithRange(start: number, end: number): TSESTree.CallExpression {
   return { range: [start, end] } as unknown as TSESTree.CallExpression;
 }
 
@@ -28,17 +25,13 @@ describe('buildZodChainRemoveMethodFix', () => {
   it('returns null when removeIndex < 1', () => {
     const { fixer } = makeFixer();
     const methods = [{ name: 'number', node: makeNodeWithRange(0, 10) }];
-    expect(
-      buildZodChainRemoveMethodFix({ fixer, methods, removeIndex: 0 }),
-    ).toBeNull();
+    expect(buildZodChainRemoveMethodFix({ fixer, methods, removeIndex: 0 })).toBeNull();
   });
 
   it('returns null when removeIndex is negative', () => {
     const { fixer } = makeFixer();
     const methods = [{ name: 'number', node: makeNodeWithRange(0, 10) }];
-    expect(
-      buildZodChainRemoveMethodFix({ fixer, methods, removeIndex: -1 }),
-    ).toBeNull();
+    expect(buildZodChainRemoveMethodFix({ fixer, methods, removeIndex: -1 })).toBeNull();
   });
 
   it('returns null when the target node has no range', () => {
@@ -47,9 +40,7 @@ describe('buildZodChainRemoveMethodFix', () => {
       { name: 'number', node: makeNodeWithRange(0, 10) },
       { name: 'finite', node: {} as unknown as TSESTree.CallExpression },
     ];
-    expect(
-      buildZodChainRemoveMethodFix({ fixer, methods, removeIndex: 1 }),
-    ).toBeNull();
+    expect(buildZodChainRemoveMethodFix({ fixer, methods, removeIndex: 1 })).toBeNull();
   });
 
   it('removes a trailing method: z.number().min(0).finite()', () => {

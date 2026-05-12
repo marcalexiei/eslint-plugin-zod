@@ -77,10 +77,7 @@ import { defineConfig } from 'eslint/config';
 import eslint from '@eslint/js';
 import eslintPluginZodCore from 'eslint-plugin-zod-core';
 
-export default defineConfig(
-  eslint.configs.recommended,
-  eslintPluginZodCore.configs.recommended,
-);
+export default defineConfig(eslint.configs.recommended, eslintPluginZodCore.configs.recommended);
 ```
 
 ### Oxlint

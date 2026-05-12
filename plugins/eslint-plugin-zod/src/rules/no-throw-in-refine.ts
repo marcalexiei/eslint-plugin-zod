@@ -11,22 +11,17 @@ export const noThrowInRefine = createZodPluginRule({
   meta: {
     type: 'problem',
     docs: {
-      description:
-        'Disallow throwing errors directly inside Zod refine callbacks',
+      description: 'Disallow throwing errors directly inside Zod refine callbacks',
     },
     messages: {
-      noThrowInRefine:
-        'Do not throw errors directly inside a z.refine callback.',
+      noThrowInRefine: 'Do not throw errors directly inside a z.refine callback.',
     },
     schema: [],
   },
   defaultOptions: [],
   create(context) {
-    const {
-      importDeclarationListener,
-      detectZodSchemaRootNode,
-      collectZodChainMethods,
-    } = trackZodSchemaImports();
+    const { importDeclarationListener, detectZodSchemaRootNode, collectZodChainMethods } =
+      trackZodSchemaImports();
 
     function checkNode(node: TSESTree.Node | null): void {
       if (!node) {

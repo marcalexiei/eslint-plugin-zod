@@ -20,11 +20,8 @@ export const preferMetaLast = createZodPluginRule({
   },
   defaultOptions: [],
   create(context) {
-    const {
-      importDeclarationListener,
-      detectZodSchemaRootNode,
-      collectZodChainMethods,
-    } = trackZodSchemaImports();
+    const { importDeclarationListener, detectZodSchemaRootNode, collectZodChainMethods } =
+      trackZodSchemaImports();
 
     return {
       ImportDeclaration: importDeclarationListener,
@@ -48,9 +45,7 @@ export const preferMetaLast = createZodPluginRule({
         }
 
         // If there are only meta() calls after the first meta -> valid (allow multiple metas at end)
-        const hasAnyNonMetaAfter = chain
-          .slice(metaIndex + 1)
-          .some((c) => c.name !== 'meta');
+        const hasAnyNonMetaAfter = chain.slice(metaIndex + 1).some((c) => c.name !== 'meta');
         if (!hasAnyNonMetaAfter) {
           return;
         }

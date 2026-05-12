@@ -13,23 +13,17 @@ interface Options {
   preferredMethod: PreferredMethod;
 }
 
-type MessageIds =
-  | 'noOptionalAndDefaultTogether'
-  | 'noOptionalAndDefaultTogetherRemoveMethod';
+type MessageIds = 'noOptionalAndDefaultTogether' | 'noOptionalAndDefaultTogetherRemoveMethod';
 
 const defaultOptions: Options = { preferredMethod: 'none' };
 
-export const noOptionalAndDefaultTogether = createZodPluginRule<
-  [Options],
-  MessageIds
->({
+export const noOptionalAndDefaultTogether = createZodPluginRule<[Options], MessageIds>({
   name: 'no-optional-and-default-together',
   meta: {
     type: 'problem',
     fixable: 'code',
     docs: {
-      description:
-        'Disallow using both `.optional()` and `.default()` on the same Zod schema',
+      description: 'Disallow using both `.optional()` and `.default()` on the same Zod schema',
     },
     messages: {
       noOptionalAndDefaultTogether:
@@ -42,8 +36,7 @@ export const noOptionalAndDefaultTogether = createZodPluginRule<
         type: 'object',
         properties: {
           preferredMethod: {
-            description:
-              'Determines which method to keep when both are present',
+            description: 'Determines which method to keep when both are present',
             type: 'string',
             enum: [...preferredMethods],
           },
@@ -56,11 +49,8 @@ export const noOptionalAndDefaultTogether = createZodPluginRule<
   create(context, [{ preferredMethod }]) {
     const { sourceCode } = context;
 
-    const {
-      importDeclarationListener,
-      detectZodSchemaRootNode,
-      collectZodChainMethods,
-    } = trackZodSchemaImports();
+    const { importDeclarationListener, detectZodSchemaRootNode, collectZodChainMethods } =
+      trackZodSchemaImports();
 
     return {
       ImportDeclaration: importDeclarationListener,
@@ -109,19 +99,13 @@ export const noOptionalAndDefaultTogether = createZodPluginRule<
           fix(fixer) {
             // Determine which method to remove
             const nodeToRemove =
-              preferredMethod === 'default'
-                ? optionalMethod.node
-                : defaultMethod.node;
+              preferredMethod === 'default' ? optionalMethod.node : defaultMethod.node;
 
             // Get the callee of the node to remove
-            const calleeToRemove =
-              nodeToRemove.callee as TSESTree.MemberExpression;
+            const calleeToRemove = nodeToRemove.callee as TSESTree.MemberExpression;
 
             // Replace the entire call expression with just its object
-            return fixer.replaceText(
-              nodeToRemove,
-              sourceCode.getText(calleeToRemove.object),
-            );
+            return fixer.replaceText(nodeToRemove, sourceCode.getText(calleeToRemove.object));
           },
         });
       },

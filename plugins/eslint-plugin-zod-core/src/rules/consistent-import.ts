@@ -25,10 +25,8 @@ export const consistentImport = createZodPluginRule<[Options], MessageIds>({
     fixable: 'code',
     messages: {
       changeImportSyntax: 'Use a {{syntax}} import for Zod core.',
-      removeDuplicate:
-        'Remove duplicate Zod core import; Zod core is already imported.',
-      convertUsage:
-        'Update Zod core usage to match the {{syntax}} import syntax.',
+      removeDuplicate: 'Remove duplicate Zod core import; Zod core is already imported.',
+      convertUsage: 'Update Zod core usage to match the {{syntax}} import syntax.',
     },
     schema: [
       {
@@ -65,10 +63,7 @@ export const consistentImport = createZodPluginRule<[Options], MessageIds>({
           nodes: [],
         };
 
-        if (
-          importGroups[source.value].hasOnlyTypeImports &&
-          importKind === 'value'
-        ) {
+        if (importGroups[source.value].hasOnlyTypeImports && importKind === 'value') {
           importGroups[source.value].hasOnlyTypeImports = false;
         }
 
@@ -106,10 +101,7 @@ export const consistentImport = createZodPluginRule<[Options], MessageIds>({
             }
           }
 
-          const isFirstImportValid = isGroupFirstImportKindValidForSyntax(
-            importGroup,
-            syntax,
-          );
+          const isFirstImportValid = isGroupFirstImportKindValidForSyntax(importGroup, syntax);
 
           if (!isFirstImportValid) {
             context.report({

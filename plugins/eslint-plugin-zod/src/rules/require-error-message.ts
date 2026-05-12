@@ -16,19 +16,15 @@ export const requireErrorMessage = createZodPluginRule({
     },
     messages: {
       requireErrorMessage: 'Custom refinements must include an error message',
-      preferError:
-        'Use the "error" property instead of the deprecated "message" property',
+      preferError: 'Use the "error" property instead of the deprecated "message" property',
       removeMessage: 'The "message" property is deprecated; use "error"',
     },
     schema: [],
   },
   defaultOptions: [],
   create(context) {
-    const {
-      importDeclarationListener,
-      detectZodSchemaRootNode,
-      collectZodChainMethods,
-    } = trackZodSchemaImports();
+    const { importDeclarationListener, detectZodSchemaRootNode, collectZodChainMethods } =
+      trackZodSchemaImports();
 
     return {
       ImportDeclaration: importDeclarationListener,
@@ -118,10 +114,7 @@ export const requireErrorMessage = createZodPluginRule({
               messageId: 'preferError',
               node: params,
               fix(fixer) {
-                return fixer.replaceTextRange(
-                  messagePropertyNode.key.range,
-                  'error',
-                );
+                return fixer.replaceTextRange(messagePropertyNode.key.range, 'error');
               },
             });
             continue;

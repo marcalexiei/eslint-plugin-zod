@@ -135,68 +135,64 @@ ruleTester.run(
   },
 );
 
-ruleTester.run(
-  `${consistentSchemaOutputTypeStyle.name} (infer)`,
-  consistentSchemaOutputTypeStyle,
-  {
-    valid: [
-      {
-        name: 'namespace import',
-        code: dedent`
+ruleTester.run(`${consistentSchemaOutputTypeStyle.name} (infer)`, consistentSchemaOutputTypeStyle, {
+  valid: [
+    {
+      name: 'namespace import',
+      code: dedent`
           import * as core from 'zod/v4/core';
           type SchemaType = core.infer<typeof Schema>;
         `,
-        options: [{ style: 'infer' }],
-      },
-      {
-        name: 'non-zod-core import',
-        code: dedent`
+      options: [{ style: 'infer' }],
+    },
+    {
+      name: 'non-zod-core import',
+      code: dedent`
           import * as z from '@custom';
           type SchemaType = z.output<typeof Schema>;
         `,
-        options: [{ style: 'infer' }],
-      },
-      {
-        name: 'aliased namespace import using infer',
-        code: dedent`
+      options: [{ style: 'infer' }],
+    },
+    {
+      name: 'aliased namespace import using infer',
+      code: dedent`
           import * as myCore from 'zod/v4/core';
           type SchemaType = myCore.infer<typeof Schema>;
         `,
-        options: [{ style: 'infer' }],
-      },
-    ],
-    invalid: [
-      {
-        name: 'namespace import',
-        code: dedent`
+      options: [{ style: 'infer' }],
+    },
+  ],
+  invalid: [
+    {
+      name: 'namespace import',
+      code: dedent`
           import * as core from 'zod/v4/core';
           type SchemaType = core.output<typeof Schema>;
         `,
-        options: [{ style: 'infer' }],
-        errors: [{ messageId: 'useInfer' }],
-        output: dedent`
+      options: [{ style: 'infer' }],
+      errors: [{ messageId: 'useInfer' }],
+      output: dedent`
           import * as core from 'zod/v4/core';
           type SchemaType = core.infer<typeof Schema>;
         `,
-      },
-      {
-        name: 'multiple usages',
-        code: dedent`
+    },
+    {
+      name: 'multiple usages',
+      code: dedent`
           import * as core from 'zod/v4/core';
           type TypeA = core.output<typeof SchemaA>;
           type TypeB = core.output<typeof SchemaB>;
         `,
-        options: [{ style: 'infer' }],
-        errors: [{ messageId: 'useInfer' }, { messageId: 'useInfer' }],
-        output: dedent`
+      options: [{ style: 'infer' }],
+      errors: [{ messageId: 'useInfer' }, { messageId: 'useInfer' }],
+      output: dedent`
           import * as core from 'zod/v4/core';
           type TypeA = core.infer<typeof SchemaA>;
           type TypeB = core.infer<typeof SchemaB>;
         `,
-      },
-    ],
-  },
-);
+    },
+  ],
+});
 
 ruleTester.run(
   `${consistentSchemaOutputTypeStyle.name} (infer, named imports)`,

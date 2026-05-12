@@ -81,8 +81,7 @@ const eslintPluginZod = {
     'prefer-strict-object': preferStrictObject,
     'prefer-top-level-string-formats': preferTopLevelStringFormats,
     'prefer-string-schema-with-trim': preferStringSchemaWithTrim,
-    'prefer-trim-before-string-length-checks':
-      preferTrimBeforeStringLengthChecks,
+    'prefer-trim-before-string-length-checks': preferTrimBeforeStringLengthChecks,
     'require-brand-type-parameter': requireBrandTypeParameter,
     'require-error-message': requireErrorMessage,
     'schema-error-property-style': schemaErrorPropertyStyle,

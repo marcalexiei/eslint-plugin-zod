@@ -1,14 +1,10 @@
-import {
-  createZodSchemaImportTrack,
-  zodMiniImportScope,
-} from '@eslint-zod/utils';
+import { createZodSchemaImportTrack, zodMiniImportScope } from '@eslint-zod/utils';
 import type { TSESTree } from '@typescript-eslint/utils';
 import { AST_NODE_TYPES } from '@typescript-eslint/utils';
 
 import { createZodMiniPluginRule } from '../utils/create-plugin-rule.js';
 
-const { trackZodSchemaImports } =
-  createZodSchemaImportTrack(zodMiniImportScope);
+const { trackZodSchemaImports } = createZodSchemaImportTrack(zodMiniImportScope);
 
 export const requireErrorMessage = createZodMiniPluginRule({
   name: 'require-error-message',
@@ -20,19 +16,15 @@ export const requireErrorMessage = createZodMiniPluginRule({
     },
     messages: {
       requireErrorMessage: 'Custom refinements must include an error message',
-      preferError:
-        'Use the "error" property instead of the deprecated "message" property',
+      preferError: 'Use the "error" property instead of the deprecated "message" property',
       removeMessage: 'The "message" property is deprecated; use "error"',
     },
     schema: [],
   },
   defaultOptions: [],
   create(context) {
-    const {
-      importDeclarationListener,
-      detectZodSchemaRootNode,
-      collectZodChainMethods,
-    } = trackZodSchemaImports();
+    const { importDeclarationListener, detectZodSchemaRootNode, collectZodChainMethods } =
+      trackZodSchemaImports();
 
     return {
       ImportDeclaration: importDeclarationListener,
@@ -122,10 +114,7 @@ export const requireErrorMessage = createZodMiniPluginRule({
               messageId: 'preferError',
               node: params,
               fix(fixer) {
-                return fixer.replaceTextRange(
-                  messagePropertyNode.key.range,
-                  'error',
-                );
+                return fixer.replaceTextRange(messagePropertyNode.key.range, 'error');
               },
             });
             continue;

@@ -14,8 +14,7 @@ export const preferStringSchemaWithTrim = createZodPluginRule({
     type: 'problem',
     fixable: 'code',
     docs: {
-      description:
-        'Enforce `z.string().trim()` to prevent accidental leading/trailing whitespace',
+      description: 'Enforce `z.string().trim()` to prevent accidental leading/trailing whitespace',
     },
     messages: {
       addTrim: '`z.string()` schemas should use `.trim()`.',
@@ -24,11 +23,8 @@ export const preferStringSchemaWithTrim = createZodPluginRule({
   },
   defaultOptions: [],
   create(context) {
-    const {
-      importDeclarationListener,
-      detectZodSchemaRootNode,
-      collectZodChainMethods,
-    } = trackZodSchemaImports();
+    const { importDeclarationListener, detectZodSchemaRootNode, collectZodChainMethods } =
+      trackZodSchemaImports();
 
     return {
       ImportDeclaration: importDeclarationListener,
@@ -46,8 +42,7 @@ export const preferStringSchemaWithTrim = createZodPluginRule({
           findParentSchemaMatchingCondition(zodSchemaMeta.node, {
             schemaName: 'record',
             condition: (callParent) =>
-              callParent.arguments.length > 0 &&
-              callParent.arguments[0] === zodSchemaMeta.node,
+              callParent.arguments.length > 0 && callParent.arguments[0] === zodSchemaMeta.node,
           })
         ) {
           return;

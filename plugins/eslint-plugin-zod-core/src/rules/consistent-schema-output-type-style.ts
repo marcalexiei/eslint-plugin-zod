@@ -1,7 +1,4 @@
-import {
-  createZodSchemaImportTrack,
-  zodCoreImportScope,
-} from '@eslint-zod/utils';
+import { createZodSchemaImportTrack, zodCoreImportScope } from '@eslint-zod/utils';
 import type { TSESTree } from '@typescript-eslint/utils';
 import { AST_NODE_TYPES } from '@typescript-eslint/utils';
 
@@ -17,20 +14,15 @@ interface Options {
 
 type MessageIds = 'useInfer' | 'useOutput';
 
-const { trackZodSchemaImports } =
-  createZodSchemaImportTrack(zodCoreImportScope);
+const { trackZodSchemaImports } = createZodSchemaImportTrack(zodCoreImportScope);
 
-export const consistentSchemaOutputTypeStyle = createZodPluginRule<
-  [Options],
-  MessageIds
->({
+export const consistentSchemaOutputTypeStyle = createZodPluginRule<[Options], MessageIds>({
   name: 'consistent-schema-output-type-style',
   meta: {
     type: 'suggestion',
     fixable: 'code',
     docs: {
-      description:
-        'Enforce consistent use of core.infer or core.output for schema type inference',
+      description: 'Enforce consistent use of core.infer or core.output for schema type inference',
     },
     messages: {
       useInfer: 'Use infer instead of output.',
@@ -68,19 +60,13 @@ export const consistentSchemaOutputTypeStyle = createZodPluginRule<
         if (typeName.type === AST_NODE_TYPES.TSQualifiedName) {
           const { left, right } = typeName;
 
-          if (
-            left.type !== AST_NODE_TYPES.Identifier ||
-            !isZodNamespace(left.name)
-          ) {
+          if (left.type !== AST_NODE_TYPES.Identifier || !isZodNamespace(left.name)) {
             return;
           }
 
           const usedStyle = right.name;
 
-          if (
-            (usedStyle !== 'infer' && usedStyle !== 'output') ||
-            usedStyle === style
-          ) {
+          if ((usedStyle !== 'infer' && usedStyle !== 'output') || usedStyle === style) {
             return;
           }
 
@@ -98,10 +84,7 @@ export const consistentSchemaOutputTypeStyle = createZodPluginRule<
         if (typeName.type === AST_NODE_TYPES.Identifier) {
           const originalName = getNamedImportOriginal(typeName.name);
 
-          if (
-            (originalName !== 'infer' && originalName !== 'output') ||
-            originalName === style
-          ) {
+          if ((originalName !== 'infer' && originalName !== 'output') || originalName === style) {
             return;
           }
 

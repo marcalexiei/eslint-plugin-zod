@@ -99,42 +99,38 @@ ruleTester.run(
   },
 );
 
-ruleTester.run(
-  `${consistentSchemaOutputTypeStyle.name} (infer)`,
-  consistentSchemaOutputTypeStyle,
-  {
-    valid: [
-      {
-        name: 'namespace import',
-        code: dedent`
+ruleTester.run(`${consistentSchemaOutputTypeStyle.name} (infer)`, consistentSchemaOutputTypeStyle, {
+  valid: [
+    {
+      name: 'namespace import',
+      code: dedent`
           import * as z from 'zod/mini';
           type SchemaType = z.infer<typeof UserSchema>;
         `,
-        options: [{ style: 'infer' }],
-      },
-      {
-        name: 'not triggered on zod import',
-        code: dedent`
+      options: [{ style: 'infer' }],
+    },
+    {
+      name: 'not triggered on zod import',
+      code: dedent`
           import * as z from 'zod';
           type SchemaType = z.output<typeof UserSchema>;
         `,
-        options: [{ style: 'infer' }],
-      },
-    ],
-    invalid: [
-      {
-        name: 'namespace import',
-        code: dedent`
+      options: [{ style: 'infer' }],
+    },
+  ],
+  invalid: [
+    {
+      name: 'namespace import',
+      code: dedent`
           import * as z from 'zod/mini';
           type SchemaType = z.output<typeof UserSchema>;
         `,
-        options: [{ style: 'infer' }],
-        errors: [{ messageId: 'useInfer' }],
-        output: dedent`
+      options: [{ style: 'infer' }],
+      errors: [{ messageId: 'useInfer' }],
+      output: dedent`
           import * as z from 'zod/mini';
           type SchemaType = z.infer<typeof UserSchema>;
         `,
-      },
-    ],
-  },
-);
+    },
+  ],
+});

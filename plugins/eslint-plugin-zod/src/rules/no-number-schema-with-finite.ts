@@ -26,11 +26,8 @@ export const noNumberSchemaWithFinite = createZodPluginRule({
   defaultOptions: [],
 
   create(context) {
-    const {
-      importDeclarationListener,
-      detectZodSchemaRootNode,
-      collectZodChainMethods,
-    } = trackZodSchemaImports();
+    const { importDeclarationListener, detectZodSchemaRootNode, collectZodChainMethods } =
+      trackZodSchemaImports();
 
     return {
       ImportDeclaration: importDeclarationListener,
@@ -43,9 +40,7 @@ export const noNumberSchemaWithFinite = createZodPluginRule({
         }
 
         const methods = collectZodChainMethods(node);
-        const finiteIndex = methods.findIndex(
-          (m) => m.name === 'finite' && m.node === node,
-        );
+        const finiteIndex = methods.findIndex((m) => m.name === 'finite' && m.node === node);
         if (finiteIndex === -1) {
           return;
         }

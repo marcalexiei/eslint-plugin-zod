@@ -11,23 +11,18 @@ export const noNumberSchemaWithStep = createZodPluginRule({
     fixable: 'code',
     type: 'problem',
     docs: {
-      description:
-        'Disallow deprecated `z.number().step()`. Use `.multipleOf()` instead.',
+      description: 'Disallow deprecated `z.number().step()`. Use `.multipleOf()` instead.',
     },
     messages: {
-      useMultipleOf:
-        '`.step()` is deprecated. Use `.multipleOf()` with the same argument instead.',
+      useMultipleOf: '`.step()` is deprecated. Use `.multipleOf()` with the same argument instead.',
     },
     schema: [],
   },
   defaultOptions: [],
 
   create(context) {
-    const {
-      importDeclarationListener,
-      detectZodSchemaRootNode,
-      collectZodChainMethods,
-    } = trackZodSchemaImports();
+    const { importDeclarationListener, detectZodSchemaRootNode, collectZodChainMethods } =
+      trackZodSchemaImports();
 
     return {
       ImportDeclaration: importDeclarationListener,
@@ -40,9 +35,7 @@ export const noNumberSchemaWithStep = createZodPluginRule({
         }
 
         const methods = collectZodChainMethods(node);
-        const stepIndex = methods.findIndex(
-          (m) => m.name === 'step' && m.node === node,
-        );
+        const stepIndex = methods.findIndex((m) => m.name === 'step' && m.node === node);
         if (stepIndex === -1) {
           return;
         }

@@ -49,17 +49,12 @@ export function buildZodChainReplacementFix(opts: {
 
   // Rebuild parameters
   if (toNode.arguments.length) {
-    const argsText = toNode.arguments
-      .map((arg) => sourceCode.getText(arg))
-      .join(', ');
+    const argsText = toNode.arguments.map((arg) => sourceCode.getText(arg)).join(', ');
 
     replacement += argsText;
   }
 
   replacement += `)${betweenSuffixes.join('')}`;
 
-  return fixer.replaceTextRange(
-    [fromNode.range[0], toNode.range[1]],
-    replacement,
-  );
+  return fixer.replaceTextRange([fromNode.range[0], toNode.range[1]], replacement);
 }

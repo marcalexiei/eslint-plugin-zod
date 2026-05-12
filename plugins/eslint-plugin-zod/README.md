@@ -109,10 +109,7 @@ import { defineConfig } from 'eslint/config';
 import eslint from '@eslint/js';
 import eslintPluginZod from 'eslint-plugin-zod';
 
-export default defineConfig(
-  eslint.configs.recommended,
-  eslintPluginZod.configs.recommended,
-);
+export default defineConfig(eslint.configs.recommended, eslintPluginZod.configs.recommended);
 ```
 
 ### Oxlint

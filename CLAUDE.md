@@ -56,12 +56,7 @@ This is the most important thing to know when working on `eslint-plugin-zod-mini
 **`zod` (full)** — validation methods are chained:
 
 ```ts
-z.string()
-  .min(1)
-  .max(10)
-  .optional()
-  .describe('desc')
-  .meta({ description: 'desc' });
+z.string().min(1).max(10).optional().describe('desc').meta({ description: 'desc' });
 ```
 
 **`zod/mini`** — validation methods are standalone `$ZodCheck` functions passed to `.check()`:

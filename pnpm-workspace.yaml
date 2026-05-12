@@ -17,7 +17,7 @@ catalogs:
     vitest: '4.1.5'
 
     # plugin dev utilities
-    '@marcalexiei/prettier-config': '1.1.4'
+    '@marcalexiei/prettier-config': '2.0.0'
     dedent: '1.7.2'
     eslint-doc-generator: '3.3.2'
     prettier: '3.8.3'

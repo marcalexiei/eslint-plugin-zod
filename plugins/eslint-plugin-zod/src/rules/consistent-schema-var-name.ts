@@ -16,16 +16,12 @@ type MessageIds = 'invalidName';
 
 const { trackZodSchemaImports } = createZodSchemaImportTrack(zodImportScope);
 
-export const consistentSchemaVarName = createZodPluginRule<
-  [Options],
-  MessageIds
->({
+export const consistentSchemaVarName = createZodPluginRule<[Options], MessageIds>({
   name: 'consistent-schema-var-name',
   meta: {
     type: 'suggestion',
     docs: {
-      description:
-        'Enforce a consistent naming convention for Zod schema variables',
+      description: 'Enforce a consistent naming convention for Zod schema variables',
     },
     messages: {
       invalidName: 'Rename this Zod schema to "{{expected}}"',
@@ -49,11 +45,8 @@ export const consistentSchemaVarName = createZodPluginRule<
   },
   defaultOptions: [{ after: 'Schema' }],
   create(context, [{ before = '', after = '' }]) {
-    const {
-      importDeclarationListener,
-      detectZodSchemaRootNode,
-      collectZodChainMethods,
-    } = trackZodSchemaImports();
+    const { importDeclarationListener, detectZodSchemaRootNode, collectZodChainMethods } =
+      trackZodSchemaImports();
 
     return {
       ImportDeclaration: importDeclarationListener,
@@ -67,15 +60,9 @@ export const consistentSchemaVarName = createZodPluginRule<
           return;
         }
 
-        const chainMethods = collectZodChainMethods(initNode).map(
-          (it) => it.name,
-        );
+        const chainMethods = collectZodChainMethods(initNode).map((it) => it.name);
 
-        if (
-          ZOD_NON_SCHEMA_PRODUCING_METHODS.some((it) =>
-            chainMethods.includes(it),
-          )
-        ) {
+        if (ZOD_NON_SCHEMA_PRODUCING_METHODS.some((it) => chainMethods.includes(it))) {
           return;
         }
 
@@ -91,8 +78,7 @@ export const consistentSchemaVarName = createZodPluginRule<
           return;
         }
 
-        const expected =
-          (validPrefix ? '' : before) + name + (validSuffix ? '' : after);
+        const expected = (validPrefix ? '' : before) + name + (validSuffix ? '' : after);
 
         context.report({
           node,

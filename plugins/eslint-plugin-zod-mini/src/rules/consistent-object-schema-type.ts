@@ -1,7 +1,4 @@
-import {
-  createZodSchemaImportTrack,
-  zodMiniImportScope,
-} from '@eslint-zod/utils';
+import { createZodSchemaImportTrack, zodMiniImportScope } from '@eslint-zod/utils';
 import type { TSESLint } from '@typescript-eslint/utils';
 import { AST_NODE_TYPES } from '@typescript-eslint/utils';
 
@@ -18,13 +15,9 @@ type MessageIds = 'consistentMethod' | 'useMethod';
 
 const defaultOptions: Options = { allow: ['object'] };
 
-const { trackZodSchemaImports } =
-  createZodSchemaImportTrack(zodMiniImportScope);
+const { trackZodSchemaImports } = createZodSchemaImportTrack(zodMiniImportScope);
 
-export const consistentObjectSchemaType = createZodMiniPluginRule<
-  [Options],
-  MessageIds
->({
+export const consistentObjectSchemaType = createZodMiniPluginRule<[Options], MessageIds>({
   name: 'consistent-object-schema-type',
   meta: {
     hasSuggestions: true,
@@ -69,9 +62,7 @@ export const consistentObjectSchemaType = createZodMiniPluginRule<
       CallExpression(node): void {
         const zodSchemaMeta = detectZodSchemaRootNode(node);
 
-        const schemaType = zodSchemaMeta?.schemaType as
-          | ZodObjectMethod
-          | undefined;
+        const schemaType = zodSchemaMeta?.schemaType as ZodObjectMethod | undefined;
 
         if (!schemaType || !ZOD_OBJECT_METHODS.includes(schemaType)) {
           return;
@@ -100,9 +91,7 @@ export const consistentObjectSchemaType = createZodMiniPluginRule<
               actual: schemaType,
               allowedList: allowedList.join(','),
             },
-            suggest: allowedList.map<
-              TSESLint.ReportSuggestionArray<MessageIds>[number]
-            >((it) => ({
+            suggest: allowedList.map<TSESLint.ReportSuggestionArray<MessageIds>[number]>((it) => ({
               messageId: 'useMethod',
               data: { expected: it },
               fix(fixer): TSESLint.RuleFix {

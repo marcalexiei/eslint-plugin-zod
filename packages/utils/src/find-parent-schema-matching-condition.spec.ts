@@ -11,10 +11,7 @@ function makeIdent(name: string): TSESTree.Identifier {
   } as unknown as TSESTree.Identifier;
 }
 
-function makeME(
-  object: TSESTree.Expression,
-  propertyName: string,
-): TSESTree.MemberExpression {
+function makeME(object: TSESTree.Expression, propertyName: string): TSESTree.MemberExpression {
   return {
     type: AST_NODE_TYPES.MemberExpression,
     object,
@@ -93,9 +90,7 @@ describe('findParentSchemaMatchingCondition', () => {
     const recordCall = makeCall(makeME(makeIdent('z'), 'record'), [stringCall]);
     setParent(stringCall, recordCall);
 
-    const condition = vi.fn<(node: TSESTree.CallExpression) => boolean>(
-      () => true,
-    );
+    const condition = vi.fn<(node: TSESTree.CallExpression) => boolean>(() => true);
     findParentSchemaMatchingCondition(stringCall, {
       schemaName: 'record',
       condition,

@@ -17,10 +17,7 @@ const defaultOptions: Options = { allow: ['object'] };
 
 const { trackZodSchemaImports } = createZodSchemaImportTrack(zodImportScope);
 
-export const consistentObjectSchemaType = createZodPluginRule<
-  [Options],
-  MessageIds
->({
+export const consistentObjectSchemaType = createZodPluginRule<[Options], MessageIds>({
   name: 'consistent-object-schema-type',
   meta: {
     hasSuggestions: true,
@@ -65,9 +62,7 @@ export const consistentObjectSchemaType = createZodPluginRule<
       CallExpression(node): void {
         const zodSchemaMeta = detectZodSchemaRootNode(node);
 
-        const schemaType = zodSchemaMeta?.schemaType as
-          | ZodObjectMethod
-          | undefined;
+        const schemaType = zodSchemaMeta?.schemaType as ZodObjectMethod | undefined;
 
         if (!schemaType || !ZOD_OBJECT_METHODS.includes(schemaType)) {
           return;
@@ -96,9 +91,7 @@ export const consistentObjectSchemaType = createZodPluginRule<
               actual: schemaType,
               allowedList: allowedList.join(','),
             },
-            suggest: allowedList.map<
-              TSESLint.ReportSuggestionArray<MessageIds>[number]
-            >((it) => ({
+            suggest: allowedList.map<TSESLint.ReportSuggestionArray<MessageIds>[number]>((it) => ({
               messageId: 'useMethod',
               data: { expected: it },
               fix(fixer): TSESLint.RuleFix {

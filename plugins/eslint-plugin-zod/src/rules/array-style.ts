@@ -44,11 +44,8 @@ export const arrayStyle = createZodPluginRule<[Options], MessageIds>({
   create(context, [{ style }]) {
     const { sourceCode } = context;
 
-    const {
-      importDeclarationListener,
-      detectZodSchemaRootNode,
-      collectZodChainMethods,
-    } = trackZodSchemaImports();
+    const { importDeclarationListener, detectZodSchemaRootNode, collectZodChainMethods } =
+      trackZodSchemaImports();
 
     return {
       ImportDeclaration: importDeclarationListener,
@@ -80,10 +77,7 @@ export const arrayStyle = createZodPluginRule<[Options], MessageIds>({
                     return null;
                   }
                   const argText = sourceCode.getText(arg);
-                  return fixer.replaceText(
-                    arrayCall.node,
-                    `${argText}.array()`,
-                  );
+                  return fixer.replaceText(arrayCall.node, `${argText}.array()`);
                 },
               });
               return;

@@ -34,8 +34,7 @@ export const schemaErrorPropertyStyle = createZodPluginRule<
             type: 'string',
           },
           example: {
-            description:
-              'Example code to help the user understand the required pattern',
+            description: 'Example code to help the user understand the required pattern',
             type: 'string',
           },
         },
@@ -43,15 +42,10 @@ export const schemaErrorPropertyStyle = createZodPluginRule<
       },
     ],
   },
-  defaultOptions: [
-    { selector: 'Literal,TemplateLiteral', example: "'error message'" },
-  ],
+  defaultOptions: [{ selector: 'Literal,TemplateLiteral', example: "'error message'" }],
   create(context, [{ selector, example }]) {
-    const {
-      importDeclarationListener,
-      detectZodSchemaRootNode,
-      collectZodChainMethods,
-    } = trackZodSchemaImports();
+    const { importDeclarationListener, detectZodSchemaRootNode, collectZodChainMethods } =
+      trackZodSchemaImports();
 
     /**
      * Parsing `selector` to ensure it is valid,

@@ -80,60 +80,56 @@ ruleTester.run(schemaErrorPropertyStyle.name, schemaErrorPropertyStyle, {
   ],
 });
 
-ruleTester.run(
-  `${schemaErrorPropertyStyle.name} (refine)`,
-  schemaErrorPropertyStyle,
-  {
-    valid: [
-      {
-        name: 'default option',
-        code: dedent`
+ruleTester.run(`${schemaErrorPropertyStyle.name} (refine)`, schemaErrorPropertyStyle, {
+  valid: [
+    {
+      name: 'default option',
+      code: dedent`
         import * as z from 'zod';
         z.string().refine(() => true, { error: "my error" });
       `,
-      },
-      {
-        name: 'default with template string',
-        code: dedent`
+    },
+    {
+      name: 'default with template string',
+      code: dedent`
         import * as z from 'zod';
         z.string().refine(() => true, \`asd\`);
       `,
-      },
-    ],
-    invalid: [
-      {
-        name: 'arrow function',
-        code: dedent`
+    },
+  ],
+  invalid: [
+    {
+      name: 'arrow function',
+      code: dedent`
         import * as z from 'zod';
         z.string().refine(() => true, { error: () => "my error" })
       `,
-        errors: [
-          {
-            messageId: 'invalidStyle',
-            data: {
-              selector: 'Literal,TemplateLiteral',
-              example: "'error message'",
-              actual: '() => "my error"',
-            },
+      errors: [
+        {
+          messageId: 'invalidStyle',
+          data: {
+            selector: 'Literal,TemplateLiteral',
+            example: "'error message'",
+            actual: '() => "my error"',
           },
-        ],
-        output: null,
-      },
-      {
-        name: 'invalid selector',
-        options: [{ selector: '>!asd', example: 'test' }],
-        code: dedent`
+        },
+      ],
+      output: null,
+    },
+    {
+      name: 'invalid selector',
+      options: [{ selector: '>!asd', example: 'test' }],
+      code: dedent`
         import * as z from 'zod';
         z.string().refine(() => true, \`template string\`)
       `,
-        errors: [
-          {
-            messageId: 'invalidSelector',
-            data: { selector: '>!asd' },
-          },
-        ],
-        output: null,
-      },
-    ],
-  },
-);
+      errors: [
+        {
+          messageId: 'invalidSelector',
+          data: { selector: '>!asd' },
+        },
+      ],
+      output: null,
+    },
+  ],
+});

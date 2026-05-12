@@ -64,10 +64,7 @@ z.object({ name: z.string() });
 ```json
 {
   "rules": {
-    "zod/consistent-object-schema-type": [
-      "error",
-      { "allow": ["looseObject", "strictObject"] }
-    ]
+    "zod/consistent-object-schema-type": ["error", { "allow": ["looseObject", "strictObject"] }]
   }
 }
 ```

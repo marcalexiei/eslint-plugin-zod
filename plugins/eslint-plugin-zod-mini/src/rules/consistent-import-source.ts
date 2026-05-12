@@ -17,8 +17,7 @@ export const consistentImportSource = createZodMiniPluginRule<
       description: 'Enforce consistent source from Zod Mini imports',
     },
     messages: {
-      sourceNotAllowed:
-        '"{{source}}" is not allowed. Available values are: {{sources}}',
+      sourceNotAllowed: '"{{source}}" is not allowed. Available values are: {{sources}}',
       replaceSource: 'Replace "{{invalid}}" with "{{valid}}"',
     },
     schema: [
@@ -60,9 +59,7 @@ export const consistentImportSource = createZodMiniPluginRule<
             source: sourceValue,
             sources: sources.map((s) => `"${s}"`).join(', '),
           },
-          suggest: sources.map<
-            TSESLint.ReportSuggestionArray<MessageIds>[number]
-          >((it) => ({
+          suggest: sources.map<TSESLint.ReportSuggestionArray<MessageIds>[number]>((it) => ({
             messageId: 'replaceSource',
             data: { valid: it, invalid: sourceValue },
             fix(fixer): TSESLint.RuleFix {

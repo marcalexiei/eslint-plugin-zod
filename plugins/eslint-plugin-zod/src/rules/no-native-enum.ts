@@ -11,22 +11,17 @@ export const noNativeEnum = createZodPluginRule({
     type: 'problem',
     fixable: 'code',
     docs: {
-      description:
-        'Disallow deprecated `z.nativeEnum()` in favor of `z.enum()`.',
+      description: 'Disallow deprecated `z.nativeEnum()` in favor of `z.enum()`.',
     },
     messages: {
-      useEnum:
-        '`z.nativeEnum()` is deprecated in Zod 4. Use `z.enum()` instead.',
+      useEnum: '`z.nativeEnum()` is deprecated in Zod 4. Use `z.enum()` instead.',
     },
     schema: [],
   },
   defaultOptions: [],
   create(context) {
-    const {
-      importDeclarationListener,
-      detectZodSchemaRootNode,
-      collectZodChainMethods,
-    } = trackZodSchemaImports();
+    const { importDeclarationListener, detectZodSchemaRootNode, collectZodChainMethods } =
+      trackZodSchemaImports();
 
     return {
       ImportDeclaration: importDeclarationListener,
@@ -48,9 +43,7 @@ export const noNativeEnum = createZodPluginRule({
             // For named imports (e.g., `nativeEnum().optional()`), we cannot safely auto-fix
             // because replacing the entire chain would require access to the namespace prefix.
             // Report the error without a fix in this case.
-            if (
-              rootMethodNode.callee.type !== AST_NODE_TYPES.MemberExpression
-            ) {
+            if (rootMethodNode.callee.type !== AST_NODE_TYPES.MemberExpression) {
               return null;
             }
 

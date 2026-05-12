@@ -9,13 +9,7 @@ const { trackZodSchemaImports } = createZodSchemaImportTrack(zodImportScope);
 /**
  * Methods that mutate/transform the value and should not be used in z.record() key schemas
  */
-const TRANSFORM_METHODS = [
-  'transform',
-  'map',
-  'trim',
-  'toLowerCase',
-  'toUpperCase',
-];
+const TRANSFORM_METHODS = ['transform', 'map', 'trim', 'toLowerCase', 'toUpperCase'];
 
 export const noTransformInRecordKey = createZodPluginRule({
   name: 'no-transform-in-record-key',
@@ -33,18 +27,13 @@ export const noTransformInRecordKey = createZodPluginRule({
   },
   defaultOptions: [],
   create(context) {
-    const {
-      importDeclarationListener,
-      detectZodSchemaRootNode,
-      collectZodChainMethods,
-    } = trackZodSchemaImports();
+    const { importDeclarationListener, detectZodSchemaRootNode, collectZodChainMethods } =
+      trackZodSchemaImports();
 
     /**
      * Check if a schema (as an expression) contains any transform methods in its chain
      */
-    function hasTransformMethods(
-      schema: TSESTree.Expression | TSESTree.SpreadElement,
-    ): boolean {
+    function hasTransformMethods(schema: TSESTree.Expression | TSESTree.SpreadElement): boolean {
       // Only process Expression nodes, not SpreadElements
       if (schema.type === AST_NODE_TYPES.SpreadElement) {
         return false;
@@ -53,9 +42,7 @@ export const noTransformInRecordKey = createZodPluginRule({
       // If it's a call expression, it could be a Zod schema
       if (schema.type === AST_NODE_TYPES.CallExpression) {
         const methods = collectZodChainMethods(schema);
-        return methods.some((method) =>
-          TRANSFORM_METHODS.includes(method.name),
-        );
+        return methods.some((method) => TRANSFORM_METHODS.includes(method.name));
       }
 
       return false;

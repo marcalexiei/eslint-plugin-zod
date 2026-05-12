@@ -84,9 +84,7 @@ export function shouldIdentifierBeRenamed(node: TSESTree.Identifier): boolean {
 /**
  * From a given specifiers retrieve the most significant to use when creating an alias import
  */
-export function getNamespaceAliasNameFrom(
-  node: TSESTree.ImportClause,
-): string | null {
+export function getNamespaceAliasNameFrom(node: TSESTree.ImportClause): string | null {
   if (
     node.type === AST_NODE_TYPES.ImportDefaultSpecifier ||
     node.type === AST_NODE_TYPES.ImportNamespaceSpecifier

@@ -1,13 +1,9 @@
-import {
-  createZodSchemaImportTrack,
-  zodMiniImportScope,
-} from '@eslint-zod/utils';
+import { createZodSchemaImportTrack, zodMiniImportScope } from '@eslint-zod/utils';
 import type { TSESLint, TSESTree } from '@typescript-eslint/utils';
 
 import { createZodMiniPluginRule } from '../utils/create-plugin-rule.js';
 
-const { trackZodSchemaImports } =
-  createZodSchemaImportTrack(zodMiniImportScope);
+const { trackZodSchemaImports } = createZodSchemaImportTrack(zodMiniImportScope);
 
 export const requireBrandTypeParameter = createZodMiniPluginRule({
   name: 'require-brand-type-parameter',
@@ -26,11 +22,8 @@ export const requireBrandTypeParameter = createZodMiniPluginRule({
   },
   defaultOptions: [],
   create(context) {
-    const {
-      importDeclarationListener,
-      detectZodSchemaRootNode,
-      collectZodChainMethods,
-    } = trackZodSchemaImports();
+    const { importDeclarationListener, detectZodSchemaRootNode, collectZodChainMethods } =
+      trackZodSchemaImports();
 
     return {
       ImportDeclaration: importDeclarationListener,
@@ -65,10 +58,7 @@ export const requireBrandTypeParameter = createZodMiniPluginRule({
             {
               messageId: 'removeBrandFunction',
               fix(fixer): TSESLint.RuleFix {
-                return fixer.removeRange([
-                  brandCalleeNode.object.range[1],
-                  brandNode.range[1],
-                ]);
+                return fixer.removeRange([brandCalleeNode.object.range[1], brandNode.range[1]]);
               },
             },
           ],

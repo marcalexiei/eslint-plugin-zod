@@ -68,10 +68,7 @@ function isOutermostCallExpression(node: TSESTree.CallExpression): boolean {
   }
 
   // If parent is MemberExpression and parent.object === node => node is part of chain
-  if (
-    parent.type === AST_NODE_TYPES.MemberExpression &&
-    parent.object === node
-  ) {
+  if (parent.type === AST_NODE_TYPES.MemberExpression && parent.object === node) {
     return false;
   }
 

@@ -153,9 +153,7 @@ ruleTester.run(preferMetaLast.name, preferMetaLast, {
         import * as z from 'zod';
         z.string().min(5).meta({ foo: "bar" }).max(10);
       `,
-      errors: [
-        { messageId: 'metaNotLast', line: 2, column: 19, endColumn: 23 },
-      ],
+      errors: [{ messageId: 'metaNotLast', line: 2, column: 19, endColumn: 23 }],
       output: dedent`
         import * as z from 'zod';
         z.string().min(5).max(10).meta({ foo: "bar" });
@@ -171,9 +169,7 @@ ruleTester.run(preferMetaLast.name, preferMetaLast, {
           action: z.string().meta({ description: "a" }).min(1),
         })
       `,
-      errors: [
-        { messageId: 'metaNotLast', line: 4, column: 22, endColumn: 26 },
-      ],
+      errors: [{ messageId: 'metaNotLast', line: 4, column: 22, endColumn: 26 }],
       output: dedent`
         import * as z from 'zod';
         export const baseEventPayloadSchema = z.strictObject({

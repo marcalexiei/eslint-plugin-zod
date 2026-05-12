@@ -27,9 +27,7 @@ export function findParentSchemaMatchingCondition(
 
         // Get the property name (method name)
         const methodName =
-          memberExpr.property.type === AST_NODE_TYPES.Identifier
-            ? memberExpr.property.name
-            : null;
+          memberExpr.property.type === AST_NODE_TYPES.Identifier ? memberExpr.property.name : null;
 
         // If this is z.record(), check if we're the first argument
         if (methodName === schemaName) {

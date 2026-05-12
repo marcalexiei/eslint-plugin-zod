@@ -1,7 +1,4 @@
-import {
-  createZodSchemaImportTrack,
-  zodMiniImportScope,
-} from '@eslint-zod/utils';
+import { createZodSchemaImportTrack, zodMiniImportScope } from '@eslint-zod/utils';
 import type { TSESTree } from '@typescript-eslint/utils';
 import { AST_NODE_TYPES } from '@typescript-eslint/utils';
 import esquery from 'esquery';
@@ -10,8 +7,7 @@ import { createZodMiniPluginRule } from '../utils/create-plugin-rule.js';
 
 type MessageIds = 'invalidStyle' | 'invalidSelector';
 
-const { trackZodSchemaImports } =
-  createZodSchemaImportTrack(zodMiniImportScope);
+const { trackZodSchemaImports } = createZodSchemaImportTrack(zodMiniImportScope);
 
 export const schemaErrorPropertyStyle = createZodMiniPluginRule<
   [{ selector: string; example: string }],
@@ -38,8 +34,7 @@ export const schemaErrorPropertyStyle = createZodMiniPluginRule<
             type: 'string',
           },
           example: {
-            description:
-              'Example code to help the user understand the required pattern',
+            description: 'Example code to help the user understand the required pattern',
             type: 'string',
           },
         },
@@ -47,15 +42,10 @@ export const schemaErrorPropertyStyle = createZodMiniPluginRule<
       },
     ],
   },
-  defaultOptions: [
-    { selector: 'Literal,TemplateLiteral', example: "'error message'" },
-  ],
+  defaultOptions: [{ selector: 'Literal,TemplateLiteral', example: "'error message'" }],
   create(context, [{ selector, example }]) {
-    const {
-      importDeclarationListener,
-      detectZodSchemaRootNode,
-      collectZodChainMethods,
-    } = trackZodSchemaImports();
+    const { importDeclarationListener, detectZodSchemaRootNode, collectZodChainMethods } =
+      trackZodSchemaImports();
 
     /**
      * Parsing `selector` to ensure it is valid,
