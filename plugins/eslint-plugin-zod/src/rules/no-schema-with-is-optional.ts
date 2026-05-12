@@ -3,7 +3,6 @@ import {
   createZodSchemaImportTrack,
   zodImportScope,
 } from '@eslint-zod/utils';
-import { AST_NODE_TYPES } from '@typescript-eslint/utils';
 
 import { createZodPluginRule } from '../utils/create-plugin-rule.js';
 
@@ -36,38 +35,28 @@ export const noSchemaWithIsOptional = createZodPluginRule({
       ImportDeclaration: importDeclarationListener,
 
       CallExpression(node): void {
-        if (node.callee.type !== AST_NODE_TYPES.MemberExpression) {
-          return;
-        }
-        if (node.callee.computed) {
-          return;
-        }
-        if (node.callee.property.type !== AST_NODE_TYPES.Identifier) {
-          return;
-        }
-        if (node.callee.property.name !== 'isOptional') {
-          return;
-        }
-        if (node.callee.object.type !== AST_NODE_TYPES.CallExpression) {
-          return;
-        }
-
         const zodSchemaMeta = detectZodSchemaRootNode(node);
-
         if (!zodSchemaMeta) {
           return;
         }
 
-        if (
-          ZOD_NON_SCHEMA_PRODUCING_METHODS.includes(zodSchemaMeta.schemaType)
-        ) {
+        const { methods } = zodSchemaMeta;
+
+        // Check if the chain contains a is `isOptional`
+        const isOptionalIndex = methods.findIndex((it) => it === 'isOptional');
+        if (isOptionalIndex === -1) {
           return;
         }
 
+        // Retrieve the chain methods before isOptional
+        const methodsBeforeIsOptional = methods.slice(0, isOptionalIndex);
+
+        // if the chain contains a zod method not producing a schema stop,
+        // the isOptional is not related to zod
         if (
-          zodSchemaMeta.methods
-            .slice(0, -1)
-            .some((method) => ZOD_NON_SCHEMA_PRODUCING_METHODS.includes(method))
+          methodsBeforeIsOptional.some((method) =>
+            ZOD_NON_SCHEMA_PRODUCING_METHODS.includes(method),
+          )
         ) {
           return;
         }

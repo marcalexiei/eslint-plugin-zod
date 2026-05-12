@@ -39,7 +39,7 @@ ruleTester.run(noSchemaWithIsOptional.name, noSchemaWithIsOptional, {
       name: 'non-schema producing zod method in chain',
       code: dedent`
         import * as z from 'zod';
-        void z.string().safeParse(undefined).isOptional();
+        void z.unknown().safeParse(undefined).some.isOptional();
       `,
     },
     {
