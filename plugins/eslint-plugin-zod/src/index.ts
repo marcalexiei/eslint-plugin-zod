@@ -17,6 +17,7 @@ import { noNumberSchemaWithIsInt } from './rules/no-number-schema-with-is-int.js
 import { noNumberSchemaWithSafe } from './rules/no-number-schema-with-safe.js';
 import { noNumberSchemaWithStep } from './rules/no-number-schema-with-step.js';
 import { noOptionalAndDefaultTogether } from './rules/no-optional-and-default-together.js';
+import { noSchemaWithIsNullable } from './rules/no-schema-with-is-nullable.js';
 import { noSchemaWithIsOptional } from './rules/no-schema-with-is-optional.js';
 import { noStringSchemaWithUuid } from './rules/no-string-schema-with-uuid.js';
 import { noThrowInRefine } from './rules/no-throw-in-refine.js';
@@ -70,6 +71,7 @@ const eslintPluginZod = {
     'no-number-schema-with-step': noNumberSchemaWithStep,
     'no-string-schema-with-uuid': noStringSchemaWithUuid,
     'no-optional-and-default-together': noOptionalAndDefaultTogether,
+    'no-schema-with-is-nullable': noSchemaWithIsNullable,
     'no-schema-with-is-optional': noSchemaWithIsOptional,
     'no-throw-in-refine': noThrowInRefine,
     'no-transform-in-record-key': noTransformInRecordKey,
@@ -113,6 +115,7 @@ const recommendedConfig = {
     'zod/no-number-schema-with-step': 'error',
     'zod/no-string-schema-with-uuid': 'error',
     'zod/no-optional-and-default-together': 'error',
+    'zod/no-schema-with-is-nullable': 'error',
     'zod/no-schema-with-is-optional': 'error',
     'zod/no-throw-in-refine': 'error',
     'zod/prefer-enum-over-literal-union': 'error',
