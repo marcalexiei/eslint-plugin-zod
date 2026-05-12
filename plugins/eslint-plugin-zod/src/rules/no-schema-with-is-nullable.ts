@@ -20,16 +20,14 @@ export const noSchemaWithIsNullable = createZodPluginRule({
         'Disallow deprecated `.isNullable()` on a Zod schema; use `safeParse(null).success` instead.',
     },
     messages: {
-      useSafeParse:
-        '`.isNullable()` is deprecated. Try `schema.safeParse(null).success` instead.',
+      useSafeParse: '`.isNullable()` is deprecated. Try `schema.safeParse(null).success` instead.',
     },
     schema: [],
   },
   defaultOptions: [],
 
   create(context) {
-    const { importDeclarationListener, detectZodSchemaRootNode } =
-      trackZodSchemaImports();
+    const { importDeclarationListener, detectZodSchemaRootNode } = trackZodSchemaImports();
 
     return {
       ImportDeclaration: importDeclarationListener,
