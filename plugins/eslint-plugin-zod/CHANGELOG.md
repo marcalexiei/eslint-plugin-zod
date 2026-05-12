@@ -1,5 +1,13 @@
 # eslint-plugin-zod
 
+## 4.3.0
+
+### Minor Changes
+
+- [#305](https://github.com/marcalexiei/eslint-zod/pull/305) [`53a0796`](https://github.com/marcalexiei/eslint-zod/commit/53a07963acf527862e6de341995a99fbc5f15d4b) Thanks [@nimaebra](https://github.com/nimaebra)! - feat: add `no-schema-with-is-optional` rule
+
+- [#303](https://github.com/marcalexiei/eslint-zod/pull/303) [`1122ec9`](https://github.com/marcalexiei/eslint-zod/commit/1122ec9322c76b547ca25695a1a5d9af5ec4a541) Thanks [@nimaebra](https://github.com/nimaebra)! - feat: add `prefer-strict-object` and `prefer-loose-object` rules
+
 ## 4.2.2
 
 ### Patch Changes
