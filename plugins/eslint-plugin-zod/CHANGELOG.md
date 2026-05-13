@@ -1,5 +1,11 @@
 # eslint-plugin-zod
 
+## 4.4.0
+
+### Minor Changes
+
+- [#307](https://github.com/marcalexiei/eslint-zod/pull/307) [`365bdec`](https://github.com/marcalexiei/eslint-zod/commit/365bdec8aadcc605245c4987e0d44842033790c3) Thanks [@nimaebra](https://github.com/nimaebra)! - feat: add `no-schema-with-is-nullable` rule
+
 ## 4.3.0
 
 ### Minor Changes
