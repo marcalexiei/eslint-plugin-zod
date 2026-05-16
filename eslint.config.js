@@ -1,12 +1,14 @@
+import path from 'node:path';
+
 import configBase from '@marcalexiei/eslint-config/base';
 import configTS from '@marcalexiei/eslint-config/typescript';
 import configVitest from '@marcalexiei/eslint-config/vitest';
-import { defineConfig, globalIgnores } from 'eslint/config';
+import { defineConfig, includeIgnoreFile } from 'eslint/config';
 import pluginEslintPlugin from 'eslint-plugin-eslint-plugin';
 import pluginEslintNode from 'eslint-plugin-n';
 
 export default defineConfig(
-  globalIgnores(['**/dist/**', '**/coverage/**']),
+  includeIgnoreFile([path.resolve('.gitignore')]),
   {
     ...configBase,
     rules: {

@@ -23,18 +23,18 @@
     "check-all": "pnpm run format && pnpm run build && pnpm run lint && pnpm run test && pnpm run typecheck"
   },
   "devDependencies": {
-    "@changesets/changelog-github": "0.6.0",
+    "@changesets/changelog-github": "0.7.0",
     "@changesets/cli": "2.31.0",
     "@marcalexiei/eslint-config": "7.0.0",
     "@marcalexiei/prettier-config": "catalog:dev",
-    "@types/node": "25.6.0",
-    "@vitest/eslint-plugin": "1.6.16",
-    "eslint": "10.3.0",
+    "@types/node": "25.8.0",
+    "@vitest/eslint-plugin": "1.6.17",
+    "eslint": "10.4.0",
     "eslint-import-resolver-typescript": "4.4.4",
     "eslint-plugin-eslint-plugin": "7.3.3",
     "eslint-plugin-import-x": "4.16.2",
-    "eslint-plugin-n": "17.24.0",
-    "knip": "6.11.0",
+    "eslint-plugin-n": "18.0.1",
+    "knip": "6.13.1",
     "prettier": "3.8.3",
     "typescript": "6.0.3",
     "typescript-eslint": "catalog:dev"
@@ -43,5 +43,5 @@
   "engines": {
     "node": "^20 || ^22 || >=24"
   },
-  "packageManager": "pnpm@11.0.6+sha512.97f906e1da2bedac3df83cadae04b4753a130092dd49d55cd36825ad3e623e9df3f97754f8f259e699172a360fac569acf2f908e7732bdae3eddb2dcf7e121fd"
+  "packageManager": "pnpm@11.1.2+sha512.415a1cc25974731e75455c1468371be74c5aa5fb7621b50d4056d222451609f11412f23fd602e6169f1e060466641f798597e1be961a10688836a67b16569499"
 }
