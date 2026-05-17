@@ -38,6 +38,7 @@ ruleTester.run(noPromiseSchema.name, noPromiseSchema, {
     {
       name: 'unrelated promise helper',
       code: dedent`
+        import promise from 'something-else';
         promise(z.string());
       `,
     },

@@ -12,6 +12,10 @@ Zod 4 deprecates `z.promise()`. In most cases you should await the value before 
 
 This rule flags `z.promise()` usages so schemas follow the current API guidance.
 
+Replacing `z.promise()` safely is not a mechanical rename.\
+In most cases the correct migration is to await the input before parsing,
+which depends on the surrounding control flow and cannot be inferred reliably from the schema expression alone.
+
 ## Examples
 
 ### Invalid
