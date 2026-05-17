@@ -41,6 +41,7 @@ Find out more about [Oxlint's `jsPLugins`](https://oxc.rs/docs/guide/usage/linte
 | [no-any-schema](docs/rules/no-any-schema.md)                                             | Disallow usage of `z.any()` in Zod Mini schemas                                                    | ✅  |     | 💡  |
 | [no-empty-custom-schema](docs/rules/no-empty-custom-schema.md)                           | Disallow usage of `z.custom()` without arguments                                                   | ✅  |     |     |
 | [no-unknown-schema](docs/rules/no-unknown-schema.md)                                     | Disallow usage of `z.unknown()` in Zod Mini schemas                                                |     |     |     |
+| [prefer-enum-over-literal-union](docs/rules/prefer-enum-over-literal-union.md)           | Prefer `z.enum()` over `z.union()` when all members are string literals.                           | ✅  | 🔧  |     |
 | [prefer-meta](docs/rules/prefer-meta.md)                                                 | Enforce usage of `z.meta()` over `z.describe()`                                                    | ✅  | 🔧  |     |
 | [require-brand-type-parameter](docs/rules/require-brand-type-parameter.md)               | Require type parameter on `.brand()` functions                                                     | ✅  |     | 💡  |
 | [require-error-message](docs/rules/require-error-message.md)                             | Enforce that custom refinements include an error message                                           | ✅  | 🔧  |     |
