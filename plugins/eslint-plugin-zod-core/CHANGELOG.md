@@ -1,5 +1,12 @@
 # eslint-plugin-zod-core
 
+## 1.0.1
+
+### Patch Changes
+
+- Updated dependencies [[`b073f04`](https://github.com/marcalexiei/eslint-zod/commit/b073f0404c06a808aa6f0712020728d97b39a26f)]:
+  - @eslint-zod/utils@1.3.0
+
 ## 1.0.0
 
 ### Major Changes

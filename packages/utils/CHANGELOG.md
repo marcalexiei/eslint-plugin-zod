@@ -1,5 +1,11 @@
 # @eslint-zod/utils
 
+## 1.3.0
+
+### Minor Changes
+
+- [#314](https://github.com/marcalexiei/eslint-zod/pull/314) [`b073f04`](https://github.com/marcalexiei/eslint-zod/commit/b073f0404c06a808aa6f0712020728d97b39a26f) Thanks [@marcalexiei](https://github.com/marcalexiei)! - feat: add `buildPreferEnumOverLiteralUnionCreate` shared rule factory
+
 ## 1.2.0
 
 ### Minor Changes
