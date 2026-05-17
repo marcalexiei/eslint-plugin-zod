@@ -42,8 +42,9 @@ AST helpers used by both plugins:
 - `buildZodChainRemoveMethodFix` / `buildZodChainReplacementFix` — fixer helpers
 - `zodImportScope` / `zodMiniImportScope` — pre-built `ZodImportScope` instances; use `scope.isAllowed(source)` to check whether a source belongs to the plugin's scope
 - `ZOD_NON_SCHEMA_PRODUCING_METHODS` — array of method names that do not return a schema (parse, codec, error formatters)
+- `buildPreferEnumOverLiteralUnionCreate(scope)` — returns the `create` function for the `prefer-enum-over-literal-union` rule, parameterised by import scope
 
-Rule implementations live entirely per-plugin. Only the AST utilities are shared.
+Rule metadata (name, `meta`, `defaultOptions`) lives entirely per-plugin. When a rule's `create` logic is identical across plugins and differs only by import scope, extract a `build*Create(scope)` factory into `@eslint-zod/utils` following the pattern above.
 
 ### TypeScript resolution
 
@@ -84,7 +85,7 @@ Several rules exist in both `eslint-plugin-zod` and `eslint-plugin-zod-mini` wit
 - **Docs** (`docs/rules/<rule-name>.md`): mirror structure and content, but adapt all code examples to the correct import source (`zod` vs `zod/mini`) and API style (chained methods vs standalone `$ZodCheck` functions passed to `.check()`).
 - **Specs** (`src/rules/<rule-name>.spec.ts`): mirror the test cases, but again adapt import sources and API. Valid/invalid cases should cover the same scenarios in both plugins.
 
-Rules that exist in both plugins: `consistent-import`, `consistent-import-source`, `consistent-object-schema-type`, `consistent-schema-output-type-style`, `consistent-schema-var-name`, `no-any-schema`, `no-empty-custom-schema`, `no-unknown-schema`, `prefer-meta`, `require-brand-type-parameter`, `require-error-message`, `schema-error-property-style`.
+Rules that exist in both plugins: `consistent-import`, `consistent-import-source`, `consistent-object-schema-type`, `consistent-schema-output-type-style`, `consistent-schema-var-name`, `no-any-schema`, `no-empty-custom-schema`, `no-unknown-schema`, `prefer-enum-over-literal-union`, `prefer-meta`, `require-brand-type-parameter`, `require-error-message`, `schema-error-property-style`.
 
 ## Quality expectations
 

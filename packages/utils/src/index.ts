@@ -1,4 +1,5 @@
 export { buildZodChainRemoveMethodFix } from './build-zod-chain-remove-method-fix.js';
+export { buildPreferEnumOverLiteralUnionCreate } from './prefer-enum-over-literal-union-create.js';
 export { buildZodChainReplacementFix } from './build-zod-chain-replacement-fix.js';
 export { isZodNumberSchemaCallExpression } from './detect-zod-schema-root-node.js';
 export { findParentSchemaMatchingCondition } from './find-parent-schema-matching-condition.js';

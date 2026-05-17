@@ -9,6 +9,7 @@ import { consistentSchemaVarName } from './rules/consistent-schema-var-name.js';
 import { noAnySchema } from './rules/no-any-schema.js';
 import { noEmptyCustomSchema } from './rules/no-empty-custom-schema.js';
 import { noUnknownSchema } from './rules/no-unknown-schema.js';
+import { preferEnumOverLiteralUnion } from './rules/prefer-enum-over-literal-union.js';
 import { preferMeta } from './rules/prefer-meta.js';
 import { requireBrandTypeParameter } from './rules/require-brand-type-parameter.js';
 import { requireErrorMessage } from './rules/require-error-message.js';
@@ -41,6 +42,7 @@ const eslintPluginZodMini = {
     'no-any-schema': noAnySchema,
     'no-empty-custom-schema': noEmptyCustomSchema,
     'no-unknown-schema': noUnknownSchema,
+    'prefer-enum-over-literal-union': preferEnumOverLiteralUnion,
     'prefer-meta': preferMeta,
     'require-brand-type-parameter': requireBrandTypeParameter,
     'require-error-message': requireErrorMessage,
@@ -63,6 +65,7 @@ const recommendedConfig = {
     'zod-mini/consistent-schema-var-name': 'error',
     'zod-mini/no-any-schema': 'error',
     'zod-mini/no-empty-custom-schema': 'error',
+    'zod-mini/prefer-enum-over-literal-union': 'error',
     'zod-mini/prefer-meta': 'error',
     'zod-mini/require-brand-type-parameter': 'error',
     'zod-mini/require-error-message': 'error',
