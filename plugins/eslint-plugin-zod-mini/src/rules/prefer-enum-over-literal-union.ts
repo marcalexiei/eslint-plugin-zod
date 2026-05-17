@@ -1,8 +1,8 @@
-import { buildPreferEnumOverLiteralUnionCreate, zodImportScope } from '@eslint-zod/utils';
+import { buildPreferEnumOverLiteralUnionCreate, zodMiniImportScope } from '@eslint-zod/utils';
 
-import { createZodPluginRule } from '../utils/create-plugin-rule.js';
+import { createZodMiniPluginRule } from '../utils/create-plugin-rule.js';
 
-export const preferEnumOverLiteralUnion = createZodPluginRule({
+export const preferEnumOverLiteralUnion = createZodMiniPluginRule({
   name: 'prefer-enum-over-literal-union',
   meta: {
     type: 'suggestion',
@@ -16,5 +16,5 @@ export const preferEnumOverLiteralUnion = createZodPluginRule({
     schema: [],
   },
   defaultOptions: [],
-  create: buildPreferEnumOverLiteralUnionCreate(zodImportScope),
+  create: buildPreferEnumOverLiteralUnionCreate(zodMiniImportScope),
 });
