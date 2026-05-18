@@ -1,8 +1,6 @@
-import { createZodSchemaImportTrack, zodMiniImportScope } from '@eslint-zod/utils';
+import { buildNoUnknownSchemaCreate, zodMiniImportScope } from '@eslint-zod/utils';
 
 import { createZodMiniPluginRule } from '../utils/create-plugin-rule.js';
-
-const { trackZodSchemaImports } = createZodSchemaImportTrack(zodMiniImportScope);
 
 export const noUnknownSchema = createZodMiniPluginRule({
   name: 'no-unknown-schema',
@@ -17,25 +15,5 @@ export const noUnknownSchema = createZodMiniPluginRule({
     schema: [],
   },
   defaultOptions: [],
-  create(context) {
-    const {
-      //
-      importDeclarationListener,
-      detectZodSchemaRootNode,
-    } = trackZodSchemaImports();
-
-    return {
-      ImportDeclaration: importDeclarationListener,
-      CallExpression(node): void {
-        const zodSchemaMeta = detectZodSchemaRootNode(node);
-
-        if (zodSchemaMeta?.schemaType === 'unknown') {
-          context.report({
-            node,
-            messageId: 'noZUnknown',
-          });
-        }
-      },
-    };
-  },
+  create: buildNoUnknownSchemaCreate(zodMiniImportScope),
 });

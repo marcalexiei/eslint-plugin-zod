@@ -1,5 +1,4 @@
-import { zodMiniImportScope } from '@eslint-zod/utils';
-import type { TSESLint } from '@typescript-eslint/utils';
+import { buildConsistentImportSourceCreate, zodMiniImportScope } from '@eslint-zod/utils';
 
 import { createZodMiniPluginRule } from '../utils/create-plugin-rule.js';
 
@@ -40,39 +39,5 @@ export const consistentImportSource = createZodMiniPluginRule<
     ],
   },
   defaultOptions: [{ sources: ['zod/mini'] }],
-  create(context, [{ sources }]) {
-    return {
-      ImportDeclaration(node): void {
-        const sourceValue = node.source.value;
-        if (!zodMiniImportScope.isAllowed(sourceValue)) {
-          return;
-        }
-
-        if ((sources as Array<string>).includes(sourceValue)) {
-          return;
-        }
-
-        context.report({
-          node,
-          messageId: 'sourceNotAllowed',
-          data: {
-            source: sourceValue,
-            sources: sources.map((s) => `"${s}"`).join(', '),
-          },
-          suggest: sources.map<TSESLint.ReportSuggestionArray<MessageIds>[number]>((it) => ({
-            messageId: 'replaceSource',
-            data: { valid: it, invalid: sourceValue },
-            fix(fixer): TSESLint.RuleFix {
-              return fixer.replaceText(
-                node.source,
-                // Replacing using the raw value
-                // to keep quote style consistent with the user code
-                node.source.raw.replace(sourceValue, it),
-              );
-            },
-          })),
-        });
-      },
-    };
-  },
+  create: buildConsistentImportSourceCreate(zodMiniImportScope),
 });

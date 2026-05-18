@@ -42,9 +42,11 @@
     "test": "vitest"
   },
   "dependencies": {
-    "@typescript-eslint/utils": "catalog:deps"
+    "@typescript-eslint/utils": "catalog:deps",
+    "esquery": "^1.6.0"
   },
   "devDependencies": {
+    "@types/esquery": "1.5.4",
     "tsdown": "catalog:dev",
     "vitest": "catalog:dev"
   },

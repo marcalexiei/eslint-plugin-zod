@@ -45,12 +45,10 @@
   },
   "dependencies": {
     "@eslint-zod/utils": "workspace:*",
-    "@typescript-eslint/utils": "catalog:deps",
-    "esquery": "^1.6.0"
+    "@typescript-eslint/utils": "catalog:deps"
   },
   "devDependencies": {
     "@marcalexiei/prettier-config": "catalog:dev",
-    "@types/esquery": "1.5.4",
     "@typescript-eslint/rule-tester": "catalog:dev",
     "dedent": "catalog:dev",
     "eslint-doc-generator": "catalog:dev",
