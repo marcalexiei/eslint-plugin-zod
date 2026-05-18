@@ -35,6 +35,11 @@ Each plugin is scoped to its own import source via `ZodImportAllowedSource` (`'z
 
 ### Shared utilities (`@eslint-zod/utils`)
 
+`@eslint-zod/utils` is split into two internal areas:
+
+- `packages/utils/src/` — AST parsing, import tracking, traversal, and fixer helpers
+- `packages/utils/src/rule-builders/` — shared `build*Create(scope)` rule builders and small shared rule helpers
+
 AST helpers used by both plugins:
 
 - `createZodSchemaImportTrack()` — tracks namespace and named imports; returns an object with `isZodNamespace`, `getNamedImportOriginal`, `collectZodChainMethods`, and listener hooks
@@ -42,9 +47,9 @@ AST helpers used by both plugins:
 - `buildZodChainRemoveMethodFix` / `buildZodChainReplacementFix` — fixer helpers
 - `zodImportScope` / `zodMiniImportScope` — pre-built `ZodImportScope` instances; use `scope.isAllowed(source)` to check whether a source belongs to the plugin's scope
 - `ZOD_NON_SCHEMA_PRODUCING_METHODS` — array of method names that do not return a schema (parse, codec, error formatters)
-- `buildPreferEnumOverLiteralUnionCreate(scope)` — returns the `create` function for the `prefer-enum-over-literal-union` rule, parameterised by import scope
+- Shared builders currently exist for `consistent-import`, `consistent-import-source`, `consistent-object-schema-type`, `consistent-schema-output-type-style`, `consistent-schema-var-name`, `no-any-schema`, `no-empty-custom-schema`, `no-unknown-schema`, `prefer-enum-over-literal-union`, `require-brand-type-parameter`, `require-error-message`, and `schema-error-property-style`
 
-Rule metadata (name, `meta`, `defaultOptions`) lives entirely per-plugin. When a rule's `create` logic is identical across plugins and differs only by import scope, extract a `build*Create(scope)` factory into `@eslint-zod/utils` following the pattern above.
+Rule metadata (name, `meta`, `defaultOptions`) lives entirely per-plugin. When a rule's `create` logic is identical across plugins and differs only by import scope, extract a `build*Create(scope)` factory into `packages/utils/src/rule-builders/` and re-export it from `@eslint-zod/utils`.
 
 ### TypeScript resolution
 
