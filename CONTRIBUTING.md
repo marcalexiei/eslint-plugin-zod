@@ -39,6 +39,19 @@ pnpm run check-all
 
 ---
 
+## TypeScript configuration
+
+Each package and plugin has two `tsconfig` files:
+
+| File                   | Purpose                                                                                                                                                                                                                                                |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `tsconfig.json`        | Used by `tsc -b`. Has `composite: true` and `references` for correct incremental build ordering.                                                                                                                                                       |
+| `tsconfig.eslint.json` | Used by `eslint.config.js`. No `composite`, no `references` — this lets `@typescript-eslint/parser` resolve `@eslint-zod/utils` to source via the `@eslint-zod/source` custom condition, so type errors propagate across packages in both CLI and IDE. |
+
+When adding a new package or plugin, create both files following the existing pattern.
+
+---
+
 ## Run tests 🧪
 
 - Run the full test suite (all packages):

@@ -48,7 +48,12 @@ Rule metadata (name, `meta`, `defaultOptions`) lives entirely per-plugin. When a
 
 ### TypeScript resolution
 
-Each package has a `@eslint-zod/source` custom export condition pointing to its `.ts` source. `tsc -b` at the root resolves workspace dependencies through this condition, so plugins can import from `@eslint-zod/utils` source directly during development without pre-building.
+Each package has a `@eslint-zod/source` custom export condition pointing to its `.ts` source. `tsconfig.base.json` sets `customConditions: ["@eslint-zod/source"]`, so any tool that creates a TypeScript program from a tsconfig that extends the base (IDE language server, `@typescript-eslint/parser`) resolves `@eslint-zod/utils` to its `.ts` source without a prior build.
+
+**Two tsconfigs per package/plugin:**
+
+- `tsconfig.json` — used by `tsc -b`. Has `composite: true`, `outDir`, and `references` to other workspace packages for correct incremental build ordering.
+- `tsconfig.eslint.json` — used by `eslint.config.js` (`parserOptions.project`). Has no `composite`, no `references`, and no `outDir`. Without project references, `@typescript-eslint/parser` resolves cross-package imports via `customConditions` → source, so type errors in `@eslint-zod/utils` propagate live to plugin callers in both the CLI and the IDE ESLint extension.
 
 ## zod vs zod/mini API differences
 

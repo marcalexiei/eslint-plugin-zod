@@ -4,6 +4,10 @@ import configBase from '@marcalexiei/eslint-config/base';
 import configTS from '@marcalexiei/eslint-config/typescript';
 import configVitest from '@marcalexiei/eslint-config/vitest';
 import { defineConfig, includeIgnoreFile } from 'eslint/config';
+import {
+  createTypeScriptImportResolver,
+  defaultConditionNames,
+} from 'eslint-import-resolver-typescript';
 import pluginEslintPlugin from 'eslint-plugin-eslint-plugin';
 import pluginEslintNode from 'eslint-plugin-n';
 
@@ -49,18 +53,25 @@ export default defineConfig(
     ...pluginEslintNode.configs['flat/recommended-module'],
     rules: {
       ...pluginEslintNode.configs['flat/recommended-module'].rules,
-      'n/no-missing-import': ['error', { ignoreTypeImport: true }],
+      'n/no-missing-import': 'off', // import plugin already handles this
     },
   },
   {
     languageOptions: {
       parserOptions: {
         project: [
-          './tsconfig.node.json',
-          './plugins/*/tsconfig.json',
-          './packages/*/tsconfig.json',
+          './tsconfig.eslint.json',
+          './plugins/*/tsconfig.eslint.json',
+          './packages/*/tsconfig.eslint.json',
         ],
       },
+    },
+    settings: {
+      'import-x/resolver-next': [
+        createTypeScriptImportResolver({
+          conditionNames: ['@eslint-zod/source', ...defaultConditionNames],
+        }),
+      ],
     },
     rules: {
       'import-x/no-extraneous-dependencies': [
