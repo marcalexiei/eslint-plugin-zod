@@ -48,9 +48,22 @@ Walks up the AST from a call expression and returns the first ancestor Zod schem
 
 Fixer helpers for removing or replacing a method in a Zod chain.
 
-### `buildPreferEnumOverLiteralUnionCreate(scope)`
+### Shared rule builders
 
-Returns the `create` function for the `prefer-enum-over-literal-union` rule, parameterised by import scope. Used by both `eslint-plugin-zod` and `eslint-plugin-zod-mini` to share rule logic while keeping per-plugin scope and rule metadata.
+These helpers return ESLint `create` functions parameterised by import scope so plugins can keep local rule metadata while reusing runtime logic.
+
+- `buildConsistentImportCreate(scope)`
+- `buildConsistentImportSourceCreate(scope)`
+- `buildConsistentObjectSchemaTypeCreate(scope)`
+- `buildConsistentSchemaOutputTypeStyleCreate(scope)`
+- `buildConsistentSchemaVarNameCreate(scope)`
+- `buildNoAnySchemaCreate(scope)`
+- `buildNoEmptyCustomSchemaCreate(scope)`
+- `buildNoUnknownSchemaCreate(scope)`
+- `buildPreferEnumOverLiteralUnionCreate(scope)`
+- `buildRequireBrandTypeParameterCreate(scope)`
+- `buildRequireErrorMessageCreate(scope)`
+- `buildSchemaErrorPropertyStyleCreate(scope)`
 
 ### `zodImportScope` / `zodMiniImportScope`
 
