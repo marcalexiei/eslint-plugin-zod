@@ -1,8 +1,8 @@
 import type { TSESLint, TSESTree } from '@typescript-eslint/utils';
 import { AST_NODE_TYPES } from '@typescript-eslint/utils';
 
-import { createZodSchemaImportTrack } from './track-zod-schema-imports.js';
-import type { ZodImportScope } from './zod-import-scope.js';
+import { createZodSchemaImportTrack } from '../track-zod-schema-imports.js';
+import type { ZodImportScope } from '../zod-import-scope.js';
 
 export function buildPreferEnumOverLiteralUnionCreate(
   scope: ZodImportScope,

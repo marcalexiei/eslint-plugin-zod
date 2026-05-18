@@ -1,8 +1,7 @@
-import { createZodSchemaImportTrack, zodImportScope } from '@eslint-zod/utils';
+import { zodImportScope } from '@eslint-zod/utils';
+import { buildNoEmptyCustomSchemaCreate } from '@eslint-zod/utils/rule-builders/no-empty-custom-schema';
 
 import { createZodPluginRule } from '../utils/create-plugin-rule.js';
-
-const { trackZodSchemaImports } = createZodSchemaImportTrack(zodImportScope);
 
 export const noEmptyCustomSchema = createZodPluginRule({
   name: 'no-empty-custom-schema',
@@ -18,37 +17,5 @@ export const noEmptyCustomSchema = createZodPluginRule({
     schema: [],
   },
   defaultOptions: [],
-  create(context) {
-    const {
-      //
-      importDeclarationListener,
-      detectZodSchemaRootNode,
-      collectZodChainMethods,
-    } = trackZodSchemaImports();
-
-    return {
-      ImportDeclaration: importDeclarationListener,
-      CallExpression(node): void {
-        const zodSchemaMeta = detectZodSchemaRootNode(node);
-        if (!zodSchemaMeta) {
-          return;
-        }
-
-        if (zodSchemaMeta.schemaType !== 'custom') {
-          return;
-        }
-
-        // Find the actual custom() call node in the chain
-        const chainMethods = collectZodChainMethods(node);
-        const customCallNode = chainMethods.find((method) => method.name === 'custom')?.node;
-
-        if (customCallNode?.arguments.length === 0) {
-          context.report({
-            node: customCallNode,
-            messageId: 'noEmptyCustomSchema',
-          });
-        }
-      },
-    };
-  },
+  create: buildNoEmptyCustomSchemaCreate(zodImportScope),
 });

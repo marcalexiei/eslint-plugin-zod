@@ -6,9 +6,6 @@ export default {
     /^eslint@/,
   ],
   workspaces: {
-    '.': {
-      entry: [],
-    },
     'plugins/eslint-plugin-zod': {
       entry: ['.eslint-doc-generatorrc.ts'],
       // eslint is an optional peer dependency referenced only for `satisfies` type checks

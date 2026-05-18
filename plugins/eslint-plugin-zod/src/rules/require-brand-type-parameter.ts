@@ -1,9 +1,7 @@
-import { createZodSchemaImportTrack, zodImportScope } from '@eslint-zod/utils';
-import type { TSESLint, TSESTree } from '@typescript-eslint/utils';
+import { zodImportScope } from '@eslint-zod/utils';
+import { buildRequireBrandTypeParameterCreate } from '@eslint-zod/utils/rule-builders/require-brand-type-parameter';
 
 import { createZodPluginRule } from '../utils/create-plugin-rule.js';
-
-const { trackZodSchemaImports } = createZodSchemaImportTrack(zodImportScope);
 
 export const requireBrandTypeParameter = createZodPluginRule({
   name: 'require-brand-type-parameter',
@@ -21,49 +19,5 @@ export const requireBrandTypeParameter = createZodPluginRule({
     schema: [],
   },
   defaultOptions: [],
-  create(context) {
-    const { importDeclarationListener, detectZodSchemaRootNode, collectZodChainMethods } =
-      trackZodSchemaImports();
-
-    return {
-      ImportDeclaration: importDeclarationListener,
-      CallExpression(node): void {
-        const zodSchemaMeta = detectZodSchemaRootNode(node);
-        if (!zodSchemaMeta) {
-          return;
-        }
-
-        const methods = collectZodChainMethods(zodSchemaMeta.node);
-
-        const brandMethod = methods.find((it) => it.name === 'brand');
-
-        if (!brandMethod) {
-          return;
-        }
-
-        const brandNode = brandMethod.node;
-
-        const { typeArguments } = brandNode;
-
-        if (typeArguments && typeArguments.params.length > 0) {
-          return;
-        }
-
-        const brandCalleeNode = brandNode.callee as TSESTree.MemberExpression;
-
-        context.report({
-          messageId: 'missingTypeParameter',
-          node: brandCalleeNode.property,
-          suggest: [
-            {
-              messageId: 'removeBrandFunction',
-              fix(fixer): TSESLint.RuleFix {
-                return fixer.removeRange([brandCalleeNode.object.range[1], brandNode.range[1]]);
-              },
-            },
-          ],
-        });
-      },
-    };
-  },
+  create: buildRequireBrandTypeParameterCreate(zodImportScope),
 });

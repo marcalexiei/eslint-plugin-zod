@@ -1,6 +1,5 @@
-import { createZodSchemaImportTrack, zodMiniImportScope } from '@eslint-zod/utils';
-import type { TSESLint } from '@typescript-eslint/utils';
-import { AST_NODE_TYPES } from '@typescript-eslint/utils';
+import { zodMiniImportScope } from '@eslint-zod/utils';
+import { buildConsistentObjectSchemaTypeCreate } from '@eslint-zod/utils/rule-builders/consistent-object-schema-type';
 
 import { createZodMiniPluginRule } from '../utils/create-plugin-rule.js';
 
@@ -14,8 +13,6 @@ interface Options {
 type MessageIds = 'consistentMethod' | 'useMethod';
 
 const defaultOptions: Options = { allow: ['object'] };
-
-const { trackZodSchemaImports } = createZodSchemaImportTrack(zodMiniImportScope);
 
 export const consistentObjectSchemaType = createZodMiniPluginRule<[Options], MessageIds>({
   name: 'consistent-object-schema-type',
@@ -50,57 +47,5 @@ export const consistentObjectSchemaType = createZodMiniPluginRule<[Options], Mes
     ],
   },
   defaultOptions: [defaultOptions],
-  create(context, [{ allow: allowedList }]) {
-    const {
-      //
-      importDeclarationListener,
-      detectZodSchemaRootNode,
-    } = trackZodSchemaImports();
-
-    return {
-      ImportDeclaration: importDeclarationListener,
-      CallExpression(node): void {
-        const zodSchemaMeta = detectZodSchemaRootNode(node);
-
-        const schemaType = zodSchemaMeta?.schemaType as ZodObjectMethod | undefined;
-
-        if (!schemaType || !ZOD_OBJECT_METHODS.includes(schemaType)) {
-          return;
-        }
-
-        if (allowedList.includes(schemaType)) {
-          return;
-        }
-
-        const { callee } = node;
-
-        if (callee.type === AST_NODE_TYPES.Identifier) {
-          context.report({
-            node,
-            messageId: 'consistentMethod',
-            data: { actual: schemaType, allowedList: allowedList.join(',') },
-          });
-          return;
-        }
-
-        if (callee.type === AST_NODE_TYPES.MemberExpression) {
-          context.report({
-            node,
-            messageId: 'consistentMethod',
-            data: {
-              actual: schemaType,
-              allowedList: allowedList.join(','),
-            },
-            suggest: allowedList.map<TSESLint.ReportSuggestionArray<MessageIds>[number]>((it) => ({
-              messageId: 'useMethod',
-              data: { expected: it },
-              fix(fixer): TSESLint.RuleFix {
-                return fixer.replaceText(callee.property, it);
-              },
-            })),
-          });
-        }
-      },
-    };
-  },
+  create: buildConsistentObjectSchemaTypeCreate(zodMiniImportScope),
 });

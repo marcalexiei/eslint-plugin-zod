@@ -1,0 +1,40 @@
+import type { TSESLint } from '@typescript-eslint/utils';
+
+import { createZodSchemaImportTrack } from '../track-zod-schema-imports.js';
+import type { ZodImportScope } from '../zod-import-scope.js';
+
+export function buildNoEmptyCustomSchemaCreate(
+  scope: ZodImportScope,
+): (context: Readonly<TSESLint.RuleContext<'noEmptyCustomSchema', []>>) => TSESLint.RuleListener {
+  const { trackZodSchemaImports } = createZodSchemaImportTrack(scope);
+
+  return function create(context) {
+    const { importDeclarationListener, detectZodSchemaRootNode, collectZodChainMethods } =
+      trackZodSchemaImports();
+
+    return {
+      ImportDeclaration: importDeclarationListener,
+      CallExpression(node): void {
+        const zodSchemaMeta = detectZodSchemaRootNode(node);
+        if (!zodSchemaMeta) {
+          return;
+        }
+
+        if (zodSchemaMeta.schemaType !== 'custom') {
+          return;
+        }
+
+        // Find the actual custom() call node in the chain
+        const chainMethods = collectZodChainMethods(node);
+        const customCallNode = chainMethods.find((method) => method.name === 'custom')?.node;
+
+        if (customCallNode?.arguments.length === 0) {
+          context.report({
+            node: customCallNode,
+            messageId: 'noEmptyCustomSchema',
+          });
+        }
+      },
+    };
+  };
+}

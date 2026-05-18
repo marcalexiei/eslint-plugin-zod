@@ -1,13 +1,9 @@
-import { createZodSchemaImportTrack, zodImportScope } from '@eslint-zod/utils';
-import type { TSESTree } from '@typescript-eslint/utils';
-import { AST_NODE_TYPES } from '@typescript-eslint/utils';
-import esquery from 'esquery';
+import { zodImportScope } from '@eslint-zod/utils';
+import { buildSchemaErrorPropertyStyleCreate } from '@eslint-zod/utils/rule-builders/schema-error-property-style';
 
 import { createZodPluginRule } from '../utils/create-plugin-rule.js';
 
 type MessageIds = 'invalidStyle' | 'invalidSelector';
-
-const { trackZodSchemaImports } = createZodSchemaImportTrack(zodImportScope);
 
 export const schemaErrorPropertyStyle = createZodPluginRule<
   [{ selector: string; example: string }],
@@ -43,96 +39,5 @@ export const schemaErrorPropertyStyle = createZodPluginRule<
     ],
   },
   defaultOptions: [{ selector: 'Literal,TemplateLiteral', example: "'error message'" }],
-  create(context, [{ selector, example }]) {
-    const { importDeclarationListener, detectZodSchemaRootNode, collectZodChainMethods } =
-      trackZodSchemaImports();
-
-    /**
-     * Parsing `selector` to ensure it is valid,
-     * if not report an error and return empty rule listener
-     */
-    try {
-      esquery.parse(selector);
-    } catch {
-      context.report({
-        loc: { line: 1, column: 0 },
-        messageId: 'invalidSelector',
-        data: { selector },
-      });
-      return {};
-    }
-
-    return {
-      ImportDeclaration: importDeclarationListener,
-      CallExpression(node): void {
-        const zodSchemaMeta = detectZodSchemaRootNode(node);
-        if (!zodSchemaMeta) {
-          return;
-        }
-
-        if (
-          zodSchemaMeta.schemaType !== 'custom' &&
-          !collectZodChainMethods(node).some((it) => it.name === 'refine')
-        ) {
-          return;
-        }
-
-        // Error should be the second parameter,
-        // if not present stop processing
-        if (node.arguments.length < 2) {
-          return;
-        }
-
-        let errorMessageNode: TSESTree.Node | undefined;
-
-        const [, params] = node.arguments;
-
-        switch (params.type) {
-          case AST_NODE_TYPES.Literal:
-          case AST_NODE_TYPES.TemplateLiteral:
-            errorMessageNode = params;
-            break;
-
-          case AST_NODE_TYPES.ObjectExpression:
-            for (const property of params.properties) {
-              if (
-                property.type === AST_NODE_TYPES.Property &&
-                property.key.type === AST_NODE_TYPES.Identifier &&
-                property.key.name === 'error'
-              ) {
-                errorMessageNode = property.value;
-                break;
-              }
-            }
-            break;
-
-          // no default
-        }
-
-        if (!errorMessageNode) {
-          return;
-        }
-
-        const match = esquery.matches(
-          errorMessageNode as never,
-          esquery.parse(selector),
-          errorMessageNode as never,
-        );
-
-        if (match) {
-          return;
-        }
-
-        context.report({
-          node,
-          messageId: 'invalidStyle',
-          data: {
-            selector,
-            example,
-            actual: context.sourceCode.getText(errorMessageNode),
-          },
-        });
-      },
-    };
-  },
+  create: buildSchemaErrorPropertyStyleCreate(zodImportScope),
 });
