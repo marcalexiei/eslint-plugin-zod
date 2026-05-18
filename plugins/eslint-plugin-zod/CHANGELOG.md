@@ -1,5 +1,14 @@
 # eslint-plugin-zod
 
+## 4.5.1
+
+### Patch Changes
+
+- [#315](https://github.com/marcalexiei/eslint-zod/pull/315) [`a89b181`](https://github.com/marcalexiei/eslint-zod/commit/a89b1815b75ec735abf96dd1f5ebdada1487ee35) Thanks [@nimaebra](https://github.com/nimaebra)! - refactor: update rule builder imports to per-file `@eslint-zod/utils/rule-builders/*` paths
+
+- Updated dependencies [[`a89b181`](https://github.com/marcalexiei/eslint-zod/commit/a89b1815b75ec735abf96dd1f5ebdada1487ee35)]:
+  - @eslint-zod/utils@2.0.0
+
 ## 4.5.0
 
 ### Minor Changes
