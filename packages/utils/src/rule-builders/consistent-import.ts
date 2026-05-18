@@ -1,12 +1,13 @@
 import type { TSESLint, TSESTree } from '@typescript-eslint/utils';
 
+import type { ZodImportScope } from '../zod-import-scope.js';
+
 import {
   getNamespaceAliasNameFrom,
   isGroupFirstImportKindValidForSyntax,
   shouldIdentifierBeRenamed,
-} from '../import-syntax-helpers.js';
-import type { ImportGroupData, ImportSyntax } from '../import-syntax-helpers.js';
-import type { ZodImportScope } from '../zod-import-scope.js';
+} from './import-syntax-helpers.js';
+import type { ImportGroupData, ImportSyntax } from './import-syntax-helpers.js';
 
 interface Options {
   syntax: ImportSyntax;
@@ -148,3 +149,5 @@ export function buildConsistentImportCreate(
     };
   };
 }
+
+export { IMPORT_SYNTAXES, type ImportSyntax } from './import-syntax-helpers.js';

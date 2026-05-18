@@ -1,4 +1,5 @@
-import { buildConsistentSchemaVarNameCreate, zodMiniImportScope } from '@eslint-zod/utils';
+import { zodMiniImportScope } from '@eslint-zod/utils';
+import { buildConsistentSchemaVarNameCreate } from '@eslint-zod/utils/rule-builders/consistent-schema-var-name';
 
 import { createZodMiniPluginRule } from '../utils/create-plugin-rule.js';
 

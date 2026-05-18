@@ -1,4 +1,5 @@
-import { buildSchemaErrorPropertyStyleCreate, zodImportScope } from '@eslint-zod/utils';
+import { zodImportScope } from '@eslint-zod/utils';
+import { buildSchemaErrorPropertyStyleCreate } from '@eslint-zod/utils/rule-builders/schema-error-property-style';
 
 import { createZodPluginRule } from '../utils/create-plugin-rule.js';
 

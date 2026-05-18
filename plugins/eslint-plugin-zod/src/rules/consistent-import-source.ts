@@ -1,4 +1,5 @@
-import { buildConsistentImportSourceCreate, zodImportScope } from '@eslint-zod/utils';
+import { zodImportScope } from '@eslint-zod/utils';
+import { buildConsistentImportSourceCreate } from '@eslint-zod/utils/rule-builders/consistent-import-source';
 
 import { createZodPluginRule } from '../utils/create-plugin-rule.js';
 

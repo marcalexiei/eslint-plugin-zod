@@ -1,9 +1,9 @@
+import { zodCoreImportScope } from '@eslint-zod/utils';
 import {
   IMPORT_SYNTAXES,
   buildConsistentImportCreate,
-  zodCoreImportScope,
-} from '@eslint-zod/utils';
-import type { ImportSyntax } from '@eslint-zod/utils';
+} from '@eslint-zod/utils/rule-builders/consistent-import';
+import type { ImportSyntax } from '@eslint-zod/utils/rule-builders/consistent-import';
 
 import { createZodPluginRule } from '../utils/create-plugin-rule.js';
 

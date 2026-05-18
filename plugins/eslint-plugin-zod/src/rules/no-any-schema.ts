@@ -1,4 +1,5 @@
-import { buildNoAnySchemaCreate, zodImportScope } from '@eslint-zod/utils';
+import { zodImportScope } from '@eslint-zod/utils';
+import { buildNoAnySchemaCreate } from '@eslint-zod/utils/rule-builders/no-any-schema';
 
 import { createZodPluginRule } from '../utils/create-plugin-rule.js';
 

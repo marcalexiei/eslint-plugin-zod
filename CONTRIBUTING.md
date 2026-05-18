@@ -15,12 +15,13 @@ This is a pnpm monorepo with three published ESLint plugins and a shared utiliti
 | `eslint-plugin-zod-core` | `plugins/eslint-plugin-zod-core/` |
 | `@eslint-zod/utils`      | `packages/utils/`                 |
 
-`@eslint-zod/utils` contains AST helpers shared by all plugins. Rule implementations live entirely per-plugin.
+`@eslint-zod/utils` contains AST helpers (exported from `@eslint-zod/utils`) and shared rule `create` factories (exported per-file from `@eslint-zod/utils/rule-builders/<rule-name>`). Rule metadata lives entirely per-plugin.
 
 Several rules exist in **different** plugins with the same name and intent but adapted to each plugin's API style.
 E.g., `zod` uses chained methods; `zod/mini` uses standalone `$ZodCheck` functions.
 
-When modifying a shared rule, keep both plugins in sync (code, specs, and docs).
+When modifying a shared rule, keep both plugins in sync (code, specs, and docs).\
+If the `create` logic is shared, it lives in `packages/utils/src/rule-builders/<rule-name>.ts` and is imported by each plugin from `@eslint-zod/utils/rule-builders/<rule-name>`.
 
 ---
 

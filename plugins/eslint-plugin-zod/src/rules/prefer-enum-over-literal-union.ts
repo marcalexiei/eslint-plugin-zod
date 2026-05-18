@@ -1,4 +1,5 @@
-import { buildPreferEnumOverLiteralUnionCreate, zodImportScope } from '@eslint-zod/utils';
+import { zodImportScope } from '@eslint-zod/utils';
+import { buildPreferEnumOverLiteralUnionCreate } from '@eslint-zod/utils/rule-builders/prefer-enum-over-literal-union';
 
 import { createZodPluginRule } from '../utils/create-plugin-rule.js';
 

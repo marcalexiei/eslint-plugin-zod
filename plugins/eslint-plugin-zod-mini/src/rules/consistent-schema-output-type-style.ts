@@ -1,4 +1,5 @@
-import { buildConsistentSchemaOutputTypeStyleCreate, zodMiniImportScope } from '@eslint-zod/utils';
+import { zodMiniImportScope } from '@eslint-zod/utils';
+import { buildConsistentSchemaOutputTypeStyleCreate } from '@eslint-zod/utils/rule-builders/consistent-schema-output-type-style';
 
 import { createZodMiniPluginRule } from '../utils/create-plugin-rule.js';
 

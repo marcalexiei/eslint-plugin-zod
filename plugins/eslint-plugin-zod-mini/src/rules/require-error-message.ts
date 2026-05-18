@@ -1,4 +1,5 @@
-import { buildRequireErrorMessageCreate, zodMiniImportScope } from '@eslint-zod/utils';
+import { zodMiniImportScope } from '@eslint-zod/utils';
+import { buildRequireErrorMessageCreate } from '@eslint-zod/utils/rule-builders/require-error-message';
 
 import { createZodMiniPluginRule } from '../utils/create-plugin-rule.js';
 
