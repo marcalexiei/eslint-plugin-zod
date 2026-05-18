@@ -40,6 +40,7 @@ Find out more about [Oxlint's `jsPLugins`](https://oxc.rs/docs/guide/usage/linte
 | [consistent-schema-var-name](docs/rules/consistent-schema-var-name.md)                   | Enforce a consistent naming convention for Zod Mini schema variables                               | ✅  |     |     |
 | [no-any-schema](docs/rules/no-any-schema.md)                                             | Disallow usage of `z.any()` in Zod Mini schemas                                                    | ✅  |     | 💡  |
 | [no-empty-custom-schema](docs/rules/no-empty-custom-schema.md)                           | Disallow usage of `z.custom()` without arguments                                                   | ✅  |     |     |
+| [no-throw-in-refine](docs/rules/no-throw-in-refine.md)                                   | Disallow throwing errors directly inside Zod Mini refine callbacks                                 | ✅  |     |     |
 | [no-unknown-schema](docs/rules/no-unknown-schema.md)                                     | Disallow usage of `z.unknown()` in Zod Mini schemas                                                |     |     |     |
 | [prefer-enum-over-literal-union](docs/rules/prefer-enum-over-literal-union.md)           | Prefer `z.enum()` over `z.union()` when all members are string literals.                           | ✅  | 🔧  |     |
 | [prefer-meta](docs/rules/prefer-meta.md)                                                 | Enforce usage of `z.meta()` over `z.describe()`                                                    | ✅  | 🔧  |     |

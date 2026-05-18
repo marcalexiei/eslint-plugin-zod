@@ -59,6 +59,7 @@ These helpers return ESLint `create` functions parameterised by import scope so 
 - `buildConsistentSchemaVarNameCreate(scope)`
 - `buildNoAnySchemaCreate(scope)`
 - `buildNoEmptyCustomSchemaCreate(scope)`
+- `buildNoThrowInRefineCreate(scope)`
 - `buildNoUnknownSchemaCreate(scope)`
 - `buildPreferEnumOverLiteralUnionCreate(scope)`
 - `buildRequireBrandTypeParameterCreate(scope)`

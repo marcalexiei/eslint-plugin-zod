@@ -8,6 +8,7 @@ import { consistentSchemaOutputTypeStyle } from './rules/consistent-schema-outpu
 import { consistentSchemaVarName } from './rules/consistent-schema-var-name.js';
 import { noAnySchema } from './rules/no-any-schema.js';
 import { noEmptyCustomSchema } from './rules/no-empty-custom-schema.js';
+import { noThrowInRefine } from './rules/no-throw-in-refine.js';
 import { noUnknownSchema } from './rules/no-unknown-schema.js';
 import { preferEnumOverLiteralUnion } from './rules/prefer-enum-over-literal-union.js';
 import { preferMeta } from './rules/prefer-meta.js';
@@ -41,6 +42,7 @@ const eslintPluginZodMini = {
     'consistent-schema-var-name': consistentSchemaVarName,
     'no-any-schema': noAnySchema,
     'no-empty-custom-schema': noEmptyCustomSchema,
+    'no-throw-in-refine': noThrowInRefine,
     'no-unknown-schema': noUnknownSchema,
     'prefer-enum-over-literal-union': preferEnumOverLiteralUnion,
     'prefer-meta': preferMeta,
@@ -65,6 +67,7 @@ const recommendedConfig = {
     'zod-mini/consistent-schema-var-name': 'error',
     'zod-mini/no-any-schema': 'error',
     'zod-mini/no-empty-custom-schema': 'error',
+    'zod-mini/no-throw-in-refine': 'error',
     'zod-mini/prefer-enum-over-literal-union': 'error',
     'zod-mini/prefer-meta': 'error',
     'zod-mini/require-brand-type-parameter': 'error',
