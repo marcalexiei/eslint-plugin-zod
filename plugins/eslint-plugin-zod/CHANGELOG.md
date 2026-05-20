@@ -1,5 +1,14 @@
 # eslint-plugin-zod
 
+## 4.5.2
+
+### Patch Changes
+
+- [#318](https://github.com/marcalexiei/eslint-zod/pull/318) [`b084557`](https://github.com/marcalexiei/eslint-zod/commit/b08455769d81682e32feae0cc3306e62d5b3c549) Thanks [@nimaebra](https://github.com/nimaebra)! - refactor(no-throw-in-refine): use `@eslint-zod/utils/rule-builders/no-throw-in-refine`
+
+- Updated dependencies [[`b084557`](https://github.com/marcalexiei/eslint-zod/commit/b08455769d81682e32feae0cc3306e62d5b3c549)]:
+  - @eslint-zod/utils@2.1.0
+
 ## 4.5.1
 
 ### Patch Changes

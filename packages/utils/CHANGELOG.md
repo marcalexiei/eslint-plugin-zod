@@ -1,5 +1,11 @@
 # @eslint-zod/utils
 
+## 2.1.0
+
+### Minor Changes
+
+- [#318](https://github.com/marcalexiei/eslint-zod/pull/318) [`b084557`](https://github.com/marcalexiei/eslint-zod/commit/b08455769d81682e32feae0cc3306e62d5b3c549) Thanks [@nimaebra](https://github.com/nimaebra)! - feat: add `no-throw-in-refine` rule builder
+
 ## 2.0.0
 
 ### Major Changes

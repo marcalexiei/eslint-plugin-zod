@@ -1,5 +1,19 @@
 # eslint-plugin-zod-mini
 
+## 1.2.0
+
+### Minor Changes
+
+- [#318](https://github.com/marcalexiei/eslint-zod/pull/318) [`b084557`](https://github.com/marcalexiei/eslint-zod/commit/b08455769d81682e32feae0cc3306e62d5b3c549) Thanks [@nimaebra](https://github.com/nimaebra)! - feat(rule-builders): add `no-throw-in-refine`
+
+  The `no-throw-in-refine` create logic has been extracted into `@eslint-zod/utils` so both
+  `eslint-plugin-zod` and `eslint-plugin-zod-mini` use the same shared implementation.
+
+### Patch Changes
+
+- Updated dependencies [[`b084557`](https://github.com/marcalexiei/eslint-zod/commit/b08455769d81682e32feae0cc3306e62d5b3c549)]:
+  - @eslint-zod/utils@2.1.0
+
 ## 1.1.1
 
 ### Patch Changes
